@@ -30,13 +30,6 @@
 				<string>fb439669080836770</string>
 			</array>
 		</dict>
-		<key>CFBundleURLTypes</key>
-        <array>
-          <dict>
-            <key>CFBundleURLName</key>
-            <string></string>
-          </dict>
-        </array>
 	</array>
 	<key>FacebookAppID</key>
 	<string>439669080836770</string>

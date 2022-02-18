@@ -1,0 +1,4 @@
+io/flutter/plugins/GeneratedPluginRegistrant.java
+ io.flutter.plugins.GeneratedPluginRegistrant
+com/idance/hocnhayonline/BuildConfig.java
+ com.idance.hocnhayonline.BuildConfig

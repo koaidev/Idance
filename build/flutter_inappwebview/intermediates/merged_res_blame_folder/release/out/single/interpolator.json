@@ -1,0 +1,30 @@
+[
+    {
+        "merged": "E:\\IDance\\Source Code\\build\\flutter_inappwebview\\intermediates\\res\\merged\\release\\interpolator\\btn_radio_to_on_mtrl_animation_interpolator_0.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\2d3d4af98a71704fecedf9c2d242a225\\transformed\\appcompat-1.2.0\\res\\interpolator\\btn_radio_to_on_mtrl_animation_interpolator_0.xml"
+    },
+    {
+        "merged": "E:\\IDance\\Source Code\\build\\flutter_inappwebview\\intermediates\\res\\merged\\release\\interpolator\\btn_radio_to_off_mtrl_animation_interpolator_0.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\2d3d4af98a71704fecedf9c2d242a225\\transformed\\appcompat-1.2.0\\res\\interpolator\\btn_radio_to_off_mtrl_animation_interpolator_0.xml"
+    },
+    {
+        "merged": "E:\\IDance\\Source Code\\build\\flutter_inappwebview\\intermediates\\res\\merged\\release\\interpolator\\btn_checkbox_unchecked_mtrl_animation_interpolator_0.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\2d3d4af98a71704fecedf9c2d242a225\\transformed\\appcompat-1.2.0\\res\\interpolator\\btn_checkbox_unchecked_mtrl_animation_interpolator_0.xml"
+    },
+    {
+        "merged": "E:\\IDance\\Source Code\\build\\flutter_inappwebview\\intermediates\\res\\merged\\release\\interpolator\\btn_checkbox_checked_mtrl_animation_interpolator_0.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\2d3d4af98a71704fecedf9c2d242a225\\transformed\\appcompat-1.2.0\\res\\interpolator\\btn_checkbox_checked_mtrl_animation_interpolator_0.xml"
+    },
+    {
+        "merged": "E:\\IDance\\Source Code\\build\\flutter_inappwebview\\intermediates\\res\\merged\\release\\interpolator\\btn_checkbox_unchecked_mtrl_animation_interpolator_1.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\2d3d4af98a71704fecedf9c2d242a225\\transformed\\appcompat-1.2.0\\res\\interpolator\\btn_checkbox_unchecked_mtrl_animation_interpolator_1.xml"
+    },
+    {
+        "merged": "E:\\IDance\\Source Code\\build\\flutter_inappwebview\\intermediates\\res\\merged\\release\\interpolator\\fast_out_slow_in.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\2d3d4af98a71704fecedf9c2d242a225\\transformed\\appcompat-1.2.0\\res\\interpolator\\fast_out_slow_in.xml"
+    },
+    {
+        "merged": "E:\\IDance\\Source Code\\build\\flutter_inappwebview\\intermediates\\res\\merged\\release\\interpolator\\btn_checkbox_checked_mtrl_animation_interpolator_1.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\2d3d4af98a71704fecedf9c2d242a225\\transformed\\appcompat-1.2.0\\res\\interpolator\\btn_checkbox_checked_mtrl_animation_interpolator_1.xml"
+    }
+]

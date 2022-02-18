@@ -1,0 +1,2 @@
+com/origogi/credit_card_input_form/BuildConfig.java
+ com.origogi.credit_card_input_form.BuildConfig

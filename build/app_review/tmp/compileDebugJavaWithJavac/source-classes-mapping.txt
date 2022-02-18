@@ -1,0 +1,7 @@
+com/appleeducate/appreview/AppReviewPlugin.java
+ com.appleeducate.appreview.AppReviewPlugin
+ com.appleeducate.appreview.AppReviewPlugin$1
+ com.appleeducate.appreview.AppReviewPlugin$2
+ com.appleeducate.appreview.AppReviewPlugin$3
+com/appleeducate/appreview/BuildConfig.java
+ com.appleeducate.appreview.BuildConfig

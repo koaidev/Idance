@@ -1,0 +1,14 @@
+eu/sndr/fluttermdnsplugin/handlers/DiscoveryRunningHandler.java
+ eu.sndr.fluttermdnsplugin.handlers.DiscoveryRunningHandler
+eu/sndr/fluttermdnsplugin/FlutterMdnsPlugin.java
+ eu.sndr.fluttermdnsplugin.FlutterMdnsPlugin
+ eu.sndr.fluttermdnsplugin.FlutterMdnsPlugin$1
+ eu.sndr.fluttermdnsplugin.FlutterMdnsPlugin$1$1
+eu/sndr/fluttermdnsplugin/handlers/ServiceLostHandler.java
+ eu.sndr.fluttermdnsplugin.handlers.ServiceLostHandler
+eu/sndr/fluttermdnsplugin/handlers/ServiceDiscoveredHandler.java
+ eu.sndr.fluttermdnsplugin.handlers.ServiceDiscoveredHandler
+eu/sndr/fluttermdnsplugin/handlers/ServiceResolvedHandler.java
+ eu.sndr.fluttermdnsplugin.handlers.ServiceResolvedHandler
+eu/sndr/fluttermdnsplugin/BuildConfig.java
+ eu.sndr.fluttermdnsplugin.BuildConfig

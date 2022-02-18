@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "3297000991",
+    "project_id": "idance2022-4d6d8",
+    "storage_bucket": "idance2022-4d6d8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:3297000991:android:923cd23794a95515c01f2a",
+        "android_client_info": {
+          "package_name": "com.idance.hocnhayonline"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "3297000991-mek0stvofrl8kf83dbn5p7h4dhv1t6bm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqTe0Js_7j7ZA5jjzb0WXhsvNLGk5xAiE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "3297000991-mek0stvofrl8kf83dbn5p7h4dhv1t6bm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "3297000991-r65651oamugqb77ib90icd3t09tku789.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.idance.hocnhayonline"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

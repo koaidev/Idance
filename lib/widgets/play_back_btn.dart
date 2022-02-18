@@ -60,15 +60,58 @@ class PlayBackBtn extends StatelessWidget {
       key: key,
       onTap: () {
         _showPopupMenu(context);
-        PopupMenuButton(itemBuilder: (context) =>[
-          PopupMenuItem(child: FlickSetPlayBack(speed: 0.25, playBackChild: Text("0.25"),), value: 1,),
-          PopupMenuItem(child: FlickSetPlayBack(speed: 0.5, playBackChild: Text("0.5"),), value: 2,),
-          PopupMenuItem(child: FlickSetPlayBack(speed: 0.75, playBackChild: Text("0.75"),), value: 3,),
-          PopupMenuItem(child: FlickSetPlayBack(speed: 1.0, playBackChild: Text("1.0"),), value: 4,),
-          PopupMenuItem(child: FlickSetPlayBack(speed: 1.25, playBackChild: Text("1.25"),), value: 5,),
-          PopupMenuItem(child: FlickSetPlayBack(speed: 1.5, playBackChild: Text("1.5"),), value: 6,),
-          PopupMenuItem(child: FlickSetPlayBack(speed: 2.0, playBackChild: Text("2.0"),), value: 7,),
-        ]);
+        PopupMenuButton(
+            itemBuilder: (context) => [
+                  PopupMenuItem(
+                    child: FlickSetPlayBack(
+                      speed: 0.25,
+                      playBackChild: Text("0.25"),
+                    ),
+                    value: 1,
+                  ),
+                  PopupMenuItem(
+                    child: FlickSetPlayBack(
+                      speed: 0.5,
+                      playBackChild: Text("0.5"),
+                    ),
+                    value: 2,
+                  ),
+                  PopupMenuItem(
+                    child: FlickSetPlayBack(
+                      speed: 0.75,
+                      playBackChild: Text("0.75"),
+                    ),
+                    value: 3,
+                  ),
+                  PopupMenuItem(
+                    child: FlickSetPlayBack(
+                      speed: 1.0,
+                      playBackChild: Text("1.0"),
+                    ),
+                    value: 4,
+                  ),
+                  PopupMenuItem(
+                    child: FlickSetPlayBack(
+                      speed: 1.25,
+                      playBackChild: Text("1.25"),
+                    ),
+                    value: 5,
+                  ),
+                  PopupMenuItem(
+                    child: FlickSetPlayBack(
+                      speed: 1.5,
+                      playBackChild: Text("1.5"),
+                    ),
+                    value: 6,
+                  ),
+                  PopupMenuItem(
+                    child: FlickSetPlayBack(
+                      speed: 2.0,
+                      playBackChild: Text("2.0"),
+                    ),
+                    value: 7,
+                  ),
+                ]);
       },
       child: Container(
         padding: padding,
@@ -83,13 +126,55 @@ class PlayBackBtn extends StatelessWidget {
       context: context,
       position: RelativeRect.fromLTRB(100, 100, 100, 100),
       items: [
-        PopupMenuItem(child: FlickSetPlayBack(speed: 0.25, playBackChild: Text("0.25"),), value: 1,),
-          PopupMenuItem(child: FlickSetPlayBack(speed: 0.5, playBackChild: Text("0.5"),), value: 2,),
-          PopupMenuItem(child: FlickSetPlayBack(speed: 0.75, playBackChild: Text("0.75"),), value: 3,),
-          PopupMenuItem(child: FlickSetPlayBack(speed: 1.0, playBackChild: Text("1.0"),), value: 4,),
-          PopupMenuItem(child: FlickSetPlayBack(speed: 1.25, playBackChild: Text("1.25"),), value: 5,),
-          PopupMenuItem(child: FlickSetPlayBack(speed: 1.5, playBackChild: Text("1.5"),), value: 6,),
-          PopupMenuItem(child: FlickSetPlayBack(speed: 2.0, playBackChild: Text("2.0"),), value: 7,),
+        PopupMenuItem(
+          child: FlickSetPlayBack(
+            speed: 0.25,
+            playBackChild: Text("0.25"),
+          ),
+          value: 1,
+        ),
+        PopupMenuItem(
+          child: FlickSetPlayBack(
+            speed: 0.5,
+            playBackChild: Text("0.5"),
+          ),
+          value: 2,
+        ),
+        PopupMenuItem(
+          child: FlickSetPlayBack(
+            speed: 0.75,
+            playBackChild: Text("0.75"),
+          ),
+          value: 3,
+        ),
+        PopupMenuItem(
+          child: FlickSetPlayBack(
+            speed: 1.0,
+            playBackChild: Text("1.0"),
+          ),
+          value: 4,
+        ),
+        PopupMenuItem(
+          child: FlickSetPlayBack(
+            speed: 1.25,
+            playBackChild: Text("1.25"),
+          ),
+          value: 5,
+        ),
+        PopupMenuItem(
+          child: FlickSetPlayBack(
+            speed: 1.5,
+            playBackChild: Text("1.5"),
+          ),
+          value: 6,
+        ),
+        PopupMenuItem(
+          child: FlickSetPlayBack(
+            speed: 2.0,
+            playBackChild: Text("2.0"),
+          ),
+          value: 7,
+        ),
       ],
       elevation: 8.0,
     );

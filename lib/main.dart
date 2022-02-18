@@ -11,6 +11,7 @@ import 'app.dart';
 import 'data/repository/config_repository.dart';
 import 'models/configuration.dart';
 import 'models/user_model.dart';
+import 'navigation_service.dart';
 import 'service/locator.dart';
 
 Future<void> main() async {
@@ -52,6 +53,7 @@ Future<void> main() async {
   }
   runApp(new MaterialApp(
     debugShowCheckedModeBanner: false,
+    navigatorKey: NavigationService.navigatorKey,
     home: new MyApp(),
   ));
 }

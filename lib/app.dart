@@ -170,10 +170,11 @@ class RenderFirstScreen extends StatelessWidget {
 
   Widget renderFirstScreen(bool isMandatoryLogin) {
     print(isMandatoryLogin);
-    if (isMandatoryLogin) {
-      return AuthScreen();
-    } else {
-      return LandingScreen();
-    }
+    // if (isMandatoryLogin) {
+    //   return AuthScreen();
+    // } else {
+    //   return LandingScreen();
+    // }
+    return LandingScreen();
   }
 }

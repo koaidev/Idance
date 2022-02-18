@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
-
 import '../../service/get_config_service.dart';
 import 'app.dart';
 import 'data/repository/config_repository.dart';
@@ -51,9 +50,10 @@ Future<void> main() async {
   if (defaultTargetPlatform == TargetPlatform.android) {
     //todo
   }
-  runApp(new MaterialApp(
-    debugShowCheckedModeBanner: false,
-    navigatorKey: NavigationService.navigatorKey,
-    home: new MyApp(),
-  ));
+  // runApp(new MaterialApp(
+  //   debugShowCheckedModeBanner: false,
+  //   navigatorKey: NavigationService.navigatorKey,
+  //   home: new MyApp(),
+  // ));
+  runApp(MyApp());
 }

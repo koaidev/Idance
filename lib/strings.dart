@@ -11,7 +11,7 @@ class AppContent {
   static final String signOut = "Đăng xuất";
   static final String library = "Thư viện";
   static final String darkMode = "Giao diện tối";
-  static final String purchases = "Gói học 1";
+  static final String purchases = "Gói học";
   static final String internetIssue = "Sự cố mạng";
   static final String checkInternetConnection = "Kiểm tra kết nối internet";
   static final String signIn = "Đăng nhập";
@@ -27,7 +27,7 @@ class AppContent {
   static final String loginWithFacebook = "Đăng nhập với Facebook";
   static final String loginWithGoogle = "Đăng nhập với Google";
   static final String loginWithEmail = "Đăng nhập với Mail";
-  static final String loginWithApple = "Đăng nhập với Apple ID ";
+  static final String loginWithApple = "Đăng nhập với Apple ID";
   static final String emailAddress = "Email";
   static final String myProfile = "Thông tin của bạn";
   static final String phone = "Số điện thoại";
@@ -126,7 +126,7 @@ class AppContent {
   static final String connectToTV = "Kết nối với TV";
   static final String activeSubsCription = "Đăng ký kích hoạt";
   static final String noSubscriptionFound = "Không tìm thấy lịch sử gói học";
-  static final String mySubsCription = "Gói học của tôi";
+  static final String mySubsCription = "Thông tin gói học";
   static final String activeSubscription = "Kích hoạt gói học";
   static final String purchasesHistory = "Lịch sử mua hàng";
   static final String movieList = "Danh sách lớp học";
@@ -154,13 +154,13 @@ class AppContent {
   static final String startStreamingNow =
       "Bắt đầu phát trực tiếp - Hủy bất kỳ lúc nào";
   static final String bySigingUpYouAgree =
-      "Để đăng nhập bạn phải đồng ý với điều khoản sử dụng.Gói đăng ký sẽ tự động gia hạn nếu bạn không hủy";
+      "Để đăng ký bạn phải đồng ý với điều khoản sử dụng.Gói đăng ký sẽ tự động gia hạn nếu bạn không hủy";
   static final String appNeedsConfiguration =
       'Ứng dụng cần cấu hình đặc biệt để chạy. Vui lòng liên hệ hotline để được hướng dẫn';
   static final String plan = "Lộ trình học:";
-  static final String watchPremiumVideo = "Lớp học cao cấp (Hằng tháng)";
+  static final String watchPremiumVideo = "Lớp học cao cấp (Hàng tháng)";
   static final String watchAllPremiumMovies =
-      "Học tất cả các bài nhảy tại IDANCE ";
+      "Học tất cả các bài nhảy tại IDANCE";
   static final String email = "Email: ";
   static final String fetchingProducts = 'Đang tìm nạp sản phẩm ...';
   static final String downloadedFile = "Đã được tải về";
@@ -168,9 +168,9 @@ class AppContent {
   static final String noFileDownloaded = "Không có dữ liệu để tải";
   static final String termsPolicy = "Chính sách và điều khoản";
   static final String youNeedPremium =
-      "Bạn cần đăng ký gói cao cấp để học được bài này";
+      "Bạn cần đăng ký để học được bài này";
   static final String subscribeToPremium = "Đăng ký gói cao cấp";
   static final String userName = "Tên người dùng :";
-  static final String upgradePurchase = "Nâng cấp gói học";
+  static final String upgradePurchase = "Đăng ký gói học";
   static final String send = "GỬI";
 }

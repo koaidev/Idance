@@ -4,6 +4,7 @@ import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:oxoo/utils/reflect_toggle.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
@@ -206,6 +207,16 @@ class _LandscapePlayerControlsState extends State<LandscapePlayerControls> {
                       ),
                       ReflectToggle(
                         size: 20,
+                        toggleReflect1: () {
+                          Fluttertoast.showToast(
+                              msg: "Tính năng Gương lật đang được phát triển.",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.CENTER,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.red,
+                              textColor: Colors.white,
+                              fontSize: 16.0);
+                        },
                       ),
                       SizedBox(
                         width: 10,
@@ -217,7 +228,7 @@ class _LandscapePlayerControlsState extends State<LandscapePlayerControls> {
                             context: contextMain,
                             builder: (contextMain) {
                               return FractionallySizedBox(
-                                heightFactor: 0.8,
+                                heightFactor: 0.7,
                                 child: Container(
                                   color: Colors.white,
                                   child: Center(
@@ -243,13 +254,9 @@ class _LandscapePlayerControlsState extends State<LandscapePlayerControls> {
                                           setState(() {});
                                           Navigator.pop(context);
                                         }),
-                                        _buildItem(context, "Bình thường", action: () {
+                                        _buildItem(context, "Bình thường",
+                                            action: () {
                                           controlManager.setPlaybackSpeed(1.0);
-                                          setState(() {});
-                                          Navigator.pop(context);
-                                        }),
-                                        _buildItem(context, "1.25", action: () {
-                                          controlManager.setPlaybackSpeed(1.25);
                                           setState(() {});
                                           Navigator.pop(context);
                                         }),
@@ -257,19 +264,11 @@ class _LandscapePlayerControlsState extends State<LandscapePlayerControls> {
                                           controlManager.setPlaybackSpeed(1.5);
                                           setState(() {});
                                           Navigator.pop(context);
-
-                                        }),
-                                        _buildItem(context, "1.75", action: () {
-                                          controlManager.setPlaybackSpeed(1.75);
-                                          setState(() {});
-                                          Navigator.pop(context);
-
                                         }),
                                         _buildItem(context, "2.0", action: () {
                                           controlManager.setPlaybackSpeed(2.0);
                                           setState(() {});
                                           Navigator.pop(context);
-
                                         }),
                                       ],
                                     ),

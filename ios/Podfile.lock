@@ -117,8 +117,6 @@ PODS:
   - GTMSessionFetcher/Core (1.7.0)
   - image_picker (0.0.1):
     - Flutter
-  - momo_vn (0.0.1):
-    - Flutter
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
     - nanopb/encode (= 2.30908.0)
@@ -167,7 +165,6 @@ DEPENDENCIES:
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - google_sign_in (from `.symlinks/plugins/google_sign_in/ios`)
   - image_picker (from `.symlinks/plugins/image_picker/ios`)
-  - momo_vn (from `.symlinks/plugins/momo_vn/ios`)
   - onesignal_flutter (from `.symlinks/plugins/onesignal_flutter/ios`)
   - package_info (from `.symlinks/plugins/package_info/ios`)
   - path_provider_ios (from `.symlinks/plugins/path_provider_ios/ios`)
@@ -234,8 +231,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/google_sign_in/ios"
   image_picker:
     :path: ".symlinks/plugins/image_picker/ios"
-  momo_vn:
-    :path: ".symlinks/plugins/momo_vn/ios"
   onesignal_flutter:
     :path: ".symlinks/plugins/onesignal_flutter/ios"
   package_info:
@@ -291,7 +286,6 @@ SPEC CHECKSUMS:
   GTMAppAuth: ad5c2b70b9a8689e1a04033c9369c4915bfcbe89
   GTMSessionFetcher: 43748f93435c2aa068b1cbe39655aaf600652e91
   image_picker: 9aa50e1d8cdacdbed739e925b7eea16d014367e6
-  momo_vn: bdc65f55945bf8c2c1a6fe10b27b1d5189a93943
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   onesignal_flutter: be350169f5b07461e7b1e9c978d8a39908c5cf37
   OneSignalXCFramework: 27159b0a150cdfe528c85325215c9d78b2f973c7

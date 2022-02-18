@@ -142,15 +142,6 @@ class _AuthScreenState extends State<AuthScreen> {
                             authService: authService,
                             function: _signInwithApple,
                             isApple: true),
-                      InkWell(
-                          onTap: () {
-                            HelpMe().launchURL(
-                                'https://me.momo.vn/lDIWuWsjuaCXC8TGTbs5');
-                          },
-                          child: mailAuthWidget(
-                              color: CustomTheme.salmonColor,
-                              title: AppContent.loginWithEmail,
-                              imagePath: "ic_button_email")),
                       HelpMe().space(90.0),
                     ],
                   ),

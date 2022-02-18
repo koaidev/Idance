@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:oxoo/screen/payment/payment_screen.dart';
 
 import '../../models/user_model.dart';
 import '../../service/authentication_service.dart';
@@ -193,35 +194,36 @@ class _PremiumSubscriptionScreenState extends State<PremiumSubscriptionScreen> {
               SizedBox(
                 height: 20.0,
               ),
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade300),
-                  borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                  color: Colors.grey.shade100,
-                ),
-                child: Column(
-                  children: [
-                    _buildProductList(),
-                    SizedBox(
-                      height: 8.0,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        AppContent.startStreamingNow,
-                        style: CustomTheme.authTitleGrey,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              Text(
-                AppContent.bySigingUpYouAgree,
-                style: CustomTheme.authTitleGrey,
-              )
+              Expanded(child: PaymentScreen())
+              // Container(
+              //   decoration: BoxDecoration(
+              //     border: Border.all(color: Colors.grey.shade300),
+              //     borderRadius: BorderRadius.all(Radius.circular(8.0)),
+              //     color: Colors.grey.shade100,
+              //   ),
+              //   child: Column(
+              //     children: [
+              //       _buildProductList(),
+              //       SizedBox(
+              //         height: 8.0,
+              //       ),
+              //       Padding(
+              //         padding: const EdgeInsets.all(8.0),
+              //         child: Text(
+              //           AppContent.startStreamingNow,
+              //           style: CustomTheme.authTitleGrey,
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 20.0,
+              // ),
+              // Text(
+              //   AppContent.bySigingUpYouAgree,
+              //   style: CustomTheme.authTitleGrey,
+              // )
             ],
           ),
         ));

@@ -18,16 +18,16 @@ class _PaymentScreenState extends State<PaymentScreen> {
         elevation: 0,
         title: Text(
           'Danh sách các gói học',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold,fontSize: 16),
         ),
-        leading: IconButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color: Colors.black,
-            )),
+        // leading: IconButton(
+        //     onPressed: () {
+        //       Navigator.of(context).pop();
+        //     },
+        //     icon: Icon(
+        //       Icons.arrow_back_ios,
+        //       color: Colors.black,
+        //     )),
       ),
       body: SingleChildScrollView(
         child: Container(

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\IDance\\Source Code\\build\\url_launcher_android\\intermediates\\res\\merged\\debug\\values-zu\\values-zu.xml",
+            "outputFile": "D:\\OXOO\\build\\url_launcher_android\\intermediates\\res\\merged\\debug\\values-zu\\values-zu.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\40fa3c0131a187d453352e996587e84f\\transformed\\core-1.1.0\\res\\values-zu\\values-zu.xml",
@@ -16,7 +16,7 @@
             ]
         },
         {
-            "outputFile": "E:\\IDance\\Source Code\\build\\url_launcher_android\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-zu\\values-zu.xml",
+            "outputFile": "D:\\OXOO\\build\\url_launcher_android\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-zu\\values-zu.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\40fa3c0131a187d453352e996587e84f\\transformed\\core-1.1.0\\res\\values-zu\\values-zu.xml",

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\IDance\\Source Code\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw\\values-sw.xml",
+            "outputFile": "D:\\OXOO\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw\\values-sw.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\17a641a0991cab8b3de00c1d4fe99ac0\\transformed\\jetified-play-services-basement-17.1.0\\res\\values-sw\\values.xml",

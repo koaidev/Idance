@@ -8,8 +8,6 @@ import 'package:oxoo/utils/reflect_toggle.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
-import '../navigation_service.dart';
-
 bool showFront = true;
 
 ///reflect video
@@ -95,11 +93,10 @@ class LandscapePlayerControls extends StatefulWidget {
 }
 
 class _LandscapePlayerControlsState extends State<LandscapePlayerControls> {
-  String speed = '1.0';
-  double speedNumber = 1;
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext contextMain) {
+    FlickControlManager controlManager =
+        Provider.of<FlickControlManager>(context);
     return Stack(
       children: <Widget>[
         FlickShowControlsAction(
@@ -153,9 +150,9 @@ class _LandscapePlayerControlsState extends State<LandscapePlayerControls> {
                               bufferedColor: Colors.white38,
                               getPlayedPaint: (
                                   {double? handleRadius,
-                                    double? height,
-                                    double? playedPart,
-                                    double? width}) {
+                                  double? height,
+                                  double? playedPart,
+                                  double? width}) {
                                 return Paint()
                                   ..shader = LinearGradient(colors: [
                                     Color.fromRGBO(108, 165, 242, 1),
@@ -172,9 +169,9 @@ class _LandscapePlayerControlsState extends State<LandscapePlayerControls> {
                               },
                               getHandlePaint: (
                                   {double? handleRadius,
-                                    double? height,
-                                    double? playedPart,
-                                    double? width}) {
+                                  double? height,
+                                  double? playedPart,
+                                  double? width}) {
                                 return Paint()
                                   ..shader = RadialGradient(
                                     colors: [
@@ -213,157 +210,76 @@ class _LandscapePlayerControlsState extends State<LandscapePlayerControls> {
                       SizedBox(
                         width: 10,
                       ),
-                      Stack(
-                        children: [
-                          FlickSetPlayBack(
-                              speed: speedNumber, playBackChild: Text(speed)),
-                          GestureDetector(
-                            child: Container(
-                              width: 100,
-                              height: 20,
-                              color: Colors.transparent,
-                            ),
-                            onTap: () {
-                              showModalBottomSheet<void>(
-                                isScrollControlled: true,
-                                context: NavigationService
-                                    .navigatorKey.currentContext!,
-                                builder: (BuildContext context) {
-                                  return FractionallySizedBox(
-                                    heightFactor: 0.7,
-                                    child: Container(
-                                      color: Colors.white,
-                                      child: Center(
-                                        child: Column(
-                                          mainAxisAlignment:
+                      FlickSetPlayBack(
+                        setPlayBack: () {
+                          showModalBottomSheet<void>(
+                            isScrollControlled: true,
+                            context: contextMain,
+                            builder: (contextMain) {
+                              return FractionallySizedBox(
+                                heightFactor: 0.8,
+                                child: Container(
+                                  color: Colors.white,
+                                  child: Center(
+                                    child: Column(
+                                      mainAxisAlignment:
                                           MainAxisAlignment.start,
-                                          crossAxisAlignment:
+                                      crossAxisAlignment:
                                           CrossAxisAlignment.start,
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: <Widget>[
-                                            _buildItem(context, "0.25",
-                                                action: () {
-                                                  FlickSetPlayBack(
-                                                      speed: 0.25,
-                                                      playBackChild: Text("0.25"));
-                                                  speedNumber = 0.25;
-                                                  speed = '0.25';
-                                                  setState(() {});
-                                                  Navigator.pop(context);
-                                                }),
-                                            _buildItem(context, "0.5",
-                                                action: () {
-                                                  FlickSetPlayBack(
-                                                    speed: 0.5,
-                                                    playBackChild: Text("0.5"),
-                                                  );
-                                                  speedNumber = 0.5;
-                                                  speed = '0.5';
-                                                  setState(() {});
-                                                  Navigator.pop(context);
-                                                }),
-                                            _buildItem(context, "0.75",
-                                                action: () {
-                                                  FlickSetPlayBack(
-                                                    speed: 0.75,
-                                                    playBackChild: Text("0.75"),
-                                                  );
-                                                  speedNumber = 0.75;
-                                                  speed = '0.75';
-                                                  setState(() {});
-                                                  Navigator.pop(context);
-                                                }),
-                                            _buildItem(context, "1.0",
-                                                action: () {
-                                                  FlickSetPlayBack(
-                                                    speed: 1.0,
-                                                    playBackChild: Text("1.0"),
-                                                  );
-                                                  speedNumber = 1;
-                                                  speed = '1.0';
-                                                  setState(() {});
-                                                  Navigator.pop(context);
-                                                }),
-                                            _buildItem(context, "1.25",
-                                                action: () {
-                                                  FlickSetPlayBack(
-                                                    speed: 1.25,
-                                                    playBackChild: Text("1.25"),
-                                                  );
-                                                  speedNumber = 1.25;
-                                                  speed = '1.25';
-                                                  setState(() {});
-                                                  Navigator.pop(context);
-                                                }),
-                                            _buildItem(context, "1.5",
-                                                action: () {
-                                                  FlickSetPlayBack(
-                                                    speed: 1.5,
-                                                    playBackChild: Text("1.5"),
-                                                  );
-                                                  speedNumber = 1.5;
-                                                  speed = '1.5';
-                                                  setState(() {});
-                                                  Navigator.pop(context);
-                                                }),
-                                            _buildItem(context, "2.0",
-                                                action: () {
-                                                  FlickSetPlayBack(
-                                                    speed: 2.0,
-                                                    playBackChild: Text("2.0"),
-                                                  );
-                                                  speedNumber = 2.0;
-                                                  speed = '2.0';
-                                                  setState(() {});
-                                                  Navigator.pop(context);
-                                                }),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                },
-                              );
-                              print('CliCk vaof day');
-                            },
-                          )
-                        ],
-                      )
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: <Widget>[
+                                        _buildItem(context, "0.25", action: () {
+                                          controlManager.setPlaybackSpeed(0.25);
+                                          setState(() {});
+                                          Navigator.pop(context);
+                                        }),
+                                        _buildItem(context, "0.5", action: () {
+                                          controlManager.setPlaybackSpeed(0.5);
+                                          setState(() {});
+                                          Navigator.pop(context);
+                                        }),
+                                        _buildItem(context, "0.75", action: () {
+                                          controlManager.setPlaybackSpeed(0.75);
+                                          setState(() {});
+                                          Navigator.pop(context);
+                                        }),
+                                        _buildItem(context, "Bình thường", action: () {
+                                          controlManager.setPlaybackSpeed(1.0);
+                                          setState(() {});
+                                          Navigator.pop(context);
+                                        }),
+                                        _buildItem(context, "1.25", action: () {
+                                          controlManager.setPlaybackSpeed(1.25);
+                                          setState(() {});
+                                          Navigator.pop(context);
+                                        }),
+                                        _buildItem(context, "1.5", action: () {
+                                          controlManager.setPlaybackSpeed(1.5);
+                                          setState(() {});
+                                          Navigator.pop(context);
 
-                      // Material(
-                      //     child: PopupMenuButton(
-                      //         icon: Icon(Icons.speed),
-                      //         itemBuilder: (context1) =>
-                      //         <PopupMenuEntry>[
-                      //           const PopupMenuItem(
-                      //             child: FlickSetPlayBack(
-                      //               speed: 0.25, playBackChild: Text("0.25"),),
-                      //           ),
-                      //           const PopupMenuItem(
-                      //             child: FlickSetPlayBack(
-                      //               speed: 0.5, playBackChild: Text("0.5"),),
-                      //           ),
-                      //           const PopupMenuItem(
-                      //             child: FlickSetPlayBack(
-                      //               speed: 0.75, playBackChild: Text("0.75"),),
-                      //           ),
-                      //           const PopupMenuItem(
-                      //             child: FlickSetPlayBack(
-                      //               speed: 1.0, playBackChild: Text("1.0"),),
-                      //           ),
-                      //           const PopupMenuItem(
-                      //             child: FlickSetPlayBack(
-                      //               speed: 1.25, playBackChild: Text("1.25"),),
-                      //           ),
-                      //           const PopupMenuItem(
-                      //             child: FlickSetPlayBack(
-                      //               speed: 1.5, playBackChild: Text("1.5"),),
-                      //           ),
-                      //           const PopupMenuItem(
-                      //             child: FlickSetPlayBack(
-                      //               speed: 2.0, playBackChild: Text("2.0"),),
-                      //           ),
-                      //         ]))
+                                        }),
+                                        _buildItem(context, "1.75", action: () {
+                                          controlManager.setPlaybackSpeed(1.75);
+                                          setState(() {});
+                                          Navigator.pop(context);
+
+                                        }),
+                                        _buildItem(context, "2.0", action: () {
+                                          controlManager.setPlaybackSpeed(2.0);
+                                          setState(() {});
+                                          Navigator.pop(context);
+
+                                        }),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      )
                     ],
                   ),
                 ),
@@ -399,7 +315,7 @@ class _LandscapePlayerControlsState extends State<LandscapePlayerControls> {
       decoration: BoxDecoration(
           border: Border(
               bottom:
-              BorderSide(color: Colors.grey.withOpacity(0.5), width: 0.5))),
+                  BorderSide(color: Colors.grey.withOpacity(0.5), width: 0.5))),
       child: GestureDetector(
         onTap: () {
           action?.call();
@@ -425,7 +341,7 @@ class LandscapePlayToggle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FlickControlManager controlManager =
-    Provider.of<FlickControlManager>(context);
+        Provider.of<FlickControlManager>(context);
     FlickVideoManager videoManager = Provider.of<FlickVideoManager>(context);
 
     double size = 50;
@@ -450,8 +366,8 @@ class LandscapePlayToggle extends StatelessWidget {
     Widget child = videoManager.isVideoEnded
         ? replayWidget
         : videoManager.isPlaying
-        ? pauseWidget
-        : playWidget;
+            ? pauseWidget
+            : playWidget;
 
     return Material(
       color: Colors.transparent,

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\IDance\\Source Code\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
+            "outputFile": "D:\\OXOO\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\917c6520d24220a04cc41a0a90a1b985\\transformed\\media-1.0.0\\res\\values-v24\\values-v24.xml",

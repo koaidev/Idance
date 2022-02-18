@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\IDance\\Source Code\\build\\image_picker\\intermediates\\res\\merged\\debug\\values-ne\\values-ne.xml",
+            "outputFile": "D:\\OXOO\\build\\image_picker\\intermediates\\res\\merged\\debug\\values-ne\\values-ne.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\40fa3c0131a187d453352e996587e84f\\transformed\\core-1.1.0\\res\\values-ne\\values-ne.xml",
@@ -16,7 +16,7 @@
             ]
         },
         {
-            "outputFile": "E:\\IDance\\Source Code\\build\\image_picker\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ne\\values-ne.xml",
+            "outputFile": "D:\\OXOO\\build\\image_picker\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ne\\values-ne.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\40fa3c0131a187d453352e996587e84f\\transformed\\core-1.1.0\\res\\values-ne\\values-ne.xml",

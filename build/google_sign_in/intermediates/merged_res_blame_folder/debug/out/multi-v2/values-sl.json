@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\IDance\\Source Code\\build\\google_sign_in\\intermediates\\res\\merged\\debug\\values-sl\\values-sl.xml",
+            "outputFile": "D:\\OXOO\\build\\google_sign_in\\intermediates\\res\\merged\\debug\\values-sl\\values-sl.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\540ed2a7b5cf03b28d08016d871c907c\\transformed\\jetified-play-services-basement-16.0.1\\res\\values-sl\\values.xml",
+                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\4d241b3733cdf80f1c3adcb4d71ab6cc\\transformed\\jetified-play-services-basement-16.0.1\\res\\values-sl\\values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\bea64397ad65647c675c634a43292e1f\\transformed\\jetified-play-services-base-16.0.1\\res\\values-sl\\values.xml",
+                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\0abf6ab9b986c99e83bd22d92158acd0\\transformed\\jetified-play-services-base-16.0.1\\res\\values-sl\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -57,10 +57,10 @@
             ]
         },
         {
-            "outputFile": "E:\\IDance\\Source Code\\build\\google_sign_in\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sl\\values-sl.xml",
+            "outputFile": "D:\\OXOO\\build\\google_sign_in\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sl\\values-sl.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\540ed2a7b5cf03b28d08016d871c907c\\transformed\\jetified-play-services-basement-16.0.1\\res\\values-sl\\values.xml",
+                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\4d241b3733cdf80f1c3adcb4d71ab6cc\\transformed\\jetified-play-services-basement-16.0.1\\res\\values-sl\\values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -77,7 +77,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\bea64397ad65647c675c634a43292e1f\\transformed\\jetified-play-services-base-16.0.1\\res\\values-sl\\values.xml",
+                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\0abf6ab9b986c99e83bd22d92158acd0\\transformed\\jetified-play-services-base-16.0.1\\res\\values-sl\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",

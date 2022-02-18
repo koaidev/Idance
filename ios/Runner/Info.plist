@@ -28,7 +28,6 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb439669080836770</string>
-				<string>momoumgq20200430</string>
 			</array>
 		</dict>
 		<key>CFBundleURLTypes</key>
@@ -47,7 +46,6 @@
 	<string>ca-app-pub-3940256099942544~1458002511</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-	    <string>momo</string>
 		<string>fbapi</string>
 		<string>fb-messenger-api</string>
 		<string>fbauth2</string>

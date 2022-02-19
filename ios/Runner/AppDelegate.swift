@@ -1,6 +1,7 @@
 import UIKit
 import Flutter
 import flutter_downloader
+import Firebase
 
 
 @UIApplicationMain
@@ -9,7 +10,11 @@ import flutter_downloader
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
+
     GeneratedPluginRegistrant.register(with: self)
+      if FirebaseApp.app() == nil {
+          FirebaseApp.configure()
+          }
     FlutterDownloaderPlugin.setPluginRegistrantCallback(registerPlugins)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }

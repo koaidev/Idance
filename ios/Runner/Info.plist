@@ -2,7 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -17,8 +16,6 @@
 	<string>OXOO Demo</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
-	<key>CFBundleVersion</key>
-        <string>$(MARKETING_VERSION)</string>
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
@@ -28,55 +25,48 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb439669080836770</string>
+			</array>
+		</dict>
+		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.376842279696-8jvogge8sfloahblkm8ll5h9s3f4iq10</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>fb442816973525148</string>
+				<string>com.googleusercontent.apps.3297000991-r65651oamugqb77ib90icd3t09tku789</string>
 			</array>
 		</dict>
 	</array>
-	<key>CFBundleURLTypes</key>
-    <array>
-      <dict>
-      <key>CFBundleURLSchemes</key>
-      <array>
-        <string>fb439669080836770</string>
-      </array>
-      </dict>
-    </array>
-    <key>FacebookAppID</key>
-    <string>439669080836770</string>
-    <key>FacebookClientToken</key>
-    <string>0fc5ef4fa43e4a23b5fe6b75bccdd9de</string>
-    <key>FacebookDisplayName</key>
-    <string>IDance - Học nhảy Online</string>
+	<key>CFBundleVersion</key>
+	<string>$(MARKETING_VERSION)</string>
+	<key>FacebookAppID</key>
+	<string>439669080836770</string>
+	<key>FacebookClientToken</key>
+	<string>0fc5ef4fa43e4a23b5fe6b75bccdd9de</string>
+	<key>FacebookDisplayName</key>
+	<string>IDance - Học nhảy Online</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-3940256099942544~1458002511</string>
 	<key>LSApplicationQueriesSchemes</key>
-    <array>
-     <string>fbapi</string>
-       <string>fbapi20130214</string>
-       <string>fbapi20130410</string>
-       <string>fbapi20130702</string>
-       <string>fbapi20131010</string>
-       <string>fbapi20131219</string>
-       <string>fbapi20140410</string>
-       <string>fbapi20140116</string>
-       <string>fbapi20150313</string>
-       <string>fbapi20150629</string>
-       <string>fbapi20160328</string>
-       <string>fbauth</string>
-       <string>fb-messenger-share-api</string>
-       <string>fbauth2</string>
-       <string>fbshareextension</string>
-    </array>
+	<array>
+		<string>fbapi</string>
+		<string>fbapi20130214</string>
+		<string>fbapi20130410</string>
+		<string>fbapi20130702</string>
+		<string>fbapi20131010</string>
+		<string>fbapi20131219</string>
+		<string>fbapi20140410</string>
+		<string>fbapi20140116</string>
+		<string>fbapi20150313</string>
+		<string>fbapi20150629</string>
+		<string>fbapi20160328</string>
+		<string>fbauth</string>
+		<string>fb-messenger-share-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>

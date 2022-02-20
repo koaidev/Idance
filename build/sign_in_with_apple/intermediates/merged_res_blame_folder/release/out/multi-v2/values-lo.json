@@ -1,20 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\IDance\\Source Code\\build\\sign_in_with_apple\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-lo\\values-lo.xml",
+            "outputFile": "D:\\OXOO1\\build\\sign_in_with_apple\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-lo\\values-lo.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\d1920d2f59d49b4abfa572ac147d9c85\\transformed\\browser-1.2.0\\res\\values-lo\\values-lo.xml",
-                    "from": {
-                        "startLines": "2,3,4,5",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,153,251,366",
-                        "endColumns": "97,97,114,98",
-                        "endOffsets": "148,246,361,460"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\40fa3c0131a187d453352e996587e84f\\transformed\\core-1.1.0\\res\\values-lo\\values-lo.xml",
+                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\a5244466e36b9f9dfdd02dd156750c7e\\transformed\\core-1.6.0\\res\\values-lo\\values-lo.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -28,25 +18,25 @@
                         "startOffsets": "465",
                         "endColumns": "100",
                         "endOffsets": "561"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\d1920d2f59d49b4abfa572ac147d9c85\\transformed\\browser-1.2.0\\res\\values-lo\\values-lo.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,153,251,366",
+                        "endColumns": "97,97,114,98",
+                        "endOffsets": "148,246,361,460"
                     }
                 }
             ]
         },
         {
-            "outputFile": "E:\\IDance\\Source Code\\build\\sign_in_with_apple\\intermediates\\res\\merged\\release\\values-lo\\values-lo.xml",
+            "outputFile": "D:\\OXOO1\\build\\sign_in_with_apple\\intermediates\\res\\merged\\release\\values-lo\\values-lo.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\d1920d2f59d49b4abfa572ac147d9c85\\transformed\\browser-1.2.0\\res\\values-lo\\values-lo.xml",
-                    "from": {
-                        "startLines": "2,3,4,5",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,153,251,366",
-                        "endColumns": "97,97,114,98",
-                        "endOffsets": "148,246,361,460"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\40fa3c0131a187d453352e996587e84f\\transformed\\core-1.1.0\\res\\values-lo\\values-lo.xml",
+                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\a5244466e36b9f9dfdd02dd156750c7e\\transformed\\core-1.6.0\\res\\values-lo\\values-lo.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -60,6 +50,16 @@
                         "startOffsets": "465",
                         "endColumns": "100",
                         "endOffsets": "561"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\d1920d2f59d49b4abfa572ac147d9c85\\transformed\\browser-1.2.0\\res\\values-lo\\values-lo.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,153,251,366",
+                        "endColumns": "97,97,114,98",
+                        "endOffsets": "148,246,361,460"
                     }
                 }
             ]

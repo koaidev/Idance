@@ -27,7 +27,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb439669080836770</string>
+				<string>373793947472190</string>
 			</array>
 		</dict>
 		<dict>
@@ -42,11 +42,11 @@
 	<key>CFBundleVersion</key>
 	<string>$(MARKETING_VERSION)</string>
 	<key>FacebookAppID</key>
-	<string>439669080836770</string>
+	<string>373793947472190</string>
 	<key>FacebookClientToken</key>
-	<string>0fc5ef4fa43e4a23b5fe6b75bccdd9de</string>
+	<string>c6e4e69702020a7fe71c6faa196d7f81</string>
 	<key>FacebookDisplayName</key>
-	<string>IDance - Học nhảy Online</string>
+	<string>IDance - Học Nhảy Online</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-3940256099942544~1458002511</string>
 	<key>LSApplicationQueriesSchemes</key>

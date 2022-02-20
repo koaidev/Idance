@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\IDance\\Source Code\\build\\admob_flutter\\intermediates\\res\\merged\\release\\values-lv\\values-lv.xml",
+            "outputFile": "D:\\OXOO1\\build\\admob_flutter\\intermediates\\res\\merged\\release\\values-lv\\values-lv.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\4a2712899943cbfaba072227ed29b61d\\transformed\\jetified-play-services-ads-19.1.0\\res\\values-lv\\values.xml",
@@ -18,6 +18,23 @@
                         "startOffsets": "2898,2977,3084,3154,3224,3312,3422",
                         "endColumns": "78,106,69,69,87,109,74",
                         "endOffsets": "2972,3079,3149,3219,3307,3417,3492"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\a5244466e36b9f9dfdd02dd156750c7e\\transformed\\core-1.6.0\\res\\values-lv\\values-lv.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "27",
+                        "startColumns": "4",
+                        "startOffsets": "3497",
+                        "endColumns": "100",
+                        "endOffsets": "3593"
                     }
                 },
                 {
@@ -52,29 +69,12 @@
                         "startOffsets": "105,214,407,542,652,853,986,1133,1493,1727,1838,2038,2175,2403,2588,2682,2780",
                         "endColumns": "108,192,134,109,200,132,146,134,233,110,199,136,227,184,93,97,117",
                         "endOffsets": "209,402,537,647,848,981,1128,1263,1722,1833,2033,2170,2398,2583,2677,2775,2893"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\40fa3c0131a187d453352e996587e84f\\transformed\\core-1.1.0\\res\\values-lv\\values-lv.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "27",
-                        "startColumns": "4",
-                        "startOffsets": "3497",
-                        "endColumns": "100",
-                        "endOffsets": "3593"
                     }
                 }
             ]
         },
         {
-            "outputFile": "E:\\IDance\\Source Code\\build\\admob_flutter\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-lv\\values-lv.xml",
+            "outputFile": "D:\\OXOO1\\build\\admob_flutter\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-lv\\values-lv.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\4a2712899943cbfaba072227ed29b61d\\transformed\\jetified-play-services-ads-19.1.0\\res\\values-lv\\values.xml",
@@ -91,6 +91,23 @@
                         "startOffsets": "2898,2977,3084,3154,3224,3312,3422",
                         "endColumns": "78,106,69,69,87,109,74",
                         "endOffsets": "2972,3079,3149,3219,3307,3417,3492"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\a5244466e36b9f9dfdd02dd156750c7e\\transformed\\core-1.6.0\\res\\values-lv\\values-lv.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "27",
+                        "startColumns": "4",
+                        "startOffsets": "3497",
+                        "endColumns": "100",
+                        "endOffsets": "3593"
                     }
                 },
                 {
@@ -125,23 +142,6 @@
                         "startOffsets": "105,214,407,542,652,853,986,1133,1493,1727,1838,2038,2175,2403,2588,2682,2780",
                         "endColumns": "108,192,134,109,200,132,146,134,233,110,199,136,227,184,93,97,117",
                         "endOffsets": "209,402,537,647,848,981,1128,1263,1722,1833,2033,2170,2398,2583,2677,2775,2893"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\40fa3c0131a187d453352e996587e84f\\transformed\\core-1.1.0\\res\\values-lv\\values-lv.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "27",
-                        "startColumns": "4",
-                        "startOffsets": "3497",
-                        "endColumns": "100",
-                        "endOffsets": "3593"
                     }
                 }
             ]

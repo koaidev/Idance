@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -395,14 +394,14 @@ class _AuthScreenState extends State<AuthScreen> {
     // Once signed in, return the UserCredential
     final User user =
         (await _auth.signInWithCredential(facebookAuthCredential)).user!;
-    // if (user.email != null && user.email != "") {
-    //   assert(user.email != null);
-    // }
-    // assert(user.displayName != null);
-    // assert(!user.isAnonymous);
+    if (user.email != null && user.email != "") {
+      assert(user.email != null);
+    }
+    assert(user.displayName != null);
+    assert(!user.isAnonymous);
 
-    // final User currentUser = _auth.currentUser!;
-    // assert(user.uid == currentUser.uid);
+    final User currentUser = _auth.currentUser!;
+    assert(user.uid == currentUser.uid);
 
     // Once signed in, return the UserCredential
     return user;

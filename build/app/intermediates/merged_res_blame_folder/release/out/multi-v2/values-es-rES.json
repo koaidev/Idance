@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\IDance\\Source Code\\build\\app\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-es-rES\\values-es-rES.xml",
+            "outputFile": "D:\\OXOO1\\build\\app\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-es-rES\\values-es-rES.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\61b46173f34e9e646e0ff31e1af8534f\\transformed\\jetified-facebook-login-12.1.0\\res\\values-es-rES\\values-es-rES.xml",

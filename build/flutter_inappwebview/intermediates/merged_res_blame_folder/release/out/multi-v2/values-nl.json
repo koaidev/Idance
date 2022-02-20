@@ -1,8 +1,25 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\IDance\\Source Code\\build\\flutter_inappwebview\\intermediates\\res\\merged\\release\\values-nl\\values-nl.xml",
+            "outputFile": "D:\\OXOO1\\build\\flutter_inappwebview\\intermediates\\res\\merged\\release\\values-nl\\values-nl.xml",
             "map": [
+                {
+                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\a5244466e36b9f9dfdd02dd156750c7e\\transformed\\core-1.6.0\\res\\values-nl\\values-nl.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "34",
+                        "startColumns": "4",
+                        "startOffsets": "3329",
+                        "endColumns": "100",
+                        "endOffsets": "3425"
+                    }
+                },
                 {
                     "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\2d3d4af98a71704fecedf9c2d242a225\\transformed\\appcompat-1.2.0\\res\\values-nl\\values-nl.xml",
                     "from": {
@@ -18,23 +35,6 @@
                         "startOffsets": "105,223,328,435,521,629,749,827,903,995,1089,1184,1278,1378,1472,1568,1663,1755,1847,1929,2040,2143,2242,2357,2471,2574,2729,3246",
                         "endColumns": "117,104,106,85,107,119,77,75,91,93,94,93,99,93,95,94,91,91,81,110,102,98,114,113,102,154,102,82",
                         "endOffsets": "218,323,430,516,624,744,822,898,990,1084,1179,1273,1373,1467,1563,1658,1750,1842,1924,2035,2138,2237,2352,2466,2569,2724,2827,3324"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\6583d688c2b440f4717cf1e884f5dd3a\\transformed\\core-1.3.0\\res\\values-nl\\values-nl.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "34",
-                        "startColumns": "4",
-                        "startOffsets": "3329",
-                        "endColumns": "100",
-                        "endOffsets": "3425"
                     }
                 },
                 {
@@ -57,8 +57,25 @@
             ]
         },
         {
-            "outputFile": "E:\\IDance\\Source Code\\build\\flutter_inappwebview\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-nl\\values-nl.xml",
+            "outputFile": "D:\\OXOO1\\build\\flutter_inappwebview\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-nl\\values-nl.xml",
             "map": [
+                {
+                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\a5244466e36b9f9dfdd02dd156750c7e\\transformed\\core-1.6.0\\res\\values-nl\\values-nl.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "34",
+                        "startColumns": "4",
+                        "startOffsets": "3329",
+                        "endColumns": "100",
+                        "endOffsets": "3425"
+                    }
+                },
                 {
                     "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\2d3d4af98a71704fecedf9c2d242a225\\transformed\\appcompat-1.2.0\\res\\values-nl\\values-nl.xml",
                     "from": {
@@ -74,23 +91,6 @@
                         "startOffsets": "105,223,328,435,521,629,749,827,903,995,1089,1184,1278,1378,1472,1568,1663,1755,1847,1929,2040,2143,2242,2357,2471,2574,2729,3246",
                         "endColumns": "117,104,106,85,107,119,77,75,91,93,94,93,99,93,95,94,91,91,81,110,102,98,114,113,102,154,102,82",
                         "endOffsets": "218,323,430,516,624,744,822,898,990,1084,1179,1273,1373,1467,1563,1658,1750,1842,1924,2035,2138,2237,2352,2466,2569,2724,2827,3324"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\6583d688c2b440f4717cf1e884f5dd3a\\transformed\\core-1.3.0\\res\\values-nl\\values-nl.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "34",
-                        "startColumns": "4",
-                        "startOffsets": "3329",
-                        "endColumns": "100",
-                        "endOffsets": "3425"
                     }
                 },
                 {

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\IDance\\Source Code\\build\\flutter_downloader\\intermediates\\res\\merged\\release\\values-hu\\values-hu.xml",
+            "outputFile": "D:\\OXOO1\\build\\flutter_downloader\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-hu\\values-hu.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\a5244466e36b9f9dfdd02dd156750c7e\\transformed\\core-1.6.0\\res\\values-hu\\values-hu.xml",
@@ -16,7 +16,7 @@
             ]
         },
         {
-            "outputFile": "E:\\IDance\\Source Code\\build\\flutter_downloader\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-hu\\values-hu.xml",
+            "outputFile": "D:\\OXOO1\\build\\flutter_downloader\\intermediates\\res\\merged\\release\\values-hu\\values-hu.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\a5244466e36b9f9dfdd02dd156750c7e\\transformed\\core-1.6.0\\res\\values-hu\\values-hu.xml",

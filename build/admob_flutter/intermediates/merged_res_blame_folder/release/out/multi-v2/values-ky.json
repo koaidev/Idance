@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\IDance\\Source Code\\build\\admob_flutter\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-ky\\values-ky.xml",
+            "outputFile": "D:\\OXOO1\\build\\admob_flutter\\intermediates\\res\\merged\\release\\values-ky\\values-ky.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\0358542f8347943bd52365781b99101d\\transformed\\jetified-play-services-base-17.0.0\\res\\values-ky\\values.xml",
@@ -38,23 +38,6 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\40fa3c0131a187d453352e996587e84f\\transformed\\core-1.1.0\\res\\values-ky\\values-ky.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "27",
-                        "startColumns": "4",
-                        "startOffsets": "3401",
-                        "endColumns": "100",
-                        "endOffsets": "3497"
-                    }
-                },
-                {
                     "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\4a2712899943cbfaba072227ed29b61d\\transformed\\jetified-play-services-ads-19.1.0\\res\\values-ky\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10",
@@ -69,12 +52,29 @@
                         "startOffsets": "2805,2880,2989,3061,3133,3217,3316",
                         "endColumns": "74,108,71,71,83,98,84",
                         "endOffsets": "2875,2984,3056,3128,3212,3311,3396"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\a5244466e36b9f9dfdd02dd156750c7e\\transformed\\core-1.6.0\\res\\values-ky\\values-ky.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "27",
+                        "startColumns": "4",
+                        "startOffsets": "3401",
+                        "endColumns": "100",
+                        "endOffsets": "3497"
                     }
                 }
             ]
         },
         {
-            "outputFile": "E:\\IDance\\Source Code\\build\\admob_flutter\\intermediates\\res\\merged\\release\\values-ky\\values-ky.xml",
+            "outputFile": "D:\\OXOO1\\build\\admob_flutter\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-ky\\values-ky.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\0358542f8347943bd52365781b99101d\\transformed\\jetified-play-services-base-17.0.0\\res\\values-ky\\values.xml",
@@ -111,23 +111,6 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\40fa3c0131a187d453352e996587e84f\\transformed\\core-1.1.0\\res\\values-ky\\values-ky.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "27",
-                        "startColumns": "4",
-                        "startOffsets": "3401",
-                        "endColumns": "100",
-                        "endOffsets": "3497"
-                    }
-                },
-                {
                     "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\4a2712899943cbfaba072227ed29b61d\\transformed\\jetified-play-services-ads-19.1.0\\res\\values-ky\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10",
@@ -142,6 +125,23 @@
                         "startOffsets": "2805,2880,2989,3061,3133,3217,3316",
                         "endColumns": "74,108,71,71,83,98,84",
                         "endOffsets": "2875,2984,3056,3128,3212,3311,3396"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\a5244466e36b9f9dfdd02dd156750c7e\\transformed\\core-1.6.0\\res\\values-ky\\values-ky.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "27",
+                        "startColumns": "4",
+                        "startOffsets": "3401",
+                        "endColumns": "100",
+                        "endOffsets": "3497"
                     }
                 }
             ]

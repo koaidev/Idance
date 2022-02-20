@@ -1,25 +1,8 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\IDance\\Source Code\\build\\flutter_facebook_auth\\intermediates\\res\\merged\\release\\values-af\\values-af.xml",
+            "outputFile": "D:\\OXOO1\\build\\flutter_facebook_auth\\intermediates\\res\\merged\\release\\values-af\\values-af.xml",
             "map": [
-                {
-                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\fbcd49fd458450a090d199d23cb691a3\\transformed\\core-1.3.2\\res\\values-af\\values-af.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "53",
-                        "startColumns": "4",
-                        "startOffsets": "5377",
-                        "endColumns": "100",
-                        "endOffsets": "5473"
-                    }
-                },
                 {
                     "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\61b46173f34e9e646e0ff31e1af8534f\\transformed\\jetified-facebook-login-12.1.0\\res\\values-af\\values-af.xml",
                     "from": {
@@ -35,6 +18,23 @@
                         "startOffsets": "2777,2943,3077,3216,3327,3411,3499,3577,3670,3762,3877,3986,4077,4168,4268,4384,4465,4546,4735,4829,4931,5045,5154",
                         "endColumns": "165,133,138,110,83,87,77,92,91,114,108,90,90,99,115,80,80,188,93,101,113,108,142",
                         "endOffsets": "2938,3072,3211,3322,3406,3494,3572,3665,3757,3872,3981,4072,4163,4263,4379,4460,4541,4730,4824,4926,5040,5149,5292"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\a5244466e36b9f9dfdd02dd156750c7e\\transformed\\core-1.6.0\\res\\values-af\\values-af.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "53",
+                        "startColumns": "4",
+                        "startOffsets": "5377",
+                        "endColumns": "100",
+                        "endOffsets": "5473"
                     }
                 },
                 {
@@ -57,25 +57,8 @@
             ]
         },
         {
-            "outputFile": "E:\\IDance\\Source Code\\build\\flutter_facebook_auth\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-af\\values-af.xml",
+            "outputFile": "D:\\OXOO1\\build\\flutter_facebook_auth\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-af\\values-af.xml",
             "map": [
-                {
-                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\fbcd49fd458450a090d199d23cb691a3\\transformed\\core-1.3.2\\res\\values-af\\values-af.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "53",
-                        "startColumns": "4",
-                        "startOffsets": "5377",
-                        "endColumns": "100",
-                        "endOffsets": "5473"
-                    }
-                },
                 {
                     "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\61b46173f34e9e646e0ff31e1af8534f\\transformed\\jetified-facebook-login-12.1.0\\res\\values-af\\values-af.xml",
                     "from": {
@@ -91,6 +74,23 @@
                         "startOffsets": "2777,2943,3077,3216,3327,3411,3499,3577,3670,3762,3877,3986,4077,4168,4268,4384,4465,4546,4735,4829,4931,5045,5154",
                         "endColumns": "165,133,138,110,83,87,77,92,91,114,108,90,90,99,115,80,80,188,93,101,113,108,142",
                         "endOffsets": "2938,3072,3211,3322,3406,3494,3572,3665,3757,3872,3981,4072,4163,4263,4379,4460,4541,4730,4824,4926,5040,5149,5292"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\a5244466e36b9f9dfdd02dd156750c7e\\transformed\\core-1.6.0\\res\\values-af\\values-af.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "53",
+                        "startColumns": "4",
+                        "startOffsets": "5377",
+                        "endColumns": "100",
+                        "endOffsets": "5473"
                     }
                 },
                 {

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-ka\\values-ka.xml",
+            "outputFile": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\values-ka\\values-ka.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\0d6dedd1391fd88185377d4b30b037a9\\transformed\\browser-1.3.0\\res\\values-ka\\values-ka.xml",
@@ -108,7 +108,7 @@
             ]
         },
         {
-            "outputFile": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\values-ka\\values-ka.xml",
+            "outputFile": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-ka\\values-ka.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\0d6dedd1391fd88185377d4b30b037a9\\transformed\\browser-1.3.0\\res\\values-ka\\values-ka.xml",

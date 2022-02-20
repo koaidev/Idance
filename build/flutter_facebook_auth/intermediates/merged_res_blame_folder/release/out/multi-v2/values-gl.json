@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\IDance\\Source Code\\build\\flutter_facebook_auth\\intermediates\\res\\merged\\release\\values-gl\\values-gl.xml",
+            "outputFile": "D:\\OXOO1\\build\\flutter_facebook_auth\\intermediates\\res\\merged\\release\\values-gl\\values-gl.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\1ce076520563eeae099a816e49902058\\transformed\\appcompat-1.1.0\\res\\values-gl\\values-gl.xml",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\fbcd49fd458450a090d199d23cb691a3\\transformed\\core-1.3.2\\res\\values-gl\\values-gl.xml",
+                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\a5244466e36b9f9dfdd02dd156750c7e\\transformed\\core-1.6.0\\res\\values-gl\\values-gl.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -33,7 +33,7 @@
             ]
         },
         {
-            "outputFile": "E:\\IDance\\Source Code\\build\\flutter_facebook_auth\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-gl\\values-gl.xml",
+            "outputFile": "D:\\OXOO1\\build\\flutter_facebook_auth\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-gl\\values-gl.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\1ce076520563eeae099a816e49902058\\transformed\\appcompat-1.1.0\\res\\values-gl\\values-gl.xml",
@@ -46,7 +46,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\fbcd49fd458450a090d199d23cb691a3\\transformed\\core-1.3.2\\res\\values-gl\\values-gl.xml",
+                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\a5244466e36b9f9dfdd02dd156750c7e\\transformed\\core-1.6.0\\res\\values-gl\\values-gl.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

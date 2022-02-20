@@ -1,58 +1,58 @@
 [
     {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\drawable-xxxhdpi-v4\\abc_text_select_handle_right_mtrl.png",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\drawable-xxxhdpi-v4\\abc_text_select_handle_right_mtrl.png"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\drawable-xxxhdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\drawable-xxxhdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\drawable-xxxhdpi-v4\\abc_btn_check_to_on_mtrl_015.png",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\drawable-xxxhdpi-v4\\abc_btn_check_to_on_mtrl_015.png"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\drawable-xxxhdpi-v4\\abc_spinner_mtrl_am_alpha.9.png",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\drawable-xxxhdpi-v4\\abc_spinner_mtrl_am_alpha.9.png"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\drawable-xxxhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\drawable-xxxhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\drawable-xxxhdpi-v4\\ic_os_notification_fallback_white_24dp.png",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\2bd2521112f6f9b0e0d834432c61fe61\\transformed\\jetified-OneSignal-4.6.3\\res\\drawable-xxxhdpi-v4\\ic_os_notification_fallback_white_24dp.png"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\drawable-xxxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\drawable-xxxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\drawable-xxxhdpi-v4\\abc_switch_track_mtrl_alpha.9.png",
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\drawable-xxxhdpi-v4\\abc_switch_track_mtrl_alpha.9.png",
         "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\drawable-xxxhdpi-v4\\abc_switch_track_mtrl_alpha.9.png"
     },
     {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\drawable-xxxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_005.png",
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\drawable-xxxhdpi-v4\\abc_spinner_mtrl_am_alpha.9.png",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\drawable-xxxhdpi-v4\\abc_spinner_mtrl_am_alpha.9.png"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\drawable-xxxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_005.png",
         "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\drawable-xxxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_005.png"
     },
     {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\drawable-xxxhdpi-v4\\abc_btn_check_to_on_mtrl_000.png",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\drawable-xxxhdpi-v4\\abc_btn_check_to_on_mtrl_000.png"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\drawable-xxxhdpi-v4\\abc_btn_radio_to_on_mtrl_015.png",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\drawable-xxxhdpi-v4\\abc_btn_radio_to_on_mtrl_015.png"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\drawable-xxxhdpi-v4\\abc_btn_radio_to_on_mtrl_000.png",
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\drawable-xxxhdpi-v4\\abc_btn_radio_to_on_mtrl_000.png",
         "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\drawable-xxxhdpi-v4\\abc_btn_radio_to_on_mtrl_000.png"
     },
     {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\drawable-xxxhdpi-v4\\abc_text_select_handle_left_mtrl.png",
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\drawable-xxxhdpi-v4\\abc_btn_check_to_on_mtrl_015.png",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\drawable-xxxhdpi-v4\\abc_btn_check_to_on_mtrl_015.png"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\drawable-xxxhdpi-v4\\ic_os_notification_fallback_white_24dp.png",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\6a7d7290b19942b409fdd1a67fa0c4ed\\transformed\\jetified-OneSignal-4.6.6\\res\\drawable-xxxhdpi-v4\\ic_os_notification_fallback_white_24dp.png"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\drawable-xxxhdpi-v4\\abc_text_select_handle_left_mtrl.png",
         "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\drawable-xxxhdpi-v4\\abc_text_select_handle_left_mtrl.png"
     },
     {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\drawable-xxxhdpi-v4\\abc_btn_switch_to_on_mtrl_00001.9.png",
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\drawable-xxxhdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\drawable-xxxhdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\drawable-xxxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\drawable-xxxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\drawable-xxxhdpi-v4\\abc_text_select_handle_right_mtrl.png",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\drawable-xxxhdpi-v4\\abc_text_select_handle_right_mtrl.png"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\drawable-xxxhdpi-v4\\abc_btn_radio_to_on_mtrl_015.png",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\drawable-xxxhdpi-v4\\abc_btn_radio_to_on_mtrl_015.png"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\drawable-xxxhdpi-v4\\abc_btn_switch_to_on_mtrl_00001.9.png",
         "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\drawable-xxxhdpi-v4\\abc_btn_switch_to_on_mtrl_00001.9.png"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\drawable-xxxhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\drawable-xxxhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\drawable-xxxhdpi-v4\\abc_btn_check_to_on_mtrl_000.png",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\drawable-xxxhdpi-v4\\abc_btn_check_to_on_mtrl_000.png"
     }
 ]

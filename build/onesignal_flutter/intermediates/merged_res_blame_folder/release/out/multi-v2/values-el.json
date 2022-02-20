@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\values-el\\values-el.xml",
+            "outputFile": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\values-el\\values-el.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\7c11fb7e469ce03aadcb38e77f241f2e\\transformed\\jetified-play-services-base-17.6.0\\res\\values-el\\values.xml",
@@ -108,7 +108,7 @@
             ]
         },
         {
-            "outputFile": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-el\\values-el.xml",
+            "outputFile": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-el\\values-el.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\7c11fb7e469ce03aadcb38e77f241f2e\\transformed\\jetified-play-services-base-17.6.0\\res\\values-el\\values.xml",

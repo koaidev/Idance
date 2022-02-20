@@ -1,14 +1,14 @@
 [
     {
-        "merged": "E:\\IDance\\Source Code\\build\\admob_flutter\\intermediates\\res\\merged\\release\\color\\common_google_signin_btn_text_light.xml",
+        "merged": "D:\\OXOO1\\build\\admob_flutter\\intermediates\\res\\merged\\release\\color\\common_google_signin_btn_tint.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\0358542f8347943bd52365781b99101d\\transformed\\jetified-play-services-base-17.0.0\\res\\color\\common_google_signin_btn_tint.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\admob_flutter\\intermediates\\res\\merged\\release\\color\\common_google_signin_btn_text_light.xml",
         "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\0358542f8347943bd52365781b99101d\\transformed\\jetified-play-services-base-17.0.0\\res\\color\\common_google_signin_btn_text_light.xml"
     },
     {
-        "merged": "E:\\IDance\\Source Code\\build\\admob_flutter\\intermediates\\res\\merged\\release\\color\\common_google_signin_btn_text_dark.xml",
+        "merged": "D:\\OXOO1\\build\\admob_flutter\\intermediates\\res\\merged\\release\\color\\common_google_signin_btn_text_dark.xml",
         "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\0358542f8347943bd52365781b99101d\\transformed\\jetified-play-services-base-17.0.0\\res\\color\\common_google_signin_btn_text_dark.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\admob_flutter\\intermediates\\res\\merged\\release\\color\\common_google_signin_btn_tint.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\0358542f8347943bd52365781b99101d\\transformed\\jetified-play-services-base-17.0.0\\res\\color\\common_google_signin_btn_tint.xml"
     }
 ]

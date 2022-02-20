@@ -1,25 +1,8 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\IDance\\Source Code\\build\\flutter_inappwebview\\intermediates\\res\\merged\\release\\values-am\\values-am.xml",
+            "outputFile": "D:\\OXOO1\\build\\flutter_inappwebview\\intermediates\\res\\merged\\release\\values-am\\values-am.xml",
             "map": [
-                {
-                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\6583d688c2b440f4717cf1e884f5dd3a\\transformed\\core-1.3.0\\res\\values-am\\values-am.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "34",
-                        "startColumns": "4",
-                        "startOffsets": "3197",
-                        "endColumns": "100",
-                        "endOffsets": "3293"
-                    }
-                },
                 {
                     "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\0d6dedd1391fd88185377d4b30b037a9\\transformed\\browser-1.3.0\\res\\values-am\\values-am.xml",
                     "from": {
@@ -52,30 +35,30 @@
                         "startOffsets": "105,203,301,407,493,596,713,791,867,958,1051,1143,1237,1337,1430,1525,1618,1709,1800,1880,1980,2080,2176,2278,2378,2477,2627,3117",
                         "endColumns": "97,97,105,85,102,116,77,75,90,92,91,93,99,92,94,92,90,90,79,99,99,95,101,99,98,149,95,79",
                         "endOffsets": "198,296,402,488,591,708,786,862,953,1046,1138,1232,1332,1425,1520,1613,1704,1795,1875,1975,2075,2171,2273,2373,2472,2622,2718,3192"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\a5244466e36b9f9dfdd02dd156750c7e\\transformed\\core-1.6.0\\res\\values-am\\values-am.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "34",
+                        "startColumns": "4",
+                        "startOffsets": "3197",
+                        "endColumns": "100",
+                        "endOffsets": "3293"
                     }
                 }
             ]
         },
         {
-            "outputFile": "E:\\IDance\\Source Code\\build\\flutter_inappwebview\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-am\\values-am.xml",
+            "outputFile": "D:\\OXOO1\\build\\flutter_inappwebview\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-am\\values-am.xml",
             "map": [
-                {
-                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\6583d688c2b440f4717cf1e884f5dd3a\\transformed\\core-1.3.0\\res\\values-am\\values-am.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "34",
-                        "startColumns": "4",
-                        "startOffsets": "3197",
-                        "endColumns": "100",
-                        "endOffsets": "3293"
-                    }
-                },
                 {
                     "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\0d6dedd1391fd88185377d4b30b037a9\\transformed\\browser-1.3.0\\res\\values-am\\values-am.xml",
                     "from": {
@@ -108,6 +91,23 @@
                         "startOffsets": "105,203,301,407,493,596,713,791,867,958,1051,1143,1237,1337,1430,1525,1618,1709,1800,1880,1980,2080,2176,2278,2378,2477,2627,3117",
                         "endColumns": "97,97,105,85,102,116,77,75,90,92,91,93,99,92,94,92,90,90,79,99,99,95,101,99,98,149,95,79",
                         "endOffsets": "198,296,402,488,591,708,786,862,953,1046,1138,1232,1332,1425,1520,1613,1704,1795,1875,1975,2075,2171,2273,2373,2472,2622,2718,3192"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\a5244466e36b9f9dfdd02dd156750c7e\\transformed\\core-1.6.0\\res\\values-am\\values-am.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "34",
+                        "startColumns": "4",
+                        "startOffsets": "3197",
+                        "endColumns": "100",
+                        "endOffsets": "3293"
                     }
                 }
             ]

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-zh-rTW\\values-zh-rTW.xml",
+            "outputFile": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\values-zh-rTW\\values-zh-rTW.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\e1df7af62dd81028bfc42f5439df1b07\\transformed\\jetified-firebase-messaging-22.0.0\\res\\values-zh-rTW\\values.xml",
@@ -108,7 +108,7 @@
             ]
         },
         {
-            "outputFile": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\values-zh-rTW\\values-zh-rTW.xml",
+            "outputFile": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-zh-rTW\\values-zh-rTW.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\e1df7af62dd81028bfc42f5439df1b07\\transformed\\jetified-firebase-messaging-22.0.0\\res\\values-zh-rTW\\values.xml",

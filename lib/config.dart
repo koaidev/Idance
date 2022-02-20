@@ -6,7 +6,7 @@ class Config {
   //set your onesignalID here
   static String oneSignalID               = "xxxxx-xxxx-xxxx-xxxx-xxxxxxx";
   //set term and conditaions url here
-  static String termsPolicyUrl            = "https://spagreen.net/tearms-of-services/";
+  static String termsPolicyUrl            = "https://cnagroup.vn/chinh-sach-bao-mat/";
 
 
   static final bool enableFacebookAuth    = true;

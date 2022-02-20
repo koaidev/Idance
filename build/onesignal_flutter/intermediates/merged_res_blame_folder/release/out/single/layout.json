@@ -1,202 +1,202 @@
 [
     {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\notification_template_big_media_narrow_custom.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\917c6520d24220a04cc41a0a90a1b985\\transformed\\media-1.0.0\\res\\layout\\notification_template_big_media_narrow_custom.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_action_menu_item_layout.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_action_menu_item_layout.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\notification_template_icon_group.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\a5244466e36b9f9dfdd02dd156750c7e\\transformed\\core-1.6.0\\res\\layout\\notification_template_icon_group.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_radio.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_list_menu_item_radio.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\select_dialog_item_material.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\select_dialog_item_material.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_activity_chooser_view.xml",
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_activity_chooser_view.xml",
         "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_activity_chooser_view.xml"
     },
     {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\select_dialog_multichoice_material.xml",
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_action_menu_item_layout.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_action_menu_item_layout.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_search_dropdown_item_icons_2line.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_search_dropdown_item_icons_2line.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\select_dialog_multichoice_material.xml",
         "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\select_dialog_multichoice_material.xml"
     },
     {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_screen_simple.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_screen_simple.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_action_menu_layout.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_action_menu_layout.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_layout.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_list_menu_item_layout.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_action_mode_close_item_material.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_action_mode_close_item_material.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\notification_template_lines_media.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\917c6520d24220a04cc41a0a90a1b985\\transformed\\media-1.0.0\\res\\layout\\notification_template_lines_media.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_icon.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_list_menu_item_icon.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_dialog_title_material.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_dialog_title_material.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\notification_media_action.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\917c6520d24220a04cc41a0a90a1b985\\transformed\\media-1.0.0\\res\\layout\\notification_media_action.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\notification_template_media_custom.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\917c6520d24220a04cc41a0a90a1b985\\transformed\\media-1.0.0\\res\\layout\\notification_template_media_custom.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_select_dialog_material.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_select_dialog_material.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\onesignal_bgimage_notif_layout.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\2bd2521112f6f9b0e0d834432c61fe61\\transformed\\jetified-OneSignal-4.6.3\\res\\layout\\onesignal_bgimage_notif_layout.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_activity_chooser_view_list_item.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_activity_chooser_view_list_item.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\notification_template_big_media_narrow.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\917c6520d24220a04cc41a0a90a1b985\\transformed\\media-1.0.0\\res\\layout\\notification_template_big_media_narrow.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\notification_action.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\a5244466e36b9f9dfdd02dd156750c7e\\transformed\\core-1.6.0\\res\\layout\\notification_action.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\notification_template_big_media_custom.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\917c6520d24220a04cc41a0a90a1b985\\transformed\\media-1.0.0\\res\\layout\\notification_template_big_media_custom.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_alert_dialog_button_bar_material.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_alert_dialog_button_bar_material.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_screen_toolbar.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_screen_toolbar.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_alert_dialog_title_material.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_alert_dialog_title_material.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_screen_simple_overlay_action_mode.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_action_mode_bar.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_action_mode_bar.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\notification_template_part_time.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\a5244466e36b9f9dfdd02dd156750c7e\\transformed\\core-1.6.0\\res\\layout\\notification_template_part_time.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_popup_menu_item_layout.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_popup_menu_item_layout.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\notification_media_cancel_action.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\917c6520d24220a04cc41a0a90a1b985\\transformed\\media-1.0.0\\res\\layout\\notification_media_cancel_action.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\select_dialog_singlechoice_material.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\select_dialog_singlechoice_material.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\notification_template_part_chronometer.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\a5244466e36b9f9dfdd02dd156750c7e\\transformed\\core-1.6.0\\res\\layout\\notification_template_part_chronometer.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_checkbox.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_list_menu_item_checkbox.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\notification_template_big_media.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\917c6520d24220a04cc41a0a90a1b985\\transformed\\media-1.0.0\\res\\layout\\notification_template_big_media.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_popup_menu_header_item_layout.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_popup_menu_header_item_layout.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\custom_dialog.xml",
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\custom_dialog.xml",
         "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\a5244466e36b9f9dfdd02dd156750c7e\\transformed\\core-1.6.0\\res\\layout\\custom_dialog.xml"
     },
     {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_alert_dialog_material.xml",
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\notification_template_big_media_narrow.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\917c6520d24220a04cc41a0a90a1b985\\transformed\\media-1.0.0\\res\\layout\\notification_template_big_media_narrow.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_alert_dialog_button_bar_material.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_alert_dialog_button_bar_material.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_alert_dialog_material.xml",
         "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_alert_dialog_material.xml"
     },
     {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_search_view.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_search_view.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_cascading_menu_item_layout.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_cascading_menu_item_layout.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_tooltip.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_tooltip.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\notification_template_media.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\917c6520d24220a04cc41a0a90a1b985\\transformed\\media-1.0.0\\res\\layout\\notification_template_media.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_expanded_menu_layout.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_expanded_menu_layout.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\browser_actions_context_menu_row.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\0d6dedd1391fd88185377d4b30b037a9\\transformed\\browser-1.3.0\\res\\layout\\browser_actions_context_menu_row.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_screen_content_include.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_screen_content_include.xml"
-    },
-    {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\support_simple_spinner_dropdown_item.xml",
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\support_simple_spinner_dropdown_item.xml",
         "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\support_simple_spinner_dropdown_item.xml"
     },
     {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_action_bar_title_item.xml",
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_screen_content_include.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_screen_content_include.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_action_bar_title_item.xml",
         "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_action_bar_title_item.xml"
     },
     {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\notification_action_tombstone.xml",
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\notification_media_action.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\917c6520d24220a04cc41a0a90a1b985\\transformed\\media-1.0.0\\res\\layout\\notification_media_action.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\select_dialog_item_material.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\select_dialog_item_material.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\notification_template_lines_media.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\917c6520d24220a04cc41a0a90a1b985\\transformed\\media-1.0.0\\res\\layout\\notification_template_lines_media.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\select_dialog_singlechoice_material.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\select_dialog_singlechoice_material.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\onesignal_bgimage_notif_layout.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\6a7d7290b19942b409fdd1a67fa0c4ed\\transformed\\jetified-OneSignal-4.6.6\\res\\layout\\onesignal_bgimage_notif_layout.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_dialog_title_material.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_dialog_title_material.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_select_dialog_material.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_select_dialog_material.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_action_mode_close_item_material.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_action_mode_close_item_material.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_screen_simple.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_screen_simple.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\notification_template_part_chronometer.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\a5244466e36b9f9dfdd02dd156750c7e\\transformed\\core-1.6.0\\res\\layout\\notification_template_part_chronometer.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_tooltip.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_tooltip.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_screen_simple_overlay_action_mode.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_activity_chooser_view_list_item.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_activity_chooser_view_list_item.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\browser_actions_context_menu_row.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\0d6dedd1391fd88185377d4b30b037a9\\transformed\\browser-1.3.0\\res\\layout\\browser_actions_context_menu_row.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_search_view.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_search_view.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_checkbox.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_list_menu_item_checkbox.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_popup_menu_header_item_layout.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_popup_menu_header_item_layout.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_screen_toolbar.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_screen_toolbar.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_icon.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_list_menu_item_icon.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\notification_media_cancel_action.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\917c6520d24220a04cc41a0a90a1b985\\transformed\\media-1.0.0\\res\\layout\\notification_media_cancel_action.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\notification_template_big_media_custom.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\917c6520d24220a04cc41a0a90a1b985\\transformed\\media-1.0.0\\res\\layout\\notification_template_big_media_custom.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\notification_template_media_custom.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\917c6520d24220a04cc41a0a90a1b985\\transformed\\media-1.0.0\\res\\layout\\notification_template_media_custom.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_alert_dialog_title_material.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_alert_dialog_title_material.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_radio.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_list_menu_item_radio.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_action_menu_layout.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_action_menu_layout.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_popup_menu_item_layout.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_popup_menu_item_layout.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\notification_template_big_media.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\917c6520d24220a04cc41a0a90a1b985\\transformed\\media-1.0.0\\res\\layout\\notification_template_big_media.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\notification_template_media.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\917c6520d24220a04cc41a0a90a1b985\\transformed\\media-1.0.0\\res\\layout\\notification_template_media.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\notification_action.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\a5244466e36b9f9dfdd02dd156750c7e\\transformed\\core-1.6.0\\res\\layout\\notification_action.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\notification_template_part_time.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\a5244466e36b9f9dfdd02dd156750c7e\\transformed\\core-1.6.0\\res\\layout\\notification_template_part_time.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_list_menu_item_layout.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_list_menu_item_layout.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\notification_template_icon_group.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\a5244466e36b9f9dfdd02dd156750c7e\\transformed\\core-1.6.0\\res\\layout\\notification_template_icon_group.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\notification_template_big_media_narrow_custom.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\917c6520d24220a04cc41a0a90a1b985\\transformed\\media-1.0.0\\res\\layout\\notification_template_big_media_narrow_custom.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_expanded_menu_layout.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_expanded_menu_layout.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_cascading_menu_item_layout.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_cascading_menu_item_layout.xml"
+    },
+    {
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\notification_action_tombstone.xml",
         "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\a5244466e36b9f9dfdd02dd156750c7e\\transformed\\core-1.6.0\\res\\layout\\notification_action_tombstone.xml"
     },
     {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\browser_actions_context_menu_page.xml",
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\browser_actions_context_menu_page.xml",
         "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\0d6dedd1391fd88185377d4b30b037a9\\transformed\\browser-1.3.0\\res\\layout\\browser_actions_context_menu_page.xml"
     },
     {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_action_bar_up_container.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_action_bar_up_container.xml"
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_action_mode_bar.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_action_mode_bar.xml"
     },
     {
-        "merged": "E:\\IDance\\Source Code\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_search_dropdown_item_icons_2line.xml",
-        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_search_dropdown_item_icons_2line.xml"
+        "merged": "D:\\OXOO1\\build\\onesignal_flutter\\intermediates\\res\\merged\\release\\layout\\abc_action_bar_up_container.xml",
+        "source": "C:\\Users\\Nguyen Khanh\\.gradle\\caches\\transforms-3\\f627de51d856420343268a8b034a2d65\\transformed\\appcompat-1.3.1\\res\\layout\\abc_action_bar_up_container.xml"
     }
 ]

@@ -11,6 +11,7 @@
 #endif
 
 #import "FLTSharedPreferencesPlugin.h"
+#import "messages.g.h"
 
 FOUNDATION_EXPORT double shared_preferences_iosVersionNumber;
 FOUNDATION_EXPORT const unsigned char shared_preferences_iosVersionString[];

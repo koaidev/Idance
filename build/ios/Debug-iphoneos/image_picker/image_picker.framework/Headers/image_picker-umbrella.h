@@ -1,21 +1,6 @@
-#ifdef __OBJC__
-#import <UIKit/UIKit.h>
-#else
-#ifndef FOUNDATION_EXPORT
-#if defined(__cplusplus)
-#define FOUNDATION_EXPORT extern "C"
-#else
-#define FOUNDATION_EXPORT extern
-#endif
-#endif
-#endif
+// Copyright 2013 The Flutter Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
 
-#import "FLTImagePickerImageUtil.h"
-#import "FLTImagePickerMetaDataUtil.h"
-#import "FLTImagePickerPhotoAssetUtil.h"
-#import "FLTImagePickerPlugin.h"
-#import "FLTPHPickerSaveImageToPathOperation.h"
-
-FOUNDATION_EXPORT double image_pickerVersionNumber;
-FOUNDATION_EXPORT const unsigned char image_pickerVersionString[];
-
+#import <Foundation/Foundation.h>
+#import <image_picker/FLTImagePickerPlugin.h>

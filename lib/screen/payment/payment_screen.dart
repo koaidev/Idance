@@ -27,7 +27,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
           children: [
             _buildSubTitle('1 tháng', "50.000 VND", 1),
             _buildSubTitle('3 tháng', "120. 000 VND", 2),
-            _buildSubTitle('6 tháng', "200.000 VND - 150.000 VND", 3),
+            _buildSubTitle('6 tháng', "", 3),
           ],
         ),
         margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
@@ -71,13 +71,34 @@ class _PaymentScreenState extends State<PaymentScreen> {
             SizedBox(
               width: 2,
             ),
-            Text(
-              subTitle.toUpperCase(),
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
-            )
+            if (index == 3)
+              Row(
+                children: [
+                  Text(
+                    '200.000 VNĐ'.toUpperCase(),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        decoration: TextDecoration.lineThrough,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    '- 150.000 VNĐ'.toUpperCase(),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
+            if (index != 3)
+              Text(
+                subTitle.toUpperCase(),
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
+              )
           ],
         ),
       ),

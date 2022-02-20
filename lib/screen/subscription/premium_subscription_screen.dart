@@ -112,88 +112,88 @@ class _PremiumSubscriptionScreenState extends State<PremiumSubscriptionScreen> {
               SizedBox(
                 height: 20.0,
               ),
-              Text(
-                AppContent.confirmYourDetails,
-                style: CustomTheme.bodyText1,
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
+              // Text(
+              //   AppContent.confirmYourDetails,
+              //   style: CustomTheme.bodyText1,
+              // ),
+              // SizedBox(
+              //   height: 20.0,
+              // ),
               //Details
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                  border: Border.all(color: Colors.grey.shade300),
-                  color: Colors.grey.shade100,
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Container(
-                            width: MediaQuery.of(context).size.width / 3,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                AppContent.plan,
-                                style: CustomTheme.bodyText1,
-                              ),
-                            )),
-                        Expanded(
-                          child: Container(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                children: [
-                                  Text(
-                                    AppContent.watchPremiumVideo,
-                                    style: CustomTheme.bodyText1,
-                                  ),
-                                  SizedBox(
-                                    height: 10.0,
-                                  ),
-                                  Text(
-                                    AppContent.watchAllPremiumMovies,
-                                    style: CustomTheme.authTitleGrey,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                    Divider(),
-                    Row(
-                      children: [
-                        Container(
-                            width: MediaQuery.of(context).size.width / 3,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                AppContent.email,
-                                style: CustomTheme.bodyText1,
-                              ),
-                            )),
-                        Expanded(
-                          child: Container(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                authUser!.email!,
-                                style: CustomTheme.authTitleGrey,
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
+              // Container(
+              //   decoration: BoxDecoration(
+              //     borderRadius: BorderRadius.all(Radius.circular(8.0)),
+              //     border: Border.all(color: Colors.grey.shade300),
+              //     color: Colors.grey.shade100,
+              //   ),
+              //   child: Column(
+              //     children: [
+              //       Row(
+              //         children: [
+              //           Container(
+              //               width: MediaQuery.of(context).size.width / 3,
+              //               child: Padding(
+              //                 padding: const EdgeInsets.all(8.0),
+              //                 child: Text(
+              //                   AppContent.plan,
+              //                   style: CustomTheme.bodyText1,
+              //                 ),
+              //               )),
+              //           Expanded(
+              //             child: Container(
+              //               child: Padding(
+              //                 padding: const EdgeInsets.all(8.0),
+              //                 child: Column(
+              //                   children: [
+              //                     Text(
+              //                       AppContent.watchPremiumVideo,
+              //                       style: CustomTheme.bodyText1,
+              //                     ),
+              //                     SizedBox(
+              //                       height: 10.0,
+              //                     ),
+              //                     Text(
+              //                       AppContent.watchAllPremiumMovies,
+              //                       style: CustomTheme.authTitleGrey,
+              //                     ),
+              //                   ],
+              //                 ),
+              //               ),
+              //             ),
+              //           )
+              //         ],
+              //       ),
+              //       Divider(),
+              //       Row(
+              //         children: [
+              //           Container(
+              //               width: MediaQuery.of(context).size.width / 3,
+              //               child: Padding(
+              //                 padding: const EdgeInsets.all(8.0),
+              //                 child: Text(
+              //                   AppContent.email,
+              //                   style: CustomTheme.bodyText1,
+              //                 ),
+              //               )),
+              //           Expanded(
+              //             child: Container(
+              //               child: Padding(
+              //                 padding: const EdgeInsets.all(8.0),
+              //                 child: Text(
+              //                   authUser!.email!,
+              //                   style: CustomTheme.authTitleGrey,
+              //                 ),
+              //               ),
+              //             ),
+              //           )
+              //         ],
+              //       ),
+              //     ],
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 20.0,
+              // ),
               Expanded(child: PaymentScreen())
               // Container(
               //   decoration: BoxDecoration(

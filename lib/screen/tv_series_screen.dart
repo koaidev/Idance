@@ -64,7 +64,7 @@ class _TvSeriesScreenState extends State<TvSeriesScreen> {
   }
 
   Widget _noItemFounnd(context) {
-    return Center(child: Text("No item Found ! ", style: isDark ? CustomTheme.bodyText2White : CustomTheme.bodyText2));
+    return Center(child: Text("Hiện chưa có video trong danh sách! ", style: isDark ? CustomTheme.bodyText2White : CustomTheme.bodyText2));
   }
 
   _buildAppBar(isFromMenu) {

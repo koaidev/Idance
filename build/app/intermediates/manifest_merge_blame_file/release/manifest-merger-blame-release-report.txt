@@ -165,8 +165,8 @@
 84
 85        <activity
 85-->D:\OXOO1\android\app\src\main\AndroidManifest.xml:26:9-37:20
-86            android:name="io.flutter.embedding.android.FlutterActivity"
-86-->D:\OXOO1\android\app\src\main\AndroidManifest.xml:27:13-72
+86            android:name="com.idance.hocnhayonline.MainActivity"
+86-->D:\OXOO1\android\app\src\main\AndroidManifest.xml:27:13-41
 87            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
 87-->D:\OXOO1\android\app\src\main\AndroidManifest.xml:28:13-163
 88            android:hardwareAccelerated="true"

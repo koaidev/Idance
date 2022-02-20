@@ -136,8 +136,9 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Text(
-                  "You need Premium membership to watch this video",
+                  "Bạn cần đăng ký gói trả phí để học bài nhảy này.",
                   style: CustomTheme.authTitle,
+                  textAlign: TextAlign.center,
                 ),
                 Column(
                   // mainAxisAlignment: MainAxisAlignment.end,
@@ -147,7 +148,7 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                       onPressed: () async {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => PremiumSubscriptionScreen(fromRadioScreen: false, fromLiveTvScreen: true, liveTvID: "1", isPaid: widget.isPaid)),);
                       },
-                      child: Text("subscribe to Premium", style: CustomTheme.bodyText3White,),
+                      child: Text("Đăng ký gói học ngay", style: CustomTheme.bodyText3White,),
                     ),
                     SizedBox(width: 30.0,),
                     ElevatedButton(

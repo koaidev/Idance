@@ -90,6 +90,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         fontWeight: FontWeight.bold),
                   )
                 ],
+                mainAxisAlignment: MainAxisAlignment.center ,
               ),
             if (index != 3)
               Text(

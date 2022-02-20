@@ -1,4 +1,4 @@
-#Sun Feb 20 03:39:36 ICT 2022
+#Mon Feb 21 01:07:22 ICT 2022
 base.1=D\:\\OXOO1\\build\\app\\intermediates\\dex\\release\\minifyReleaseWithR8\\classes2.dex
 path.1=classes2.dex
 base.0=D\:\\OXOO1\\build\\app\\intermediates\\dex\\release\\minifyReleaseWithR8\\classes.dex

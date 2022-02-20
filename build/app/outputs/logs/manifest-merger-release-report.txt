@@ -577,7 +577,7 @@ ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:23:9-25:70
 		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:25:13-67
 	android:name
 		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:24:13-69
-activity#io.flutter.embedding.android.FlutterActivity
+activity#com.idance.hocnhayonline.MainActivity
 ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:26:9-37:20
 	android:launchMode
 		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:30:13-43
@@ -590,7 +590,7 @@ ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:26:9-37:20
 	android:theme
 		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:31:13-47
 	android:name
-		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:27:13-72
+		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:27:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
 ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:33:13-36:29
 action#android.intent.action.MAIN

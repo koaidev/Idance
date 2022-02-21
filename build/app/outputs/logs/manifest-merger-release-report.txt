@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 application
-INJECTED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:18:5-83:19
+INJECTED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:18:5-85:19
 MERGED from [:firebase_auth] D:\OXOO1\build\firebase_auth\intermediates\library_manifest\release\AndroidManifest.xml:7:5-13:19
 MERGED from [:firebase_auth] D:\OXOO1\build\firebase_auth\intermediates\library_manifest\release\AndroidManifest.xml:7:5-13:19
 MERGED from [:firebase_core] D:\OXOO1\build\firebase_core\intermediates\library_manifest\release\AndroidManifest.xml:7:5-13:19
@@ -107,21 +107,21 @@ MERGED from [com.google.android.gms:play-services-ads-base:19.1.0] C:\Users\Nguy
 		INJECTED from D:\OXOO1\android\app\src\main\AndroidManifest.xml
 		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:19:9-42
 provider#vn.hunghd.flutterdownloader.DownloadedFileProvider
-INJECTED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:66:9-74:20
+INJECTED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:68:9-76:20
 	android:grantUriPermissions
-		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:70:13-47
+		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:72:13-47
 	android:authorities
 		INJECTED from D:\OXOO1\android\app\src\main\AndroidManifest.xml
-		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:68:13-79
+		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:70:13-79
 	android:exported
-		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:69:13-37
+		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:71:13-37
 	android:name
-		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:67:13-78
+		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:69:13-78
 manifest
-ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:1:1-84:12
-INJECTED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:1:1-84:12
-INJECTED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:1:1-84:12
-INJECTED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:1:1-84:12
+ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:1:1-86:12
+INJECTED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:1:1-86:12
+INJECTED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:1:1-86:12
+INJECTED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:1:1-86:12
 MERGED from [:firebase_auth] D:\OXOO1\build\firebase_auth\intermediates\library_manifest\release\AndroidManifest.xml:2:1-15:12
 MERGED from [:firebase_core] D:\OXOO1\build\firebase_core\intermediates\library_manifest\release\AndroidManifest.xml:2:1-15:12
 MERGED from [:image_picker] D:\OXOO1\build\image_picker\intermediates\library_manifest\release\AndroidManifest.xml:2:1-19:12
@@ -244,20 +244,20 @@ MERGED from [com.google.android.play:core:1.8.2] C:\Users\Nguyen Khanh\.gradle\c
 MERGED from [androidx.annotation:annotation-experimental:1.1.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\c0505da8d9c1c4beb11fede97a9f51c6\transformed\jetified-annotation-experimental-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [com.android.installreferrer:installreferrer:1.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\60f8a10efd26a922902d9de25ccf0265\transformed\jetified-installreferrer-1.0\AndroidManifest.xml:2:1-13:12
 MERGED from [com.google.android.gms:play-services-ads-base:19.1.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\de7c37ed1c045e3b06180693299b6659\transformed\jetified-play-services-ads-base-19.1.0\AndroidManifest.xml:2:1-9:12
-INJECTED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:1:1-84:12
-INJECTED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:1:1-84:12
-INJECTED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:1:1-84:12
+INJECTED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:1:1-86:12
+INJECTED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:1:1-86:12
+INJECTED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:1:1-86:12
 	package
 		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:2:5-39
 		INJECTED from D:\OXOO1\android\app\src\main\AndroidManifest.xml
 		INJECTED from D:\OXOO1\android\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from D:\OXOO1\android\app\src\main\AndroidManifest.xml
-		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:1:1-84:12
+		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:1:1-86:12
 		INJECTED from D:\OXOO1\android\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from D:\OXOO1\android\app\src\main\AndroidManifest.xml
-		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:1:1-84:12
+		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:1:1-86:12
 		INJECTED from D:\OXOO1\android\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:1:11-69
@@ -578,99 +578,103 @@ ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:23:9-25:70
 	android:name
 		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:24:13-69
 activity#com.idance.hocnhayonline.MainActivity
-ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:26:9-37:20
+ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:26:9-38:20
 	android:launchMode
-		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:30:13-43
+		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:31:13-43
 	android:hardwareAccelerated
-		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:29:13-47
+		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:30:13-47
 	android:windowSoftInputMode
-		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:32:13-55
+		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:33:13-55
+	android:exported
+		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:28:13-36
 	android:configChanges
-		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:28:13-163
+		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:29:13-163
 	android:theme
-		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:31:13-47
+		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:32:13-47
 	android:name
 		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:27:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:33:13-36:29
+ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:34:13-37:29
 action#android.intent.action.MAIN
-ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:34:17-69
+ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:35:17-69
 	android:name
-		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:34:25-66
+		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:35:25-66
 category#android.intent.category.LAUNCHER
-ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:35:17-77
+ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:36:17-77
 	android:name
-		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:35:27-74
+		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:36:27-74
 meta-data#flutterEmbedding
-ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:40:9-42:33
+ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:41:9-43:33
 	android:value
-		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:42:13-30
+		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:43:13-30
 	android:name
-		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:41:13-44
+		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:42:13-44
 activity#com.facebook.FacebookActivity
-ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:44:9-47:48
+ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:45:9-49:48
 MERGED from [com.facebook.android:facebook-common:12.2.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\419fd111c52f53307e4474f108f70166\transformed\jetified-facebook-common-12.2.0\AndroidManifest.xml:30:9-33:66
 MERGED from [com.facebook.android:facebook-common:12.2.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\419fd111c52f53307e4474f108f70166\transformed\jetified-facebook-common-12.2.0\AndroidManifest.xml:30:9-33:66
 	android:label
-		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:47:13-45
+		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:49:13-45
+	android:exported
+		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:47:13-36
 	android:configChanges
-		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:46:13-96
+		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:48:13-96
 	android:theme
 		ADDED from [com.facebook.android:facebook-common:12.2.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\419fd111c52f53307e4474f108f70166\transformed\jetified-facebook-common-12.2.0\AndroidManifest.xml:33:13-63
 	android:name
-		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:45:13-57
+		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:46:13-57
 activity#com.facebook.CustomTabActivity
-ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:48:9-59:20
+ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:50:9-61:20
 MERGED from [com.facebook.android:facebook-common:12.2.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\419fd111c52f53307e4474f108f70166\transformed\jetified-facebook-common-12.2.0\AndroidManifest.xml:35:9-49:20
 MERGED from [com.facebook.android:facebook-common:12.2.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\419fd111c52f53307e4474f108f70166\transformed\jetified-facebook-common-12.2.0\AndroidManifest.xml:35:9-49:20
 	tools:node
 		ADDED from [com.facebook.android:facebook-common:12.2.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\419fd111c52f53307e4474f108f70166\transformed\jetified-facebook-common-12.2.0\AndroidManifest.xml:38:13-31
 	android:exported
-		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:50:13-36
+		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:52:13-36
 	android:name
-		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:49:13-58
+		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:51:13-58
 intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:scheme:@string/fb_login_protocol_scheme
-ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:51:13-58:29
+ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:53:13-60:29
 action#android.intent.action.VIEW
-ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:52:17-69
+ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:54:17-69
 	android:name
-		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:52:25-66
+		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:54:25-66
 category#android.intent.category.DEFAULT
-ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:54:17-76
+ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:56:17-76
 	android:name
-		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:54:27-73
+		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:56:27-73
 category#android.intent.category.BROWSABLE
-ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:55:17-78
+ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:57:17-78
 	android:name
-		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:55:27-75
+		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:57:27-75
 data
-ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:57:17-75
+ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:59:17-75
 	android:scheme
-		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:57:23-72
+		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:59:23-72
 meta-data#com.facebook.sdk.ApplicationId
-ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:61:9-63:55
+ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:63:9-65:55
 	android:value
-		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:63:13-52
+		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:65:13-52
 	android:name
-		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:62:13-58
+		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:64:13-58
 meta-data#android.support.FILE_PROVIDER_PATHS
-ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:71:13-73:58
+ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:73:13-75:58
 	android:resource
-		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:73:17-55
+		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:75:17-55
 	android:name
-		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:72:17-67
+		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:74:17-67
 meta-data#io.flutter.embedding.android.SplashScreenDrawable
-ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:76:9-78:62
+ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:78:9-80:62
 	android:resource
-		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:78:13-59
+		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:80:13-59
 	android:name
-		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:77:13-77
+		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:79:13-77
 meta-data#com.onesignal.NotificationOpened.DEFAULT
-ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:80:9-82:39
+ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:82:9-84:39
 	android:value
-		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:82:13-36
+		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:84:13-36
 	android:name
-		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:81:13-68
+		ADDED from D:\OXOO1\android\app\src\main\AndroidManifest.xml:83:13-68
 service#com.google.firebase.components.ComponentDiscoveryService
 ADDED from [:firebase_auth] D:\OXOO1\build\firebase_auth\intermediates\library_manifest\release\AndroidManifest.xml:8:9-12:19
 MERGED from [:firebase_core] D:\OXOO1\build\firebase_core\intermediates\library_manifest\release\AndroidManifest.xml:8:9-12:19

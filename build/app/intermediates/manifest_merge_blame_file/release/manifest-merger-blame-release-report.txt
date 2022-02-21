@@ -153,7 +153,7 @@
 78        android:label="IDance - Học nhảy Online"
 78-->D:\OXOO1\android\app\src\main\AndroidManifest.xml:21:9-49
 79        android:supportsRtl="true"
-79-->[com.facebook.android:facebook-login:12.1.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\61b46173f34e9e646e0ff31e1af8534f\transformed\jetified-facebook-login-12.1.0\AndroidManifest.xml:28:18-44
+79-->[com.facebook.android:facebook-login:12.2.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\61b46173f34e9e646e0ff31e1af8534f\transformed\jetified-facebook-login-12.1.0\AndroidManifest.xml:28:18-44
 80        android:usesCleartextTraffic="true" >
 80-->D:\OXOO1\android\app\src\main\AndroidManifest.xml:22:9-44
 81        <meta-data
@@ -208,7 +208,7 @@
 109            android:label="@string/app_name"
 109-->D:\OXOO1\android\app\src\main\AndroidManifest.xml:47:13-45
 110            android:theme="@style/com_facebook_activity_theme" />
-110-->[com.facebook.android:facebook-common:12.1.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\c529a52acb4c22354215d9b9ff9df467\transformed\jetified-facebook-common-12.1.0\AndroidManifest.xml:33:13-63
+110-->[com.facebook.android:facebook-common:12.2.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\419fd111c52f53307e4474f108f70166\transformed\jetified-facebook-common-12.2.0\AndroidManifest.xml:33:13-63
 111        <activity
 111-->D:\OXOO1\android\app\src\main\AndroidManifest.xml:48:9-59:20
 112            android:name="com.facebook.CustomTabActivity"
@@ -233,7 +233,7 @@
 120-->D:\OXOO1\android\app\src\main\AndroidManifest.xml:57:23-72
 121            </intent-filter>
 122            <intent-filter>
-122-->[com.facebook.android:facebook-common:12.1.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\c529a52acb4c22354215d9b9ff9df467\transformed\jetified-facebook-common-12.1.0\AndroidManifest.xml:39:13-48:29
+122-->[com.facebook.android:facebook-common:12.2.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\419fd111c52f53307e4474f108f70166\transformed\jetified-facebook-common-12.2.0\AndroidManifest.xml:39:13-48:29
 123                <action android:name="android.intent.action.VIEW" />
 123-->D:\OXOO1\android\app\src\main\AndroidManifest.xml:52:17-69
 123-->D:\OXOO1\android\app\src\main\AndroidManifest.xml:52:25-66
@@ -571,8 +571,8 @@
 304            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 304-->[com.onesignal:OneSignal:4.6.6] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\6a7d7290b19942b409fdd1a67fa0c4ed\transformed\jetified-OneSignal-4.6.6\AndroidManifest.xml:132:13-72
 305        <activity android:name="com.facebook.CustomTabMainActivity" />
-305-->[com.facebook.android:facebook-common:12.1.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\c529a52acb4c22354215d9b9ff9df467\transformed\jetified-facebook-common-12.1.0\AndroidManifest.xml:34:9-71
-305-->[com.facebook.android:facebook-common:12.1.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\c529a52acb4c22354215d9b9ff9df467\transformed\jetified-facebook-common-12.1.0\AndroidManifest.xml:34:19-68
+305-->[com.facebook.android:facebook-common:12.2.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\419fd111c52f53307e4474f108f70166\transformed\jetified-facebook-common-12.2.0\AndroidManifest.xml:34:9-71
+305-->[com.facebook.android:facebook-common:12.2.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\419fd111c52f53307e4474f108f70166\transformed\jetified-facebook-common-12.2.0\AndroidManifest.xml:34:19-68
 306        <!--
 307         The initialization ContentProvider will call FacebookSdk.sdkInitialize automatically
 308         with the application context. This config is merged in with the host app's manifest,
@@ -583,38 +583,38 @@
 313         a completely different provider.
 314        -->
 315        <provider
-315-->[com.facebook.android:facebook-core:12.1.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\e38b9e3adb19ce4d7427f585b09ef05b\transformed\jetified-facebook-core-12.1.0\AndroidManifest.xml:39:9-42:40
+315-->[com.facebook.android:facebook-core:12.2.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\6be1427b3d43a0c40370146c78abd809\transformed\jetified-facebook-core-12.2.0\AndroidManifest.xml:39:9-42:40
 316            android:name="com.facebook.internal.FacebookInitProvider"
-316-->[com.facebook.android:facebook-core:12.1.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\e38b9e3adb19ce4d7427f585b09ef05b\transformed\jetified-facebook-core-12.1.0\AndroidManifest.xml:40:13-70
+316-->[com.facebook.android:facebook-core:12.2.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\6be1427b3d43a0c40370146c78abd809\transformed\jetified-facebook-core-12.2.0\AndroidManifest.xml:40:13-70
 317            android:authorities="com.idance.hocnhayonline.FacebookInitProvider"
-317-->[com.facebook.android:facebook-core:12.1.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\e38b9e3adb19ce4d7427f585b09ef05b\transformed\jetified-facebook-core-12.1.0\AndroidManifest.xml:41:13-72
+317-->[com.facebook.android:facebook-core:12.2.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\6be1427b3d43a0c40370146c78abd809\transformed\jetified-facebook-core-12.2.0\AndroidManifest.xml:41:13-72
 318            android:exported="false" />
-318-->[com.facebook.android:facebook-core:12.1.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\e38b9e3adb19ce4d7427f585b09ef05b\transformed\jetified-facebook-core-12.1.0\AndroidManifest.xml:42:13-37
+318-->[com.facebook.android:facebook-core:12.2.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\6be1427b3d43a0c40370146c78abd809\transformed\jetified-facebook-core-12.2.0\AndroidManifest.xml:42:13-37
 319
 320        <receiver
-320-->[com.facebook.android:facebook-core:12.1.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\e38b9e3adb19ce4d7427f585b09ef05b\transformed\jetified-facebook-core-12.1.0\AndroidManifest.xml:44:9-50:20
+320-->[com.facebook.android:facebook-core:12.2.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\6be1427b3d43a0c40370146c78abd809\transformed\jetified-facebook-core-12.2.0\AndroidManifest.xml:44:9-50:20
 321            android:name="com.facebook.CurrentAccessTokenExpirationBroadcastReceiver"
-321-->[com.facebook.android:facebook-core:12.1.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\e38b9e3adb19ce4d7427f585b09ef05b\transformed\jetified-facebook-core-12.1.0\AndroidManifest.xml:45:13-86
+321-->[com.facebook.android:facebook-core:12.2.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\6be1427b3d43a0c40370146c78abd809\transformed\jetified-facebook-core-12.2.0\AndroidManifest.xml:45:13-86
 322            android:exported="false" >
-322-->[com.facebook.android:facebook-core:12.1.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\e38b9e3adb19ce4d7427f585b09ef05b\transformed\jetified-facebook-core-12.1.0\AndroidManifest.xml:46:13-37
+322-->[com.facebook.android:facebook-core:12.2.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\6be1427b3d43a0c40370146c78abd809\transformed\jetified-facebook-core-12.2.0\AndroidManifest.xml:46:13-37
 323            <intent-filter>
-323-->[com.facebook.android:facebook-core:12.1.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\e38b9e3adb19ce4d7427f585b09ef05b\transformed\jetified-facebook-core-12.1.0\AndroidManifest.xml:47:13-49:29
+323-->[com.facebook.android:facebook-core:12.2.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\6be1427b3d43a0c40370146c78abd809\transformed\jetified-facebook-core-12.2.0\AndroidManifest.xml:47:13-49:29
 324                <action android:name="com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED" />
-324-->[com.facebook.android:facebook-core:12.1.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\e38b9e3adb19ce4d7427f585b09ef05b\transformed\jetified-facebook-core-12.1.0\AndroidManifest.xml:48:17-95
-324-->[com.facebook.android:facebook-core:12.1.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\e38b9e3adb19ce4d7427f585b09ef05b\transformed\jetified-facebook-core-12.1.0\AndroidManifest.xml:48:25-92
+324-->[com.facebook.android:facebook-core:12.2.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\6be1427b3d43a0c40370146c78abd809\transformed\jetified-facebook-core-12.2.0\AndroidManifest.xml:48:17-95
+324-->[com.facebook.android:facebook-core:12.2.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\6be1427b3d43a0c40370146c78abd809\transformed\jetified-facebook-core-12.2.0\AndroidManifest.xml:48:25-92
 325            </intent-filter>
 326        </receiver>
 327        <receiver
-327-->[com.facebook.android:facebook-core:12.1.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\e38b9e3adb19ce4d7427f585b09ef05b\transformed\jetified-facebook-core-12.1.0\AndroidManifest.xml:51:9-57:20
+327-->[com.facebook.android:facebook-core:12.2.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\6be1427b3d43a0c40370146c78abd809\transformed\jetified-facebook-core-12.2.0\AndroidManifest.xml:51:9-57:20
 328            android:name="com.facebook.AuthenticationTokenManager$CurrentAuthenticationTokenChangedBroadcastReceiver"
-328-->[com.facebook.android:facebook-core:12.1.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\e38b9e3adb19ce4d7427f585b09ef05b\transformed\jetified-facebook-core-12.1.0\AndroidManifest.xml:52:13-118
+328-->[com.facebook.android:facebook-core:12.2.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\6be1427b3d43a0c40370146c78abd809\transformed\jetified-facebook-core-12.2.0\AndroidManifest.xml:52:13-118
 329            android:exported="false" >
-329-->[com.facebook.android:facebook-core:12.1.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\e38b9e3adb19ce4d7427f585b09ef05b\transformed\jetified-facebook-core-12.1.0\AndroidManifest.xml:53:13-37
+329-->[com.facebook.android:facebook-core:12.2.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\6be1427b3d43a0c40370146c78abd809\transformed\jetified-facebook-core-12.2.0\AndroidManifest.xml:53:13-37
 330            <intent-filter>
-330-->[com.facebook.android:facebook-core:12.1.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\e38b9e3adb19ce4d7427f585b09ef05b\transformed\jetified-facebook-core-12.1.0\AndroidManifest.xml:54:13-56:29
+330-->[com.facebook.android:facebook-core:12.2.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\6be1427b3d43a0c40370146c78abd809\transformed\jetified-facebook-core-12.2.0\AndroidManifest.xml:54:13-56:29
 331                <action android:name="com.facebook.sdk.ACTION_CURRENT_AUTHENTICATION_TOKEN_CHANGED" />
-331-->[com.facebook.android:facebook-core:12.1.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\e38b9e3adb19ce4d7427f585b09ef05b\transformed\jetified-facebook-core-12.1.0\AndroidManifest.xml:55:17-103
-331-->[com.facebook.android:facebook-core:12.1.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\e38b9e3adb19ce4d7427f585b09ef05b\transformed\jetified-facebook-core-12.1.0\AndroidManifest.xml:55:25-100
+331-->[com.facebook.android:facebook-core:12.2.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\6be1427b3d43a0c40370146c78abd809\transformed\jetified-facebook-core-12.2.0\AndroidManifest.xml:55:17-103
+331-->[com.facebook.android:facebook-core:12.2.0] C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\6be1427b3d43a0c40370146c78abd809\transformed\jetified-facebook-core-12.2.0\AndroidManifest.xml:55:25-100
 332            </intent-filter>
 333        </receiver>
 334

@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
@@ -146,7 +147,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   ),
                 ],
               ),
-              if (isLoading) CircularProgressIndicator(),
+              isLoading ? CircularProgressIndicator() : Text(""),
             ],
           ),
         ),
@@ -327,7 +328,7 @@ class _AuthScreenState extends State<AuthScreen> {
   //   assert(user.uid == currentUser.uid);
   //   return user;
   // }
-  Future<User> signInWithGoogle() async {
+  Future<User?> signInWithGoogle() async {
     // Trigger the authentication flow
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
@@ -340,19 +341,29 @@ class _AuthScreenState extends State<AuthScreen> {
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
+    try {
+      final User user = (await _auth.signInWithCredential(credential)).user!;
+      if (user.email != null && user.email != "") {
+        assert(user.email != null);
+      }
+      assert(user.displayName != null);
+      assert(!user.isAnonymous);
 
-    final User user = (await _auth.signInWithCredential(credential)).user!;
-    if (user.email != null && user.email != "") {
-      assert(user.email != null);
+      final User currentUser = _auth.currentUser!;
+      assert(user.uid == currentUser.uid);
+
+      // Once signed in, return the UserCredential
+      return user;
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+        Fluttertoast.showToast(
+            msg: "Lỗi: $e. \nVui lòng chọn phương thức đăng nhập khác.",
+            gravity: ToastGravity.CENTER,
+            toastLength: Toast.LENGTH_LONG);
+      });
+      return null;
     }
-    assert(user.displayName != null);
-    assert(!user.isAnonymous);
-
-    final User currentUser = _auth.currentUser!;
-    assert(user.uid == currentUser.uid);
-
-    // Once signed in, return the UserCredential
-    return user;
   }
 
   Future<User> _signInwithApple() async {
@@ -383,7 +394,7 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   // ignore: missing_return
-  Future<User> signInWithFacebook() async {
+  Future<User?> signInWithFacebook() async {
     // Trigger the sign-in flow
     final LoginResult loginResult = await FacebookAuth.instance.login();
 
@@ -392,18 +403,27 @@ class _AuthScreenState extends State<AuthScreen> {
         FacebookAuthProvider.credential(loginResult.accessToken!.token);
 
     // Once signed in, return the UserCredential
-    final User user =
-        (await _auth.signInWithCredential(facebookAuthCredential)).user!;
-    if (user.email != null && user.email != "") {
-      assert(user.email != null);
+    try {
+      final User user =
+          (await _auth.signInWithCredential(facebookAuthCredential)).user!;
+      if (user.email != null && user.email != "") {
+        assert(user.email != null);
+      }
+      assert(user.displayName != null);
+      assert(!user.isAnonymous);
+
+      final User currentUser = _auth.currentUser!;
+      assert(user.uid == currentUser.uid);
+      return user;
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+        Fluttertoast.showToast(
+            msg: "Lỗi: $e. \nVui lòng chọn phương thức đăng nhập khác.",
+            gravity: ToastGravity.CENTER,
+            toastLength: Toast.LENGTH_LONG);
+      });
+      return null;
     }
-    assert(user.displayName != null);
-    assert(!user.isAnonymous);
-
-    final User currentUser = _auth.currentUser!;
-    assert(user.uid == currentUser.uid);
-
-    // Once signed in, return the UserCredential
-    return user;
   }
 }

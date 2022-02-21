@@ -115,7 +115,7 @@ class AppContent {
   static final String notification = "Thông báo";
   static final String pushNotification = "Thông báo đẩy";
   static final String others = "KHÁC";
-  static final String contactUs = "Liên hệ chứng tôi";
+  static final String contactUs = "Liên hệ chúng tôi";
   static final String infoAddress = "idance247@gmail.com";
   static final String copyright = "Bản quyền";
   static final String copyrightText = "Bản quyền @CNAGroup";
@@ -140,8 +140,8 @@ class AppContent {
   static final String rentNow = "Đăng ký ngay";
   static final String goBack = "Trở về";
   static final String ok = "Đồng ý";
-  static final String rentalHistory = 'Rental History';
-  static final String noItemFound = "No Item Found !";
+  static final String rentalHistory = 'Lịch sử';
+  static final String noItemFound = "Không có bài giảng nào được tìm thấy!";
   static final String noItemHere = "No items here";
   static final String premiumSubscriptionRequired =
       " Yêu cầu đăng ký gói cao cấp!";

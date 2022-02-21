@@ -425,7 +425,7 @@
 -keep class com.facebook.login.Login
 
 # End of content from C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\61b46173f34e9e646e0ff31e1af8534f\transformed\jetified-facebook-login-12.1.0\proguard.txt
-# The proguard configuration file for the following section is C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\c529a52acb4c22354215d9b9ff9df467\transformed\jetified-facebook-common-12.1.0\proguard.txt
+# The proguard configuration file for the following section is C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\419fd111c52f53307e4474f108f70166\transformed\jetified-facebook-common-12.2.0\proguard.txt
 # Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
 #
 # You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
@@ -478,8 +478,8 @@
 
 -keep class com.facebook.common.Common
 
-# End of content from C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\c529a52acb4c22354215d9b9ff9df467\transformed\jetified-facebook-common-12.1.0\proguard.txt
-# The proguard configuration file for the following section is C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\e38b9e3adb19ce4d7427f585b09ef05b\transformed\jetified-facebook-core-12.1.0\proguard.txt
+# End of content from C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\419fd111c52f53307e4474f108f70166\transformed\jetified-facebook-common-12.2.0\proguard.txt
+# The proguard configuration file for the following section is C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\6be1427b3d43a0c40370146c78abd809\transformed\jetified-facebook-core-12.2.0\proguard.txt
 # Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
 #
 # You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
@@ -548,7 +548,7 @@
 -keep public class com.android.vending.billing.IInAppBillingService$Stub {
     public <methods>;
 }
-# End of content from C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\e38b9e3adb19ce4d7427f585b09ef05b\transformed\jetified-facebook-core-12.1.0\proguard.txt
+# End of content from C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\6be1427b3d43a0c40370146c78abd809\transformed\jetified-facebook-core-12.2.0\proguard.txt
 # The proguard configuration file for the following section is C:\Users\Nguyen Khanh\.gradle\caches\transforms-3\d58a15340769d7b9b6e2c2ae7b4a9349\transformed\jetified-window-1.0.0-beta04\proguard.txt
 # Copyright (C) 2020 The Android Open Source Project
 #

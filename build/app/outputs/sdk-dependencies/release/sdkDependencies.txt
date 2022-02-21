@@ -819,7 +819,7 @@ library {
   maven_library {
     groupId: "com.facebook.android"
     artifactId: "facebook-login"
-    version: "12.1.0"
+    version: "12.2.0"
   }
   digests {
     sha256: "\326\237\241\2215\0313\247\245<\017j\207\237+\361\201\356\375)\303\270\361\374\032\304\bP\a\362\2738"
@@ -829,20 +829,20 @@ library {
   maven_library {
     groupId: "com.facebook.android"
     artifactId: "facebook-core"
-    version: "12.1.0"
+    version: "12.2.0"
   }
   digests {
-    sha256: "\177E\241a\225\177\323\364vj\337(.\254^_\314t\340\024\3368\304\021\246/TQ\237}\326V"
+    sha256: "\3374\220\\\231\272\357\356T\272\032V\356\272\257\3144A*f\362\354H\310sT\212\001\314\252\3242"
   }
 }
 library {
   maven_library {
     groupId: "com.facebook.android"
     artifactId: "facebook-common"
-    version: "12.1.0"
+    version: "12.2.0"
   }
   digests {
-    sha256: "O\247M\376\201R1L\r\2101\221\334\020\372T{\2153T\265\321+\375\363\033\352\272\333n\363\035"
+    sha256: "\352c\330\224Q\351q\027\a\222X\a!\232\201\323\315\016\304\f\233g\314F\262\314\030A[|(W"
   }
 }
 library {
@@ -1337,7 +1337,7 @@ library {
 }
 library {
   digests {
-    sha256: "\b\323;X*^\346W\307\337\v\335\334$\211[\345\272Y\236\t\357\0332\352\261\272\360\316\350\a\330"
+    sha256: "WUJHc\306AOf\314)\341\306\263)<\276\321\366\244\336\220p{\373\2052-\264\025\367`"
   }
 }
 library_dependencies {

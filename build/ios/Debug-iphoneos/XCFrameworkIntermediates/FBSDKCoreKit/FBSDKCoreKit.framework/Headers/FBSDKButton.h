@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import <FBSDKCoreKit/FBSDKImpressionTrackingButton.h>
+#import <FBSDKCoreKit/FBSDKImpressionLoggingButton.h>
 @class FBSDKIcon;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
   A base class for common SDK buttons.
  */
 NS_SWIFT_NAME(FBButton)
-@interface FBSDKButton : FBSDKImpressionTrackingButton
+@interface FBSDKButton : FBSDKImpressionLoggingButton
 
 @property (nonatomic, readonly, getter = isImplicitlyDisabled) BOOL implicitlyDisabled;
 
@@ -31,7 +31,7 @@ NS_SWIFT_NAME(FBButton)
  Internal method exposed to facilitate transition to Swift.
  API Subject to change or removal without warning. Do not use.
 
- @warning UNSAFE - DO NOT USE
+ @warning INTERNAL - DO NOT USE
  */
 - (void) configureWithIcon:(nullable FBSDKIcon *)icon
                      title:(nullable NSString *)title
@@ -46,7 +46,7 @@ NS_SWIFT_NAME(FBButton)
  Internal method exposed to facilitate transition to Swift.
  API Subject to change or removal without warning. Do not use.
 
- @warning UNSAFE - DO NOT USE
+ @warning INTERNAL - DO NOT USE
  */
 - (UIColor *)defaultBackgroundColor;
 
@@ -54,7 +54,7 @@ NS_SWIFT_NAME(FBButton)
  Internal method exposed to facilitate transition to Swift.
  API Subject to change or removal without warning. Do not use.
 
- @warning UNSAFE - DO NOT USE
+ @warning INTERNAL - DO NOT USE
  */
 - (CGSize)sizeThatFits:(CGSize)size title:(NSString *)title;
 
@@ -62,7 +62,7 @@ NS_SWIFT_NAME(FBButton)
  Internal method exposed to facilitate transition to Swift.
  API Subject to change or removal without warning. Do not use.
 
- @warning UNSAFE - DO NOT USE
+ @warning INTERNAL - DO NOT USE
  */
 - (CGSize)textSizeForText:(NSString *)text font:(UIFont *)font constrainedSize:(CGSize)constrainedSize lineBreakMode:(NSLineBreakMode)lineBreakMode;
 
@@ -70,7 +70,7 @@ NS_SWIFT_NAME(FBButton)
  Internal method exposed to facilitate transition to Swift.
  API Subject to change or removal without warning. Do not use.
 
- @warning UNSAFE - DO NOT USE
+ @warning INTERNAL - DO NOT USE
  */
 - (void)logTapEventWithEventName:(NSString *)eventName
                       parameters:(nullable NSDictionary<NSString *, id> *)parameters;

@@ -11,14 +11,14 @@ PODS:
   - AppAuth/ExternalUserAgent (1.4.0)
   - credit_card_input_form (0.0.1):
     - Flutter
-  - FBAEMKit (12.1.0):
-    - FBSDKCoreKit_Basics (= 12.1.0)
-  - FBSDKCoreKit (12.1.0):
-    - FBAEMKit (= 12.1.0)
-    - FBSDKCoreKit_Basics (= 12.1.0)
-  - FBSDKCoreKit_Basics (12.1.0)
-  - FBSDKLoginKit (12.1.0):
-    - FBSDKCoreKit (= 12.1.0)
+  - FBAEMKit (12.2.1):
+    - FBSDKCoreKit_Basics (= 12.2.1)
+  - FBSDKCoreKit (12.2.1):
+    - FBAEMKit (= 12.2.1)
+    - FBSDKCoreKit_Basics (= 12.2.1)
+  - FBSDKCoreKit_Basics (12.2.1)
+  - FBSDKLoginKit (12.2.1):
+    - FBSDKCoreKit (= 12.2.1)
   - Firebase/Auth (8.11.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 8.11.0)
@@ -49,8 +49,8 @@ PODS:
   - flutter_downloader (0.0.1):
     - Flutter
   - flutter_facebook_auth (3.5.3):
-    - FBSDKCoreKit (~> 12.1.0)
-    - FBSDKLoginKit (~> 12.1.0)
+    - FBSDKCoreKit (~> 12.2.1)
+    - FBSDKLoginKit (~> 12.2.1)
     - Flutter
   - flutter_inappwebview (0.0.1):
     - Flutter
@@ -259,10 +259,10 @@ SPEC CHECKSUMS:
   app_review: 6f51001269c59a2f4a5b5ae68b7d106401152764
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   credit_card_input_form: c849da5e6fc6ebf157d84b06077f54d6aa12fae5
-  FBAEMKit: 56c0bb9b42e3747cd82b67934f0c2b19325382ea
-  FBSDKCoreKit: 75368765d9c2303073145a7925dfaa9d60bcd77b
-  FBSDKCoreKit_Basics: 39865aff97e5f6951a78fb3e89dc4460e35e1895
-  FBSDKLoginKit: e993f97c7cc794c5da4056d8aec3c3d66033a727
+  FBAEMKit: 4cea610d0bc1680572f2aad7b25db7a2f2690d82
+  FBSDKCoreKit: 5b1992fe65802ca26be7e68bc4fac5f59fa39908
+  FBSDKCoreKit_Basics: a6a92ca628e05f86f458a4721574c5ddfb058ba3
+  FBSDKLoginKit: 7467b7f988ca4fdf48f12a839bcfce4264752429
   Firebase: 44dd9724c84df18b486639e874f31436eaa9a20c
   firebase_auth: 20bf788012988ef04ce608fada5b8d8cd1069302
   firebase_core: 443bccfd6aa6b42f07be365b500773dc69db2d87
@@ -271,7 +271,7 @@ SPEC CHECKSUMS:
   FirebaseCoreDiagnostics: 3b40dfadef5b90433a60ae01f01e90fe87aa76aa
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
   flutter_downloader: 058b9c41564a90500f67f3e432e3524613a7fd83
-  flutter_facebook_auth: dfd6b2563406c538098e2127512d385c9ffd70ad
+  flutter_facebook_auth: dbc47556cbdc61ced50e14473bd32461386a1425
   flutter_inappwebview: bfd58618f49dc62f2676de690fc6dcda1d6c3721
   flutter_keyboard_visibility: 0339d06371254c3eb25eeb90ba8d17dca8f9c069
   flutter_mdns_plugin: 3b8fa566cc39005527b515c77243cfdba77b70bc

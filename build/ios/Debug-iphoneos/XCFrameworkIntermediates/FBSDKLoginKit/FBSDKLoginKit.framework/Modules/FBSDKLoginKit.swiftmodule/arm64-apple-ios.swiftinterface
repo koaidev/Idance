@@ -15,7 +15,7 @@ extension LoginConfiguration {
 @available(tvOS, unavailable)
 public typealias LoginResultBlock = (FBSDKLoginKit.LoginResult) -> Swift.Void
 @available(tvOS, unavailable)
-public enum LoginResult {
+@frozen public enum LoginResult {
   case success(granted: Swift.Set<FBSDKCoreKit.Permission>, declined: Swift.Set<FBSDKCoreKit.Permission>, token: FBSDKCoreKit.AccessToken?)
   case cancelled
   case failed(Swift.Error)

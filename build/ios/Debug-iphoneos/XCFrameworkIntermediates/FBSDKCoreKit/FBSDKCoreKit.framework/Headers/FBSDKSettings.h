@@ -153,7 +153,7 @@ NS_SWIFT_NAME(jpegCompressionQuality);
  A convenient way to toggle error recovery for all FBSDKGraphRequest instances created after this is set.
  */
 @property (class, nonatomic, getter = isGraphErrorRecoveryEnabled) BOOL graphErrorRecoveryEnabled
-  DEPRECATED_MSG_ATTRIBUTE("`Settings.isGraphErrorRecoveryEnabled` is deprecated and will be removed in the next major release, please use `Settings.shared.isGraphErrorRecoveryEnabled` instead");;
+  DEPRECATED_MSG_ATTRIBUTE("`Settings.isGraphErrorRecoveryEnabled` is deprecated and will be removed in the next major release, please use `Settings.shared.isGraphErrorRecoveryEnabled` instead");
 
 /**
  A convenient way to toggle error recovery for all FBSDKGraphRequest instances created after this is set.
@@ -301,7 +301,7 @@ NS_SWIFT_NAME(jpegCompressionQuality);
  Internal property exposed to facilitate transition to Swift.
  API Subject to change or removal without warning. Do not use.
 
- @warning UNSAFE - DO NOT USE
+ @warning INTERNAL - DO NOT USE
  */
 @property (nullable, nonatomic, copy) NSString *userAgentSuffix;
 

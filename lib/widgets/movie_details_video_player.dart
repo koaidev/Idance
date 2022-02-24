@@ -216,6 +216,7 @@ class _LandscapePlayerControlsState extends State<LandscapePlayerControls> {
                               backgroundColor: Colors.red,
                               textColor: Colors.white,
                               fontSize: 16.0);
+
                         },
                       ),
                       SizedBox(

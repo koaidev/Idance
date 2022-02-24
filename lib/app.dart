@@ -49,7 +49,7 @@ class _MyAppState extends State<MyApp> {
       future: Init.instance.initialize(),
       builder: (context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const MaterialApp(home: Splash());
+          return const MaterialApp(debugShowCheckedModeBanner: false,home: Splash());
         } else {
           return startActivity(context);
         }

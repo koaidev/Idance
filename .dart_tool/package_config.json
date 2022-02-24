@@ -315,19 +315,19 @@
     },
     {
       "name": "flutter_facebook_auth",
-      "rootUri": "file:///Users/apple/.pub-cache/hosted/pub.dartlang.org/flutter_facebook_auth-3.5.7",
+      "rootUri": "file:///Users/apple/.pub-cache/hosted/pub.dartlang.org/flutter_facebook_auth-4.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "flutter_facebook_auth_platform_interface",
-      "rootUri": "file:///Users/apple/.pub-cache/hosted/pub.dartlang.org/flutter_facebook_auth_platform_interface-2.7.1",
+      "rootUri": "file:///Users/apple/.pub-cache/hosted/pub.dartlang.org/flutter_facebook_auth_platform_interface-3.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "flutter_facebook_auth_web",
-      "rootUri": "file:///Users/apple/.pub-cache/hosted/pub.dartlang.org/flutter_facebook_auth_web-2.6.0+2",
+      "rootUri": "file:///Users/apple/.pub-cache/hosted/pub.dartlang.org/flutter_facebook_auth_web-3.0.0+1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -1106,7 +1106,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-02-21T02:53:04.395052Z",
+  "generated": "2022-02-21T14:00:19.725789Z",
   "generator": "pub",
   "generatorVersion": "2.15.1"
 }

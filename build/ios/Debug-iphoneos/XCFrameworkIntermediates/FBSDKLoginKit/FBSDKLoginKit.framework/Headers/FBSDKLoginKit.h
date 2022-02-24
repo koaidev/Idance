@@ -17,10 +17,12 @@
 
 #if !TARGET_OS_TV
  #import <FBSDKLoginKit/FBSDKLoginButton.h>
+ #import <FBSDKLoginKit/FBSDKLoginButtonDelegate.h>
  #import <FBSDKLoginKit/FBSDKLoginConfiguration.h>
  #import <FBSDKLoginKit/FBSDKLoginManager.h>
  #import <FBSDKLoginKit/FBSDKLoginManagerLoginResult.h>
  #import <FBSDKLoginKit/FBSDKLoginTooltipView.h>
+ #import <FBSDKLoginKit/FBSDKLoginTooltipViewDelegate.h>
  #import <FBSDKLoginKit/FBSDKReferralManager.h>
  #import <FBSDKLoginKit/FBSDKReferralManagerResult.h>
 #endif

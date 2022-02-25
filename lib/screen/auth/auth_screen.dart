@@ -141,7 +141,7 @@ class _AuthScreenState extends State<AuthScreen> {
                             imagePath: "ic_button_apple",
                             authService: authService,
                             function: _signInwithApple,
-                            isApple: true),
+                            isApple: false),
                       HelpMe().space(90.0),
                     ],
                   ),

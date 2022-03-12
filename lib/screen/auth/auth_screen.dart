@@ -141,7 +141,7 @@ class _AuthScreenState extends State<AuthScreen> {
                             imagePath: "ic_button_apple",
                             authService: authService,
                             function: _signInwithApple,
-                            isApple: false),
+                            isApple: true),
                       HelpMe().space(90.0),
                     ],
                   ),
@@ -161,7 +161,8 @@ class _AuthScreenState extends State<AuthScreen> {
       String? imagePath,
       AuthService? authService,
       Function? function,
-      bool isApple = false}) {
+      bool isApple = false,
+      Color? titleColor}) {
     return BlocListener<FirebaseAuthBloc, FirebaseAuthState>(
       listener: (context, state) {
         if (state is FirebaseAuthStateCompleted) {
@@ -373,7 +374,7 @@ class _AuthScreenState extends State<AuthScreen> {
         AppleIDAuthorizationScopes.fullName,
       ],
     );
-    print(appleCredential);
+    print("appleCredential = $appleCredential");
     final OAuthProvider oAuthProvider = OAuthProvider('apple.com');
     final credential = oAuthProvider.credential(
         idToken: appleCredential.identityToken,

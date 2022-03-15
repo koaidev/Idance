@@ -27,7 +27,7 @@ class AppContent {
   static final String loginWithFacebook = "Đăng nhập với Facebook";
   static final String loginWithGoogle = "Đăng nhập với Google";
   static final String loginWithEmail = "Đăng nhập với Mail";
-  static final String loginWithApple = "Đăng nhập với Apple ID";
+  static final String loginWithApple = "Đăng nhập với Apple";
   static final String emailAddress = "Email";
   static final String myProfile = "Thông tin của bạn";
   static final String phone = "Số điện thoại";

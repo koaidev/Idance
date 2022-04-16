@@ -1,3 +1,4 @@
+import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:oxoo/server/repository.dart';
@@ -49,15 +50,36 @@ class _HomeScreenState extends State<HomeScreen> {
     AppConfig? appConfig = configService.appConfig();
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
+      floatingActionButton: FabCircularMenu(children: [
+        Spacer(flex: 2),
+        IconButton(icon: Icon(Icons.home), onPressed: () {
+          _launchURL('https://m.me/dtako.dev');
+        }),
+        Spacer(flex: 1),
+        IconButton(icon: Icon(Icons.face), onPressed: () {
           _launchURL("https://zalo.me/g/gxdkue195");
-        },
-        backgroundColor: Colors.transparent,
-        child: Image.asset("assets/images/zalo_icon.png"),
+        }),
+        Spacer(flex: 1),
+        // ElevatedButton(onPressed: () {
+        //   _launchURL("https://zalo.me/g/gxdkue195");
+        // }, child: Image.asset("assets/images/zalo_icon.png", width: 32, height: 32)),
+        // ElevatedButton(onPressed: () {
+        //   _launchURL("https://zalo.me/g/gxdkue195");
+        // }, child: Image.asset("assets/images/messenger.png",width: 32, height: 32)),
+      ],
+      fabSize: 48,
+      fabOpenColor: Colors.transparent,
+      ringWidth: 60,
       ),
+      // FloatingActionButton(
+      //   onPressed: () {
+      //     _launchURL("https://zalo.me/g/gxdkue195");
+      //   },
+      //   backgroundColor: Colors.transparent,
+      //   child: Image.asset("assets/images/zalo_icon.png"),
+      // ),
       backgroundColor:
-          isDark! ? CustomTheme.primaryColorDark : Colors.transparent,
+    isDark! ? CustomTheme.primaryColorDark : Colors.transparent,
       body: FutureBuilder<HomeContent>(
         future: _homeContent,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -101,12 +123,11 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget buildUI(
-      {BuildContext? context,
-      PaymentConfig? paymentConfig,
-      AuthUser? authUser,
-      AppConfig? appConfig,
-      required HomeContent homeContent}) {
+  Widget buildUI({BuildContext? context,
+    PaymentConfig? paymentConfig,
+    AuthUser? authUser,
+    AppConfig? appConfig,
+    required HomeContent homeContent}) {
     return CustomScrollView(
       slivers: <Widget>[
         SliverToBoxAdapter(
@@ -185,3 +206,4 @@ class _HomeScreenState extends State<HomeScreen> {
 void _launchURL(String _url) async {
   if (!await launch(_url)) throw 'Could not launch $_url';
 }
+

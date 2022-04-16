@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
-    <string name="app_name">IDance - Học nhảy Online</string>
+    <string name="app_name">IDance</string>
 
     <string name="facebook_app_id">373793947472190</string>
     <string name="fb_login_protocol_scheme">fb373793947472190</string>

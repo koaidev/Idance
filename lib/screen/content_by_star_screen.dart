@@ -36,7 +36,7 @@ class _ContentByStarScreenState extends State<ContentByStarScreen> {
     final routes = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
 
     return Scaffold(
-      appBar: _buildAppBar(true, routes['starName']),
+      appBar: _buildAppBar(true, routes["starName"]),
       body: _buildUI(routes["starId"]),
     );
   }

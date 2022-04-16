@@ -681,9 +681,10 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   AppContent.youNeedPremium,
                   style: CustomTheme.authTitle,
                 ),
-                Column(
+                Row(
                   // mainAxisAlignment: MainAxisAlignment.end,
                   children: [
+                    Spacer(flex: 1,),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         primary: CustomTheme.primaryColor,),
@@ -700,9 +701,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         style: CustomTheme.bodyText3White,
                       ),
                     ),
-                    SizedBox(
-                      width: 30.0,
-                    ),
+                    Spacer(flex: 1,),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         primary: CustomTheme.primaryColor,),
@@ -712,6 +711,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       child: Text(AppContent.goBack,
                           style: CustomTheme.bodyText3White),
                     ),
+                    Spacer(flex: 1,),
                   ],
                 )
               ],

@@ -56,7 +56,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
 
   //get Image Function
   Future getImage() async {
-    final pickedFile = await picker.getImage(
+    final pickedFile = await picker.pickImage(
         source: ImageSource.gallery, maxHeight: 120, maxWidth: 120);
 
     setState(() {

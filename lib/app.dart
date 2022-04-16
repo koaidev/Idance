@@ -1,9 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:oxoo/bloc/bloc.dart';
 import 'package:provider/provider.dart';
@@ -44,12 +42,12 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-
     return FutureBuilder(
       future: Init.instance.initialize(),
       builder: (context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const MaterialApp(debugShowCheckedModeBanner: false,home: Splash());
+          return const MaterialApp(
+              debugShowCheckedModeBanner: false, home: Splash());
         } else {
           return startActivity(context);
         }

@@ -8,6 +8,9 @@ class Config {
   //set term and conditaions url here
   static String termsPolicyUrl            = "https://cnagroup.vn/chinh-sach-bao-mat/";
 
+  //set api momo payment
+  static String momoServerUrl = "https://test-payment.momo.vn";
+
 
   static final bool enableFacebookAuth    = true;
   static final bool enableGoogleAuth      = true;

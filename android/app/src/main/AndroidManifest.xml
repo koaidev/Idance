@@ -17,9 +17,10 @@
     </queries>
     <application
         android:name="${applicationName}"
+        android:label="IDANCE: Học Nhảy Online"
         android:icon="@mipmap/launcher_icon"
-        android:label="IDance - Học nhảy Online"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        >
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713" />
@@ -83,4 +84,14 @@
             android:name="com.onesignal.NotificationOpened.DEFAULT"
             android:value="DISABLE" />
     </application>
+    <queries>
+        <!-- If your app opens https URLs -->
+        <intent>
+            <category android:name="android.intent.category.BROWSABLE" />
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+        <!-- If your app makes calls -->
+
+    </queries>
 </manifest>

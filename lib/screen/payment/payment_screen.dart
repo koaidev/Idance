@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:oxoo/screen/payment/payment_detail_screen.dart';
+import 'package:oxoo/screen/landing_screen.dart';
+import 'package:oxoo/screen/payment/choose_payment_screen.dart';
 
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({Key? key}) : super(key: key);
@@ -13,21 +14,35 @@ class _PaymentScreenState extends State<PaymentScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: Text(
-          'Danh sách các gói học',
-          style: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20),
-        ),
-      ),
       body: Container(
         child: Column(
           children: [
+            Text(
+              'CHỌN GÓI HỌC',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, fontSize: 20, color: Colors.red),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 30,),
             _buildSubTitle('1 tháng', "50.000 VND", 1),
             _buildSubTitle('3 tháng', "120. 000 VND", 2),
             _buildSubTitle('6 tháng', "", 3),
+            Spacer(flex: 1,),
+            Container(
+              child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(primary: Colors.red),
+                  onPressed: () {
+                    Navigator.pushNamed(context, LandingScreen.route);
+                  },
+                  child: Row(
+                    children: [
+                      Expanded(child: Icon(Icons.home_rounded)),
+                      Expanded(child: Text("HOME"))
+                    ],
+                  )),
+              width: 200,
+            ),
+            SizedBox(height: 15,)
           ],
         ),
         margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
@@ -41,11 +56,14 @@ class _PaymentScreenState extends State<PaymentScreen> {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => PaymentDetailScreen(),
+                builder: (context) => ChoosePaymentScreen(index: index),
                 settings: RouteSettings(arguments: index)));
       },
       child: Container(
-        width: MediaQuery.of(context).size.width,
+        width: MediaQuery
+            .of(context)
+            .size
+            .width,
         margin: const EdgeInsets.only(bottom: 15),
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
         decoration: BoxDecoration(
@@ -90,7 +108,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         fontWeight: FontWeight.bold),
                   )
                 ],
-                mainAxisAlignment: MainAxisAlignment.center ,
+                mainAxisAlignment: MainAxisAlignment.center,
               ),
             if (index != 3)
               Text(

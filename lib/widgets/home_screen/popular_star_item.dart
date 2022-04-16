@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import '../../screen/content_by_star_screen.dart';
 import '../../screen/movies_by_star_id.dart';
 import 'package:hive/hive.dart';
 import '../../models/home_content.dart';
 import '../../screen/all_country_screen.dart';
+import '../../screen/popular_star_screen.dart';
 import '../../strings.dart';
 import '../../style/theme.dart';
 import '../../widgets/home_screen_more_widget.dart';
@@ -21,7 +23,7 @@ class _HomeScreenCountryListState extends State<HomeScreenPopularStarList> {
   static late bool isDark ;
   var appModeBox = Hive.box('appModeBox');
 
-@override
+  @override
   void initState() {
   isDark = appModeBox.get('isDark')??false;
   super.initState();
@@ -41,7 +43,10 @@ class _HomeScreenCountryListState extends State<HomeScreenPopularStarList> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(AppContent.popularStars, style:isDark? CustomTheme.bodyText2White:CustomTheme.coloredBodyText2,),
-                    HomeScreenMoreWidget(routeName: AllCountryScreen.route,)
+                    // InkWell(
+                    //     onTap: (){Navigator.pushNamed(context,PopularStarScreen.route,arguments: widget.popularStarList
+                    //     );},
+                    //     child: Text(AppContent.more, style:CustomTheme.bodyTextgray2))
                   ],
                 )),
             SizedBox(height: 5.0),

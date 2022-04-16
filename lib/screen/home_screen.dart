@@ -4,23 +4,25 @@ import 'package:oxoo/server/repository.dart';
 import 'package:oxoo/widgets/home_screen/country_item.dart';
 import 'package:oxoo/widgets/home_screen/popular_star_item.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import '../../models/configuration.dart';
 import '../../models/home_content.dart';
 import '../../widgets/banner_ads.dart';
 import '../models/user_model.dart';
 import '../service/authentication_service.dart';
 import '../service/get_config_service.dart';
+import '../strings.dart';
 import '../style/theme.dart';
 import '../utils/loadingIndicator.dart';
 import '../widgets/home_screen/features_genre_movies_item.dart';
 import '../widgets/home_screen/genre_item.dart';
-import '../widgets/home_screen/live_tv_item.dart';
 import '../widgets/home_screen/movie_item.dart';
 import '../widgets/home_screen/slider.dart';
-import '../widgets/home_screen/tv_series_item.dart';
-import '../strings.dart';
 
 class HomeScreen extends StatefulWidget {
+  static final String route = '/HomeScreen';
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -47,12 +49,25 @@ class _HomeScreenState extends State<HomeScreen> {
     AppConfig? appConfig = configService.appConfig();
 
     return Scaffold(
-      backgroundColor: isDark! ? CustomTheme.primaryColorDark : Colors.transparent,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _launchURL("https://zalo.me/g/gxdkue195");
+        },
+        backgroundColor: Colors.transparent,
+        child: Image.asset("assets/images/zalo_icon.png"),
+      ),
+      backgroundColor:
+          isDark! ? CustomTheme.primaryColorDark : Colors.transparent,
       body: FutureBuilder<HomeContent>(
         future: _homeContent,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
-            return buildUI(context: context, authUser: authUser, paymentConfig: paymentConfig, appConfig: appConfig, homeContent: snapshot.data);
+            return buildUI(
+                context: context,
+                authUser: authUser,
+                paymentConfig: paymentConfig,
+                appConfig: appConfig,
+                homeContent: snapshot.data);
           } else if (snapshot.hasError) {
             return Center(
               child: Text(
@@ -86,7 +101,12 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget buildUI({BuildContext? context, PaymentConfig? paymentConfig, AuthUser? authUser, AppConfig? appConfig, required HomeContent homeContent}) {
+  Widget buildUI(
+      {BuildContext? context,
+      PaymentConfig? paymentConfig,
+      AuthUser? authUser,
+      AppConfig? appConfig,
+      required HomeContent homeContent}) {
     return CustomScrollView(
       slivers: <Widget>[
         SliverToBoxAdapter(
@@ -106,7 +126,8 @@ class _HomeScreenState extends State<HomeScreen> {
           SliverToBoxAdapter(
             child: Container(
               margin: EdgeInsets.only(top: 5, bottom: 5),
-              child: HomeScreenCountryList(countryList: homeContent.allCountry, isDark: isDark!),
+              child: HomeScreenCountryList(
+                  countryList: homeContent.allCountry, isDark: isDark!),
             ),
           ),
 
@@ -125,7 +146,9 @@ class _HomeScreenState extends State<HomeScreen> {
         SliverToBoxAdapter(
           child: Container(
             margin: EdgeInsets.only(top: 5, bottom: 5),
-            child: HomeScreenPopularStarList(popularStarList: homeContent.popularStars!,),
+            child: HomeScreenPopularStarList(
+              popularStarList: homeContent.popularStars!,
+            ),
           ),
         ),
         //Latest movies
@@ -140,16 +163,16 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        SliverToBoxAdapter(
-          child: Container(
-            margin: EdgeInsets.only(top: 2, bottom: 15),
-            child: HomeScreenSeriesList(
-              latestTvSeries: homeContent.latestTvseries,
-              title: AppContent.latestTvSeries,
-              isDark: isDark,
-            ),
-          ),
-        ),
+        // SliverToBoxAdapter(
+        //   child: Container(
+        //     margin: EdgeInsets.only(top: 2, bottom: 15),
+        //     child: HomeScreenSeriesList(
+        //       latestTvSeries: homeContent.latestTvseries,
+        //       title: AppContent.latestTvSeries,
+        //       isDark: isDark,
+        //     ),
+        //   ),
+        // ),
         HomeScreenGenreMoviesList(
           genreMoviesList: homeContent.featuresGenreAndMovie,
           isDark: isDark,
@@ -157,4 +180,8 @@ class _HomeScreenState extends State<HomeScreen> {
       ],
     );
   }
+}
+
+void _launchURL(String _url) async {
+  if (!await launch(_url)) throw 'Could not launch $_url';
 }

@@ -27,7 +27,7 @@ class AppContent {
   static final String loginWithFacebook = "Đăng nhập với Facebook";
   static final String loginWithGoogle = "Đăng nhập với Google";
   static final String loginWithEmail = "Đăng nhập với Mail";
-  static final String loginWithApple = "Đăng nhập với Apple";
+  static final String loginWithApple = "Đăng nhập bằng Apple";
   static final String emailAddress = "Email";
   static final String myProfile = "Thông tin của bạn";
   static final String phone = "Số điện thoại";
@@ -56,12 +56,12 @@ class AppContent {
   static final String addComments = "Thêm bình luận";
   static final String deleteConfirm = "Gõ DELETE";
   static final String exploreByCountry = "Khám phá theo cấp độ";
-  static final String popularStars = "Giáo viên nổi bật";
+  static final String popularStars = "Giáo viên";
   static final String featuredTvChannels = "Kênh đặc sắc";
   static final String featuredRadio = "Featured Radio ";
   static final String liveEvents = "Lớp học trực tiếp";
-  static final String latestMovies = "Bài vừa học";
-  static final String latestTvSeries = "Khóa vừa học";
+  static final String latestMovies = "Lớp học miễn phí";
+  static final String latestTvSeries = "Lớp học yêu thích";
   static final String movieScreen = "Bài học";
   static final String eventScreen = "Sự kiện";
   static final String favouriteScreen = "Màn yêu thích";
@@ -167,9 +167,8 @@ class AppContent {
   static final String downloads = "Tải về";
   static final String noFileDownloaded = "Không có dữ liệu để tải";
   static final String termsPolicy = "Chính sách và điều khoản";
-  static final String youNeedPremium =
-      "Bạn cần đăng ký để học được bài này";
-  static final String subscribeToPremium = "Đăng ký gói cao cấp";
+  static final String youNeedPremium = "Bạn cần đăng ký để học được Lớp này";
+  static final String subscribeToPremium = "Đăng ký";
   static final String userName = "Tên người dùng :";
   static final String upgradePurchase = "Đăng ký gói học";
   static final String send = "GỬI";

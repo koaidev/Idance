@@ -1,5 +1,8 @@
 import 'package:hive/hive.dart';
+
 part 'user_model.g.dart';
+
+//add new field: phoneNumber
 @HiveType(typeId: 9)
 class AuthUser {
   @HiveField(0)
@@ -26,15 +29,19 @@ class AuthUser {
   @HiveField(7)
   String? lastLogin;
 
-  AuthUser(
-      {this.status,
-        this.userId,
-        this.name,
-        this.email,
-        this.imageUrl,
-        this.gender,
-        this.joinDate,
-        this.lastLogin});
+  // @HiveField(8)
+  // String? phoneNumber;
+
+  AuthUser({
+    this.status,
+    this.userId,
+    this.name,
+    this.email,
+    this.imageUrl,
+    this.gender,
+    this.joinDate,
+    this.lastLogin,
+  });
 
   factory AuthUser.fromJson(Map<String, dynamic> json) {
     return AuthUser(

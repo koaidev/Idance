@@ -200,7 +200,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
           (context, AsyncSnapshot<AllCommentModelList?> allCommentModelList) {
         if (allCommentModelList.connectionState == ConnectionState.none &&
             allCommentModelList.data == null) {
-          //print('project snapshot data is: ${projectSnap.data}');
+          print('project snapshot data is: not');
           return SliverToBoxAdapter(
             child: Container(),
           );

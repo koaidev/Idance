@@ -50,36 +50,49 @@ class _HomeScreenState extends State<HomeScreen> {
     AppConfig? appConfig = configService.appConfig();
 
     return Scaffold(
-      floatingActionButton: FabCircularMenu(children: [
-        Spacer(flex: 2),
-        IconButton(icon: Icon(Icons.home), onPressed: () {
-          _launchURL('https://m.me/dtako.dev');
-        }),
-        Spacer(flex: 1),
-        IconButton(icon: Icon(Icons.face), onPressed: () {
-          _launchURL("https://zalo.me/g/gxdkue195");
-        }),
-        Spacer(flex: 1),
-        // ElevatedButton(onPressed: () {
-        //   _launchURL("https://zalo.me/g/gxdkue195");
-        // }, child: Image.asset("assets/images/zalo_icon.png", width: 32, height: 32)),
-        // ElevatedButton(onPressed: () {
-        //   _launchURL("https://zalo.me/g/gxdkue195");
-        // }, child: Image.asset("assets/images/messenger.png",width: 32, height: 32)),
-      ],
-      fabSize: 48,
-      fabOpenColor: Colors.transparent,
-      ringWidth: 60,
+      floatingActionButton: FabCircularMenu(
+        children: [
+          Spacer(flex: 2),
+          GestureDetector(
+              onTap: () {
+                _launchURL('https://m.me/chicken.3695');
+              },
+              child: Container(
+                height: 60,
+                width: 60,
+                padding: EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(100)),
+                    color: Colors.white),
+                child: Image.asset(
+                  "assets/images/messenger.png",
+                  fit: BoxFit.cover,
+                ),
+              )),
+          Spacer(flex: 1),
+          GestureDetector(
+              onTap: () {
+                _launchURL("https://zalo.me/g/gxdkue195");
+              },
+              child: Container(
+                height: 60,
+                width: 60,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                    color: Colors.white),
+                child: Image.asset(
+                  "assets/images/zalo_icon.png",
+                  fit: BoxFit.fill,
+                ),
+              )),
+        ],
+        fabSize: 60,
+        fabOpenIcon: Icon(Icons.support_agent_rounded),
+        fabOpenColor: Colors.red,
+        ringColor: Colors.transparent,
       ),
-      // FloatingActionButton(
-      //   onPressed: () {
-      //     _launchURL("https://zalo.me/g/gxdkue195");
-      //   },
-      //   backgroundColor: Colors.transparent,
-      //   child: Image.asset("assets/images/zalo_icon.png"),
-      // ),
       backgroundColor:
-    isDark! ? CustomTheme.primaryColorDark : Colors.transparent,
+          isDark! ? CustomTheme.primaryColorDark : Colors.transparent,
       body: FutureBuilder<HomeContent>(
         future: _homeContent,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -123,11 +136,12 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget buildUI({BuildContext? context,
-    PaymentConfig? paymentConfig,
-    AuthUser? authUser,
-    AppConfig? appConfig,
-    required HomeContent homeContent}) {
+  Widget buildUI(
+      {BuildContext? context,
+      PaymentConfig? paymentConfig,
+      AuthUser? authUser,
+      AppConfig? appConfig,
+      required HomeContent homeContent}) {
     return CustomScrollView(
       slivers: <Widget>[
         SliverToBoxAdapter(
@@ -206,4 +220,3 @@ class _HomeScreenState extends State<HomeScreen> {
 void _launchURL(String _url) async {
   if (!await launch(_url)) throw 'Could not launch $_url';
 }
-

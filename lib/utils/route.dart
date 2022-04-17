@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:oxoo/screen/content_by_star_screen.dart';
 import 'package:oxoo/screen/home_screen.dart';
-import 'package:oxoo/screen/popular_star_screen.dart';
 
 import '../../screen/all_country_screen.dart';
 import '../../screen/auth/auth_screen.dart';
@@ -59,7 +58,6 @@ class Routes {
       PhoneAuthScreen.route: (_) => PhoneAuthScreen(
             userRepository: userRepository,
           ),
-      PopularStarScreen.route: (_) => PopularStarScreen(),
       HomeScreen.route: (_) => HomeScreen(),
       LiveTvChannelsCard.route: (_) => LiveTvChannelsCard(),
       LandingScreen.route: (_) => LandingScreen(),

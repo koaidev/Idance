@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:oxoo/screen/payment/api/momo_payment_handle.dart';
@@ -288,13 +289,17 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                                   DateTime.now()
                                       .millisecondsSinceEpoch
                                       .toString();
-                              String ipnUrl =
-                                  "https://play.google.com/store/apps/details?id=com.idance.hocnhayonline&hl=vi&gl=VN";
+                              String ipnUrl = "http://54.255.160.47/api/ipn";
                               String orderId = requestId;
                               String orderInfo =
                                   "${nameController.text} - ${phoneController.text} - $comboLearn";
                               String storeId = "MOMOEZEO20220315";
-                              String extraData = "";
+                              Map<String, String> data = {
+                                "user_id":
+                                    FirebaseAuth.instance.currentUser!.uid
+                              };
+                              String extraData =
+                                  base64.encode(utf8.encode(json.encode(data)));
                               String accessKey = "q2ACnLximNzIH50O";
                               String secretKey =
                                   "guoqhgzu7orgVcISgpDalcgcoW3NcoJl";

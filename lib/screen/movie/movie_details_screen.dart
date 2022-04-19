@@ -2,26 +2,28 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:isolate';
 import 'dart:ui';
-import 'package:oxoo/bloc/movie_details/movie_details_bloc.dart';
-import 'package:oxoo/widgets/movie/movie_poster.dart';
-import '../../models/favourite_response_model.dart';
-import '../../constants.dart';
-import 'movie_reply_screen.dart';
-import 'package:hive/hive.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
-import '../../screen/auth/auth_screen.dart';
-import '../../screen/subscription/premium_subscription_screen.dart';
+import 'package:hive/hive.dart';
+import 'package:oxoo/bloc/movie_details/movie_details_bloc.dart';
+import 'package:oxoo/widgets/movie/movie_poster.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
-import '../../models/video_comments/ad_comments_model.dart';
-import '../../models/video_comments/all_comments_model.dart';
+
+import '../../constants.dart';
 import '../../models/configuration.dart';
+import '../../models/favourite_response_model.dart';
 import '../../models/movie_details_model.dart';
 import '../../models/user_model.dart';
+import '../../models/video_comments/ad_comments_model.dart';
+import '../../models/video_comments/all_comments_model.dart';
+import '../../screen/auth/auth_screen.dart';
+import '../../screen/subscription/premium_subscription_screen.dart';
 import '../../server/repository.dart';
 import '../../service/authentication_service.dart';
 import '../../service/get_config_service.dart';
@@ -34,7 +36,7 @@ import '../../widgets/movie/select_download_dialog.dart';
 import '../../widgets/movie/select_server_dialog.dart';
 import '../../widgets/share_btn.dart';
 import '../../widgets/tv_series/cast_crew_item_card.dart';
-import 'package:path_provider/path_provider.dart';
+import 'movie_reply_screen.dart';
 
 class MovieDetailScreen extends StatefulWidget {
   static final String route = "/MovieDetailScreen";
@@ -317,11 +319,24 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                 height: 15,
                                 width: MediaQuery.of(context).size.width - 170,
                                 child: ListView.builder(
-                                    itemCount: movieDetailsModel.genre!.length > 2 ? 2 : movieDetailsModel.genre!.length,
+                                    itemCount:
+                                        movieDetailsModel.genre!.length > 2
+                                            ? 2
+                                            : movieDetailsModel.genre!.length,
                                     scrollDirection: Axis.horizontal,
-                                    itemBuilder: (BuildContext context, int index) {
-                                      return Container(child: Text(
-                                        index + 1 == movieDetailsModel.genre!.length ? movieDetailsModel.genre!.elementAt(index).name! : movieDetailsModel.genre!.elementAt(index).name! + ", ",
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return Container(
+                                          child: Text(
+                                        index + 1 ==
+                                                movieDetailsModel.genre!.length
+                                            ? movieDetailsModel.genre!
+                                                .elementAt(index)
+                                                .name!
+                                            : movieDetailsModel.genre!
+                                                    .elementAt(index)
+                                                    .name! +
+                                                ", ",
                                         style: CustomTheme.bodyText3White,
                                       ));
                                     }),
@@ -330,13 +345,18 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                               Container(
                                 width: MediaQuery.of(context).size.width - 170,
                                 child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(primary: CustomTheme.primaryColorRed,),
+                                  style: ElevatedButton.styleFrom(
+                                    primary: CustomTheme.primaryColorRed,
+                                  ),
                                   onPressed: () {
-                                    SelectServerDialog().createDialog(context, movieDetailsModel.videos!, isDark);
+                                    SelectServerDialog().createDialog(context,
+                                        movieDetailsModel.videos!, isDark);
                                   },
                                   child: Padding(
-                                    padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 10.0),
-                                    child: Text(AppContent.watchNow, style: CustomTheme.bodyText3White),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 14.0, horizontal: 10.0),
+                                    child: Text(AppContent.watchNow,
+                                        style: CustomTheme.bodyText3White),
                                   ),
                                 ),
                               ),
@@ -344,12 +364,19 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                               //rent button
                               if (isDownloadEnable)
                                 Container(
-                                  width: MediaQuery.of(context).size.width - 170,
+                                  width:
+                                      MediaQuery.of(context).size.width - 170,
                                   child: ElevatedButton(
                                     onPressed: () async {
-                                      SelectDownloadDialog().createDialog(context, movieDetailsModel.downloadLinks!, isDark, downloadVideo);
+                                      SelectDownloadDialog().createDialog(
+                                          context,
+                                          movieDetailsModel.downloadLinks!,
+                                          isDark,
+                                          downloadVideo);
                                     },
-                                    style: ElevatedButton.styleFrom(primary: CustomTheme.whiteColor,),
+                                    style: ElevatedButton.styleFrom(
+                                      primary: CustomTheme.whiteColor,
+                                    ),
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 14.0, horizontal: 10.0),
@@ -568,7 +595,9 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                     alignment: Alignment.bottomRight,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary:  isDark! ? CustomTheme.grey_transparent2 : Colors.grey.shade300,
+                        primary: isDark!
+                            ? CustomTheme.grey_transparent2
+                            : Colors.grey.shade300,
                       ),
                       onPressed: () async {
                         String comments = commentsController.text.toString();
@@ -588,8 +617,10 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                 ),
               ),
             if (allCommentModelList.data != null)
-              SliverList(delegate: SliverChildListDelegate(List.generate(
-                allCommentModelList.data!.commentsList!.length, (index) => Padding(
+              SliverList(
+                  delegate: SliverChildListDelegate(List.generate(
+                allCommentModelList.data!.commentsList!.length,
+                (index) => Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
                   child: Card(
                     color: isDark! ? CustomTheme.colorAccentDark : Colors.white,
@@ -598,9 +629,12 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       child: Row(
                         children: [
                           ClipRRect(
-                            borderRadius: BorderRadius.all(Radius.circular(25.0)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(25.0)),
                             child: Image.network(
-                              allCommentModelList.data!.commentsList!.elementAt(index).userImgUrl!,
+                              allCommentModelList.data!.commentsList!
+                                  .elementAt(index)
+                                  .userImgUrl!,
                               width: 50.0,
                               height: 50.0,
                             ),
@@ -612,13 +646,22 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  allCommentModelList.data!.commentsList!.elementAt(index).userName!,
-                                  style: isDark! ? CustomTheme.bodyText2White : CustomTheme.bodyTextgray2,
+                                  allCommentModelList.data!.commentsList!
+                                      .elementAt(index)
+                                      .userName!,
+                                  style: isDark!
+                                      ? CustomTheme.bodyText2White
+                                      : CustomTheme.bodyTextgray2,
                                 ),
-                                SizedBox(height: 5.0,),
+                                SizedBox(
+                                  height: 5.0,
+                                ),
                                 Text(
-                                  allCommentModelList.data!.commentsList!.elementAt(index).comments!,
-                                  style: CustomTheme.smallTextGrey,),
+                                  allCommentModelList.data!.commentsList!
+                                      .elementAt(index)
+                                      .comments!,
+                                  style: CustomTheme.smallTextGrey,
+                                ),
                                 SizedBox(
                                   height: 5.0,
                                 ),
@@ -684,10 +727,13 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                 Row(
                   // mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Spacer(flex: 1,),
+                    Spacer(
+                      flex: 1,
+                    ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: CustomTheme.primaryColor,),
+                        primary: CustomTheme.primaryColor,
+                      ),
                       onPressed: () async {
                         Navigator.push(
                           context,
@@ -701,17 +747,22 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         style: CustomTheme.bodyText3White,
                       ),
                     ),
-                    Spacer(flex: 1,),
+                    Spacer(
+                      flex: 1,
+                    ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: CustomTheme.primaryColor,),
+                        primary: CustomTheme.primaryColor,
+                      ),
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
                       child: Text(AppContent.goBack,
                           style: CustomTheme.bodyText3White),
                     ),
-                    Spacer(flex: 1,),
+                    Spacer(
+                      flex: 1,
+                    ),
                   ],
                 )
               ],
@@ -752,6 +803,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
     );
   }
 
+  bool isFavoriteMovie = false;
+
   //make favourite
   Widget favouriteMovie(String? userID, String? movieID) {
     return FutureBuilder<FavouriteResponseModel?>(
@@ -764,29 +817,31 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
           default:
             if (snapshot.hasError) return Text('Error: ${snapshot.error}');
             if (snapshot.hasData)
-              return snapshot.data!.status == "success"
-                  ? InkWell(
-                      onTap: () async {
-                        FavouriteResponseModel favouriteResponseModel =
-                            await (Repository().removeFavourite(userID, movieID)
-                                as FutureOr<FavouriteResponseModel>);
-                        showShortToast(favouriteResponseModel.message!);
-                        setState(() {});
+              return (snapshot.data!.status == "success" && !isFavoriteMovie)
+                  ? IconButton(
+                      onPressed: () async {
+                        await (Repository()
+                            .removeFavourite(userID, movieID)
+                            .then((value) {
+                          showShortToast(value!.message!);
+                          setState(() {
+                            isFavoriteMovie = true;
+                          });
+                        }) as FutureOr<FavouriteResponseModel>);
                       },
-                      child: Icon(
-                        Icons.favorite_outlined,
-                        color: CustomTheme.whiteColor,
-                      ))
-                  : InkWell(
-                      onTap: () async {
-                        FavouriteResponseModel favouriteResponseModel =
-                            await (Repository().addFavourite(userID, movieID)
-                                as FutureOr<FavouriteResponseModel>);
-                        showShortToast(favouriteResponseModel.message!);
-                        setState(() {});
+                      icon: Icon(Icons.favorite_outlined, color: CustomTheme.primaryColorRed))
+                  : IconButton(
+                      onPressed: () async {
+                        await (Repository()
+                            .addFavourite(userID, movieID)
+                            .then((value) {
+                          showShortToast(value!.message!);
+                          setState(() {
+                            isFavoriteMovie = false;
+                          });
+                        }) as FutureOr<FavouriteResponseModel>);
                       },
-                      child: Icon(Icons.favorite_border,
-                          color: CustomTheme.whiteColor));
+                      icon: Icon(Icons.favorite_border, color: CustomTheme.whiteColor));
             return Container();
         }
       },

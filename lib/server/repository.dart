@@ -415,7 +415,7 @@ class Repository {
     dio.options.headers = ConfigApi().getHeaders();
     try {
       final response =
-          await dio.get("${ConfigApi().getApiUrl()}favorite?user_id=$userID");
+          await dio.get("${ConfigApi().getApiUrl()}/favorite?user_id=$userID");
       if (response.statusCode == 200) {
         FavouriteListModel favouriteListModel =
             FavouriteListModel.fromJson(response.data);
@@ -431,7 +431,7 @@ class Repository {
     dio.options.headers = ConfigApi().getHeaders();
     try {
       final response = await dio.get(
-          "${ConfigApi().getApiUrl()}add_favorite?user_id=$userID&videos_id=$videoId");
+          "${ConfigApi().getApiUrl()}/add_favorite?user_id=$userID&videos_id=$videoId");
       if (response.statusCode == 200) {
         FavouriteResponseModel favouriteResponseModel =
             FavouriteResponseModel.fromJson(response.data);
@@ -447,7 +447,7 @@ class Repository {
     dio.options.headers = ConfigApi().getHeaders();
     try {
       final response = await dio.get(
-          "${ConfigApi().getApiUrl()}remove_favorite?user_id=$userID&videos_id=$videoId");
+          "${ConfigApi().getApiUrl()}/remove_favorite?user_id=$userID&videos_id=$videoId");
       if (response.statusCode == 200) {
         FavouriteResponseModel favouriteResponseModel =
             FavouriteResponseModel.fromJson(response.data);
@@ -463,7 +463,7 @@ class Repository {
     dio.options.headers = ConfigApi().getHeaders();
     try {
       final response = await dio.get(
-          "${ConfigApi().getApiUrl()}verify_favorite_list?user_id=$userID&videos_id=$videoId");
+          "${ConfigApi().getApiUrl()}/verify_favorite_list?user_id=$userID&videos_id=$videoId");
       if (response.statusCode == 200) {
         FavouriteResponseModel favouriteResponseModel =
             FavouriteResponseModel.fromJson(response.data);

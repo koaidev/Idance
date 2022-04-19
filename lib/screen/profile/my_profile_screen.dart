@@ -432,16 +432,16 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                             print(userId);
 
                             if (password == confirmPassword) {
-                              SubmitResponseModel passwordSetModel =
+                              // SubmitResponseModel passwordSetModel =
                                   await (Repository().setUserPassword(
                                           userID: userId,
                                           password: password,
-                                          firebaseAuthUid: uid)
-                                      as FutureOr<SubmitResponseModel>);
-                              showShortToast(passwordSetModel.data!);
-                              setPasswordController.clear();
-                              confirmPasswordController.clear();
-                              Navigator.of(context).pop();
+                                          firebaseAuthUid: uid).then((value){
+                                    showShortToast(value!.data!);
+                                    setPasswordController.clear();
+                                    confirmPasswordController.clear();
+                                    Navigator.of(context).pop();
+                                  })) ;
                             } else {
                               showShortToast("password don't match");
                             }

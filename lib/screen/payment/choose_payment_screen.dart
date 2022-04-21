@@ -289,7 +289,8 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                                   DateTime.now()
                                       .millisecondsSinceEpoch
                                       .toString();
-                              String ipnUrl = "http://54.255.160.47/api/ipn";
+                              String ipnUrl =
+                                  "https://apppanel.cnagroup.vn/rest_api/v1/index";
                               String orderId = requestId;
                               String orderInfo =
                                   "${nameController.text} - ${phoneController.text} - $comboLearn";

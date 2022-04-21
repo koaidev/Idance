@@ -7,6 +7,10 @@ class ConfigApi {
     return Config.apiServerUrl + "v130";
   }
 
+  String getPaymentStatusUrl(String id) {
+    return "https://apppanel.cnagroup.vn/rest_api/v1/id/$id";
+  }
+
   Map<String, String> getHeaders() {
     /*authorization*/
     String username = 'nguyennam.3695@gmail.com';
@@ -26,7 +30,7 @@ class ConfigApi {
     return Config.momoServerUrl + "/v2/gateway/api/create";
   }
 
-  String getMomoServerUrlConfirm(){
+  String getMomoServerUrlConfirm() {
     return Config.momoServerUrl + "/v2/gateway/api/confirm";
   }
 

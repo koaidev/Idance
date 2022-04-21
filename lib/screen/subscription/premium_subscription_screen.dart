@@ -47,8 +47,6 @@ class _PremiumSubscriptionScreenState extends State<PremiumSubscriptionScreen> {
 
   //In-app-purchase var
   List<String> _notFoundIds = [];
-  // List<ProductDetails> _products = [];
-  // List<PurchaseDetails> _purchases = [];
   bool _isAvailable = false;
   bool _loading = true;
 
@@ -62,33 +60,9 @@ class _PremiumSubscriptionScreenState extends State<PremiumSubscriptionScreen> {
 
   Future<void> initStoreInfo() async {}
 
-  void _handlePaymentSuccess() async {
-    Navigator.of(context).popUntil((_) => popCount++ >= 2);
-  }
-
-  // void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) {}
-
-  // void deliverProduct(PurchaseDetails purchaseDetails) async {
-  //   // IMPORTANT!! Always verify a purchase purchase details before delivering the product.
-  //   setState(() {
-  //     _purchases.add(purchaseDetails);
-  //
-  //     _handlePaymentSuccess();
-  //   });
-  // }
-
   void showPendingUI() {
     setState(() {});
   }
-
-  // void handleError(IAPError? error) {
-  //   setState(() {});
-  // }
-
-  // void _handleInvalidPurchase(PurchaseDetails purchaseDetails) {
-  //   // handle invalid purchase here if  _verifyPurchase` failed.
-  //   appModeBox.delete('isUserValidSubscriber');
-  // }
 
   @override
   void dispose() {
@@ -112,118 +86,9 @@ class _PremiumSubscriptionScreenState extends State<PremiumSubscriptionScreen> {
               SizedBox(
                 height: 20.0,
               ),
-              // Text(
-              //   AppContent.confirmYourDetails,
-              //   style: CustomTheme.bodyText1,
-              // ),
-              // SizedBox(
-              //   height: 20.0,
-              // ),
-              //Details
-              // Container(
-              //   decoration: BoxDecoration(
-              //     borderRadius: BorderRadius.all(Radius.circular(8.0)),
-              //     border: Border.all(color: Colors.grey.shade300),
-              //     color: Colors.grey.shade100,
-              //   ),
-              //   child: Column(
-              //     children: [
-              //       Row(
-              //         children: [
-              //           Container(
-              //               width: MediaQuery.of(context).size.width / 3,
-              //               child: Padding(
-              //                 padding: const EdgeInsets.all(8.0),
-              //                 child: Text(
-              //                   AppContent.plan,
-              //                   style: CustomTheme.bodyText1,
-              //                 ),
-              //               )),
-              //           Expanded(
-              //             child: Container(
-              //               child: Padding(
-              //                 padding: const EdgeInsets.all(8.0),
-              //                 child: Column(
-              //                   children: [
-              //                     Text(
-              //                       AppContent.watchPremiumVideo,
-              //                       style: CustomTheme.bodyText1,
-              //                     ),
-              //                     SizedBox(
-              //                       height: 10.0,
-              //                     ),
-              //                     Text(
-              //                       AppContent.watchAllPremiumMovies,
-              //                       style: CustomTheme.authTitleGrey,
-              //                     ),
-              //                   ],
-              //                 ),
-              //               ),
-              //             ),
-              //           )
-              //         ],
-              //       ),
-              //       Divider(),
-              //       Row(
-              //         children: [
-              //           Container(
-              //               width: MediaQuery.of(context).size.width / 3,
-              //               child: Padding(
-              //                 padding: const EdgeInsets.all(8.0),
-              //                 child: Text(
-              //                   AppContent.email,
-              //                   style: CustomTheme.bodyText1,
-              //                 ),
-              //               )),
-              //           Expanded(
-              //             child: Container(
-              //               child: Padding(
-              //                 padding: const EdgeInsets.all(8.0),
-              //                 child: Text(
-              //                   authUser!.email!,
-              //                   style: CustomTheme.authTitleGrey,
-              //                 ),
-              //               ),
-              //             ),
-              //           )
-              //         ],
-              //       ),
-              //     ],
-              //   ),
-              // ),
-              // SizedBox(
-              //   height: 20.0,
-              // ),
+
               Expanded(child: PaymentScreen())
-              // Container(
-              //   decoration: BoxDecoration(
-              //     border: Border.all(color: Colors.grey.shade300),
-              //     borderRadius: BorderRadius.all(Radius.circular(8.0)),
-              //     color: Colors.grey.shade100,
-              //   ),
-              //   child: Column(
-              //     children: [
-              //       _buildProductList(),
-              //       SizedBox(
-              //         height: 8.0,
-              //       ),
-              //       Padding(
-              //         padding: const EdgeInsets.all(8.0),
-              //         child: Text(
-              //           AppContent.startStreamingNow,
-              //           style: CustomTheme.authTitleGrey,
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              // ),
-              // SizedBox(
-              //   height: 20.0,
-              // ),
-              // Text(
-              //   AppContent.bySigingUpYouAgree,
-              //   style: CustomTheme.authTitleGrey,
-              // )
+
             ],
           ),
         ));

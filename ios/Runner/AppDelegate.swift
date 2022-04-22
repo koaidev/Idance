@@ -1,8 +1,9 @@
+
 import UIKit
 import Flutter
 import flutter_downloader
-import Firebase
-import momo_vn
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {
@@ -10,27 +11,30 @@ import momo_vn
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
-
     GeneratedPluginRegistrant.register(with: self)
-      if FirebaseApp.app() == nil {
-          FirebaseApp.configure()
-          }
     FlutterDownloaderPlugin.setPluginRegistrantCallback(registerPlugins)
+    ApplicationDelegate.shared.application(
+                application,
+                didFinishLaunchingWithOptions: launchOptions
+            )
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
-  override func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-          MoMoPayment.handleOpenUrl(url: url, sourceApp: sourceApplication!)
-          return true
-      }
-
-  override func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
-          MoMoPayment.handleOpenUrl(url: url, sourceApp: "")
-          return true
-      }
 }
-
+func application(
+          _ app: UIApplication,
+          open url: URL,
+          options: [UIApplication.OpenURLOptionsKey : Any] = [:]
+      ) -> Bool {
+          ApplicationDelegate.shared.application(
+              app,
+              open: url,
+              sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+              annotation: options[UIApplication.OpenURLOptionsKey.annotation]
+          )
+          return true
+      }
 private func registerPlugins(registry: FlutterPluginRegistry) {
-    if (!registry.hasPlugin("FlutterDownloaderPlugin")) {
-       FlutterDownloaderPlugin.register(with: registry.registrar(forPlugin: "FlutterDownloaderPlugin")!)
-    }
-}
+          if (!registry.hasPlugin("FlutterDownloaderPlugin")) {
+             FlutterDownloaderPlugin.register(with: registry.registrar(forPlugin: "FlutterDownloaderPlugin")!)
+          }
+      }

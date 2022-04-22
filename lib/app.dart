@@ -1,9 +1,11 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:oxoo/bloc/bloc.dart';
+import 'package:oxoo/network/api_configuration.dart';
 import 'package:provider/provider.dart';
 
 import '../../bloc/auth/registration_bloc.dart';
@@ -19,6 +21,7 @@ import 'server/phone_auth_repository.dart';
 import 'server/repository.dart';
 import 'service/get_config_service.dart';
 import 'utils/route.dart';
+import 'package:http/http.dart' as http;
 
 class MyApp extends StatefulWidget {
   static final String route = "/MyApp";
@@ -34,6 +37,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+
     isDark = appModeBox.get('isDark');
     if (isDark == null) {
       appModeBox.put('isDark', true);
@@ -59,6 +63,7 @@ class _MyAppState extends State<MyApp> {
 class Splash extends StatelessWidget {
   const Splash({Key? key}) : super(key: key);
   static bool? isDark = true;
+  static bool? isUserValidSubscriber = false;
 
   get appModeBox => Hive.box("appModeBox");
 
@@ -94,6 +99,7 @@ class Splash extends StatelessWidget {
   }
 }
 
+
 class Init {
   Init._();
 
@@ -103,6 +109,9 @@ class Init {
     // This is where you can initialize the resources needed by your app while
     // the splash screen is displayed.  Remove the following example because
     // delaying the user experience is a bad design practice!
+    if(FirebaseAuth.instance.currentUser!=null){
+      await http.get(Uri.parse(ConfigApi().getPaymentStatusUrl(FirebaseAuth.instance.currentUser!.uid.toString())));
+    }
     await Future.delayed(const Duration(seconds: 3));
   }
 }

@@ -27,20 +27,20 @@ class GenreScreen extends StatelessWidget {
   }
 
   final List<LinearGradient> gradientBG = [
-    CustomTheme.gradient1,
+    // CustomTheme.gradient1,
     CustomTheme.gradient2,
-    CustomTheme.gradient3,
-    CustomTheme.gradient4,
-    CustomTheme.gradient5,
-    CustomTheme.gradient6,
+    // CustomTheme.gradient3,
+    // CustomTheme.gradient4,
+    // CustomTheme.gradient5,
+    // CustomTheme.gradient6,
   ];
 
   int index = 0;
   LinearGradient getRandomColor() {
-    if (index >= 5) {
-      index = 0;
-    }
-    index++;
+    // if (index >= 5) {
+    //   index = 0;
+    // }
+    // index++;
     return gradientBG[index];
   }
 

@@ -9,7 +9,8 @@ class Config {
   static String termsPolicyUrl            = "https://cnagroup.vn/chinh-sach-bao-mat/";
 
   //set api momo payment
-  static String momoServerUrl = "https://test-payment.momo.vn";
+  static String momoServerUrl = "https://payment.momo.vn";
+  //https://payment.momo.vn/v2/gateway/api/create
 
 
   static final bool enableFacebookAuth    = true;

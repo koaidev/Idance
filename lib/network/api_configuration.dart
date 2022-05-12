@@ -28,6 +28,7 @@ class ConfigApi {
 
   String getMomoServerUrlCreate() {
     return Config.momoServerUrl + "/v2/gateway/api/create";
+    //https://payment.momo.vn/v2/gateway/api/create
   }
 
   String getMomoServerUrlConfirm() {

@@ -10,24 +10,28 @@ import '../home_screen_more_widget.dart';
 // ignore: must_be_immutable
 class HomeScreenCountryList extends StatelessWidget {
   List<AllCountry>? countryList;
+  List<AllGenre>? listGenres;
   bool isDark = false;
-  HomeScreenCountryList({Key? key, required this.countryList, required this.isDark}) : super(key: key);
+
+  HomeScreenCountryList(
+      {Key? key,
+      required this.countryList,
+      required this.isDark,
+      required this.listGenres})
+      : super(key: key);
 
   final List<LinearGradient> gradientBG = [
-    CustomTheme.gradient1,
+    // CustomTheme.gradient1,
     CustomTheme.gradient2,
-    CustomTheme.gradient3,
-    CustomTheme.gradient4,
-    CustomTheme.gradient5,
-    CustomTheme.gradient6,
+    // CustomTheme.gradient3,
+    // CustomTheme.gradient4,
+    // CustomTheme.gradient5,
+    // CustomTheme.gradient6,
   ];
 
   int index = 0;
+
   LinearGradient getRandomColor() {
-    if (index >= 5) {
-      index = 0;
-    }
-    index++;
     return gradientBG[index];
   }
 
@@ -47,7 +51,9 @@ class HomeScreenCountryList extends StatelessWidget {
               children: [
                 Text(
                   AppContent.exploreByCountry,
-                  style: isDark ? CustomTheme.bodyText2White : CustomTheme.coloredBodyText2,
+                  style: isDark
+                      ? CustomTheme.bodyText2White
+                      : CustomTheme.coloredBodyText2,
                 ),
                 HomeScreenMoreWidget(
                   routeName: AllCountryScreen.route,
@@ -72,6 +78,7 @@ class HomeScreenCountryList extends StatelessWidget {
                           builder: (context) => ContentCountryBasedScreen(
                                 countryID: countryList![index].countryId!,
                                 countryName: countryList![index].name,
+                                listGenres: listGenres,
                               )),
                     );
                   },

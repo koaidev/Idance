@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pagewise/flutter_pagewise.dart';
-import '../../strings.dart';
 import 'package:hive/hive.dart';
+
 import '../../models/movie_model.dart';
 import '../../screen/movie/movie_details_screen.dart';
 import '../../server/repository.dart';
+import '../../strings.dart';
 import '../../style/theme.dart';
 import '../../utils/loadingIndicator.dart';
 import '../constants.dart';
@@ -31,7 +32,8 @@ class _MoviesScreenByGenereIDState extends State<MoviesScreenByGenereID> {
   @override
   Widget build(BuildContext context) {
     printLog("_MoviesScreenByGenereIDState");
-    final routes = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final routes =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
 
     return Scaffold(
       appBar: _buildAppBar(routes['isPresentAppBar'], routes['title']),
@@ -56,7 +58,9 @@ class _MoviesScreenByGenereIDState extends State<MoviesScreenByGenereID> {
           pageFuture: (pageIndex) {
             print(pageIndex);
             String pageNumber = (pageIndex! * PAGE_NUMBER + 1).toString();
-            return Repository().getMovieByGenereID(pageNumber, genereId).then((value) => value!);
+            return Repository()
+                .getMovieByGenereID(pageNumber, genereId)
+                .then((value) => value!);
           }),
     );
   }
@@ -64,19 +68,24 @@ class _MoviesScreenByGenereIDState extends State<MoviesScreenByGenereID> {
   _buildAppBar(isPresentAppBar, title) {
     if (isPresentAppBar)
       return AppBar(
-        backgroundColor: isDark ? CustomTheme.primaryColorDark : CustomTheme.primaryColor,
+        backgroundColor:
+            isDark ? CustomTheme.primaryColorDark : CustomTheme.primaryColor,
         title: Text(title),
       );
   }
 
   Widget _noItemFounnd(context) {
-    return Center(child: Text(AppContent.noItemFound, style: isDark ? CustomTheme.bodyText2White : CustomTheme.bodyText2));
+    return Center(
+        child: Text(AppContent.noItemFound,
+            style:
+                isDark ? CustomTheme.bodyText2White : CustomTheme.bodyText2));
   }
 
   Widget _itemBuilder(context, MovieModel model, _) {
     return Container(
       child: InkWell(
-        onTap: () => Navigator.pushNamed(context, MovieDetailScreen.route, arguments: {"movieID": model.videosId}),
+        onTap: () => Navigator.pushNamed(context, MovieDetailScreen.route,
+            arguments: {"movieID": model.videosId}),
         child: ClipRRect(
             borderRadius: BorderRadius.circular(5.0),
             child: Card(
@@ -86,7 +95,9 @@ class _MoviesScreenByGenereIDState extends State<MoviesScreenByGenereID> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   ClipRRect(
-                    borderRadius: BorderRadius.only(topLeft: Radius.circular(5.0), topRight: Radius.circular(5.0)),
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(5.0),
+                        topRight: Radius.circular(5.0)),
                     child: Image.network(
                       model.thumbnailUrl!,
                       fit: BoxFit.fill,
@@ -103,14 +114,24 @@ class _MoviesScreenByGenereIDState extends State<MoviesScreenByGenereID> {
                         Text(
                           model.title!,
                           overflow: TextOverflow.ellipsis,
-                          style: isDark ? CustomTheme.smallTextWhite.copyWith(fontSize: 13) : CustomTheme.smallText.copyWith(fontSize: 13),
+                          style: isDark
+                              ? CustomTheme.smallTextWhite
+                                  .copyWith(fontSize: 13)
+                              : CustomTheme.smallText.copyWith(fontSize: 13),
                         ),
                         Row(
                           children: [
-                            Text(model.videoQuality!, textAlign: TextAlign.start, style: isDark ? CustomTheme.smallTextWhite : CustomTheme.smallText),
+                            Text(model.videoQuality!,
+                                textAlign: TextAlign.start,
+                                style: isDark
+                                    ? CustomTheme.smallTextWhite
+                                    : CustomTheme.smallText),
                             Expanded(
-                              child:
-                                  Text(model.release!, textAlign: TextAlign.end, style: isDark ? CustomTheme.smallTextWhite : CustomTheme.smallText),
+                              child: Text(model.release!,
+                                  textAlign: TextAlign.end,
+                                  style: isDark
+                                      ? CustomTheme.smallTextWhite
+                                      : CustomTheme.smallText),
                             ),
                           ],
                         )

@@ -1,11 +1,17 @@
 import 'dart:async';
+import 'dart:convert';
 
+import 'package:app_links/app_links.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:oxoo/bloc/bloc.dart';
+import 'package:oxoo/models/payment_object.dart';
 import 'package:oxoo/network/api_configuration.dart';
+import 'package:oxoo/screen/subscription/my_subscription_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../bloc/auth/registration_bloc.dart';
@@ -23,6 +29,7 @@ import 'service/get_config_service.dart';
 import 'utils/route.dart';
 import 'package:http/http.dart' as http;
 
+
 class MyApp extends StatefulWidget {
   static final String route = "/MyApp";
 
@@ -33,19 +40,118 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   var appModeBox = Hive.box('appModeBox');
   static bool? isDark = true;
+  final _navigatorKey = GlobalKey<NavigatorState>();
+  late AppLinks _appLinks;
+  StreamSubscription<Uri>? _linkSubscription;
 
   @override
   void initState() {
     super.initState();
-
     isDark = appModeBox.get('isDark');
     if (isDark == null) {
       appModeBox.put('isDark', true);
     }
+    initDeepLinks();
   }
 
   @override
+  void dispose() {
+    _linkSubscription?.cancel();
+
+    super.dispose();
+  }
+
+  void openAppLink(Uri uri) {
+    _navigatorKey.currentState?.pushNamed(uri.fragment);
+  }
+
+  Future<void> initDeepLinks() async {
+    _appLinks = AppLinks();
+
+    // Check initial link if app was in cold state (terminated)
+    final appLink = await _appLinks.getInitialAppLink();
+    if (appLink != null) {
+      print('getInitialAppLink: $appLink');
+      openAppLink(appLink);
+    }
+
+    // Handle link when app is in warm state (front or background)
+    _linkSubscription = _appLinks.uriLinkStream.listen((uri) {
+      print('onAppLink: $uri');
+      openAppLink(uri);
+      checkPaymentUser();
+    });
+  }
+
+  checkPaymentUser() async{
+    if (FirebaseAuth.instance.currentUser != null) {
+      final response = await http.get(Uri.parse(ConfigApi().getPaymentStatusUrl(
+          FirebaseAuth.instance.currentUser!.uid.toString())));
+      if (response.statusCode == 200) {
+        // If the server did return a 200 OK response,
+        // then parse the JSON.
+        var paymentObject = PaymentObject.fromJson(jsonDecode(response.body));
+        if (paymentObject.data != null) {
+          Data data = paymentObject.data![paymentObject.data!.length-1];
+          if (data.userId != null) {
+            int timePaid = int.parse(data.requestId!.substring(2));
+            int amount =  int.parse(data.amount!);
+            appModeBox.put("amount", amount);
+            appModeBox.put("timePaid", timePaid);
+
+            if (amount == 50000) {
+              int timeNow = DateTime.now().millisecondsSinceEpoch;
+              int timeUseService = timeNow - timePaid;
+              if (timeUseService > 2678400000) {
+                appModeBox.put("isUserValidSubscriber", false);
+              } else {
+                appModeBox.put("isUserValidSubscriber", true);
+              }
+              Fluttertoast.showToast(msg: "Bạn đã đăng ký thành công gói cước 1 tháng.", toastLength: Toast.LENGTH_LONG);
+              Navigator.popAndPushNamed(context, MySubscriptionScreen.route);
+
+            }
+            if (amount == 120000) {
+              int timeNow = DateTime.now().millisecondsSinceEpoch;
+              int timeUseService = timeNow - timePaid;
+              if (timeUseService > 8035200000) {
+                appModeBox.put("isUserValidSubscriber", false);
+              } else {
+                appModeBox.put("isUserValidSubscriber", true);
+              }
+              Fluttertoast.showToast(msg: "Bạn đã đăng ký thành công gói cước 3 tháng.", toastLength: Toast.LENGTH_LONG);
+              Navigator.popAndPushNamed(context, MySubscriptionScreen.route);
+
+            }
+            if (amount == 150000) {
+              int timeNow = DateTime.now().millisecondsSinceEpoch;
+              int timeUseService = timeNow - timePaid;
+              if (timeUseService > 16070400000) {
+                appModeBox.put("isUserValidSubscriber", false);
+              } else {
+                appModeBox.put("isUserValidSubscriber", true);
+              }
+              Fluttertoast.showToast(msg: "Bạn đã đăng ký thành công gói cước 6 tháng.", toastLength: Toast.LENGTH_LONG);
+              Navigator.popAndPushNamed(context, MySubscriptionScreen.route);
+
+            }
+          }
+        }
+      } else {
+        // If the server did not return a 200 OK response,
+        // then throw an exception.
+        throw Exception('Failed to load album');
+      }
+    }
+  }
+
+
+  @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return FutureBuilder(
       future: Init.instance.initialize(),
       builder: (context, AsyncSnapshot snapshot) {
@@ -99,7 +205,6 @@ class Splash extends StatelessWidget {
   }
 }
 
-
 class Init {
   Init._();
 
@@ -109,9 +214,6 @@ class Init {
     // This is where you can initialize the resources needed by your app while
     // the splash screen is displayed.  Remove the following example because
     // delaying the user experience is a bad design practice!
-    if(FirebaseAuth.instance.currentUser!=null){
-      await http.get(Uri.parse(ConfigApi().getPaymentStatusUrl(FirebaseAuth.instance.currentUser!.uid.toString())));
-    }
     await Future.delayed(const Duration(seconds: 3));
   }
 }

@@ -51,7 +51,7 @@ class Routes {
       MySubscriptionScreen.route: (_) => MySubscriptionScreen(),
       FavouriteScreen.route: (_) => FavouriteScreen(),
       PremiumSubscriptionScreen.route: (_) => PremiumSubscriptionScreen(),
-      ContentCountryBasedScreen.route: (_) => ContentCountryBasedScreen(),
+      // ContentCountryBasedScreen.route: (_) => ContentCountryBasedScreen(),
       MovieReplyScreen.route: (_) => MovieReplyScreen(),
       MovieDetailScreen.route: (_) => MovieDetailScreen(),
       TermsPolices.route: (_) => TermsPolices(),

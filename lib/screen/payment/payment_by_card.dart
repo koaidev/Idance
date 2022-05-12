@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -48,9 +49,9 @@ class _PaymentByCardScreenState extends State<PaymentByCardScreen> {
     }
     action1 = () {
       Clipboard.setData(
-          ClipboardData(text: "$name - $phoneNumber - $comboLearn"));
+          ClipboardData(text: "$name - $phoneNumber - $comboLearn - ${FirebaseAuth.instance.currentUser!.uid}"));
       Fluttertoast.showToast(
-          msg: "Đã sao chép: $name - $phoneNumber - $comboLearn",
+          msg: "Đã sao chép: $name - $phoneNumber - $comboLearn - ${FirebaseAuth.instance.currentUser!.uid}",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
@@ -125,7 +126,7 @@ class _PaymentByCardScreenState extends State<PaymentByCardScreen> {
                     text: "\n\n Nội dung:\n",
                     style: TextStyle(color: Colors.white)),
                 TextSpan(
-                    text: "$name - $phoneNumber - $comboLearn\n\n",
+                    text: "$name - $phoneNumber - $comboLearn - ${FirebaseAuth.instance.currentUser!.uid}\n\n",
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.white)),
                 TextSpan(

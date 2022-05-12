@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flick_video_player/flick_video_player.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -57,10 +56,17 @@ class _PlayerState extends State<MovieDetailsVideoPlayerWidget> {
     flickManager.dispose();
     super.dispose();
   }
+  Future<bool> _onWillPop() async {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual);
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp]);
+    Navigator.pop(context);
+    return true;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return WillPopScope(child: Container(
       // Use the VideoPlayer widget to display the video.
       child: FlickVideoPlayer(
         flickManager: flickManager,
@@ -77,7 +83,7 @@ class _PlayerState extends State<MovieDetailsVideoPlayerWidget> {
           controls: LandscapePlayerControls(),
         ),
       ),
-    );
+    ), onWillPop: _onWillPop);
   }
 }
 
@@ -94,6 +100,7 @@ class LandscapePlayerControls extends StatefulWidget {
 }
 
 class _LandscapePlayerControlsState extends State<LandscapePlayerControls> {
+
   @override
   Widget build(BuildContext contextMain) {
     FlickControlManager controlManager =

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -5,6 +7,8 @@ import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
+import 'package:oxoo/models/payment_object.dart';
+import 'package:oxoo/network/api_configuration.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../constants.dart';
@@ -32,6 +36,7 @@ import 'movie/movie_details_screen.dart';
 import 'movie_screen.dart';
 import 'tv_series/tv_series_details_screen.dart';
 import 'tv_series_screen.dart';
+import 'package:http/http.dart' as http;
 
 class LandingScreen extends StatefulWidget {
   static final String route = "LandingScreen";
@@ -55,15 +60,67 @@ class _LandingScreenState extends State<LandingScreen>
   var appModeBox = Hive.box('appModeBox');
   String? userID;
   AuthUser? authUser = AuthService().getUser();
-  List<String> _kProductIdSubscription = <String>[
-    'com.zamoo.livedemo.allaccess'
-  ];
+
+  checkPaymentUser() async{
+    if (FirebaseAuth.instance.currentUser != null) {
+      final response = await http.get(Uri.parse(ConfigApi().getPaymentStatusUrl(
+          FirebaseAuth.instance.currentUser!.uid.toString())));
+      if (response.statusCode == 200) {
+        // If the server did return a 200 OK response,
+        // then parse the JSON.
+        var paymentObject = PaymentObject.fromJson(jsonDecode(response.body));
+        if (paymentObject.data != null) {
+          Data data = paymentObject.data![paymentObject.data!.length-1];
+          if (data.userId != null) {
+            int timePaid = int.parse(data.requestId!.substring(2));
+            int amount =  int.parse(data.amount!);
+            appModeBox.put("amount", amount);
+            appModeBox.put("timePaid", timePaid);
+
+            if (amount == 50000) {
+              int timeNow = DateTime.now().millisecondsSinceEpoch;
+              int timeUseService = timeNow - timePaid;
+              if (timeUseService > 2678400000) {
+                appModeBox.put("isUserValidSubscriber", false);
+
+              } else {
+                appModeBox.put("isUserValidSubscriber", true);
+              }
+            }
+            if (amount == 120000) {
+              int timeNow = DateTime.now().millisecondsSinceEpoch;
+              int timeUseService = timeNow - timePaid;
+              if (timeUseService > 8035200000) {
+                appModeBox.put("isUserValidSubscriber", false);
+              } else {
+                appModeBox.put("isUserValidSubscriber", true);
+              }
+            }
+            if (amount == 150000) {
+              int timeNow = DateTime.now().millisecondsSinceEpoch;
+              int timeUseService = timeNow - timePaid;
+              if (timeUseService > 16070400000) {
+                appModeBox.put("isUserValidSubscriber", false);
+              } else {
+                appModeBox.put("isUserValidSubscriber", true);
+              }
+            }
+          }
+        }
+      } else {
+        // If the server did not return a 200 OK response,
+        // then throw an exception.
+        throw Exception('Failed to load album');
+      }
+    }
+  }
 
   @override
   void initState() {
     appModeBox.delete("isUserValidSubscriber");
     _controller = new TabController(vsync: this, length: 5, initialIndex: 1);
     super.initState();
+    checkPaymentUser();
     myFocusNode = FocusNode();
     KeyboardVisibilityController().onChange.listen((bool visible) {
       print('Keyboard visibility update. Is visible: $visible');
@@ -71,6 +128,7 @@ class _LandingScreenState extends State<LandingScreen>
     });
     isDark = appModeBox.get('isDark') ?? false;
     initStoreInfo();
+
     SchedulerBinding.instance!
         .addPostFrameCallback((_) => configOneSignal(context));
   }

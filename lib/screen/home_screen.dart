@@ -55,18 +55,18 @@ class _HomeScreenState extends State<HomeScreen> {
           Spacer(flex: 2),
           GestureDetector(
               onTap: () {
-                _launchURL('https://m.me/chicken.3695');
+                _launchURL('https://m.me/idanceeee');
               },
               child: Container(
                 height: 60,
                 width: 60,
                 padding: EdgeInsets.all(5),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(100)),
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
                     color: Colors.white),
                 child: Image.asset(
                   "assets/images/messenger.png",
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                 ),
               )),
           Spacer(flex: 1),
@@ -90,6 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
         fabOpenIcon: Icon(Icons.support_agent_rounded),
         fabOpenColor: Colors.red,
         ringColor: Colors.transparent,
+        fabColor: CustomTheme.gradient2.colors[1],
       ),
       backgroundColor:
           isDark! ? CustomTheme.primaryColorDark : Colors.transparent,
@@ -117,22 +118,6 @@ class _HomeScreenState extends State<HomeScreen> {
           );
         },
       ),
-      // body: BlocBuilder<HomeContentBloc, HomeContentState>(
-      //   builder: (context, state) {
-      //     if (state is HomeContentLoadingState) {
-      //       BlocProvider.of<HomeContentBloc>(context)..add(FetchHomeContentData());
-      //     } else if (state is HomeContentErrorState) {
-      //       return Center(
-      //         child: Text(AppContent.somethingWentWrong),
-      //       );
-      //     } else if (state is HomeContentLoadedState) {
-      //       printLog("--------home content data loaded");
-
-      //       return buildUI(context: context, authUser: authUser, paymentConfig: paymentConfig, homeContent: state.homeContent);
-      //     }
-      //     return Center(child: spinkit);
-      //   },
-      // ),
     );
   }
 
@@ -156,17 +141,17 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
 
-        //country
+        //cấp độ
         if (appConfig!.countryVisible)
           SliverToBoxAdapter(
             child: Container(
               margin: EdgeInsets.only(top: 5, bottom: 5),
               child: HomeScreenCountryList(
-                  countryList: homeContent.allCountry, isDark: isDark!),
+                  countryList: homeContent.allCountry, isDark: isDark!, listGenres: homeContent.allGenre,),
             ),
           ),
 
-        //genre
+        //thể loại
         if (appConfig.genreVisible)
           SliverToBoxAdapter(
             child: Container(

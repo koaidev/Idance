@@ -10,7 +10,6 @@ import '../../strings.dart';
 import '../../style/theme.dart';
 
 //In-app-purchase var
-const List<String> _kProductIds = <String>['com.zamoo.livedemo.allaccess'];
 
 class PremiumSubscriptionScreen extends StatefulWidget {
   static final String route = '/PremiumSubscriptionScreen';
@@ -86,9 +85,7 @@ class _PremiumSubscriptionScreenState extends State<PremiumSubscriptionScreen> {
               SizedBox(
                 height: 20.0,
               ),
-
               Expanded(child: PaymentScreen())
-
             ],
           ),
         ));

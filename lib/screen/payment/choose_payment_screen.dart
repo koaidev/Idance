@@ -259,7 +259,7 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                         buttonColor: Colors.red,
                         child: ElevatedButton(
                           child: Text(
-                            'Thanh toán ví MOMO',
+                            'Thanh toán bằng Ví MoMo',
                           ),
                           onPressed: () async {
                             if (nameController.text.isEmpty |
@@ -284,7 +284,7 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                               String lang = "vi";
                               String requestType = "captureWallet";
                               String redirectUrl =
-                                  "https://play.google.com/store/apps/details?id=com.idance.hocnhayonline&hl=vi&gl=VN";
+                                  "http://apppanel.cnagroup.vn/applink/";
                               String requestId = "ID" +
                                   DateTime.now()
                                       .millisecondsSinceEpoch
@@ -301,9 +301,9 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                               };
                               String extraData =
                                   base64.encode(utf8.encode(json.encode(data)));
-                              String accessKey = "q2ACnLximNzIH50O";
+                              String accessKey = "y1NdrijpynTsOCHW";
                               String secretKey =
-                                  "guoqhgzu7orgVcISgpDalcgcoW3NcoJl";
+                                  "3FUSB54SlKdbz0R8Z3HHFKF7u8M0EgQU";
                               var signature =
                                   "accessKey=$accessKey&amount=$amount&extraData=$extraData&ipnUrl=$ipnUrl&orderId=$orderId&orderInfo=$orderInfo&partnerCode=$partnerCode&redirectUrl=$redirectUrl&requestId=$requestId&requestType=$requestType";
 

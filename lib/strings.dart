@@ -70,7 +70,7 @@ class AppContent {
   static final String radioScreen = "Radio Screen";
   static final String tryAgain = "Thử lại";
   static final String allRadioChannels = "All Radio Channels";
-  static final String genreScreen = "Genre Screen";
+  static final String genreScreen = "Thể loại";
   static final String genre = "Thể loại";
   static final String countryScreen = "Cấp độ";
   static final String selectGender = "Chọn cách xưng hô";

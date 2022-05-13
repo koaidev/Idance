@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pagewise/flutter_pagewise.dart';
-import '../../constants.dart';
 import 'package:hive/hive.dart';
+
+import '../../constants.dart';
 import '../../models/home_content.dart';
 import '../../server/repository.dart';
 import '../../strings.dart';
@@ -12,6 +13,7 @@ import '../screen/content_country_based_screen.dart';
 
 class AllCountryScreen extends StatefulWidget {
   static final String route = '/AllCountryScreen';
+
   @override
   _AllCountryScreenState createState() => _AllCountryScreenState();
 }
@@ -32,6 +34,7 @@ class _AllCountryScreenState extends State<AllCountryScreen> {
   ];
 
   int index = 0;
+
   LinearGradient getRandomColor() {
     // if (index >= 5) {
     //   index = 0;
@@ -51,7 +54,8 @@ class _AllCountryScreenState extends State<AllCountryScreen> {
     printLog("_AllCountryScreenState");
     final bool isFromMenu = ModalRoute.of(context)!.settings.arguments as bool;
     return Scaffold(
-      backgroundColor: isDark ? CustomTheme.primaryColorDark : Colors.transparent,
+      backgroundColor:
+          isDark ? CustomTheme.primaryColorDark : Colors.white,
       appBar: _buildAppBar(isFromMenu) as PreferredSizeWidget,
       body: buildUI(),
     );
@@ -60,8 +64,14 @@ class _AllCountryScreenState extends State<AllCountryScreen> {
   _buildAppBar(isFromMenu) {
     if (isFromMenu)
       return AppBar(
-        backgroundColor: isDark ? CustomTheme.colorAccentDark : CustomTheme.primaryColor,
-        title: Text(AppContent.countryScreen),
+        backgroundColor:
+            isDark ? CustomTheme.colorAccentDark : CustomTheme.primaryColor,
+        title: Text(
+          AppContent.countryScreen,
+          style: TextStyle(
+            fontFamily: 'Montserrat',
+          ),
+        ),
       );
   }
 
@@ -83,15 +93,17 @@ class _AllCountryScreenState extends State<AllCountryScreen> {
             pageFuture: (pageIndex) {
               print(pageIndex);
               String pageNumber = (pageIndex! * PAGE_NUMBER + 1).toString();
-              return Repository().getCountryList(pageNumber).then((value) => value!);
+              return Repository()
+                  .getCountryList(pageNumber)
+                  .then((value) => value!);
             }),
       ),
     );
   }
 
   Widget _itemBuilder(context, AllCountry allCountry, _) {
-    List<AllGenre> listGenres =[];
-    Repository().getGenreList("1").then((value){
+    List<AllGenre> listGenres = [];
+    Repository().getGenreList("1").then((value) {
       listGenres.addAll(value!);
     });
     return InkWell(
@@ -101,7 +113,8 @@ class _AllCountryScreenState extends State<AllCountryScreen> {
           MaterialPageRoute(
               builder: (context) => ContentCountryBasedScreen(
                     countryID: allCountry.countryId!,
-                    countryName: allCountry.name, listGenres: listGenres,
+                    countryName: allCountry.name,
+                    listGenres: listGenres,
                   )),
         );
       },

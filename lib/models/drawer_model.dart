@@ -65,11 +65,11 @@ List<DrawerModel> drawerListItemFirst = [
       navItemName: AppContent.darkMode,
       navItemIcon: "ic_brightness_3_black_24dp.svg",
       isSelected: false),
-  DrawerModel(
-      id: 12,
-      navItemName: AppContent.library,
-      navItemIcon: "ic_file_download_black_24dp.svg",
-      isSelected: false),
+  // DrawerModel(
+  //     id: 12,
+  //     navItemName: AppContent.library,
+  //     navItemIcon: "ic_file_download_black_24dp.svg",
+  //     isSelected: false),
 ];
 
 List<DrawerModel> drawerListItemWithoutLogin = [
@@ -118,9 +118,9 @@ List<DrawerModel> drawerListItemWithoutLogin = [
       navItemName: AppContent.darkMode,
       navItemIcon: "ic_brightness_3_black_24dp.svg",
       isSelected: false),
-  DrawerModel(
-      id: 10,
-      navItemName: AppContent.library,
-      navItemIcon: "ic_file_download_black_24dp.svg",
-      isSelected: false),
+  // DrawerModel(
+  //     id: 10,
+  //     navItemName: AppContent.library,
+  //     navItemIcon: "ic_file_download_black_24dp.svg",
+  //     isSelected: false),
 ];

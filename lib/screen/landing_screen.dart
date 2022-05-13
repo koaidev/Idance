@@ -349,22 +349,22 @@ class _LandingScreenState extends State<LandingScreen>
           : Text(
               _widgetTitle.elementAt(_selectedIndex),
               style: TextStyle(
-                fontFamily: 'Montserrat',
+                fontFamily: _selectedIndex==0 ? 'Horizon' : 'Montserrat',
               ),
             ),
-      actions: <Widget>[
-        activeSearch
-            ? Container()
-            : IconButton(
-                icon: Icon(Icons.search),
-                onPressed: () {
-                  setState(() {
-                    activeSearch = true;
-                    myFocusNode!.requestFocus();
-                  });
-                },
-              )
-      ],
+      // actions: <Widget>[
+      //   activeSearch
+      //       ? Container()
+      //       : IconButton(
+      //           icon: Icon(Icons.search),
+      //           onPressed: () {
+      //             setState(() {
+      //               activeSearch = true;
+      //               myFocusNode!.requestFocus();
+      //             });
+      //           },
+      //         )
+      // ],
     );
   }
 
@@ -532,10 +532,10 @@ class _LandingScreenState extends State<LandingScreen>
                       });
                   break;
 
-                case 11:
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, DownloadScreen.route);
-                  break;
+                // case 11:
+                //   Navigator.pop(context);
+                //   Navigator.pushNamed(context, DownloadScreen.route);
+                //   break;
               }
             },
           );
@@ -548,7 +548,7 @@ class _LandingScreenState extends State<LandingScreen>
         physics: const NeverScrollableScrollPhysics(),
         itemCount: drawerListItem.length,
         itemBuilder: (BuildContext context, int index) {
-          if (index == 8)
+          if (index == 7)
             return ListTile(
               leading: SvgPicture.asset(
                 'assets/drawer_icon/${drawerListItem.elementAt(index).navItemIcon}',
@@ -645,11 +645,11 @@ class _LandingScreenState extends State<LandingScreen>
                   Navigator.pop(context);
                   Navigator.pushNamed(context, AuthScreen.route);
                   break;
-                case 9:
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, DownloadScreen.route,
-                      arguments: {'isDark': isDark});
-                  break;
+                // case 9:
+                //   Navigator.pop(context);
+                //   Navigator.pushNamed(context, DownloadScreen.route,
+                //       arguments: {'isDark': isDark});
+                //   break;
               }
             },
           );

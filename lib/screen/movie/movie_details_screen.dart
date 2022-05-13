@@ -445,7 +445,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                    "${AppContent.releaseOn}${movieDetailsModel.release}",
+                    "${AppContent.releaseOn} ${movieDetailsModel.release}",
                     style: isDark!
                         ? CustomTheme.bodyText2White
                         : CustomTheme.bodyText2),

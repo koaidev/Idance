@@ -37,7 +37,7 @@ class PopularStarScreenState extends State<PopularStarScreen> {
               fontFamily: 'Montserrat',
             ),
           ),
-          backgroundColor: isDark ? CustomTheme.darkGrey : Colors.red,
+          backgroundColor: isDark ? CustomTheme.primaryColorDark : Colors.red,
         ),
         body: FutureBuilder<HomeContent>(
           future: _homeContent,

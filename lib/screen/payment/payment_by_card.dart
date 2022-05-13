@@ -152,7 +152,7 @@ class _PaymentByCardScreenState extends State<PaymentByCardScreen> {
                     ))
               ])),
           SizedBox(
-            height: 5,
+            height: 15,
           ),
           Divider(
             height: 1,

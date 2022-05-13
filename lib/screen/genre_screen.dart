@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pagewise/flutter_pagewise.dart';
 import 'package:hive/hive.dart';
+
 import '../../models/home_content.dart';
 import '../../server/repository.dart';
 import '../../strings.dart';
@@ -20,7 +21,8 @@ class GenreScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     isFromMenu = ModalRoute.of(context)!.settings.arguments as bool?;
     return Scaffold(
-      backgroundColor: isDark ? CustomTheme.primaryColorDark : Colors.transparent,
+      backgroundColor:
+          isDark ? CustomTheme.primaryColorDark : Colors.white,
       appBar: _buildAppBar(isFromMenu),
       body: buildUI(),
     );
@@ -36,6 +38,7 @@ class GenreScreen extends StatelessWidget {
   ];
 
   int index = 0;
+
   LinearGradient getRandomColor() {
     // if (index >= 5) {
     //   index = 0;
@@ -47,8 +50,14 @@ class GenreScreen extends StatelessWidget {
   _buildAppBar(isFromMenu) {
     if (isFromMenu)
       return AppBar(
-        backgroundColor: isDark ? CustomTheme.colorAccentDark : CustomTheme.primaryColor,
-        title: Text(AppContent.genreScreen),
+        backgroundColor:
+            isDark ? CustomTheme.primaryColorDark : CustomTheme.primaryColor,
+        title: Text(
+          AppContent.genreScreen,
+          style: TextStyle(
+            fontFamily: 'Montserrat',
+          ),
+        ),
       );
   }
 
@@ -70,7 +79,9 @@ class GenreScreen extends StatelessWidget {
             pageFuture: (pageIndex) {
               print(pageIndex);
               String pageNumber = (pageIndex! * PAGE_NUMBER + 1).toString();
-              return Repository().getGenreList(pageNumber).then((value) => value!);
+              return Repository()
+                  .getGenreList(pageNumber)
+                  .then((value) => value!);
             }),
       ),
     );

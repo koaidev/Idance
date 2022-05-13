@@ -79,104 +79,108 @@ abstract class CustomTheme {
   );
 
   static TextStyle bodyText1 = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Montserrat',
     fontWeight: FontWeight.w500,
     color: black_window,
     fontSize: 18,
   );
   static TextStyle bodyText1White = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Montserrat',
     fontWeight: FontWeight.w500,
     color: Colors.white,
     fontSize: 18,
   );
   static TextStyle bodyText1Bold = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Montserrat',
     fontWeight: FontWeight.bold,
     color: black_window,
     fontSize: 15,
   );
   static TextStyle bodyText1BoldWhite = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Montserrat',
     fontWeight: FontWeight.bold,
     color: whiteColor,
     fontSize: 15,
   );
   static TextStyle bodyText2 = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Montserrat',
     fontWeight: FontWeight.w700,
     color: black_window,
     fontSize: 15,
   );
   static TextStyle bodyText2White = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Montserrat',
     fontWeight: FontWeight.w700,
     color: whiteColor,
     fontSize: 15,
   );
   static TextStyle bodyTextgray2 = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Montserrat',
     fontWeight: FontWeight.w700,
     color: grey_60,
     fontSize: 15,
   );
   static TextStyle bodyTextgray = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Montserrat',
     fontWeight: FontWeight.w300,
     color: Colors.grey.shade500,
     fontSize: 15,
   );
   static TextStyle coloredBodyText1 = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Montserrat',
     fontWeight: FontWeight.w500,
     color: primaryColor,
     fontSize: 18,
   );
   static TextStyle displayTextColored = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Montserrat',
     fontWeight: FontWeight.w500,
     color: colorAccent,
     fontSize: 25,
   );
   static TextStyle coloredBodyText2 = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Montserrat',
     fontWeight: FontWeight.w700,
     color: primaryColorRed,
     fontSize: 15,
   );
   static TextStyle orangeColoredBodyText = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Montserrat',
     fontWeight: FontWeight.w700,
     color: primaryColor,
     fontSize: 15,
   );
   static TextStyle coloredBodyText2Bold = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Montserrat',
     fontWeight: FontWeight.bold,
     color: colorAccent,
     fontSize: 16,
   );
   static TextStyle coloredBodyText3 = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Montserrat',
     color: colorAccent,
     fontSize: 12,
   );
   static TextStyle bodyText3 = TextStyle(
+    fontFamily: 'Montserrat',
     fontWeight: FontWeight.w500,
     color: black_window,
     fontSize: 14,
   );
   static TextStyle bodyText3White = TextStyle(
+    fontFamily: 'Montserrat',
     fontWeight: FontWeight.w500,
     color: whiteColor,
     fontSize: 14,
   );
   static TextStyle bodyText3Gray = TextStyle(
+    fontFamily: 'Montserrat',
     fontWeight: FontWeight.w500,
     color: grey_transparent2,
     fontSize: 14,
   );
   static TextStyle bodyTextBold3 = TextStyle(
+    fontFamily: 'Montserrat',
     fontWeight: FontWeight.bold,
     color: black_window,
     fontSize: 12,
@@ -185,110 +189,110 @@ abstract class CustomTheme {
   static TextStyle bodyText2Bold =  TextStyle(fontWeight: FontWeight.bold,fontSize: 16.0);
   static TextStyle bodyText2BoldWhite =  TextStyle(fontWeight: FontWeight.bold,fontSize: 16.0,color: Colors.white);
   static TextStyle subText2 = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Montserrat',
     color: grey_60,
     fontSize: 12,
   );
   static TextStyle subTextBold = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Montserrat',
     color: black_window,
     fontWeight: FontWeight.bold,
     fontSize: 12,
   );
   static TextStyle subTextBoldWhite = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Montserrat',
     color: whiteColor,
     fontWeight: FontWeight.bold,
     fontSize: 12,
   );
 
   static TextStyle coloredSubText = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Montserrat',
     color: colorAccent,
     fontSize: 14,
   );
 
   static TextStyle authBtnTitle = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Montserrat',
     color: whiteColor,
     fontSize: 16,
     fontWeight: FontWeight.bold,
   );
   static TextStyle authBtnTitleBlack = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Montserrat',
     color: Colors.black,
     fontSize: 16,
     fontWeight: FontWeight.bold,
   );
   static TextStyle authTitle = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Montserrat',
     color: primaryColor,
     fontSize: 18,
     fontWeight: FontWeight.bold,
   );
   static TextStyle authTitleWhite = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Montserrat',
     color: Colors.white,
     fontSize: 15,
     fontWeight: FontWeight.bold,
   );
   static TextStyle authTitleBlack = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Montserrat',
     color: Colors.black,
     fontSize: 15,
     fontWeight: FontWeight.bold,
   );
   static TextStyle authTitleGrey = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Montserrat',
     color: grey_transparent2,
     fontSize: 15,
     fontWeight: FontWeight.bold,
   );
   static TextStyle textFieldTitlePrimaryColored = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Montserrat',
     color: colorAccent,
     fontSize: 14,
     fontWeight: FontWeight.bold,
   );
 
   static TextStyle textFieldTitlePrimaryWhite = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Montserrat',
     color: whiteColor,
     fontSize: 14,
     fontWeight: FontWeight.bold,
   );
 
   static TextStyle smallTextGrey = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Montserrat',
     color: grey_transparent2,
     fontSize: 13,
     fontWeight: FontWeight.normal,
   );
   static TextStyle smallText = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Montserrat',
     fontSize: 12,
     fontWeight: FontWeight.normal,
   );
   static TextStyle smallTextWhite = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Montserrat',
     fontSize: 12,
     color: Colors.white,
     fontWeight: FontWeight.normal,
   );
   static TextStyle smallTextStyleColored = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Montserrat',
     color: primaryColor,
     fontSize: 12,
     fontWeight: FontWeight.bold,
   );
   static TextStyle textStyleWhite15 = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Montserrat',
     color: whiteColor,
     fontSize: 15,
     fontWeight: FontWeight.normal,
   );
   static TextStyle textStyleBlack15 = TextStyle(
-    fontFamily: 'NunitoSans',
+    fontFamily: 'Montserrat',
     color: Colors.black,
     fontSize: 15,
     fontWeight: FontWeight.normal,

@@ -83,7 +83,7 @@ class AppContent {
   static final String yesText = "Đồng ý";
   static final String noText = "Hủy bỏ";
   static final String listeningZamoo = "listeningZamoo";
-  static final String selectServer = "Chọn máy chủ";
+  static final String selectServer = "Chọn chế độ";
   static final String showResultFor = "Hiện kết quả cho:";
   static final String noitemshere = "Không có bài học tại đây";
   static final String somethingWentWrong = "Có gì đó không đúng";

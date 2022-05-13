@@ -20,14 +20,22 @@ class _PaymentScreenState extends State<PaymentScreen> {
             Text(
               'CHỌN GÓI HỌC',
               style: TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: 20, color: Colors.red),
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                color: Colors.red,
+                fontFamily: 'Montserrat',
+              ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 30,),
+            SizedBox(
+              height: 30,
+            ),
             _buildSubTitle('1 tháng', "50.000 VND", 1),
             _buildSubTitle('3 tháng', "120. 000 VND", 2),
             _buildSubTitle('6 tháng', "", 3),
-            Spacer(flex: 1,),
+            Spacer(
+              flex: 1,
+            ),
             Container(
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: Colors.red),
@@ -42,7 +50,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   )),
               width: 200,
             ),
-            SizedBox(height: 15,)
+            SizedBox(
+              height: 15,
+            )
           ],
         ),
         margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
@@ -60,10 +70,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 settings: RouteSettings(arguments: index)));
       },
       child: Container(
-        width: MediaQuery
-            .of(context)
-            .size
-            .width,
+        width: MediaQuery.of(context).size.width,
         margin: const EdgeInsets.only(bottom: 15),
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
         decoration: BoxDecoration(
@@ -83,6 +90,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
               title.toUpperCase(),
               style: TextStyle(
                   color: Colors.white,
+                  fontFamily: 'Montserrat',
                   fontSize: 18,
                   fontWeight: FontWeight.bold),
             ),
@@ -93,16 +101,64 @@ class _PaymentScreenState extends State<PaymentScreen> {
               Row(
                 children: [
                   Text(
-                    '200.000 VNĐ'.toUpperCase(),
+                    '450.000 VNĐ'.toUpperCase(),
                     style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontFamily: 'Montserrat',
+                        decoration: TextDecoration.lineThrough,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    ' 150.000 VNĐ'.toUpperCase(),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.bold),
+                  )
+                ],
+                mainAxisAlignment: MainAxisAlignment.center,
+              ),
+            if (index == 2)
+              Row(
+                children: [
+                  Text(
+                    '250.000 VNĐ'.toUpperCase(),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontFamily: 'Montserrat',
+                        decoration: TextDecoration.lineThrough,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    ' 120.000 VNĐ'.toUpperCase(),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Montserrat',
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold),
+                  )
+                ],
+                mainAxisAlignment: MainAxisAlignment.center,
+              ),
+            if (index == 1)
+              Row(
+                children: [
+                  Text(
+                    '100.000 VNĐ'.toUpperCase(),
+                    style: TextStyle(
+                        fontFamily: 'Montserrat',
                         color: Colors.white,
                         fontSize: 18,
                         decoration: TextDecoration.lineThrough,
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    '- 150.000 VNĐ'.toUpperCase(),
+                    ' 50.000 VNĐ'.toUpperCase(),
                     style: TextStyle(
+                        fontFamily: 'Montserrat',
                         color: Colors.white,
                         fontSize: 18,
                         fontWeight: FontWeight.bold),
@@ -110,14 +166,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 ],
                 mainAxisAlignment: MainAxisAlignment.center,
               ),
-            if (index != 3)
-              Text(
-                subTitle.toUpperCase(),
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold),
-              )
           ],
         ),
       ),

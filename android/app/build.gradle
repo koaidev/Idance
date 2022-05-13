@@ -51,8 +51,8 @@ android {
         applicationId "com.idance.hocnhayonline"
         minSdkVersion 21
         targetSdkVersion 32
-        versionCode 5
-        versionName '1.0.0'
+        versionCode 6
+        versionName '1.0.1'
     }
 
     signingConfigs{

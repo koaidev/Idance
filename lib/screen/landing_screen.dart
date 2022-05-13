@@ -6,6 +6,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
+import 'package:http/http.dart' as http;
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:oxoo/models/payment_object.dart';
 import 'package:oxoo/network/api_configuration.dart';
@@ -36,7 +37,6 @@ import 'movie/movie_details_screen.dart';
 import 'movie_screen.dart';
 import 'tv_series/tv_series_details_screen.dart';
 import 'tv_series_screen.dart';
-import 'package:http/http.dart' as http;
 
 class LandingScreen extends StatefulWidget {
   static final String route = "LandingScreen";
@@ -61,7 +61,7 @@ class _LandingScreenState extends State<LandingScreen>
   String? userID;
   AuthUser? authUser = AuthService().getUser();
 
-  checkPaymentUser() async{
+  checkPaymentUser() async {
     if (FirebaseAuth.instance.currentUser != null) {
       final response = await http.get(Uri.parse(ConfigApi().getPaymentStatusUrl(
           FirebaseAuth.instance.currentUser!.uid.toString())));
@@ -70,10 +70,10 @@ class _LandingScreenState extends State<LandingScreen>
         // then parse the JSON.
         var paymentObject = PaymentObject.fromJson(jsonDecode(response.body));
         if (paymentObject.data != null) {
-          Data data = paymentObject.data![paymentObject.data!.length-1];
+          Data data = paymentObject.data![paymentObject.data!.length - 1];
           if (data.userId != null) {
             int timePaid = int.parse(data.requestId!.substring(2));
-            int amount =  int.parse(data.amount!);
+            int amount = int.parse(data.amount!);
             appModeBox.put("amount", amount);
             appModeBox.put("timePaid", timePaid);
 
@@ -82,7 +82,6 @@ class _LandingScreenState extends State<LandingScreen>
               int timeUseService = timeNow - timePaid;
               if (timeUseService > 2678400000) {
                 appModeBox.put("isUserValidSubscriber", false);
-
               } else {
                 appModeBox.put("isUserValidSubscriber", true);
               }
@@ -347,7 +346,12 @@ class _LandingScreenState extends State<LandingScreen>
           isDark ? CustomTheme.colorAccentDark : CustomTheme.primaryColor,
       title: activeSearch
           ? appBarSearchWidget()
-          : Text(_widgetTitle.elementAt(_selectedIndex)),
+          : Text(
+              _widgetTitle.elementAt(_selectedIndex),
+              style: TextStyle(
+                fontFamily: 'Montserrat',
+              ),
+            ),
       actions: <Widget>[
         activeSearch
             ? Container()
@@ -420,6 +424,7 @@ class _LandingScreenState extends State<LandingScreen>
               title: Text(
                 drawerListItem.elementAt(index).navItemName,
                 style: TextStyle(
+                    fontFamily: 'Montserrat',
                     color: drawerListItem.elementAt(index).isSelected
                         ? Colors.red
                         : CustomTheme.grey_60),

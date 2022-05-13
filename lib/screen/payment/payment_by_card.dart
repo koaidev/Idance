@@ -48,10 +48,12 @@ class _PaymentByCardScreenState extends State<PaymentByCardScreen> {
       amountNumber = 150000;
     }
     action1 = () {
-      Clipboard.setData(
-          ClipboardData(text: "$name - $phoneNumber - $comboLearn - ${FirebaseAuth.instance.currentUser!.uid}"));
+      Clipboard.setData(ClipboardData(
+          text:
+              "$name - $phoneNumber - $comboLearn - ${FirebaseAuth.instance.currentUser!.uid}"));
       Fluttertoast.showToast(
-          msg: "Đã sao chép: $name - $phoneNumber - $comboLearn - ${FirebaseAuth.instance.currentUser!.uid}",
+          msg:
+              "Đã sao chép: $name - $phoneNumber - $comboLearn - ${FirebaseAuth.instance.currentUser!.uid}",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
@@ -73,7 +75,10 @@ class _PaymentByCardScreenState extends State<PaymentByCardScreen> {
         title: Text(
           "CHUYỂN KHOẢN NGÂN HÀNG",
           style: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
+              fontFamily: 'Montserrat',
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 16),
         ),
         leading: IconButton(
             onPressed: () {
@@ -115,24 +120,36 @@ class _PaymentByCardScreenState extends State<PaymentByCardScreen> {
                   text:
                       "Để thanh toán gói học này, bạn hãy chuyển khoản chính xác học phí và nội dung bên dưới:\n\nHọc phí:",
                   style: TextStyle(
+                    fontFamily: 'Montserrat',
                     color: Colors.white,
                   ),
                 ),
                 TextSpan(
                     text: "\n$amount",
                     style: const TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.white)),
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white)),
                 TextSpan(
                     text: "\n\n Nội dung:\n",
-                    style: TextStyle(color: Colors.white)),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Montserrat',
+                    )),
                 TextSpan(
-                    text: "$name - $phoneNumber - $comboLearn - ${FirebaseAuth.instance.currentUser!.uid}\n\n",
+                    text:
+                        "$name - $phoneNumber - $comboLearn - ${FirebaseAuth.instance.currentUser!.uid}\n\n",
                     style: const TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.white)),
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white)),
                 TextSpan(
                     text:
                         "\n\n-----------------------------\nTên ngân hàng: ACB\n\n Tên tài khoản: CNA Group\n\n Số tài khoản: 1327.888888\n\n-----------------------------\n\nHotline: 0888.430.620",
-                    style: TextStyle(color: Colors.white))
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Montserrat',
+                    ))
               ])),
           SizedBox(
             height: 5,
@@ -174,7 +191,13 @@ class _PaymentByCardScreenState extends State<PaymentByCardScreen> {
                 child: Row(
                   children: [
                     Expanded(child: Icon(Icons.home_rounded)),
-                    Expanded(child: Text("HOME"))
+                    Expanded(
+                        child: Text(
+                      "HOME",
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
+                      ),
+                    ))
                   ],
                 )),
             width: 200,
@@ -200,7 +223,10 @@ class _PaymentByCardScreenState extends State<PaymentByCardScreen> {
           ),
           Text(
             title,
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'Montserrat',
+            ),
           )
         ],
       ),

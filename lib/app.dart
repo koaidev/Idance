@@ -253,6 +253,7 @@ class AfterSplash extends StatelessWidget {
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
+
             routes: Routes.getRoute(),
             home: RenderFirstScreen(),
           )),

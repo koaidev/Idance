@@ -361,30 +361,31 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                 ),
                               ),
 
+                              //todo download button
                               //rent button
-                              if (isDownloadEnable)
-                                Container(
-                                  width:
-                                      MediaQuery.of(context).size.width - 170,
-                                  child: ElevatedButton(
-                                    onPressed: () async {
-                                      SelectDownloadDialog().createDialog(
-                                          context,
-                                          movieDetailsModel.downloadLinks!,
-                                          isDark,
-                                          downloadVideo);
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      primary: CustomTheme.whiteColor,
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 14.0, horizontal: 10.0),
-                                      child: Text(AppContent.download,
-                                          style: CustomTheme.bodyText3),
-                                    ),
-                                  ),
-                                ),
+                              // if (isDownloadEnable)
+                              //   Container(
+                              //     width:
+                              //         MediaQuery.of(context).size.width - 170,
+                              //     child: ElevatedButton(
+                              //       onPressed: () async {
+                              //         SelectDownloadDialog().createDialog(
+                              //             context,
+                              //             movieDetailsModel.downloadLinks!,
+                              //             isDark,
+                              //             downloadVideo);
+                              //       },
+                              //       style: ElevatedButton.styleFrom(
+                              //         primary: CustomTheme.whiteColor,
+                              //       ),
+                              //       child: Padding(
+                              //         padding: const EdgeInsets.symmetric(
+                              //             vertical: 14.0, horizontal: 10.0),
+                              //         child: Text(AppContent.download,
+                              //             style: CustomTheme.bodyText3),
+                              //       ),
+                              //     ),
+                              //   ),
                             ],
                           ),
                         )

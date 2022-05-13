@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:oxoo/server/repository.dart';
+import 'package:oxoo/style/theme.dart';
 
 import '../../models/home_content.dart';
 import '../strings.dart';
@@ -28,9 +29,15 @@ class PopularStarScreenState extends State<PopularStarScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: isDark ? CustomTheme.primaryColorDark : Colors.white,
         appBar: AppBar(
-          title: Text("Danh sách giáo viên"),
-          backgroundColor: Colors.red,
+          title: Text(
+            "Danh sách giáo viên",
+            style: TextStyle(
+              fontFamily: 'Montserrat',
+            ),
+          ),
+          backgroundColor: isDark ? CustomTheme.darkGrey : Colors.red,
         ),
         body: FutureBuilder<HomeContent>(
           future: _homeContent,
@@ -51,14 +58,17 @@ class PopularStarScreenState extends State<PopularStarScreen> {
                         mainAxisSpacing: 16),
                     itemBuilder: (BuildContext context, int index) {
                       return buildStarCard(
-                          context, homeContent.popularStars![index]);
+                          context, homeContent.popularStars![index],isDark);
                     }),
               );
             } else if (snapshot.hasError) {
               return Center(
                 child: Text(
                   AppContent.somethingWentWrong,
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                    color: isDark ? CustomTheme.primaryColorDark : Colors.white,
+                    fontFamily: 'Montserrat',
+                  ),
                 ),
               );
             }
@@ -70,7 +80,7 @@ class PopularStarScreenState extends State<PopularStarScreen> {
   }
 }
 
-Widget buildStarCard(BuildContext context, PopularStars popularStars) {
+Widget buildStarCard(BuildContext context, PopularStars popularStars, bool isDark) {
   return GestureDetector(
       onTap: () {
         Navigator.pushNamed(
@@ -111,7 +121,11 @@ Widget buildStarCard(BuildContext context, PopularStars popularStars) {
                     height: 7,
                   ),
                   Text(popularStars.starName!,
-                      style: TextStyle(fontWeight: FontWeight.w500)),
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontFamily: 'Montserrat',
+                        color: !isDark ? CustomTheme.primaryColorDark : Colors.white,
+                      )),
                   SizedBox(
                     height: 7,
                   ),

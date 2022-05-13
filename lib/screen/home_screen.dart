@@ -1,7 +1,8 @@
-import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:oxoo/server/repository.dart';
+import 'package:oxoo/utils/fab/action_button.dart';
+import 'package:oxoo/utils/fab/expand_fab.dart';
 import 'package:oxoo/widgets/home_screen/country_item.dart';
 import 'package:oxoo/widgets/home_screen/popular_star_item.dart';
 import 'package:provider/provider.dart';
@@ -50,47 +51,66 @@ class _HomeScreenState extends State<HomeScreen> {
     AppConfig? appConfig = configService.appConfig();
 
     return Scaffold(
-      floatingActionButton: FabCircularMenu(
+      // floatingActionButton: FabCircularMenu(
+      //   children: [
+      //     Spacer(flex: 2),
+      //     GestureDetector(
+      //         onTap: () {
+      //           _launchURL('https://m.me/idanceeee');
+      //         },
+      //         child: Container(
+      //           height: 60,
+      //           width: 60,
+      //           padding: EdgeInsets.all(5),
+      //           decoration: BoxDecoration(
+      //               borderRadius: BorderRadius.all(Radius.circular(15)),
+      //               color: Colors.white),
+      //           child: Image.asset(
+      //             "assets/images/messenger.png",
+      //             fit: BoxFit.fill,
+      //           ),
+      //         )),
+      //     Spacer(flex: 1),
+      //     GestureDetector(
+      //         onTap: () {
+      //           _launchURL("https://zalo.me/g/gxdkue195");
+      //         },
+      //         child: Container(
+      //           height: 60,
+      //           width: 60,
+      //           decoration: BoxDecoration(
+      //               borderRadius: BorderRadius.all(Radius.circular(15)),
+      //               color: Colors.white),
+      //           child: Image.asset(
+      //             "assets/images/zalo_icon.png",
+      //             fit: BoxFit.fill,
+      //           ),
+      //         )),
+      //   ],
+      //   fabSize: 60,
+      //   fabOpenIcon: Icon(Icons.support_agent_rounded),
+      //   fabOpenColor: Colors.red,
+      //   ringColor: Colors.transparent,
+      //   fabColor: CustomTheme.gradient2.colors[1],
+      // ),
+      floatingActionButton: ExpandableFab(
+        distance: 112.0,
         children: [
-          Spacer(flex: 2),
-          GestureDetector(
-              onTap: () {
-                _launchURL('https://m.me/idanceeee');
-              },
-              child: Container(
-                height: 60,
-                width: 60,
-                padding: EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(15)),
-                    color: Colors.white),
-                child: Image.asset(
-                  "assets/images/messenger.png",
-                  fit: BoxFit.fill,
-                ),
-              )),
-          Spacer(flex: 1),
-          GestureDetector(
-              onTap: () {
-                _launchURL("https://zalo.me/g/gxdkue195");
-              },
-              child: Container(
-                height: 60,
-                width: 60,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(15)),
-                    color: Colors.white),
-                child: Image.asset(
-                  "assets/images/zalo_icon.png",
-                  fit: BoxFit.fill,
-                ),
-              )),
+          ActionButton(
+            onPressed: () => _launchURL('https://m.me/idanceeee'),
+            icon: Image.asset(
+              "assets/images/messenger.png",
+              fit: BoxFit.fill,
+            ),
+          ),
+          ActionButton(
+            onPressed: () => _launchURL("https://zalo.me/g/gxdkue195"),
+            icon: Image.asset(
+              "assets/images/zalo_icon.png",
+              fit: BoxFit.fill,
+            ),
+          ),
         ],
-        fabSize: 60,
-        fabOpenIcon: Icon(Icons.support_agent_rounded),
-        fabOpenColor: Colors.red,
-        ringColor: Colors.transparent,
-        fabColor: CustomTheme.gradient2.colors[1],
       ),
       backgroundColor:
           isDark! ? CustomTheme.primaryColorDark : Colors.transparent,
@@ -147,7 +167,10 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Container(
               margin: EdgeInsets.only(top: 5, bottom: 5),
               child: HomeScreenCountryList(
-                  countryList: homeContent.allCountry, isDark: isDark!, listGenres: homeContent.allGenre,),
+                countryList: homeContent.allCountry,
+                isDark: isDark!,
+                listGenres: homeContent.allGenre,
+              ),
             ),
           ),
 

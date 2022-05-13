@@ -22,7 +22,6 @@ class ChoosePaymentScreen extends StatefulWidget {
 
 class ChoosePaymentScreenState extends State<StatefulWidget> {
   // ignore: non_constant_identifier_names
-  late String _paymentStatus;
   final int index;
   late String title;
   late String comboLearn;
@@ -63,7 +62,6 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
   @override
   void initState() {
     super.initState();
-    _paymentStatus = "";
     initPlatformState();
     initPaymentValue();
   }
@@ -79,7 +77,12 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.red,
-          title: Text(title),
+          title: Text(
+            title,
+            style: TextStyle(
+              fontFamily: 'Montserrat',
+            ),
+          ),
           leading: IconButton(
               onPressed: () {
                 Navigator.of(context).pop();
@@ -96,6 +99,7 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                 Divider(),
                 Text("Chi tiết giao dịch",
                     style: TextStyle(
+                        fontFamily: 'Montserrat',
                         color: Colors.red,
                         fontSize: 20,
                         fontWeight: FontWeight.bold)),
@@ -113,6 +117,7 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                             child: Text(
                               "Nhà cung cấp",
                               style: TextStyle(
+                                  fontFamily: 'Montserrat',
                                   color: Colors.red,
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold),
@@ -122,6 +127,7 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                               child: Text(
                             "CNA GROUP",
                             style: TextStyle(
+                                fontFamily: 'Montserrat',
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 14),
@@ -134,6 +140,7 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                             child: Text(
                           "Liên hệ",
                           style: TextStyle(
+                              fontFamily: 'Montserrat',
                               color: Colors.red,
                               fontSize: 14,
                               fontWeight: FontWeight.bold),
@@ -142,6 +149,7 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                             child: Text(
                           "0888.430.620",
                           style: TextStyle(
+                              fontFamily: 'Montserrat',
                               color: Colors.black,
                               fontSize: 14,
                               fontWeight: FontWeight.bold),
@@ -155,6 +163,7 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                               child: Text(
                             "Dịch vụ",
                             style: TextStyle(
+                                fontFamily: 'Montserrat',
                                 color: Colors.red,
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold),
@@ -163,6 +172,7 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                               child: Text(
                             comboLearn,
                             style: TextStyle(
+                                fontFamily: 'Montserrat',
                                 color: Colors.black,
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold),
@@ -175,6 +185,7 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                             child: Text(
                           "Số tiền",
                           style: TextStyle(
+                              fontFamily: 'Montserrat',
                               color: Colors.red,
                               fontSize: 14,
                               fontWeight: FontWeight.bold),
@@ -183,6 +194,7 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                             child: Text(
                           amount,
                           style: TextStyle(
+                              fontFamily: 'Montserrat',
                               color: Colors.black,
                               fontSize: 14,
                               fontWeight: FontWeight.bold),
@@ -199,6 +211,7 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                               child: Text(
                             "Thông tin khách hàng",
                             style: TextStyle(
+                                fontFamily: 'Montserrat',
                                 color: Colors.red,
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold),
@@ -222,6 +235,7 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                               labelText: 'Nhập tên của bạn',
                             ),
                             style: TextStyle(
+                                fontFamily: 'Montserrat',
                                 color: Colors.red,
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold),
@@ -245,6 +259,7 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                               labelText: 'Nhập SĐT liên hệ của bạn',
                             ),
                             style: TextStyle(
+                                fontFamily: 'Montserrat',
                                 color: Colors.red,
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold),
@@ -260,6 +275,9 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                         child: ElevatedButton(
                           child: Text(
                             'Thanh toán bằng Ví MoMo',
+                            style: TextStyle(
+                              fontFamily: 'Montserrat',
+                            ),
                           ),
                           onPressed: () async {
                             if (nameController.text.isEmpty |
@@ -338,7 +356,9 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                       SizedBox(
                         height: 15,
                       ),
-                      Text("Hoặc", style: TextStyle(color: Colors.grey)),
+                      Text("Hoặc",
+                          style: TextStyle(
+                              fontFamily: 'Montserrat', color: Colors.grey)),
                       SizedBox(
                         height: 15,
                       ),
@@ -348,6 +368,9 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                         child: ElevatedButton(
                           child: Text(
                             'Chuyển Khoản Ngân Hàng',
+                            style: TextStyle(
+                              fontFamily: 'Montserrat',
+                            ),
                           ),
                           onPressed: () async {
                             //todo
@@ -388,6 +411,7 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                         child: Text(
                           "Chú ý:",
                           style: TextStyle(
+                              fontFamily: 'Montserrat',
                               fontWeight: FontWeight.bold, fontSize: 16),
                           textAlign: TextAlign.left,
                         ),
@@ -399,6 +423,7 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                       Text(
                         "Tài khoản của bạn sẽ được kích hoạt trong tối đa 15 phút đối với hình thức thành toán Momo và chuyển khoản nhanh 24/7\nTài khoản của bạn sẽ được kích hoạt trong tối đa 1-3 ngày đối với hình thức chuyển khoản thông thường.\nHotline: 0888.430.620",
                         style: TextStyle(
+                          fontFamily: 'Montserrat',
                           fontWeight: FontWeight.bold,
                         ),
                         textAlign: TextAlign.center,
@@ -416,9 +441,7 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
     );
   }
 
-  void _setState() {
-    _paymentStatus = 'ĐÃ THANH TOÁN';
-  }
+  void _setState() {}
 
   void _handlePaymentSuccess(PaymentMomoResponse response) {
     setState(() {

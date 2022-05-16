@@ -72,7 +72,7 @@ dependencies:
   firebase_in_app_messaging: ^0.6.0+7
   firebase_messaging: ^11.2.6
   fab_circular_menu: ^1.0.2
-  app_links: ^3.0.2
+  app_links: ^3.2.0
   scoped_model: ^2.0.0-nullsafety.0
 
 dev_dependencies:

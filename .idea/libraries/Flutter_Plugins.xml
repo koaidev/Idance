@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/share-2.0.4" />
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-2.1.5" />
+      <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/app_links_macos-1.0.0" />
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth-3.3.14" />
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher-6.0.20" />
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_ios-2.1.0" />
@@ -20,6 +21,8 @@
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker-0.8.5" />
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth_web-3.3.12" />
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_messaging-11.2.13" />
+      <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/app_links_windows-1.0.0" />
+      <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/app_links-3.2.0" />
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/video_player_android-2.3.2" />
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_mdns_plugin-0.0.3" />
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock_macos-0.4.0" />
@@ -34,8 +37,8 @@
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_inappwebview-5.3.2" />
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/app_review-2.1.1+1" />
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock-0.5.6" />
-      <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_downloader-1.7.3" />
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/sign_in_with_apple_web-1.0.1" />
+      <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_downloader-1.7.4" />
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/package_info-2.0.2" />
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/sign_in_with_apple-3.3.0" />
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_facebook_auth_web-3.1.0" />
@@ -60,9 +63,6 @@
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_facebook_auth-4.2.1" />
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in-5.3.0" />
       <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_android-2.0.11" />
-      <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/app_links_macos-1.0.0" />
-      <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/app_links_windows-1.0.0" />
-      <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/app_links-3.2.0" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

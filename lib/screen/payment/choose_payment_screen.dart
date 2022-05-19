@@ -336,6 +336,7 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                                       partnerCode: partnerCode,
                                       partnerName: partnerName,
                                       amount: amountNumber,
+                                      // amount: 10000,
                                       lang: lang,
                                       requestType: requestType,
                                       redirectUrl: redirectUrl,

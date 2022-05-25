@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:oxoo/bloc/bloc.dart';
 import 'package:oxoo/models/payment_object.dart';
 import 'package:oxoo/network/api_configuration.dart';
@@ -43,9 +44,19 @@ class _MyAppState extends State<MyApp> {
   final _navigatorKey = GlobalKey<NavigatorState>();
   late AppLinks _appLinks;
   StreamSubscription<Uri>? _linkSubscription;
+  late StreamSubscription<List<PurchaseDetails>> _subscription;
 
   @override
   void initState() {
+    final Stream purchaseUpdated =
+        InAppPurchase.instance.purchaseStream;
+    // _subscription = purchaseUpdated.listen((purchaseDetailsList) {
+    //   _listenToPurchaseUpdated(purchaseDetailsList);
+    // }, onDone: () {
+    //   _subscription.cancel();
+    // }, onError: (error) {
+    //   // handle error here.
+    // });
     super.initState();
     isDark = appModeBox.get('isDark');
     if (isDark == null) {
@@ -53,11 +64,35 @@ class _MyAppState extends State<MyApp> {
     }
     initDeepLinks();
   }
-
+  // void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) {
+  //   purchaseDetailsList.forEach((PurchaseDetails purchaseDetails) async {
+  //     if (purchaseDetails.status == PurchaseStatus.pending) {
+  //       //todo
+  //       // _showPendingUI();
+  //     } else {
+  //       if (purchaseDetails.status == PurchaseStatus.error) {
+  //         //todo
+  //         // _handleError(purchaseDetails.error!);
+  //       } else if (purchaseDetails.status == PurchaseStatus.purchased ||
+  //           purchaseDetails.status == PurchaseStatus.restored) {
+  //         bool valid = await _verifyPurchase(purchaseDetails);
+  //         if (valid) {
+  //           _deliverProduct(purchaseDetails);
+  //         } else {
+  //           _handleInvalidPurchase(purchaseDetails);
+  //         }
+  //       }
+  //       if (purchaseDetails.pendingCompletePurchase) {
+  //         await InAppPurchase.instance
+  //             .completePurchase(purchaseDetails);
+  //       }
+  //     }
+  //   });
+  // }
   @override
   void dispose() {
     _linkSubscription?.cancel();
-
+    _subscription.cancel();
     super.dispose();
   }
 

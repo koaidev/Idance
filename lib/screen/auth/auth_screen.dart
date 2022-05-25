@@ -309,26 +309,6 @@ class _AuthScreenState extends State<AuthScreen> {
     );
   }
 
-  // Future<UserCredential> _signInWithGoogle() async {
-  //   final GoogleSignInAccount googleUser =
-  //       await (_googleSignIn.signIn() as FutureOr<GoogleSignInAccount>);
-  //   final GoogleSignInAuthentication googleAuth =
-  //       await googleUser.authentication;
-  //   final AuthCredential credential = GoogleAuthProvider.credential(
-  //     accessToken: googleAuth.accessToken,
-  //     idToken: googleAuth.idToken,
-  //   );
-  //   final User user = (await _auth.signInWithCredential(credential)).user!;
-  //   if (user.email != null && user.email != "") {
-  //     assert(user.email != null);
-  //   }
-  //   assert(user.displayName != null);
-  //   assert(!user.isAnonymous);
-  //
-  //   final User currentUser = _auth.currentUser!;
-  //   assert(user.uid == currentUser.uid);
-  //   return user;
-  // }
   Future<User?> signInWithGoogle() async {
     // Trigger the authentication flow
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();

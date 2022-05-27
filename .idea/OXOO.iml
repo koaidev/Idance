@@ -186,6 +186,12 @@
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/google_sign_in_ios/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/google_sign_in_ios/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/google_sign_in_ios/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/app_links/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/app_links/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/app_links/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/app_links/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/app_links/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/app_links/example/.dart_tool" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

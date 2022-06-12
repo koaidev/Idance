@@ -21,19 +21,31 @@
     },
     {
       "name": "app_links",
-      "rootUri": "file:///C:/Users/Nguyen%20Khanh/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/app_links-3.0.2",
+      "rootUri": "file:///C:/Users/Nguyen%20Khanh/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/app_links-3.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "app_links_macos",
+      "rootUri": "file:///C:/Users/Nguyen%20Khanh/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/app_links_macos-1.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "app_links_platform_interface",
-      "rootUri": "file:///C:/Users/Nguyen%20Khanh/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/app_links_platform_interface-1.0.0",
+      "rootUri": "file:///C:/Users/Nguyen%20Khanh/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/app_links_platform_interface-1.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "app_links_web",
       "rootUri": "file:///C:/Users/Nguyen%20Khanh/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/app_links_web-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "app_links_windows",
+      "rootUri": "file:///C:/Users/Nguyen%20Khanh/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/app_links_windows-1.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -357,7 +369,7 @@
     },
     {
       "name": "flutter_downloader",
-      "rootUri": "file:///C:/Users/Nguyen%20Khanh/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/flutter_downloader-1.7.3",
+      "rootUri": "file:///C:/Users/Nguyen%20Khanh/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/flutter_downloader-1.7.4",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -1214,7 +1226,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-05-22T10:17:17.368101Z",
+  "generated": "2022-06-10T18:04:27.250684Z",
   "generator": "pub",
   "generatorVersion": "2.16.2"
 }

@@ -40,12 +40,15 @@ class MovieDetailsVideoPlayerWidget extends StatefulWidget {
 
 class _PlayerState extends State<MovieDetailsVideoPlayerWidget> {
   late FlickManager flickManager;
+  late VideoPlayerController videoPlayerController;
 
   @override
   void initState() {
     super.initState();
+    videoPlayerController = VideoPlayerController.network(widget.videoUrl!);
+    videoPlayerController.initialize().then((value) => setState((){}));
     flickManager = FlickManager(
-      videoPlayerController: VideoPlayerController.network(widget.videoUrl!),
+      videoPlayerController: videoPlayerController,
       autoPlay: true,
       autoInitialize: true,
     );
@@ -56,34 +59,41 @@ class _PlayerState extends State<MovieDetailsVideoPlayerWidget> {
     flickManager.dispose();
     super.dispose();
   }
+
   Future<bool> _onWillPop() async {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual);
-    SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.portraitUp]);
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     Navigator.pop(context);
     return true;
   }
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(child: Container(
-      // Use the VideoPlayer widget to display the video.
-      child: FlickVideoPlayer(
-        flickManager: flickManager,
-        preferredDeviceOrientationFullscreen: [
-          DeviceOrientation.landscapeLeft,
-          DeviceOrientation.landscapeRight
-        ],
-        preferredDeviceOrientation: [
-          DeviceOrientation.landscapeLeft,
-          DeviceOrientation.landscapeRight
-        ],
-        systemUIOverlay: [],
-        flickVideoWithControls: FlickVideoWithControls(
-          controls: LandscapePlayerControls(),
-        ),
-      ),
-    ), onWillPop: _onWillPop);
+    return  WillPopScope(
+          onWillPop: _onWillPop,
+          child: Container(
+            // Use the VideoPlayer widget to display the video.
+            child:
+            AspectRatio(
+              aspectRatio: 16.0/9.0,
+              child: FlickVideoPlayer(
+                flickManager: flickManager,
+                preferredDeviceOrientationFullscreen: [
+                  DeviceOrientation.landscapeLeft,
+                  DeviceOrientation.landscapeRight
+                ],
+                preferredDeviceOrientation: [
+                  DeviceOrientation.landscapeLeft,
+                  DeviceOrientation.landscapeRight
+                ],
+                systemUIOverlay: [],
+                flickVideoWithControls: FlickVideoWithControls(
+                  controls: LandscapePlayerControls(),
+                  videoFit: BoxFit.fitHeight,
+                ),
+              ),
+          ),)
+    );
   }
 }
 
@@ -100,7 +110,6 @@ class LandscapePlayerControls extends StatefulWidget {
 }
 
 class _LandscapePlayerControlsState extends State<LandscapePlayerControls> {
-
   @override
   Widget build(BuildContext contextMain) {
     FlickControlManager controlManager =
@@ -223,7 +232,6 @@ class _LandscapePlayerControlsState extends State<LandscapePlayerControls> {
                               backgroundColor: Colors.red,
                               textColor: Colors.white,
                               fontSize: 16.0);
-
                         },
                       ),
                       SizedBox(

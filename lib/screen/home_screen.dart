@@ -5,6 +5,7 @@ import 'package:oxoo/utils/fab/action_button.dart';
 import 'package:oxoo/utils/fab/expand_fab.dart';
 import 'package:oxoo/widgets/home_screen/country_item.dart';
 import 'package:oxoo/widgets/home_screen/popular_star_item.dart';
+import 'package:oxoo/widgets/home_screen/tv_series_item.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -206,16 +207,16 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        // SliverToBoxAdapter(
-        //   child: Container(
-        //     margin: EdgeInsets.only(top: 2, bottom: 15),
-        //     child: HomeScreenSeriesList(
-        //       latestTvSeries: homeContent.latestTvseries,
-        //       title: AppContent.latestTvSeries,
-        //       isDark: isDark,
-        //     ),
-        //   ),
-        // ),
+        SliverToBoxAdapter(
+          child: Container(
+            margin: EdgeInsets.only(top: 2, bottom: 15),
+            child: HomeScreenSeriesList(
+              latestTvSeries: homeContent.latestTvseries,
+              title: AppContent.latestTvSeries,
+              isDark: isDark,
+            ),
+          ),
+        ),
         HomeScreenGenreMoviesList(
           genreMoviesList: homeContent.featuresGenreAndMovie,
           isDark: isDark,

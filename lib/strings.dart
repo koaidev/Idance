@@ -60,8 +60,8 @@ class AppContent {
   static final String featuredTvChannels = "Kênh đặc sắc";
   static final String featuredRadio = "Featured Radio ";
   static final String liveEvents = "Lớp học trực tiếp";
-  static final String latestMovies = "Lớp học miễn phí";
-  static final String latestTvSeries = "Lớp học yêu thích";
+  static final String latestMovies = "Bài học mới nhất";
+  static final String latestTvSeries = "Khóa học mới nhất";
   static final String movieScreen = "Bài học";
   static final String eventScreen = "Sự kiện";
   static final String favouriteScreen = "Màn yêu thích";

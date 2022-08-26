@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../models/password_reset_model.dart';
 import 'package:hive/hive.dart';
 import '../../constants.dart';
@@ -13,7 +14,9 @@ import '../utils/loadingIndicator.dart';
 
 class ResetPassword extends StatefulWidget {
   static final String route = '/ResetPassword';
+
   ResetPassword({Key? key}) : super(key: key);
+
   @override
   _ResetPasswordState createState() => new _ResetPasswordState();
 }
@@ -44,7 +47,8 @@ class _ResetPasswordState extends State<ResetPassword> {
         key: _scaffoldKey,
         appBar: AppBar(
           elevation: 1.0,
-          backgroundColor: isDark ? CustomTheme.darkGrey : CustomTheme.primaryColor,
+          backgroundColor:
+              isDark ? CustomTheme.darkGrey : CustomTheme.primaryColor,
           title: Text(AppContent.resetPassword),
         ),
         body: Container(
@@ -58,7 +62,10 @@ class _ResetPasswordState extends State<ResetPassword> {
                 children: <Widget>[
                   Container(
                     height: MediaQuery.of(context).size.height / 2.2,
-                    decoration: BoxDecoration(color: isDark ? CustomTheme.darkGrey : CustomTheme.primaryColor),
+                    decoration: BoxDecoration(
+                        color: isDark
+                            ? CustomTheme.darkGrey
+                            : CustomTheme.primaryColor),
                   ),
                   Column(
                     children: <Widget>[
@@ -69,11 +76,15 @@ class _ResetPasswordState extends State<ResetPassword> {
                       Container(
                         padding: EdgeInsets.only(top: 20.0),
                         child: Container(
-                          margin: EdgeInsets.only(bottom: 30.0, left: 10.0, right: 10.0),
+                          margin: EdgeInsets.only(
+                              bottom: 30.0, left: 10.0, right: 10.0),
                           decoration: new BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
                             boxShadow: CustomTheme.boxShadow,
-                            color: isDark ? CustomTheme.colorAccentDark : Colors.white,
+                            color: isDark
+                                ? CustomTheme.colorAccentDark
+                                : Colors.white,
                           ),
                           height: 310,
                           child: Column(
@@ -93,14 +104,23 @@ class _ResetPasswordState extends State<ResetPassword> {
                                   child: Column(
                                     children: <Widget>[
                                       EditTextUtils().getCustomEditTextField(
-                                          hintValue: AppContent.emailAddress,
-                                          keyboardType: TextInputType.emailAddress,
-                                          controller: resetPassEmailController,
-                                          style: isDark ? CustomTheme.authTitleGrey : CustomTheme.authTitle,
-                                          underLineInputBorderColor: isDark ? CustomTheme.grey_transparent2 : CustomTheme.primaryColor,
-                                          validator: (value) {
-                                            return validateEmail(value);
-                                          }),
+                                        hintValue: AppContent.emailAddress,
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter.allow(
+                                              RegExp("[a-z A-Z 0-9]"))
+                                        ],
+                                        keyboardType: TextInputType.name,
+                                        controller: resetPassEmailController,
+                                        style: isDark
+                                            ? CustomTheme.authTitleGrey
+                                            : CustomTheme.authTitle,
+                                        underLineInputBorderColor: isDark
+                                            ? CustomTheme.grey_transparent2
+                                            : CustomTheme.primaryColor,
+                                        // validator: (value) {
+                                        //   return validateEmail(value);
+                                        // }
+                                      ),
                                       SizedBox(height: 20),
                                     ],
                                   ),
@@ -113,21 +133,41 @@ class _ResetPasswordState extends State<ResetPassword> {
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                     primary: CustomTheme.darkGrey,
-                                    shape:  RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0),),),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20.0),
+                                    ),
+                                  ),
                                   onPressed: () async {
                                     if (_formKey.currentState!.validate()) {
                                       isLoading = true;
-                                      PasswordResetModel? passwordResetModel = await Repository().passwordReset(userEmail: "mirmahfuz10@gmail.com");
-                                      if (passwordResetModel != null) showShortToast(passwordResetModel.message!);
+                                      PasswordResetModel? passwordResetModel =
+                                          await Repository().passwordReset(
+                                              userEmail:
+                                                  resetPassEmailController.text
+                                                          .replaceAll(" ", "") +
+                                                      "@gmail.com"
+                                              // "mirmahfuz10@gmail.com"
+                                              );
+                                      if (passwordResetModel != null)
+                                        showShortToast(
+                                            passwordResetModel.message!,
+                                            context);
                                       isLoading = false;
                                     }
                                   },
                                   child: Padding(
-                                    padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
-                                    child: Text(AppContent.send, style: TextStyle(color: Colors.white),),),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 15.0, horizontal: 20.0),
+                                    child: Text(
+                                      AppContent.send,
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
                                 ),
                               ),
-                              SizedBox(height: 8.0,),
+                              SizedBox(
+                                height: 8.0,
+                              ),
                             ],
                           ),
                         ),

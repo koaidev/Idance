@@ -22,22 +22,12 @@ import '../../style/theme.dart';
 import '../../utils/button_widget.dart';
 import '../../utils/loadingIndicator.dart';
 import '../../viewmodel/movie_view_model.dart';
+import '../../widgets/movie_play_for_ios.dart';
 import '../../widgets/share_btn.dart';
 import '../../widgets/tv_series/cast_crew_item_card.dart';
 import '../../widgets/tv_series/episode_item_card.dart';
 import '../../widgets/tv_series/related_tvseries_card.dart';
-
-// class TvSerisDetailsScreen extends StatelessWidget {
-//
-//
-//
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     // TODO: implement build
-//     throw UnimplementedError();
-//   }
-// }
+import 'dart:io' show Platform;
 
 class TvSerisDetailsScreen extends StatelessWidget {
   final String? seriesID;
@@ -84,7 +74,7 @@ class TvSerisDetailsScreen extends StatelessWidget {
           builder: (context, state) {
             if (state is TvSerisIsLoaded) {
               if (isPaid == "1" && authUser == null) {
-                SchedulerBinding.instance!.addPostFrameCallback((_) {
+                SchedulerBinding.instance.addPostFrameCallback((_) {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
@@ -99,8 +89,7 @@ class TvSerisDetailsScreen extends StatelessWidget {
                 print("isPaid:${tvSeriesDetailsModel!.isPaid}");
                 if (!isUserValidSubscriber &&
                     tvSeriesDetailsModel!.isPaid == "1") {
-                  return
-                    Scaffold(
+                  return Scaffold(
                     backgroundColor:
                         isDark! ? CustomTheme.black_window : Colors.white,
                     body: subscriptionInfoDialog(
@@ -116,8 +105,6 @@ class TvSerisDetailsScreen extends StatelessWidget {
                       if (tvSeriesDetailsModel!.season!.length > 0) {
                         selectedSeason =
                             tvSeriesDetailsModel!.season!.elementAt(0);
-
-
                       }
                       return Stack(
                         children: [
@@ -227,387 +214,398 @@ class TvSerisDetailsScreen extends StatelessWidget {
         return ScopedModel<MovieViewModel>(
           model: MovieViewModel(),
           child: ScopedModelDescendant<MovieViewModel>(
-              builder: (context, child, model) =>
-            Scaffold(
-                body: Container(
-                  color: isDark!
-                      ? CustomTheme.primaryColorDark
-                      : CustomTheme.whiteColor,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        if (!isSeriesPlaying)
-                          Stack(
-                            alignment: Alignment.topCenter,
-                            children: [
+              builder: (context, child, model) => Scaffold(
+                    body: Container(
+                      color: isDark!
+                          ? CustomTheme.primaryColorDark
+                          : CustomTheme.whiteColor,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            if (!isSeriesPlaying)
                               Stack(
-                                alignment: AlignmentDirectional.bottomStart,
+                                alignment: Alignment.topCenter,
                                 children: [
                                   Stack(
+                                    alignment: AlignmentDirectional.bottomStart,
                                     children: [
-                                      Container(
-                                        width: MediaQuery.of(context)
-                                            .size
-                                            .width,
-                                        height: 330.0,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(2.0)),
-                                          image: DecorationImage(
-                                            image: NetworkImage(
-                                                tvSeriesDetailsModel!
-                                                    .posterUrl!),
-                                            fit: BoxFit.fill,
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 330.0,
-                                        decoration: BoxDecoration(
-                                          gradient: LinearGradient(
-                                            begin: Alignment.topCenter,
-                                            end: Alignment.bottomCenter,
-                                            colors: [
-                                              Colors.black87,
-                                              Colors.black87,
-                                              isDark!
-                                                  ? Colors.black
-                                                  : Colors.white,
-                                            ],
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Container(
-                                        margin: new EdgeInsets.symmetric(
-                                            horizontal: 10.0,
-                                            vertical: 10.0),
-                                        width: 140,
-                                        height: 200.0,
-                                        decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(6.0)),
-                                            image: DecorationImage(
+                                      Stack(
+                                        children: [
+                                          Container(
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            height: 330.0,
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(2.0)),
+                                              image: DecorationImage(
                                                 image: NetworkImage(
                                                     tvSeriesDetailsModel!
-                                                        .thumbnailUrl!),
-                                                fit: BoxFit.fill)),
+                                                        .posterUrl!),
+                                                fit: BoxFit.fill,
+                                              ),
+                                            ),
+                                          ),
+                                          Container(
+                                            height: 330.0,
+                                            decoration: BoxDecoration(
+                                              gradient: LinearGradient(
+                                                begin: Alignment.topCenter,
+                                                end: Alignment.bottomCenter,
+                                                colors: [
+                                                  Colors.black87,
+                                                  Colors.black87,
+                                                  isDark!
+                                                      ? Colors.black
+                                                      : Colors.white,
+                                                ],
+                                              ),
+                                            ),
+                                          )
+                                        ],
                                       ),
-                                      Container(
-                                        height: 200.0,
-                                        alignment: Alignment.bottomLeft,
-                                        margin:
-                                        new EdgeInsets.only(left: 10),
-                                        width: 150.0,
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              tvSeriesDetailsModel!.title!,
-                                              style: TextStyle(
-                                                  fontSize: 20,
-                                                  color: Colors.white,
-                                                  fontWeight:
-                                                  FontWeight.bold),
+                                      Row(
+                                        children: [
+                                          Container(
+                                            margin: new EdgeInsets.symmetric(
+                                                horizontal: 10.0,
+                                                vertical: 10.0),
+                                            width: 140,
+                                            height: 200.0,
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(6.0)),
+                                                image: DecorationImage(
+                                                    image: NetworkImage(
+                                                        tvSeriesDetailsModel!
+                                                            .thumbnailUrl!),
+                                                    fit: BoxFit.fill)),
+                                          ),
+                                          Container(
+                                            height: 200.0,
+                                            alignment: Alignment.bottomLeft,
+                                            margin:
+                                                new EdgeInsets.only(left: 10),
+                                            width: 150.0,
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  tvSeriesDetailsModel!.title!,
+                                                  style: TextStyle(
+                                                      fontSize: 20,
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                HelpMe().space(8.0),
+                                                Text(
+                                                  tvSeriesDetailsModel!.slug!,
+                                                  style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ],
                                             ),
-                                            HelpMe().space(8.0),
-                                            Text(
-                                              tvSeriesDetailsModel!.slug!,
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: Colors.white,
-                                                  fontWeight:
-                                                  FontWeight.bold),
-                                            ),
-                                          ],
-                                        ),
-                                      )
+                                          )
+                                        ],
+                                      ),
                                     ],
                                   ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 50.0, horizontal: 10.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        InkWell(
+                                            onTap: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: Icon(
+                                              Icons.arrow_back_ios,
+                                              color: Colors.white,
+                                            )),
+                                        ShareApp(
+                                          title: tvSeriesDetailsModel!.title,
+                                          color: Colors.white,
+                                        )
+                                      ],
+                                    ),
+                                  )
                                 ],
                               ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 50.0, horizontal: 10.0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    InkWell(
-                                        onTap: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Icon(
-                                          Icons.arrow_back_ios,
-                                          color: Colors.white,
-                                        )),
-                                    ShareApp(
-                                      title: tvSeriesDetailsModel!.title,
-                                      color: Colors.white,
-                                    )
-                                  ],
+                            HelpMe().space(20.0),
+                            if (selectedSeason != null)
+                              Container(
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                width: MediaQuery.of(context).size.width,
+                                height: 45.0,
+                                decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(4.0)),
+                                  border: Border.all(color: Colors.grey),
                                 ),
-                              )
-                            ],
-                          ),
-                        HelpMe().space(20.0),
-                        if (selectedSeason != null)
-                          Container(
-                            margin:
-                            const EdgeInsets.symmetric(horizontal: 8.0),
-                            width: MediaQuery.of(context).size.width,
-                            height: 45.0,
-                            decoration: BoxDecoration(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(4.0)),
-                              border: Border.all(color: Colors.grey),
-                            ),
-                            child: Center(
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 8.0),
-                                child: new DropdownButton<Season>(
-                                  value: selectedSeason,
-                                  hint: Text(
-                                    selectedSeasonName,
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                  isExpanded: true,
-                                  underline: Container(
-                                    width: 0.0,
-                                    height: 0.0,
-                                  ),
-                                  onChanged: (newValue) {
-                                    selectedSeason = newValue;
-                                    selectedSeasonName = newValue!.seasonsName!;
-
-                                    model.setCurrentSeason(newValue);
-                                    model.setCurrentSeasonName(
-                                        newValue.seasonsName);
-                                  },
-                                  items: tvSeriesDetailsModel!.season!
-                                      .map((season) {
-                                    return new DropdownMenuItem<Season>(
-                                      value: season,
-                                      child: new Text(
-                                        "Chế độ: " + season.seasonsName!,
-                                        style: new TextStyle(
-                                            color: Colors.grey),
+                                child: Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0),
+                                    child: new DropdownButton<Season>(
+                                      value: selectedSeason,
+                                      hint: Text(
+                                        selectedSeasonName,
+                                        style: TextStyle(color: Colors.white),
                                       ),
-                                    );
-                                  }).toList(),
+                                      isExpanded: true,
+                                      underline: Container(
+                                        width: 0.0,
+                                        height: 0.0,
+                                      ),
+                                      onChanged: (newValue) {
+                                        selectedSeason = newValue;
+                                        selectedSeasonName =
+                                            newValue!.seasonsName!;
+
+                                        model.setCurrentSeason(newValue);
+                                        model.setCurrentSeasonName(
+                                            newValue.seasonsName);
+                                      },
+                                      items: tvSeriesDetailsModel!.season!
+                                          .map((season) {
+                                        return new DropdownMenuItem<Season>(
+                                          value: season,
+                                          child: new Text(
+                                            "Chế độ: " + season.seasonsName!,
+                                            style: new TextStyle(
+                                                color: Colors.grey),
+                                          ),
+                                        );
+                                      }).toList(),
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ),
-                        if (selectedSeason != null)
-                          Container(
-                            margin:
-                            const EdgeInsets.symmetric(horizontal: 8.0),
-                            height: 170.0,
-                            child: ListView.builder(
-                                itemCount: selectedSeason!.episodes!.length,
-                                scrollDirection: Axis.horizontal,
-                                itemBuilder:
-                                    (BuildContext context, int index) {
-                                  model.setCurrentSeason(selectedSeason);
-                                  return InkWell(
-                                    onTap: () {
-                                      print("tapped_on_episodeItem_card");
-                                      // isSeriesPlaying = true;
-                                      // setState(() {});
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              MovieDetailsVideoPlayerWidget(
-                                                videoUrl: model.currentSeason
-                                                    ?.episodes![index].fileUrl,
+                            if (selectedSeason != null)
+                              Container(
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                height: 170.0,
+                                child: ListView.builder(
+                                    itemCount: selectedSeason!.episodes!.length,
+                                    scrollDirection: Axis.horizontal,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      model.setCurrentSeason(selectedSeason);
+                                      return InkWell(
+                                        onTap: () {
+                                          print("tapped_on_episodeItem_card");
+                                          // isSeriesPlaying = true;
+                                          // setState(() {});
+                                          if(Platform.isIOS)
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    LandscapePlayer(
+                                                      videoUrl: model.currentSeason
+                                                          ?.episodes![index].fileUrl,
+                                                    ),
                                               ),
+                                            );
+                                          if(Platform.isAndroid)
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    MovieDetailsVideoPlayerWidget(
+                                                      videoUrl: model.currentSeason
+                                                          ?.episodes![index].fileUrl,
+                                                    ),
+                                              ),
+                                            );
+                                        },
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: EpisodeItemCard(
+                                            episodeName: model
+                                                .currentSeason?.episodes!
+                                                .elementAt(index)
+                                                .episodesName,
+                                            imagePath: model
+                                                .currentSeason?.episodes!
+                                                .elementAt(index)
+                                                .imageUrl,
+                                            isDark: isDark,
+                                          ),
                                         ),
                                       );
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: EpisodeItemCard(
-                                        episodeName: model
-                                            .currentSeason?.episodes!
-                                            .elementAt(index)
-                                            .episodesName,
-                                        imagePath: model
-                                            .currentSeason?.episodes!
-                                            .elementAt(index)
-                                            .imageUrl,
-                                        isDark: isDark,
-                                      ),
-                                    ),
-                                  );
-                                }),
-                          ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(tvSeriesDetailsModel!.description!,
-                              style: isDark!
-                                  ? CustomTheme.bodyText2White
-                                  : CustomTheme.bodyText2),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            AppContent.director,
-                            style: isDark!
-                                ? CustomTheme.bodyText1BoldWhite
-                                : CustomTheme.bodyText1Bold,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "${AppContent.releaseOn} ${tvSeriesDetailsModel?.release}",
-                            style: isDark!
-                                ? CustomTheme.bodyText1BoldWhite
-                                : CustomTheme.bodyText1Bold,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            AppContent.genre,
-                            style: isDark!
-                                ? CustomTheme.bodyText1BoldWhite
-                                : CustomTheme.bodyText1Bold,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            AppContent.castCrew,
-                            style: isDark!
-                                ? CustomTheme.bodyText1BoldWhite
-                                : CustomTheme.bodyText1Bold,
-                          ),
-                        ),
-                        Container(
-                          margin:
-                          const EdgeInsets.symmetric(horizontal: 4.0),
-                          height: 120.0,
-                          child: ListView.builder(
-                              itemCount:
-                              tvSeriesDetailsModel!.castAndCrew!.length,
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder:
-                                  (BuildContext context, int index) {
-                                return CastCrewCard(
-                                  castAndCrew: tvSeriesDetailsModel!
-                                      .castAndCrew!
-                                      .elementAt(index),
-                                  isDark: isDark,
-                                );
-                              }),
-                        ),
-                        Divider(),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            AppContent.youMayAlsoLike,
-                            style: isDark!
-                                ? CustomTheme.bodyText1BoldWhite
-                                : CustomTheme.bodyText1Bold,
-                          ),
-                        ),
-                        if (tvSeriesDetailsModel!.relatedTvseries != null)
-                          Container(
-                            margin:
-                            const EdgeInsets.symmetric(horizontal: 8.0),
-                            height: 200.0,
-                            child: ListView.builder(
-                                itemCount: tvSeriesDetailsModel!
-                                    .relatedTvseries!.length,
-                                scrollDirection: Axis.horizontal,
-                                itemBuilder:
-                                    (BuildContext context, int index) {
-                                  return Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: RelatedTvSerisCard(
-                                      relatedTvseries: tvSeriesDetailsModel!
-                                          .relatedTvseries!
+                                    }),
+                              ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(tvSeriesDetailsModel!.description!,
+                                  style: isDark!
+                                      ? CustomTheme.bodyText2White
+                                      : CustomTheme.bodyText2),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                AppContent.director,
+                                style: isDark!
+                                    ? CustomTheme.bodyText1BoldWhite
+                                    : CustomTheme.bodyText1Bold,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                "${AppContent.releaseOn} ${tvSeriesDetailsModel?.release}",
+                                style: isDark!
+                                    ? CustomTheme.bodyText1BoldWhite
+                                    : CustomTheme.bodyText1Bold,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                AppContent.genre,
+                                style: isDark!
+                                    ? CustomTheme.bodyText1BoldWhite
+                                    : CustomTheme.bodyText1Bold,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                AppContent.castCrew,
+                                style: isDark!
+                                    ? CustomTheme.bodyText1BoldWhite
+                                    : CustomTheme.bodyText1Bold,
+                              ),
+                            ),
+                            Container(
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 4.0),
+                              height: 120.0,
+                              child: ListView.builder(
+                                  itemCount:
+                                      tvSeriesDetailsModel!.castAndCrew!.length,
+                                  scrollDirection: Axis.horizontal,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return CastCrewCard(
+                                      castAndCrew: tvSeriesDetailsModel!
+                                          .castAndCrew!
                                           .elementAt(index),
                                       isDark: isDark,
-                                    ),
-                                  );
-                                }),
-                          ),
-                        // Padding(
-                        //   padding: const EdgeInsets.all(8.0),
-                        //   child: Text(
-                        //     AppContent.comments,
-                        //     style: isDark!
-                        //         ? CustomTheme.bodyText1BoldWhite
-                        //         : CustomTheme.bodyText1Bold,
-                        //   ),
-                        // ),
-                        // Padding(
-                        //   padding: EdgeInsets.all(8.0),
-                        //   child: TextField(
-                        //     style: isDark!
-                        //         ? CustomTheme.bodyText2White
-                        //         : CustomTheme.bodyText2,
-                        //     controller: editingController,
-                        //     decoration: InputDecoration(
-                        //       hintText: AppContent.yourComments,
-                        //       filled: true,
-                        //       hintStyle: CustomTheme.bodyTextgray2,
-                        //       fillColor:
-                        //           isDark! ? Colors.black54 : Colors.grey.shade200,
-                        //       focusedBorder: OutlineInputBorder(
-                        //         borderSide: BorderSide(
-                        //             color: Colors.grey.shade200, width: 0.0),
-                        //       ),
-                        //       border: OutlineInputBorder(
-                        //         borderSide: BorderSide(
-                        //             color: Colors.grey.shade200, width: 0.0),
-                        //       ),
-                        //       enabledBorder: OutlineInputBorder(
-                        //         borderSide: BorderSide(
-                        //             color: Colors.grey.shade200, width: 0.0),
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
-                        // Padding(
-                        //   padding: const EdgeInsets.all(8.0),
-                        //   child: Align(
-                        //     alignment: Alignment.bottomRight,
-                        //     child: ElevatedButton(
-                        //       style: ElevatedButton.styleFrom(
-                        //         primary: isDark!
-                        //             ? CustomTheme.grey_transparent2
-                        //             : Colors.grey.shade300,
-                        //       ),
-                        //       onPressed: () {
-                        //         print("Add Comments Pressed ");
-                        //       },
-                        //       child: Text(
-                        //         AppContent.addComments,
-                        //         style: TextStyle(color: CustomTheme.primaryColor),
-                        //       ),
-                        //     ),
-                        //   ),
-                        // )
-                      ],
+                                    );
+                                  }),
+                            ),
+                            Divider(),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                AppContent.youMayAlsoLike,
+                                style: isDark!
+                                    ? CustomTheme.bodyText1BoldWhite
+                                    : CustomTheme.bodyText1Bold,
+                              ),
+                            ),
+                            if (tvSeriesDetailsModel!.relatedTvseries != null)
+                              Container(
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                height: 200.0,
+                                child: ListView.builder(
+                                    itemCount: tvSeriesDetailsModel!
+                                        .relatedTvseries!.length,
+                                    scrollDirection: Axis.horizontal,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: RelatedTvSerisCard(
+                                          relatedTvseries: tvSeriesDetailsModel!
+                                              .relatedTvseries!
+                                              .elementAt(index),
+                                          isDark: isDark,
+                                        ),
+                                      );
+                                    }),
+                              ),
+                            // Padding(
+                            //   padding: const EdgeInsets.all(8.0),
+                            //   child: Text(
+                            //     AppContent.comments,
+                            //     style: isDark!
+                            //         ? CustomTheme.bodyText1BoldWhite
+                            //         : CustomTheme.bodyText1Bold,
+                            //   ),
+                            // ),
+                            // Padding(
+                            //   padding: EdgeInsets.all(8.0),
+                            //   child: TextField(
+                            //     style: isDark!
+                            //         ? CustomTheme.bodyText2White
+                            //         : CustomTheme.bodyText2,
+                            //     controller: editingController,
+                            //     decoration: InputDecoration(
+                            //       hintText: AppContent.yourComments,
+                            //       filled: true,
+                            //       hintStyle: CustomTheme.bodyTextgray2,
+                            //       fillColor:
+                            //           isDark! ? Colors.black54 : Colors.grey.shade200,
+                            //       focusedBorder: OutlineInputBorder(
+                            //         borderSide: BorderSide(
+                            //             color: Colors.grey.shade200, width: 0.0),
+                            //       ),
+                            //       border: OutlineInputBorder(
+                            //         borderSide: BorderSide(
+                            //             color: Colors.grey.shade200, width: 0.0),
+                            //       ),
+                            //       enabledBorder: OutlineInputBorder(
+                            //         borderSide: BorderSide(
+                            //             color: Colors.grey.shade200, width: 0.0),
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
+                            // Padding(
+                            //   padding: const EdgeInsets.all(8.0),
+                            //   child: Align(
+                            //     alignment: Alignment.bottomRight,
+                            //     child: ElevatedButton(
+                            //       style: ElevatedButton.styleFrom(
+                            //         primary: isDark!
+                            //             ? CustomTheme.grey_transparent2
+                            //             : Colors.grey.shade300,
+                            //       ),
+                            //       onPressed: () {
+                            //         print("Add Comments Pressed ");
+                            //       },
+                            //       child: Text(
+                            //         AppContent.addComments,
+                            //         style: TextStyle(color: CustomTheme.primaryColor),
+                            //       ),
+                            //     ),
+                            //   ),
+                            // )
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              )),
-
+                  )),
         );
       },
     );

@@ -26,9 +26,9 @@ class AppContent {
   static final String loginWithPhone = "Đăng nhập với số điện thoại";
   static final String loginWithFacebook = "Đăng nhập với Facebook";
   static final String loginWithGoogle = "Đăng nhập với Google";
-  static final String loginWithEmail = "Đăng nhập với Mail";
+  static final String loginWithEmail = "Đăng nhập với IDANCE";
   static final String loginWithApple = "Đăng nhập bằng Apple";
-  static final String emailAddress = "Email";
+  static final String emailAddress = "ID của bạn";
   static final String myProfile = "Thông tin của bạn";
   static final String phone = "Số điện thoại";
   static final String reasonText = "Lý do";
@@ -161,7 +161,7 @@ class AppContent {
   static final String watchPremiumVideo = "Lớp học cao cấp (Hàng tháng)";
   static final String watchAllPremiumMovies =
       "Học tất cả các bài nhảy tại IDANCE";
-  static final String email = "Email: ";
+  static final String email = "ID: ";
   static final String fetchingProducts = 'Đang tìm nạp sản phẩm ...';
   static final String downloadedFile = "Đã được tải về";
   static final String downloads = "Tải về";

@@ -95,7 +95,7 @@ class _LiveTvDetailsScreenState extends State<LiveTvDetailsScreen> {
                   liveTvDetailsModel = state.liveTvDetailsModel;
                   String? url = liveTvDetailsModel!.streamUrl;
                   if (liveTvDetailsModel!.isPaid == "1" && authUser == null) {
-                    SchedulerBinding.instance!.addPostFrameCallback((_) {
+                    SchedulerBinding.instance.addPostFrameCallback((_) {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(

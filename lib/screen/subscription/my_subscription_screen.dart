@@ -29,6 +29,7 @@ class _MySubscriptionScreenState extends State<MySubscriptionScreen> {
   int timeCanUse = 0;
   int timeExp = 0;
 
+
   @override
   initState() {
     super.initState();
@@ -43,13 +44,13 @@ class _MySubscriptionScreenState extends State<MySubscriptionScreen> {
     printLog("_MySubscriptionScreenState");
     final authService = Provider.of<AuthService>(context);
     AuthUser authUser = authService.getUser()!;
-    if (amount == 50000) {
+    if (amount == 50000 || amount == 45000) {
       timeExp = 2678400000;
       learnCombo = "Gói học 1 tháng";
-    } else if (amount == 120000) {
+    } else if (amount == 120000 || amount == 99000) {
       timeExp = 8035200000;
       learnCombo = "Gói học 3 tháng";
-    } else if (amount == 150000) {
+    } else if (amount == 150000 || amount == 149000) {
       timeExp = 16070400000;
       learnCombo = "Gói học 6 tháng";
     }
@@ -87,7 +88,7 @@ class _MySubscriptionScreenState extends State<MySubscriptionScreen> {
                       ),
                       _space(4),
                       Text(
-                        "${AppContent.email}${authUser.email}",
+                        "ID người dùng: ${authUser.email?.split("@")[0]}",
                         style: isDark
                             ? CustomTheme.bodyText3White
                             : CustomTheme.bodyText3,

@@ -1,13 +1,15 @@
 import 'dart:convert';
+import 'dart:io' show Platform;
 
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:oxoo/screen/payment/api/momo_payment_handle.dart';
 import 'package:oxoo/screen/payment/models/payment_momo_create.dart';
-import 'package:oxoo/screen/payment/models/payment_momo_response.dart';
 import 'package:oxoo/screen/payment/payment_by_card.dart';
+import 'package:toast/toast.dart';
 
 class ChoosePaymentScreen extends StatefulWidget {
   final int index;
@@ -38,32 +40,28 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
     super.dispose();
   }
 
-  void initPaymentValue() {
-    if (index == 1) {
-      comboLearn = "Gói học 1 tháng";
-      title = "THANH TOÁN GÓI HỌC 1 THÁNG";
-      amount = "50.000";
-      amountNumber = 50000;
-    } else if (index == 2) {
-      comboLearn = "Gói học 3 tháng";
-      title = "THANH TOÁN GÓI HỌC 3 THÁNG";
-      amount = "120.000";
-      amountNumber = 120000;
-    } else if (index == 3) {
-      comboLearn = "Gói học 6 tháng";
-      title = "THANH TOÁN GÓI HỌC 6 THÁNG";
-      amount = "150.000";
-      amountNumber = 150000;
-    }
-  }
-
   ChoosePaymentScreenState({Key? key, required this.index}) : super();
 
   @override
   void initState() {
     super.initState();
     initPlatformState();
-    initPaymentValue();
+    if (index == 1) {
+      comboLearn = "Gói học 1 tháng";
+      title = "THANH TOÁN GÓI HỌC 1 THÁNG";
+      amount = "45.000";
+      amountNumber = 45000;
+    } else if (index == 2) {
+      comboLearn = "Gói học 3 tháng";
+      title = "THANH TOÁN GÓI HỌC 3 THÁNG";
+      amount = "99.000";
+      amountNumber = 99000;
+    } else if (index == 3) {
+      comboLearn = "Gói học 6 tháng";
+      title = "THANH TOÁN GÓI HỌC 6 THÁNG";
+      amount = "149.000";
+      amountNumber = 149000;
+    }
   }
 
   Future<void> initPlatformState() async {
@@ -73,6 +71,8 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
 
   @override
   Widget build(BuildContext context) {
+    ToastContext().init(context);
+
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -232,8 +232,12 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                                     width: 3, color: Colors.blue),
                                 borderRadius: BorderRadius.circular(15),
                               ),
-                              labelText: 'Nhập tên của bạn',
+                              labelText: 'Nhập tên của bạn (Không dấu)',
                             ),
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                  RegExp("[a-z A-Z]"))
+                            ],
                             style: TextStyle(
                                 fontFamily: 'Montserrat',
                                 color: Colors.red,
@@ -283,17 +287,21 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                             if (nameController.text.isEmpty |
                                 phoneController.text.isEmpty) {
                               if (nameController.text.isEmpty) {
-                                Fluttertoast.showToast(
-                                    msg:
-                                        "Bạn cần nhập tên để có thể kích hoạt đúng tài khoản.");
+                                Toast.show(
+                                    "Bạn cần nhập tên để có thể kích hoạt đúng tài khoản.",
+                                    duration: Toast.lengthShort,
+                                    gravity: Toast.bottom);
                               } else if (phoneController.text.isEmpty) {
-                                Fluttertoast.showToast(
-                                    msg:
-                                        "Bạn cần nhập SĐT để có thể kích hoạt đúng tài khoản.");
+                                ToastContext().init(context);
+                                Toast.show(
+                                    "Bạn cần nhập SĐT để có thể kích hoạt đúng tài khoản.",
+                                    duration: Toast.lengthShort,
+                                    gravity: Toast.bottom);
                               } else {
-                                Fluttertoast.showToast(
-                                    msg:
-                                        "Bạn cần nhập thông tin để có thể kích hoạt tài khoản.");
+                                Toast.show(
+                                    "Bạn cần nhập thông tin để có thể kích hoạt tài khoản.",
+                                    duration: Toast.lengthShort,
+                                    gravity: Toast.bottom);
                               }
                             } else {
                               String partnerCode = "MOMOEZEO20220315";
@@ -349,7 +357,8 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                                       autoCapture: true,
                                       signature: signature));
 
-                              MomoPayment.handleResultResponse(response);
+                              MomoPayment.handleResultResponse(
+                                  response, context);
                             }
                           },
                         ),
@@ -363,6 +372,47 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                       SizedBox(
                         height: 15,
                       ),
+                      if (Platform.isIOS)
+                        SizedBox(
+                          height: 15,
+                        ),
+                      if (Platform.isIOS)
+                        ButtonTheme(
+                          minWidth: 300,
+                          buttonColor: Colors.red,
+                          child: ElevatedButton(
+                            child: Text(
+                              'Thanh toán bằng Apple ID',
+                              style: TextStyle(
+                                fontFamily: 'Montserrat',
+                              ),
+                            ),
+                            onPressed: () async {
+                              if (nameController.text.isEmpty |
+                                  phoneController.text.isEmpty) {
+                                if (nameController.text.isEmpty) {
+                                  Toast.show(
+                                      "Bạn cần nhập tên để có thể kích hoạt đúng tài khoản.",
+                                      duration: Toast.lengthShort,
+                                      gravity: Toast.bottom);
+                                } else if (phoneController.text.isEmpty) {
+                                  Toast.show(
+                                      "Bạn cần nhập SĐT để có thể kích hoạt đúng tài khoản.",
+                                      duration: Toast.lengthShort,
+                                      gravity: Toast.bottom);
+                                } else {
+                                  Toast.show(
+                                      "Bạn cần nhập thông tin để có thể kích hoạt tài khoản.",
+                                      duration: Toast.lengthShort,
+                                      gravity: Toast.bottom);
+                                }
+                              } else {
+                                //todo function for in app purchase
+
+                              }
+                            },
+                          ),
+                        ),
                       ButtonTheme(
                         minWidth: 300,
                         buttonColor: Colors.red,
@@ -378,17 +428,20 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                             if (nameController.text.isEmpty |
                                 phoneController.text.isEmpty) {
                               if (nameController.text.isEmpty) {
-                                Fluttertoast.showToast(
-                                    msg:
-                                        "Bạn cần nhập tên để có thể kích hoạt đúng tài khoản.");
+                                Toast.show(
+                                    "Bạn cần nhập tên để có thể kích hoạt đúng tài khoản.",
+                                    duration: Toast.lengthShort,
+                                    gravity: Toast.bottom);
                               } else if (phoneController.text.isEmpty) {
-                                Fluttertoast.showToast(
-                                    msg:
-                                        "Bạn cần nhập SĐT để có thể kích hoạt đúng tài khoản.");
+                                Toast.show(
+                                    "Bạn cần nhập SĐT để có thể kích hoạt đúng tài khoản.",
+                                    duration: Toast.lengthShort,
+                                    gravity: Toast.bottom);
                               } else {
-                                Fluttertoast.showToast(
-                                    msg:
-                                        "Bạn cần nhập thông tin để có thể kích hoạt tài khoản.");
+                                Toast.show(
+                                    "Bạn cần nhập thông tin để có thể kích hoạt tài khoản.",
+                                    duration: Toast.lengthShort,
+                                    gravity: Toast.bottom);
                               }
                             } else {
                               Navigator.push(
@@ -413,7 +466,8 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                           "Chú ý:",
                           style: TextStyle(
                               fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.bold, fontSize: 16),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16),
                           textAlign: TextAlign.left,
                         ),
                         width: MediaQuery.of(context).size.width,
@@ -440,25 +494,5 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
         ),
       ),
     );
-  }
-
-  void _setState() {}
-
-  void _handlePaymentSuccess(PaymentMomoResponse response) {
-    setState(() {
-      _setState();
-    });
-    Fluttertoast.showToast(
-        msg: "Đã thanh toán thành công: " + response.orderId,
-        toastLength: Toast.LENGTH_SHORT);
-  }
-
-  void _handlePaymentError(PaymentMomoResponse response) {
-    setState(() {
-      _setState();
-    });
-    Fluttertoast.showToast(
-        msg: "Thanh toán không thành công: " + response.message.toString(),
-        toastLength: Toast.LENGTH_SHORT);
   }
 }

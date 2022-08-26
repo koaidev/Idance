@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:oxoo/bloc/auth/firebase_auth/firebase_auth_bloc.dart';
@@ -64,10 +65,10 @@ class _SignUpScreenState extends State<SignUpScreen>
     ///read user data from phone(flutter hive box)
     _isRegistered = authService.getUser() != null ? true : false;
     return new Scaffold(
-      key: _scaffoldKey,
-      body:
-          _isRegistered ? LandingScreen() : _renderRegisterWidget(authService),
-    );
+        key: _scaffoldKey,
+        body: _isRegistered
+            ? LandingScreen()
+            : _renderRegisterWidget(authService));
   }
 
   Widget _renderRegisterWidget(authService) {
@@ -101,6 +102,10 @@ class _SignUpScreenState extends State<SignUpScreen>
         ),
         body: Container(
           height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("assets/images/background.png"),
+                  fit: BoxFit.cover)),
           child: SingleChildScrollView(
               child: Stack(
             alignment: Alignment.center,
@@ -108,21 +113,25 @@ class _SignUpScreenState extends State<SignUpScreen>
               Stack(
                 children: <Widget>[
                   Container(
-                    height: MediaQuery.of(context).size.height / 2.2,
+                    // height: MediaQuery.of(context).size.height / 2.2,
                     decoration: BoxDecoration(
-                      /* gradient: new LinearGradient(
-                                  colors: [
-                                    isDark? CustomTheme.darkGrey:CustomTheme.primaryColor,
-                                    isDark? CustomTheme.darkGrey:CustomTheme.colorAccent,
-                                  ],
-                                  begin: const FractionalOffset(0.0, 0.0),
-                                  end: const FractionalOffset(1.0, 1.0),
-                                  stops: [0.0, 1.0],
-                                  tileMode: TileMode.clamp),*/
-                      color: isDark
-                          ? CustomTheme.darkGrey
-                          : CustomTheme.primaryColor,
-                    ),
+                        image: DecorationImage(
+                            image: AssetImage("assets/images/background.png"),
+                            fit: BoxFit.cover)),
+                    // decoration: BoxDecoration(
+                    //   /* gradient: new LinearGradient(
+                    //               colors: [
+                    //                 isDark? CustomTheme.darkGrey:CustomTheme.primaryColor,
+                    //                 isDark? CustomTheme.darkGrey:CustomTheme.colorAccent,
+                    //               ],
+                    //               begin: const FractionalOffset(0.0, 0.0),
+                    //               end: const FractionalOffset(1.0, 1.0),
+                    //               stops: [0.0, 1.0],
+                    //               tileMode: TileMode.clamp),*/
+                    //   color: isDark
+                    //       ? CustomTheme.darkGrey
+                    //       : CustomTheme.primaryColor,
+                    // ),
                   ),
                   Column(
                     mainAxisSize: MainAxisSize.min,
@@ -188,25 +197,20 @@ class _SignUpScreenState extends State<SignUpScreen>
                                           SizedBox(height: 10),
                                           EditTextUtils()
                                               .getCustomEditTextField(
-                                                  hintValue:
-                                                      AppContent.emailAddress,
-                                                  keyboardType: TextInputType
-                                                      .emailAddress,
-                                                  style: isDark
-                                                      ? CustomTheme
-                                                          .authTitleGrey
-                                                      : CustomTheme.authTitle,
-                                                  underLineInputBorderColor:
-                                                      isDark
-                                                          ? CustomTheme
-                                                              .grey_transparent2
-                                                          : CustomTheme
-                                                              .primaryColor,
-                                                  controller:
-                                                      loginEmailController,
-                                                  validator: (value) {
-                                                    return validateEmail(value);
-                                                  }),
+                                            hintValue: AppContent.emailAddress,
+                                            keyboardType: TextInputType.name,
+                                            style: isDark
+                                                ? CustomTheme.authTitleGrey
+                                                : CustomTheme.authTitle,
+                                            underLineInputBorderColor: isDark
+                                                ? CustomTheme.grey_transparent2
+                                                : CustomTheme.primaryColor,
+                                            inputFormatters: [
+                                              FilteringTextInputFormatter.allow(
+                                                  RegExp("[a-z A-Z 0-9]"))
+                                            ],
+                                            controller: loginEmailController,
+                                          ),
                                           SizedBox(height: 10),
                                           EditTextUtils()
                                               .getCustomEditTextField(
@@ -227,6 +231,9 @@ class _SignUpScreenState extends State<SignUpScreen>
                                                   controller:
                                                       loginPasswordController,
                                                   obscureValue: true,
+                                              inputFormatters: [
+                                                FilteringTextInputFormatter.allow(RegExp("[a-zA-Z0-9]"))
+                                              ],
                                                   validator: (value) {
                                                     return validateMinLength(
                                                         value);
@@ -256,16 +263,21 @@ class _SignUpScreenState extends State<SignUpScreen>
                                             firebaseAuthBloc
                                                 .add(FirebaseAuthStarted());
                                             await register(
-                                                loginEmailController.text,
-                                                loginPasswordController.text)
+                                                    loginEmailController.text
+                                                            .replaceAll(
+                                                                " ", "") +
+                                                        "@gmail.com",
+                                                    loginPasswordController
+                                                        .text)
                                                 .then((value) => {
-                                              firebaseAuthBloc.add(
-                                                  FirebaseAuthCompleting(
-                                                    uid: value!.uid,
-                                                    email: value.email,
-                                                    phone: value.phoneNumber,
-                                                  ))
-                                            });
+                                                      firebaseAuthBloc.add(
+                                                          FirebaseAuthCompleting(
+                                                        uid: value!.uid,
+                                                        email: value.email,
+                                                        phone:
+                                                            value.phoneNumber,
+                                                      ))
+                                                    });
                                           });
                                         }
                                       },
@@ -315,11 +327,11 @@ class _SignUpScreenState extends State<SignUpScreen>
           .createUserWithEmailAndPassword(email: email, password: password);
       final User? user = userCredential.user;
       if (user != null) {
-        if (user.email != null && user.email != "") {
-          assert(user.email != null);
-        }
-        assert(user.displayName != null);
-        assert(!user.isAnonymous);
+        // if (user.email != null && user.email != "") {
+        //   assert(user.email != null);
+        // }
+        // assert(user.displayName != null);
+        // assert(!user.isAnonymous);
 
         final User currentUser = FirebaseAuth.instance.currentUser!;
         assert(user.uid == currentUser.uid);

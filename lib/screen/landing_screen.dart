@@ -1,8 +1,11 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
+import 'package:flutter_inapp_purchase/modules.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
@@ -31,7 +34,6 @@ import '../style/theme.dart';
 import '../utils/button_widget.dart';
 import '../utils/search_text_field.dart';
 import 'all_country_screen.dart';
-import 'downloads_screen.dart';
 import 'home_screen.dart';
 import 'movie/movie_details_screen.dart';
 import 'movie_screen.dart';
@@ -60,6 +62,13 @@ class _LandingScreenState extends State<LandingScreen>
   var appModeBox = Hive.box('appModeBox');
   String? userID;
   AuthUser? authUser = AuthService().getUser();
+  List<PurchasedItem> _purchases = [];
+  late StreamSubscription? _conectionSubscription;
+
+  int amount = 0;
+  String learnCombo = "";
+  int timeCanUse = 0;
+  int timeExp = 0;
 
   checkPaymentUser() async {
     if (FirebaseAuth.instance.currentUser != null) {
@@ -77,7 +86,7 @@ class _LandingScreenState extends State<LandingScreen>
             appModeBox.put("amount", amount);
             appModeBox.put("timePaid", timePaid);
 
-            if (amount == 50000) {
+            if (amount == 50000||amount==45000) {
               int timeNow = DateTime.now().millisecondsSinceEpoch;
               int timeUseService = timeNow - timePaid;
               if (timeUseService > 2678400000) {
@@ -86,7 +95,7 @@ class _LandingScreenState extends State<LandingScreen>
                 appModeBox.put("isUserValidSubscriber", true);
               }
             }
-            if (amount == 120000) {
+            if (amount == 120000||amount==99000) {
               int timeNow = DateTime.now().millisecondsSinceEpoch;
               int timeUseService = timeNow - timePaid;
               if (timeUseService > 8035200000) {
@@ -95,7 +104,7 @@ class _LandingScreenState extends State<LandingScreen>
                 appModeBox.put("isUserValidSubscriber", true);
               }
             }
-            if (amount == 150000) {
+            if (amount == 150000||amount==149000) {
               int timeNow = DateTime.now().millisecondsSinceEpoch;
               int timeUseService = timeNow - timePaid;
               if (timeUseService > 16070400000) {
@@ -114,21 +123,43 @@ class _LandingScreenState extends State<LandingScreen>
     }
   }
 
+
+  @override
+  void dispose() {
+    myFocusNode!.dispose();
+    _controller.dispose();
+    if (_conectionSubscription != null) {
+      _conectionSubscription!.cancel();
+      _conectionSubscription = null;
+    }
+    super.dispose();
+  }
+
+
   @override
   void initState() {
+
+    _conectionSubscription =
+        FlutterInappPurchase.connectionUpdated.listen((connected) {
+          print('connected: $connected');
+        });
+
     appModeBox.delete("isUserValidSubscriber");
+    amount = appModeBox.get("amount") ?? 0;
+    // _getPurchaseHistory();
     _controller = new TabController(vsync: this, length: 5, initialIndex: 1);
     super.initState();
+
     checkPaymentUser();
+
     myFocusNode = FocusNode();
     KeyboardVisibilityController().onChange.listen((bool visible) {
       print('Keyboard visibility update. Is visible: $visible');
       if (visible == false) activeSearch = false;
     });
     isDark = appModeBox.get('isDark') ?? false;
-    initStoreInfo();
 
-    SchedulerBinding.instance!
+    SchedulerBinding.instance
         .addPostFrameCallback((_) => configOneSignal(context));
   }
 
@@ -146,13 +177,6 @@ class _LandingScreenState extends State<LandingScreen>
     TvSeriesScreen(),
     FavouriteScreen()
   ];
-
-  @override
-  void dispose() {
-    myFocusNode!.dispose();
-    _controller.dispose();
-    super.dispose();
-  }
 
   void _handleSubmitted(String value) {
     printLog("trying_to_submit$value");
@@ -288,19 +312,6 @@ class _LandingScreenState extends State<LandingScreen>
             ),
             label: AppContent.movies,
           ),
-          // BottomNavigationBarItem(
-          //   activeIcon: Image.asset(
-          //     'assets/bottom_nav/icon_tv.png',
-          //     color: CustomTheme.primaryColorRed,
-          //     scale: 3,
-          //   ),
-          //   icon: Image.asset(
-          //     'assets/bottom_nav/icon_tv.png',
-          //     color: CustomTheme.grey_transparent2,
-          //     scale: 3,
-          //   ),
-          //   label: AppContent.live,
-          // ),
           BottomNavigationBarItem(
             activeIcon: Image.asset(
               'assets/bottom_nav/icon_tv_series.png',
@@ -352,19 +363,6 @@ class _LandingScreenState extends State<LandingScreen>
                 fontFamily: _selectedIndex==0 ? 'Horizon' : 'Montserrat',
               ),
             ),
-      // actions: <Widget>[
-      //   activeSearch
-      //       ? Container()
-      //       : IconButton(
-      //           icon: Icon(Icons.search),
-      //           onPressed: () {
-      //             setState(() {
-      //               activeSearch = true;
-      //               myFocusNode!.requestFocus();
-      //             });
-      //           },
-      //         )
-      // ],
     );
   }
 
@@ -656,5 +654,4 @@ class _LandingScreenState extends State<LandingScreen>
         });
   }
 
-  Future<void> initStoreInfo() async {}
 }

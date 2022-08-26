@@ -203,9 +203,9 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                       profileDetailsModel!.email ?? profileDetailsModel!.email,
                   controller: emailController,
                   height: 50.0,
-                  validator: (value) {
-                    return validateEmail(value);
-                  },
+                  // validator: (value) {
+                  //   return validateEmail(value);
+                  // },
                 ),
                 _space(20),
                 Align(
@@ -318,7 +318,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                   image: _image);
 
                           if (profileDetailsModel != null) {
-                            showShortToast(profileDetailsModel.data!);
+                            showShortToast(profileDetailsModel.data!, context);
                             isupdating = false;
                             setState(() {
                               profileDetailsModel = profileDetailsModel;
@@ -437,13 +437,13 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                           userID: userId,
                                           password: password,
                                           firebaseAuthUid: uid).then((value){
-                                    showShortToast(value!.data!);
+                                    showShortToast(value!.data!,context);
                                     setPasswordController.clear();
                                     confirmPasswordController.clear();
                                     Navigator.of(context).pop();
                                   })) ;
                             } else {
-                              showShortToast("password don't match");
+                              showShortToast("password don't match", context);
                             }
                           }
                         },
@@ -564,7 +564,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   //accountDeactivate Function
   accountDeactivate(context) async {
     _accountDeactivate = await Repository().accountDeactivate(
-        userId: userId, reason: accountDeactivateReasonController.value.text);
+        userId: userId, reason: accountDeactivateReasonController.value.text, context: context);
     if (_accountDeactivate != null) {
       if (authService.getUser() != null) authService.deleteUser();
       Navigator.of(context).pop();

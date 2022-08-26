@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:oxoo/app.dart';
 
 import '../../models/all_live_tv_by_category.dart';
 import '../../models/all_package_model.dart';
@@ -44,7 +46,7 @@ class Repository {
       if (user.status == 'success') {
         return user;
       } else {
-        showShortToast(response.data['data']);
+        showShortToast(response.data['data'], MyApp.navigationKey.currentContext!);
         return null;
       }
     } catch (e) {
@@ -67,7 +69,7 @@ class Repository {
       if (user.status == 'success') {
         return user;
       } else {
-        showShortToast(response.data['data']);
+        showShortToast(response.data['data'], MyApp.navigationKey.currentContext!);
         return null;
       }
     } catch (e) {
@@ -94,7 +96,7 @@ class Repository {
       if (user.status == 'success') {
         return user;
       } else {
-        showShortToast(response.data['message']);
+        showShortToast(response.data['message'], MyApp.navigationKey.currentContext!);
         return null;
       }
     } catch (e) {
@@ -596,7 +598,7 @@ class Repository {
   }
 
   Future<SubmitResponseModel?> accountDeactivate(
-      {String? userId, String? reason}) async {
+      {String? userId, String? reason, required BuildContext context}) async {
     dio.options.headers = ConfigApi().getHeaders();
     FormData formData = new FormData.fromMap(
         {"id": userId, "reason": reason, "password": "adminadmin"});
@@ -606,7 +608,7 @@ class Repository {
           data: formData);
       SubmitResponseModel deactivate =
           SubmitResponseModel.fromJson(response.data);
-      showShortToast(deactivate.data!);
+      showShortToast(deactivate.data!, context);
       if (deactivate.status == 'success') {
         return deactivate;
       }

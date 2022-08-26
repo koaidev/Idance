@@ -1,60 +1,29 @@
-import 'dart:ffi';
-import 'dart:io';
-
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:oxoo/utils/reflect_toggle.dart';
 import 'package:provider/provider.dart';
-import 'package:toast/toast.dart';
 import 'package:video_player/video_player.dart';
 
-bool showFront = true;
 
-///reflect video
-Future<void> reflect() async {
-  showFront = true;
-}
-
-/// not reflect the video.
-Future<void> notReflect() async {
-  showFront = false;
-}
-
-/// Toggle reflect.
-Future<void> toggleReflect() async {
-  showFront ? notReflect() : reflect();
-}
-
-class MovieDetailsVideoPlayerWidget extends StatefulWidget {
+class LandscapePlayer extends StatefulWidget {
   final String? videoUrl;
-  final File? localFile;
 
-  const MovieDetailsVideoPlayerWidget({Key? key, this.videoUrl, this.localFile})
-      : super(key: key);
+  LandscapePlayer({Key? key, this.videoUrl}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() {
-    return _PlayerState();
-  }
+  _LandscapePlayerState createState() => _LandscapePlayerState();
 }
 
-class _PlayerState extends State<MovieDetailsVideoPlayerWidget> {
+class _LandscapePlayerState extends State<LandscapePlayer> {
   late FlickManager flickManager;
-  late VideoPlayerController videoPlayerController;
   late dynamic boxFit;
-  bool isZoomOut = false;
 
   @override
   void initState() {
     super.initState();
-    videoPlayerController = VideoPlayerController.network(widget.videoUrl!);
-    videoPlayerController.initialize().then((value) => setState(() {}));
     flickManager = FlickManager(
-      videoPlayerController: videoPlayerController,
-      autoPlay: true,
-      autoInitialize: true,
-    );
+        videoPlayerController:
+        VideoPlayerController.network(widget.videoUrl!));
     boxFit = BoxFit.fitHeight;
   }
 
@@ -64,40 +33,27 @@ class _PlayerState extends State<MovieDetailsVideoPlayerWidget> {
     super.dispose();
   }
 
-  Future<bool> _onWillPop() async {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual);
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    Navigator.pop(context);
-    return true;
-  }
-
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-        onWillPop: _onWillPop,
-        child: Container(
-          // Use the VideoPlayer widget to display the video.
-          child: FlickVideoPlayer(
-            flickManager: flickManager,
-            preferredDeviceOrientationFullscreen: [
-              DeviceOrientation.landscapeLeft,
-              DeviceOrientation.landscapeRight
-            ],
-            preferredDeviceOrientation: [
-              DeviceOrientation.landscapeLeft,
-              DeviceOrientation.landscapeRight
-            ],
-            systemUIOverlay: [],
-            flickVideoWithControls: FlickVideoWithControls(
-              controls: LandscapePlayerControls(),
-              videoFit: boxFit,
-            ),
-          )
-        ));
+    return Scaffold(
+      body: FlickVideoPlayer(
+        flickManager: flickManager,
+        preferredDeviceOrientation: [
+          DeviceOrientation.landscapeRight,
+          DeviceOrientation.landscapeLeft
+        ],
+        systemUIOverlay: [],
+        flickVideoWithControls: FlickVideoWithControls(
+          controls: LandscapePlayerControls(),
+          videoFit: boxFit,
+        ),
+      ),
+    );
   }
 }
 
-class LandscapePlayerControls extends StatefulWidget {
+
+class LandscapePlayerControls extends StatelessWidget {
   const LandscapePlayerControls(
       {Key? key, this.iconSize = 20, this.fontSize = 12})
       : super(key: key);
@@ -105,15 +61,9 @@ class LandscapePlayerControls extends StatefulWidget {
   final double fontSize;
 
   @override
-  State<LandscapePlayerControls> createState() =>
-      _LandscapePlayerControlsState();
-}
-
-class _LandscapePlayerControlsState extends State<LandscapePlayerControls> {
-  @override
-  Widget build(BuildContext contextMain) {
+  Widget build(BuildContext context) {
     FlickControlManager controlManager =
-        Provider.of<FlickControlManager>(context);
+    Provider.of<FlickControlManager>(context);
     return Stack(
       children: <Widget>[
         FlickShowControlsAction(
@@ -148,7 +98,7 @@ class _LandscapePlayerControlsState extends State<LandscapePlayerControls> {
                         width: 10,
                       ),
                       FlickCurrentPosition(
-                        fontSize: widget.fontSize,
+                        fontSize: fontSize,
                       ),
                       SizedBox(
                         width: 10,
@@ -167,9 +117,9 @@ class _LandscapePlayerControlsState extends State<LandscapePlayerControls> {
                               bufferedColor: Colors.white38,
                               getPlayedPaint: (
                                   {double? handleRadius,
-                                  double? height,
-                                  double? playedPart,
-                                  double? width}) {
+                                    double? height,
+                                    double? playedPart,
+                                    double? width}) {
                                 return Paint()
                                   ..shader = LinearGradient(colors: [
                                     Color.fromRGBO(108, 165, 242, 1),
@@ -186,9 +136,9 @@ class _LandscapePlayerControlsState extends State<LandscapePlayerControls> {
                               },
                               getHandlePaint: (
                                   {double? handleRadius,
-                                  double? height,
-                                  double? playedPart,
-                                  double? width}) {
+                                    double? height,
+                                    double? playedPart,
+                                    double? width}) {
                                 return Paint()
                                   ..shader = RadialGradient(
                                     colors: [
@@ -210,7 +160,7 @@ class _LandscapePlayerControlsState extends State<LandscapePlayerControls> {
                         ),
                       ),
                       FlickTotalDuration(
-                        fontSize: widget.fontSize,
+                        fontSize: fontSize,
                       ),
                       SizedBox(
                         width: 10,
@@ -221,23 +171,11 @@ class _LandscapePlayerControlsState extends State<LandscapePlayerControls> {
                       SizedBox(
                         width: 10,
                       ),
-                      ReflectToggle(
-                        size: 20,
-                        toggleReflect1: () {
-                          Toast.show(
-                              "Tính năng Gương lật đang được phát triển.",
-                              duration: Toast.lengthShort,
-                              gravity: Toast.center);
-                        },
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
                       FlickSetPlayBack(
                         setPlayBack: () {
                           showModalBottomSheet<void>(
                             isScrollControlled: true,
-                            context: contextMain,
+                            context: context,
                             builder: (contextMain) {
                               return FractionallySizedBox(
                                 heightFactor: 0.7,
@@ -246,40 +184,40 @@ class _LandscapePlayerControlsState extends State<LandscapePlayerControls> {
                                   child: Center(
                                     child: Column(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                                      MainAxisAlignment.start,
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      CrossAxisAlignment.start,
                                       mainAxisSize: MainAxisSize.min,
                                       children: <Widget>[
                                         _buildItem(context, "0.25", action: () {
                                           controlManager.setPlaybackSpeed(0.25);
-                                          setState(() {});
+                                          // setState(() {});
                                           Navigator.pop(context);
                                         }),
                                         _buildItem(context, "0.5", action: () {
                                           controlManager.setPlaybackSpeed(0.5);
-                                          setState(() {});
+                                          // setState(() {});
                                           Navigator.pop(context);
                                         }),
                                         _buildItem(context, "0.75", action: () {
                                           controlManager.setPlaybackSpeed(0.75);
-                                          setState(() {});
+                                          // setState(() {});
                                           Navigator.pop(context);
                                         }),
                                         _buildItem(context, "Bình thường",
                                             action: () {
-                                          controlManager.setPlaybackSpeed(1.0);
-                                          setState(() {});
-                                          Navigator.pop(context);
-                                        }),
+                                              controlManager.setPlaybackSpeed(1.0);
+                                              // setState(() {});
+                                              Navigator.pop(context);
+                                            }),
                                         _buildItem(context, "1.5", action: () {
                                           controlManager.setPlaybackSpeed(1.5);
-                                          setState(() {});
+                                          // setState(() {});
                                           Navigator.pop(context);
                                         }),
                                         _buildItem(context, "2.0", action: () {
                                           controlManager.setPlaybackSpeed(2.0);
-                                          setState(() {});
+                                          // setState(() {});
                                           Navigator.pop(context);
                                         }),
                                       ],
@@ -290,11 +228,7 @@ class _LandscapePlayerControlsState extends State<LandscapePlayerControls> {
                             },
                           );
                         },
-                      ),
-                      // SizedBox(
-                      //   width: 10,
-                      // ),
-                      // IconButton(onPressed: (){}, icon: (isZoomOut)? Icon(Icons.zoom_out_map): )
+                      )
                     ],
                   ),
                 ),
@@ -307,8 +241,8 @@ class _LandscapePlayerControlsState extends State<LandscapePlayerControls> {
           top: 10,
           child: GestureDetector(
             onTap: () {
-              // SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
-              SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual);
+              SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+                  overlays: SystemUiOverlay.values);
               SystemChrome.setPreferredOrientations(
                   [DeviceOrientation.portraitUp]);
               Navigator.pop(context);
@@ -322,7 +256,6 @@ class _LandscapePlayerControlsState extends State<LandscapePlayerControls> {
       ],
     );
   }
-
   Widget _buildItem(BuildContext context, String title, {Function? action}) {
     return Container(
       width: MediaQuery.of(context).size.width,
@@ -330,7 +263,7 @@ class _LandscapePlayerControlsState extends State<LandscapePlayerControls> {
       decoration: BoxDecoration(
           border: Border(
               bottom:
-                  BorderSide(color: Colors.grey.withOpacity(0.5), width: 0.5))),
+              BorderSide(color: Colors.grey.withOpacity(0.5), width: 0.5))),
       child: GestureDetector(
         onTap: () {
           action?.call();
@@ -356,7 +289,7 @@ class LandscapePlayToggle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FlickControlManager controlManager =
-        Provider.of<FlickControlManager>(context);
+    Provider.of<FlickControlManager>(context);
     FlickVideoManager videoManager = Provider.of<FlickVideoManager>(context);
 
     double size = 50;
@@ -381,8 +314,8 @@ class LandscapePlayToggle extends StatelessWidget {
     Widget child = videoManager.isVideoEnded
         ? replayWidget
         : videoManager.isPlaying
-            ? pauseWidget
-            : playWidget;
+        ? pauseWidget
+        : playWidget;
 
     return Material(
       color: Colors.transparent,

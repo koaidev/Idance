@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../style/theme.dart';
 class EditTextUtils {
   TextFormField getCustomEditTextField(
@@ -10,6 +11,7 @@ class EditTextUtils {
         Function? validator,
         bool obscureValue = false,
         int maxLines = 1,
+        List<TextInputFormatter>? inputFormatters,
         Color underLineInputBorderColor = CustomTheme.grey_transparent2,
       TextInputType? keyboardType}) {
     return  TextFormField(
@@ -34,7 +36,7 @@ class EditTextUtils {
       style: style,
       validator: validator as String? Function(String?)?,
       obscureText: obscureValue,
-
+      inputFormatters: inputFormatters,
     );
   }
 }

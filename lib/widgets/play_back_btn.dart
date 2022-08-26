@@ -1,11 +1,10 @@
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
-class PlayBackBtn extends StatelessWidget {
-  const PlayBackBtn(
+class CustomVideoPlayerButton extends StatelessWidget {
+  const CustomVideoPlayerButton(
       {Key? key,
-      this.playBackChild,
+      this.customButton,
       this.setPlayBack,
       this.speed = 1.0,
       this.size,
@@ -18,7 +17,7 @@ class PlayBackBtn extends StatelessWidget {
   /// Widget shown when player is not in full-screen.
   ///
   /// Default - [Icon(Icons.fullscreen)]
-  final Widget? playBackChild;
+  final Widget? customButton;
 
   final BuildContext context;
 
@@ -47,7 +46,7 @@ class PlayBackBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget playBackWidget = playBackChild ??
+    Widget playBackWidget = customButton ??
         Icon(
           Icons.play_circle_outline_sharp,
           size: size,

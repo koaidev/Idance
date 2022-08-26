@@ -1,4 +1,6 @@
-import 'package:fluttertoast/fluttertoast.dart';
+
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:toast/toast.dart';
 
 String? validateNotEmpty(String value) {
   if (value.length == 0)
@@ -29,9 +31,9 @@ String? validatePhone(String value) {
 
 String? validateEmail(String value) {
   if (!RegExp(
-          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+[a-zA-Z0-9]+\.[a-zA-Z]+\s+")
       .hasMatch(value))
-    return 'valid email is required !';
+    return 'valid id is required !';
   else
     return null;
 }
@@ -43,9 +45,8 @@ String? validateDelete(String value) {
     return null;
 }
 
-void showShortToast(String message) {
-  Fluttertoast.showToast(
-      msg: message,
-      toastLength: Toast.LENGTH_SHORT,
-      timeInSecForIosWeb: 1);
+void showShortToast(String message, BuildContext context) {
+  ToastContext().init(context);
+  Toast.show(message, duration: Toast.lengthShort, gravity:  Toast.bottom );
+
 }

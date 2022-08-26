@@ -192,6 +192,24 @@
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/app_links/example/build" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/app_links/example/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/app_links/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/smart_auth/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/smart_auth/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/smart_auth/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/smart_auth/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/smart_auth/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/smart_auth/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/in_app_purchase_storekit/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/in_app_purchase_storekit/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/in_app_purchase_storekit/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/in_app_purchase_storekit/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/in_app_purchase_storekit/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/in_app_purchase_storekit/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_inapp_purchase/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_inapp_purchase/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_inapp_purchase/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_inapp_purchase/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_inapp_purchase/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_inapp_purchase/example/.pub" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:oxoo/screen/landing_screen.dart';
+import 'package:toast/toast.dart';
 
 class PaymentByCardScreen extends StatefulWidget {
   final int index;
@@ -36,30 +36,27 @@ class _PaymentByCardScreenState extends State<PaymentByCardScreen> {
   void handleAction(int index) {
     if (index == 1) {
       comboLearn = "goi hoc 1 thang";
-      amount = "50.000";
-      amountNumber = 50000;
+      amount = "45.000";
+      amountNumber = 45000;
     } else if (index == 2) {
       comboLearn = "goi hoc 3 thang";
-      amount = "120.000";
-      amountNumber = 120000;
+      amount = "99.000";
+      amountNumber = 99000;
     } else {
       comboLearn = "goi hoc 6 thang";
-      amount = "150.000";
-      amountNumber = 150000;
+      amount = "149.000";
+      amountNumber = 149000;
     }
     action1 = () {
       Clipboard.setData(ClipboardData(
           text:
               "$name - $phoneNumber - $comboLearn - ${FirebaseAuth.instance.currentUser!.uid}"));
-      Fluttertoast.showToast(
-          msg:
-              "Đã sao chép: $name - $phoneNumber - $comboLearn - ${FirebaseAuth.instance.currentUser!.uid}",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
+      Toast.show(
+          "Đã sao chép: $name - $phoneNumber - $comboLearn - ${FirebaseAuth.instance.currentUser!.uid}",
+          duration: Toast.lengthShort,
           backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0);
+          textStyle: TextStyle(color: Colors.white, fontSize: 16.0),
+          gravity: Toast.bottom);
     };
     setState(() {});
   }
@@ -67,6 +64,7 @@ class _PaymentByCardScreenState extends State<PaymentByCardScreen> {
   @override
   Widget build(BuildContext context) {
     handleAction(index);
+    ToastContext().init(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -168,14 +166,12 @@ class _PaymentByCardScreenState extends State<PaymentByCardScreen> {
               Expanded(
                   child: _buildActionCopy('Copy số tài khoản', action: () {
                 Clipboard.setData(ClipboardData(text: "1327888888"));
-                Fluttertoast.showToast(
-                    msg: "Đã sao chép: 1327888888",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.BOTTOM,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: Colors.blue,
-                    textColor: Colors.white,
-                    fontSize: 16.0);
+                Toast.show(
+                    "Đã sao chép: 1327888888",
+                    duration: Toast.lengthShort,
+                    backgroundColor: Colors.red,
+                    textStyle: TextStyle(color: Colors.white, fontSize: 16.0),
+                    gravity: Toast.bottom);
               })),
             ],
           ),

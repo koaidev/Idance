@@ -55,9 +55,9 @@ class Routes {
       MovieReplyScreen.route: (_) => MovieReplyScreen(),
       MovieDetailScreen.route: (_) => MovieDetailScreen(),
       TermsPolices.route: (_) => TermsPolices(),
-      PhoneAuthScreen.route: (_) => PhoneAuthScreen(
-            userRepository: userRepository,
-          ),
+      // PhoneAuthScreen.route: (_) => PhoneAuthScreen(
+      //       userRepository: userRepository,
+      //     ),
       HomeScreen.route: (_) => HomeScreen(),
       LiveTvChannelsCard.route: (_) => LiveTvChannelsCard(),
       LandingScreen.route: (_) => LandingScreen(),

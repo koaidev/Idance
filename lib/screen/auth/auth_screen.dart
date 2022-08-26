@@ -5,11 +5,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:toast/toast.dart';
 
 import '../../bloc/auth/firebase_auth/firebase_auth_bloc.dart';
 import '../../bloc/auth/firebase_auth/firebase_auth_event.dart';
@@ -57,6 +57,7 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     printLog("_AuthScreenState");
+    ToastContext().init(context);
     final AuthService authService = Provider.of<AuthService>(context);
     _isLogged = authService.getUser() != null ? true : false;
 
@@ -102,12 +103,12 @@ class _AuthScreenState extends State<AuthScreen> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      if (Config.enablePhoneAuth)
-                        phoneAuthWidget(
-                          color: CustomTheme.springGreen,
-                          title: AppContent.loginWithPhone,
-                          imagePath: "ic_button_phone",
-                        ),
+                      // if (Config.enablePhoneAuth)
+                      //   phoneAuthWidget(
+                      //     color: CustomTheme.springGreen,
+                      //     title: AppContent.loginWithPhone,
+                      //     imagePath: "ic_button_phone",
+                      //   ),
                       if (Config.enableFacebookAuth)
                         socialAuthWidget(
                             color: CustomTheme.royalBlue,
@@ -133,7 +134,7 @@ class _AuthScreenState extends State<AuthScreen> {
                           child: mailAuthWidget(
                               color: CustomTheme.salmonColor,
                               title: AppContent.loginWithEmail,
-                              imagePath: "ic_button_email")),
+                              imagePath: "logo")),
                       if (Platform.isIOS)
                         socialAuthWidget(
                             color: Colors.white,
@@ -208,18 +209,23 @@ class _AuthScreenState extends State<AuthScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      SizedBox(
+                        width: 10.0,
+                      ),
                       Image.asset(
                         'assets/images/$imagePath.png',
                         width: 20.0,
                         height: 20.0,
                       ),
-                      SizedBox(
-                        width: 10.0,
-                      ),
+                      Spacer(flex:1),
                       Text(title!,
                           style: isApple
                               ? CustomTheme.authBtnTitleBlack
                               : CustomTheme.authBtnTitle),
+                      Spacer(flex:1),
+                      SizedBox(
+                        width: 10.0,
+                      ),
                     ],
                   ),
                 ),
@@ -234,44 +240,44 @@ class _AuthScreenState extends State<AuthScreen> {
     );
   }
 
-  Widget phoneAuthWidget(
-      {Color? color, required String title, String? imagePath}) {
-    return InkWell(
-      onTap: () {
-        Navigator.pushNamed(context, PhoneAuthScreen.route);
-      },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
-        child: Container(
-          child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  'assets/images/$imagePath.png',
-                  width: 20.0,
-                  height: 20.0,
-                ),
-                SizedBox(
-                  width: 10.0,
-                ),
-                Text(
-                  title,
-                  style: CustomTheme.authBtnTitle,
-                ),
-              ],
-            ),
-          ),
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.all(Radius.circular(4.0)),
-          ),
-        ),
-      ),
-    );
-  }
+  // Widget phoneAuthWidget(
+  //     {Color? color, required String title, String? imagePath}) {
+  //   return InkWell(
+  //     onTap: () {
+  //       Navigator.pushNamed(context, PhoneAuthScreen.route);
+  //     },
+  //     child: Padding(
+  //       padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
+  //       child: Container(
+  //         child: Padding(
+  //           padding:
+  //               const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+  //           child: Row(
+  //             mainAxisAlignment: MainAxisAlignment.center,
+  //             children: [
+  //               Image.asset(
+  //                 'assets/images/$imagePath.png',
+  //                 width: 20.0,
+  //                 height: 20.0,
+  //               ),
+  //               SizedBox(
+  //                 width: 10.0,
+  //               ),
+  //               Text(
+  //                 title,
+  //                 style: CustomTheme.authBtnTitle,
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //         decoration: BoxDecoration(
+  //           color: color,
+  //           borderRadius: BorderRadius.all(Radius.circular(4.0)),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Widget mailAuthWidget(
       {Color? color, required String title, String? imagePath}) {
@@ -285,17 +291,21 @@ class _AuthScreenState extends State<AuthScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                SizedBox(width: 10,),
                 Image.asset(
                   'assets/images/$imagePath.png',
                   width: 20.0,
                   height: 20.0,
                 ),
-                SizedBox(
-                  width: 10.0,
-                ),
+                Spacer(flex: 1,),
+
                 Text(
                   title,
                   style: CustomTheme.authBtnTitle,
+                ),
+                Spacer(flex: 1,),
+                SizedBox(
+                  width: 10.0,
                 ),
               ],
             ),
@@ -338,10 +348,8 @@ class _AuthScreenState extends State<AuthScreen> {
     } catch (e) {
       setState(() {
         isLoading = false;
-        Fluttertoast.showToast(
-            msg: "Lỗi: $e. \nVui lòng chọn phương thức đăng nhập khác.",
-            gravity: ToastGravity.CENTER,
-            toastLength: Toast.LENGTH_LONG);
+        Toast.show("Lỗi: $e. \nVui lòng chọn phương thức đăng nhập khác.",
+            duration: Toast.lengthShort, gravity: Toast.bottom);
       });
       return null;
     }
@@ -399,10 +407,8 @@ class _AuthScreenState extends State<AuthScreen> {
     } catch (e) {
       setState(() {
         isLoading = false;
-        Fluttertoast.showToast(
-            msg: "Lỗi: $e. \nVui lòng chọn phương thức đăng nhập khác.",
-            gravity: ToastGravity.CENTER,
-            toastLength: Toast.LENGTH_LONG);
+        Toast.show("Lỗi: $e. \nVui lòng chọn phương thức đăng nhập khác.",
+            duration: Toast.lengthShort, gravity: Toast.bottom);
       });
       return null;
     }

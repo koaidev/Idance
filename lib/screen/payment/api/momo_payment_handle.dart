@@ -1,10 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
 import 'package:oxoo/screen/payment/models/payment_momo_create.dart';
 import 'package:oxoo/screen/payment/models/payment_momo_response.dart';
+import 'package:toast/toast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../network/api_configuration.dart';
@@ -45,11 +46,12 @@ class MomoPayment {
     }
   }
 
-  static Future<void> handleResultResponse(PaymentMomoResponse? response) async {
+  static Future<void> handleResultResponse(PaymentMomoResponse? response, BuildContext context) async {
     if (response != null && response.deeplink != null) {
       _launchURL(response.deeplink!);
     }else{
-      Fluttertoast.showToast(msg: "Lỗi đã xảy ra. vui lòng thử lại sau!");
+      ToastContext().init(context);
+      Toast.show("Lỗi đã xảy ra. vui lòng thử lại sau!", duration: Toast.lengthShort, gravity:  Toast.bottom);
     }
   }
 

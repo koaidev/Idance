@@ -1,16 +1,16 @@
 import 'package:admob_flutter/admob_flutter.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
+
 import '../../service/get_config_service.dart';
 import 'app.dart';
 import 'data/repository/config_repository.dart';
 import 'models/configuration.dart';
 import 'models/user_model.dart';
-import 'navigation_service.dart';
 import 'service/locator.dart';
 
 Future<void> main() async {
@@ -37,23 +37,14 @@ Future<void> main() async {
   await Hive.openBox<AuthUser>('oxooUser');
   await Hive.openBox('appModeBox');
 
-  var height = WidgetsBinding.instance!.window.physicalSize.height;
-  var width = WidgetsBinding.instance!.window.physicalSize.width;
+  var height = WidgetsBinding.instance.window.physicalSize.height;
+  var width = WidgetsBinding.instance.window.physicalSize.width;
 
   Hive.box("appModeBox").put("ratioScreen", height / width);
-
   ConfigurationModel? configurationModel;
   configurationModel =
       await ConfigurationRepositoryImpl().getConfigurationData();
   GetConfigService().updateGetConfig(configurationModel);
   setupLocator();
-  if (defaultTargetPlatform == TargetPlatform.android) {
-    //todo
-  }
-  // runApp(new MaterialApp(
-  //   debugShowCheckedModeBanner: false,
-  //   navigatorKey: NavigationService.navigatorKey,
-  //   home: new MyApp(),
-  // ));
   runApp(MyApp());
 }

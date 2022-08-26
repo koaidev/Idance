@@ -14,6 +14,7 @@ import 'package:oxoo/widgets/movie/movie_poster.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
+import 'package:toast/toast.dart';
 
 import '../../constants.dart';
 import '../../models/configuration.dart';
@@ -138,6 +139,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
     final configService = Provider.of<GetConfigService>(context);
     PaymentConfig? paymentConfig = configService.paymentConfig();
     platform = Theme.of(context).platform;
+    ToastContext().init(context);
     return Scaffold(
       body: Container(
         color: isDark! ? CustomTheme.primaryColorDark : Colors.white,
@@ -152,7 +154,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
               if (state is MovieDetailsLoadedState) {
                 movieDetailsModel = state.movieDetails;
                 if (movieDetailsModel.isPaid == "1" && authUser == null) {
-                  SchedulerBinding.instance!.addPostFrameCallback((_) {
+                  SchedulerBinding.instance.addPostFrameCallback((_) {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
@@ -827,7 +829,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         await (Repository()
                             .removeFavourite(userID, movieID)
                             .then((value) {
-                          showShortToast(value!.message!);
+                          showShortToast(value!.message!, context);
                           setState(() {
                             isFavoriteMovie = true;
                           });
@@ -839,7 +841,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         await (Repository()
                             .addFavourite(userID, movieID)
                             .then((value) {
-                          showShortToast(value!.message!);
+                          showShortToast(value!.message!, context);
                           setState(() {
                             isFavoriteMovie = false;
                           });

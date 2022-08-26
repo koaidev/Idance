@@ -1,7 +1,7 @@
-import 'dart:ui';
+import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:oxoo/screen/landing_screen.dart';
 import 'package:oxoo/screen/payment/choose_payment_screen.dart';
 
@@ -13,6 +13,44 @@ class PaymentScreen extends StatefulWidget {
 }
 
 class _PaymentScreenState extends State<PaymentScreen> {
+  final List<String> _productLists = [
+    'com.idance.hocnhayonline.goihoc1thang',
+    'com.idance.hocnhayonline.goihoc3thang',
+    'com.idance.hocnhayonline.goihoc6thang'
+  ];
+  List<IAPItem> _items = [];
+   IAPItem? item45;
+   IAPItem? item99;
+   IAPItem? item149;
+
+  Future _getProduct() async {
+    List<IAPItem> items =
+        await FlutterInappPurchase.instance.getProducts(_productLists);
+    for (var item in items) {
+      print('${item.toString()}');
+      this._items.add(item);
+      if (item.productId == _productLists[0]) {
+        this.item45 = item;
+      }
+      if (item.productId == _productLists[1]) {
+        this.item99 = item;
+      }
+      if (item.productId == _productLists[2]) {
+        this.item149 = item;
+      }
+    }
+
+    setState(() {
+      this._items = items;
+    });
+  }
+
+  @override
+  void initState() {
+    if (Platform.isIOS) _getProduct();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,8 +61,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
             Container(
               width: MediaQuery.of(context).size.width,
               margin: const EdgeInsets.only(bottom: 15),
-              padding:
-              const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
               decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
@@ -53,18 +90,27 @@ class _PaymentScreenState extends State<PaymentScreen> {
             SizedBox(
               height: 30,
             ),
-            _buildSubTitle('1 tháng', "50.000 VND", 1),
-            _buildSubTitle('3 tháng', "120. 000 VND", 2),
-            _buildSubTitle('6 tháng', "", 3),
-            // Spacer(
-            //   flex: 1,
-            // ),
+            if (Platform.isIOS)
+              _buildSubTitle((item45!=null)? item45!.title! : "Không xác định.", "100.000 VNĐ",
+                  (item45!=null)? item45!.localizedPrice! : "0 VNĐ", 1),
+            if (Platform.isIOS)
+              _buildSubTitle((item99!=null)? item99!.title! : "Không xác định.", "250.000 VNĐ",
+                  (item99!=null)? item99!.localizedPrice! : "0 VNĐ", 2),
+            if (Platform.isIOS)
+              _buildSubTitle((item149!=null)? item149!.title! : "Không xác định.", "450.000 VNĐ",
+                  (item149!=null)? item149!.localizedPrice! : "0 VNĐ", 3),
+            if (Platform.isAndroid)
+              _buildSubTitle("GÓI HỌC 1 THÁNG", "100.000 VNĐ", "45.000", 1),
+            if (Platform.isAndroid)
+              _buildSubTitle("GÓI HỌC 3 THÁNG", "250.000 VNĐ", "99.000", 2),
+            if (Platform.isAndroid)
+              _buildSubTitle("GÓI HỌC 6 THÁNG", "450.000 VNĐ", "149.000", 3),
             GestureDetector(
               onTap: () {
                 Navigator.pushNamed(context, LandingScreen.route);
               },
               child: Container(
-                width: MediaQuery.of(context).size.width/2.7,
+                width: MediaQuery.of(context).size.width / 2.7,
                 margin: const EdgeInsets.only(bottom: 15),
                 padding:
                     const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
@@ -88,18 +134,22 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     Expanded(
                         child: Text(
                       "HOME",
-                      style: TextStyle(color: Colors.white, fontFamily: "Montserrat", fontWeight: FontWeight.w700),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: "Montserrat",
+                          fontWeight: FontWeight.w700),
                     ))
                   ],
                 ),
               ),
             ),
-            Spacer(flex: 1,),
+            Spacer(
+              flex: 1,
+            ),
             Container(
               width: MediaQuery.of(context).size.width,
               margin: const EdgeInsets.only(bottom: 15),
-              padding:
-              const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
               decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
@@ -112,7 +162,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   borderRadius: BorderRadius.all(Radius.circular(50))),
               child: Text(
                 "Chú ý: \nSau khi thanh toán, thoát hoàn toàn ứng dụng và mở lại để được kích hoạt.",
-                style: TextStyle(color: Colors.white, fontFamily: "Montserrat", fontWeight: FontWeight.w700),
+                style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: "Montserrat",
+                    fontWeight: FontWeight.w700),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -127,14 +180,28 @@ class _PaymentScreenState extends State<PaymentScreen> {
     );
   }
 
-  Widget _buildSubTitle(String title, String subTitle, int index) {
+  Widget _buildSubTitle(
+      String title, String cost, String discountCost, int index) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ChoosePaymentScreen(index: index),
-                settings: RouteSettings(arguments: index)));
+        if (Platform.isIOS) {
+          if (index == 1 && item45!=null) {
+            FlutterInappPurchase.instance.requestPurchase(item45!.productId!);
+          }
+          if (index == 2 && item99!=null) {
+            FlutterInappPurchase.instance.requestPurchase(item99!.productId!);
+          }
+          if (index == 3 && item149!=null) {
+            FlutterInappPurchase.instance.requestPurchase(item149!.productId!);
+          }
+        }
+        if (Platform.isAndroid) {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ChoosePaymentScreen(index: index),
+                  settings: RouteSettings(arguments: index)));
+        }
       },
       child: Container(
         width: MediaQuery.of(context).size.width,
@@ -164,75 +231,28 @@ class _PaymentScreenState extends State<PaymentScreen> {
             SizedBox(
               width: 2,
             ),
-            if (index == 3)
-              Row(
-                children: [
-                  Text(
-                    '450.000 VNĐ'.toUpperCase(),
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontFamily: 'Montserrat',
-                        decoration: TextDecoration.lineThrough,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    ' 150.000 VNĐ'.toUpperCase(),
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.bold),
-                  )
-                ],
-                mainAxisAlignment: MainAxisAlignment.center,
-              ),
-            if (index == 2)
-              Row(
-                children: [
-                  Text(
-                    '250.000 VNĐ'.toUpperCase(),
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontFamily: 'Montserrat',
-                        decoration: TextDecoration.lineThrough,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    ' 120.000 VNĐ'.toUpperCase(),
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Montserrat',
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold),
-                  )
-                ],
-                mainAxisAlignment: MainAxisAlignment.center,
-              ),
-            if (index == 1)
-              Row(
-                children: [
-                  Text(
-                    '100.000 VNĐ'.toUpperCase(),
-                    style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        color: Colors.white,
-                        fontSize: 18,
-                        decoration: TextDecoration.lineThrough,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    ' 50.000 VNĐ'.toUpperCase(),
-                    style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold),
-                  )
-                ],
-                mainAxisAlignment: MainAxisAlignment.center,
-              ),
+            Row(
+              children: [
+                Text(
+                  '$cost'.toUpperCase(),
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontFamily: 'Montserrat',
+                      decoration: TextDecoration.lineThrough,
+                      fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  ' $discountCost'.toUpperCase(),
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.bold),
+                )
+              ],
+              mainAxisAlignment: MainAxisAlignment.center,
+            ),
           ],
         ),
       ),

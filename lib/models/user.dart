@@ -23,15 +23,15 @@ class UserIDance {
   UserIDance.fromJson(
     Map<String, dynamic>? json,
   ) : this(
-          name: json?['name'] as String,
-          phone: json?['phone'] as String,
-          email: json?['email'] as String,
-          uid: json?['uid'] as String,
-          fcmToken: json?['fcmToken'] as String,
-          image: json?['image'] as String,
-          currentPlan: json?['currentPlan'] as String,
-          lastPlanDate: json?['lastPlanDate'] as int,
-          dateCreate: json?['dateCreate'] as int,
+          name: json?['name'] as String?,
+          phone: json?['phone'] as String?,
+          email: json?['email'] as String?,
+          uid: json?['uid'] as String?,
+          fcmToken: json?['fcmToken'] as String?,
+          image: json?['image'] as String?,
+          currentPlan: json?['currentPlan'] as String?,
+          lastPlanDate: json?['lastPlanDate'] as int?,
+          dateCreate: json?['dateCreate'] as int?,
         );
 
   Map<String, dynamic> toJson() {

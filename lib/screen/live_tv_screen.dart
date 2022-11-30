@@ -3,7 +3,6 @@ import 'package:hive/hive.dart';
 import '../../models/all_live_tv_by_category.dart';
 import '../../models/user_model.dart';
 import '../../server/repository.dart';
-import '../../service/authentication_service.dart';
 import '../../style/theme.dart';
 import '../../utils/loadingIndicator.dart';
 import '../../widgets/banner_ads.dart';
@@ -28,7 +27,6 @@ class _LiveTvScreenState extends State<LiveTvScreen> {
   void initState() {
     super.initState();
     isDark = appModeBox.get('isDark') ?? false;
-    authUser = AuthService().getUser();
     if (authUser != null) {}
   }
 
@@ -63,26 +61,6 @@ class _LiveTvScreenState extends State<LiveTvScreen> {
           );
         },
       ),
-      // body: BlocProvider(
-      //   create: (context) => LiveTvBloc(repository: tvRepository),
-      //   child: BlocBuilder<LiveTvBloc, LiveTvState>(
-      //     builder: (context, state) {
-      //       if (state is LiveTvLoadingState) {
-      //         BlocProvider.of<LiveTvBloc>(context).add(FetchAllLiveTVData());
-      //       }
-      //       if (state is LiveTvErrorState) {
-      //         return Center(
-      //           child: Text(AppContent.somethingWentWrong),
-      //         );
-      //       }
-      //       if (state is LiveTVLoadedState) {
-      //         _list = state.channels;
-      //         return buildUI(context);
-      //       }
-      //       return Center(child: spinkit);
-      //     },
-      //   ),
-      // ),
       bottomSheet: BannerAds(
         isDark: isDark,
       ),

@@ -1,7 +1,12 @@
+import 'dart:io' show Platform;
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
+import 'package:oxoo/models/user.dart';
+import 'package:oxoo/network/api_firebase.dart';
 import 'package:oxoo/widgets/movie_details_video_player.dart';
 import 'package:provider/provider.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -10,12 +15,10 @@ import '../../bloc/tv_seris/tv_seris_bloc.dart';
 import '../../constants.dart';
 import '../../models/configuration.dart';
 import '../../models/tv_series_details_model.dart';
-import '../../models/user_model.dart';
 import '../../models/video_comments/all_comments_model.dart';
 import '../../screen/auth/auth_screen.dart';
 import '../../screen/subscription/premium_subscription_screen.dart';
 import '../../server/repository.dart';
-import '../../service/authentication_service.dart';
 import '../../service/get_config_service.dart';
 import '../../strings.dart';
 import '../../style/theme.dart';
@@ -27,7 +30,6 @@ import '../../widgets/share_btn.dart';
 import '../../widgets/tv_series/cast_crew_item_card.dart';
 import '../../widgets/tv_series/episode_item_card.dart';
 import '../../widgets/tv_series/related_tvseries_card.dart';
-import 'dart:io' show Platform;
 
 class TvSerisDetailsScreen extends StatelessWidget {
   final String? seriesID;
@@ -44,91 +46,94 @@ class TvSerisDetailsScreen extends StatelessWidget {
   static bool? isDark;
   var appModeBox = Hive.box('appModeBox');
   bool isLoadingBraintree = false;
-  AuthUser? authUser = AuthService().getUser();
   bool isUserValidSubscriber = false;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //
-  // }
+  UserIDance? userIDance;
 
   @override
   Widget build(BuildContext context) {
     printLog("_TvSerisDetailsScreenState");
 
     isDark = appModeBox.get('isDark') ?? false;
-    isUserValidSubscriber = appModeBox.get('isUserValidSubscriber') ?? false;
     final configService = Provider.of<GetConfigService>(context);
     PaymentConfig? paymentConfig = configService.paymentConfig();
 
-    return Scaffold(
-      backgroundColor:
-          isDark! ? CustomTheme.colorAccentDark : CustomTheme.primaryColor,
-      body: BlocProvider<TvSerisBloc>(
-        create: (BuildContext context) => TvSerisBloc(Repository())
-          ..add(GetTvSerisEvent(
-              seriesId: seriesID,
-              userId: authUser != null ? authUser!.userId.toString() : null)),
-        child: BlocBuilder<TvSerisBloc, TvSerisState>(
-          builder: (context, state) {
-            if (state is TvSerisIsLoaded) {
-              if (isPaid == "1" && authUser == null) {
-                SchedulerBinding.instance.addPostFrameCallback((_) {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AuthScreen(
-                        fromPaidScreen: true,
-                      ),
-                    ),
-                  );
-                });
-              } else {
-                tvSeriesDetailsModel = state.tvSeriesDetailsModel;
-                print("isPaid:${tvSeriesDetailsModel!.isPaid}");
-                if (!isUserValidSubscriber &&
-                    tvSeriesDetailsModel!.isPaid == "1") {
-                  return Scaffold(
-                    backgroundColor:
-                        isDark! ? CustomTheme.black_window : Colors.white,
-                    body: subscriptionInfoDialog(
-                        context: context,
-                        isDark: isDark!,
-                        userId: authUser!.userId.toString()),
-                  );
-                } else {
-                  if (state.tvSeriesDetailsModel != null) {
-                    tvSeriesDetailsModel = state.tvSeriesDetailsModel;
+    return StreamBuilder<DocumentSnapshot>(
+        stream: ApiFirebase().getUserStream(),
+        builder:
+            (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+          if (snapshot.hasError) {
+            userIDance = UserIDance(uid: ApiFirebase().uid);
+          }
+          if (snapshot.hasData) {
+            userIDance = (snapshot.data?.data() ??
+                UserIDance(uid: ApiFirebase().uid)) as UserIDance?;
+          }
+          isUserValidSubscriber = userIDance?.currentPlan != "free";
+          return Scaffold(
+            backgroundColor:
+            isDark! ? CustomTheme.colorAccentDark : CustomTheme.primaryColor,
+            body: BlocProvider<TvSerisBloc>(
+              create: (BuildContext context) => TvSerisBloc(Repository())
+                ..add(GetTvSerisEvent(seriesId: seriesID, userId: ApiFirebase().uid)),
+              child: BlocBuilder<TvSerisBloc, TvSerisState>(
+                builder: (context, state) {
+                  if (state is TvSerisIsLoaded) {
+                    if (isPaid == "1" && !ApiFirebase().isLogin()) {
+                      SchedulerBinding.instance.addPostFrameCallback((_) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AuthScreen(
+                              fromPaidScreen: true,
+                            ),
+                          ),
+                        );
+                      });
+                    } else {
+                      tvSeriesDetailsModel = state.tvSeriesDetailsModel;
+                      print("isPaid:${tvSeriesDetailsModel!.isPaid}");
+                      if (!isUserValidSubscriber &&
+                          tvSeriesDetailsModel!.isPaid == "1") {
+                        return Scaffold(
+                          backgroundColor:
+                          isDark! ? CustomTheme.black_window : Colors.white,
+                          body: subscriptionInfoDialog(
+                              context: context,
+                              isDark: isDark!,
+                              userId: ApiFirebase().uid),
+                        );
+                      } else {
+                        if (state.tvSeriesDetailsModel != null) {
+                          tvSeriesDetailsModel = state.tvSeriesDetailsModel;
 
-                    if (tvSeriesDetailsModel != null) {
-                      if (tvSeriesDetailsModel!.season!.length > 0) {
-                        selectedSeason =
-                            tvSeriesDetailsModel!.season!.elementAt(0);
+                          if (tvSeriesDetailsModel != null) {
+                            if (tvSeriesDetailsModel!.season!.length > 0) {
+                              selectedSeason =
+                                  tvSeriesDetailsModel!.season!.elementAt(0);
+                            }
+                            return Stack(
+                              children: [
+                                buildUI(context, paymentConfig,
+                                    tvSeriesDetailsModel!.videosId),
+                                if (isLoadingBraintree) spinkit,
+                              ],
+                            );
+                          }
+                          return Center(
+                            child: Text(AppContent.loadingData),
+                          );
+                        }
                       }
-                      return Stack(
-                        children: [
-                          buildUI(context, authUser, paymentConfig,
-                              tvSeriesDetailsModel!.videosId),
-                          if (isLoadingBraintree) spinkit,
-                        ],
+                      return Center(
+                        child: spinkit,
                       );
                     }
-                    return Center(
-                      child: Text(AppContent.loadingData),
-                    );
                   }
-                }
-                return Center(
-                  child: spinkit,
-                );
-              }
-            }
-            return Center(child: spinkit);
-          },
-        ),
-      ),
-    );
+                  return Center(child: spinkit);
+                },
+              ),
+            ),
+          );});
   }
 
   ///build subscriptionInfo Dialog
@@ -200,8 +205,8 @@ class TvSerisDetailsScreen extends StatelessWidget {
     );
   }
 
-  Widget buildUI(BuildContext context, AuthUser? authUser,
-      PaymentConfig? paymentConfig, String? videoId) {
+  Widget buildUI(
+      BuildContext context, PaymentConfig? paymentConfig, String? videoId) {
     return FutureBuilder(
       future: Repository().getAllComments(videoId),
       builder:
@@ -411,26 +416,30 @@ class TvSerisDetailsScreen extends StatelessWidget {
                                           print("tapped_on_episodeItem_card");
                                           // isSeriesPlaying = true;
                                           // setState(() {});
-                                          if(Platform.isIOS)
+                                          if (Platform.isIOS)
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
                                                     LandscapePlayer(
-                                                      videoUrl: model.currentSeason
-                                                          ?.episodes![index].fileUrl,
-                                                    ),
+                                                  videoUrl: model
+                                                      .currentSeason
+                                                      ?.episodes![index]
+                                                      .fileUrl,
+                                                ),
                                               ),
                                             );
-                                          if(Platform.isAndroid)
+                                          if (Platform.isAndroid)
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
                                                     MovieDetailsVideoPlayerWidget(
-                                                      videoUrl: model.currentSeason
-                                                          ?.episodes![index].fileUrl,
-                                                    ),
+                                                  videoUrl: model
+                                                      .currentSeason
+                                                      ?.episodes![index]
+                                                      .fileUrl,
+                                                ),
                                               ),
                                             );
                                         },

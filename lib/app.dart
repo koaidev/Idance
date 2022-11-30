@@ -2,33 +2,30 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:app_links/app_links.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:http/http.dart' as http;
 import 'package:oxoo/bloc/bloc.dart';
 import 'package:oxoo/models/payment_object.dart';
+import 'package:oxoo/models/user.dart';
 import 'package:oxoo/network/api_configuration.dart';
+import 'package:oxoo/network/api_firebase.dart';
 import 'package:oxoo/screen/subscription/my_subscription_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:toast/toast.dart';
 
-import '../../bloc/auth/registration_bloc.dart';
-import '../../service/authentication_service.dart';
-import 'bloc/auth/firebase_auth/firebase_auth_bloc.dart';
-import 'bloc/auth/login_bloc.dart';
-import 'bloc/auth/phone_auth/phone_auth_bloc.dart';
 import 'constants.dart';
 import 'models/configuration.dart';
 import 'screen/auth/auth_screen.dart';
 import 'screen/landing_screen.dart';
-import 'server/phone_auth_repository.dart';
 import 'server/repository.dart';
 import 'service/get_config_service.dart';
 import 'utils/route.dart';
-import 'package:http/http.dart' as http;
 
 class MyApp extends StatefulWidget {
   static final String route = "/MyApp";
@@ -45,16 +42,12 @@ class _MyAppState extends State<MyApp> {
   late AppLinks _appLinks;
   StreamSubscription<Uri>? _linkSubscription;
 
-  late StreamSubscription? _conectionSubscription;
-  late StreamSubscription _purchaseUpdatedSubscription;
-  late StreamSubscription _purchaseErrorSubscription;
-  List<PurchasedItem> _purchases = [];
+  StreamSubscription? _conectionSubscription;
 
   int amount = 0;
   String learnCombo = "";
   int timeCanUse = 0;
   int timeExp = 0;
-
 
   Future<http.Response> setVipUser(
     String amount,
@@ -62,11 +55,9 @@ class _MyAppState extends State<MyApp> {
     String timePay = "ID" + DateTime.now().millisecondsSinceEpoch.toString();
     String userId = FirebaseAuth.instance.currentUser!.uid;
     Map<String, String> data = {
-      "user_id":
-      FirebaseAuth.instance.currentUser!.uid
+      "user_id": FirebaseAuth.instance.currentUser!.uid
     };
-    String extraData =
-    base64.encode(utf8.encode(json.encode(data)));
+    String extraData = base64.encode(utf8.encode(json.encode(data)));
     return http.post(
         Uri.parse('https://apppanel.cnagroup.vn/rest_api/v1/new_vip_user'),
         headers: <String, String>{
@@ -92,7 +83,6 @@ class _MyAppState extends State<MyApp> {
     // setState to update our non-existent appearance.
     if (!mounted) return;
 
-
     // refresh items for android
     try {
       String msg = await FlutterInappPurchase.instance.consumeAll();
@@ -105,8 +95,8 @@ class _MyAppState extends State<MyApp> {
         FlutterInappPurchase.connectionUpdated.listen((connected) {
       print('connected: $connected');
     });
-    _purchaseUpdatedSubscription =
-        FlutterInappPurchase.purchaseUpdated.listen((productItem) async {
+
+    FlutterInappPurchase.purchaseUpdated.listen((productItem) async {
       print('purchase-updated: $productItem');
 
       ///start calculate time paid
@@ -158,8 +148,7 @@ class _MyAppState extends State<MyApp> {
       ///end calculate time paid
     });
 
-    _purchaseErrorSubscription =
-        FlutterInappPurchase.purchaseError.listen((purchaseError) {
+    FlutterInappPurchase.purchaseError.listen((purchaseError) {
       print('purchase-error: $purchaseError');
       Toast.show("Lỗi thanh toán: $purchaseError");
     });
@@ -219,50 +208,74 @@ class _MyAppState extends State<MyApp> {
         // then parse the JSON.
         var paymentObject = PaymentObject.fromJson(jsonDecode(response.body));
         if (paymentObject.data != null) {
-          Data data = paymentObject.data![paymentObject.data!.length - 1];
-          if (data.userId != null) {
+          Data data = paymentObject.data![0];
+          UserIDance currentUser = await ApiFirebase().getUser().get().then((value) => value.data() as UserIDance);
+          if (data.userId != null && currentUser.lastPlanDate!<int.parse(data.requestId!.substring(2))) {
             int timePaid = int.parse(data.requestId!.substring(2));
             int amount = int.parse(data.amount!);
-            appModeBox.put("amount", amount);
-            appModeBox.put("timePaid", timePaid);
-
             if (amount == 50000 || amount == 45000) {
               int timeNow = DateTime.now().millisecondsSinceEpoch;
               int timeUseService = timeNow - timePaid;
               if (timeUseService > 2678400000) {
-                appModeBox.put("isUserValidSubscriber", false);
+                final userIDance = {
+                  "currentPlan": "free",
+                };
+                await ApiFirebase().updatePlan(userIDance);
               } else {
-                appModeBox.put("isUserValidSubscriber", true);
+                final userIDance = {
+                  "currentPlan": "vip1",
+                  "lastPlanDate": timePaid
+                };
+                final response = await ApiFirebase().updatePlan(userIDance);
+                if(response){
+                  Toast.show("Bạn đã đăng ký thành công gói cước 1 tháng.",
+                      duration: Toast.lengthLong, gravity: Toast.bottom);
+                  Navigator.popAndPushNamed(context, MySubscriptionScreen.route);
+                }
               }
-              Toast.show("Bạn đã đăng ký thành công gói cước 1 tháng.",
-                  duration: Toast.lengthLong, gravity: Toast.bottom);
-              Navigator.popAndPushNamed(context, MySubscriptionScreen.route);
             }
             if (amount == 120000 || amount == 99000) {
               int timeNow = DateTime.now().millisecondsSinceEpoch;
               int timeUseService = timeNow - timePaid;
-              if (timeUseService > 8035200000) {
-                appModeBox.put("isUserValidSubscriber", false);
-              } else {
-                appModeBox.put("isUserValidSubscriber", true);
-              }
-              Toast.show("Bạn đã đăng ký thành công gói cước 3 tháng.",
-                  duration: Toast.lengthLong, gravity: Toast.bottom);
 
-              Navigator.popAndPushNamed(context, MySubscriptionScreen.route);
+              if (timeUseService > 8035200000) {
+                final userIDance = {
+                  "currentPlan": "free",
+                };
+                await ApiFirebase().updatePlan(userIDance);
+              } else {
+                final userIDance = {
+                  "currentPlan": "vip2",
+                  "lastPlanDate": timePaid
+                };
+                final response = await ApiFirebase().updatePlan(userIDance);
+                if(response){
+                  Toast.show("Bạn đã đăng ký thành công gói cước 3 tháng.",
+                      duration: Toast.lengthLong, gravity: Toast.bottom);
+                  Navigator.popAndPushNamed(context, MySubscriptionScreen.route);
+                }
+              }
             }
             if (amount == 150000 || amount == 149000) {
               int timeNow = DateTime.now().millisecondsSinceEpoch;
               int timeUseService = timeNow - timePaid;
               if (timeUseService > 16070400000) {
-                appModeBox.put("isUserValidSubscriber", false);
+                final userIDance = {
+                  "currentPlan": "free",
+                };
+                await ApiFirebase().updatePlan(userIDance);
               } else {
-                appModeBox.put("isUserValidSubscriber", true);
+                final userIDance = {
+                  "currentPlan": "vip3",
+                  "lastPlanDate": timePaid
+                };
+                final response = await ApiFirebase().updatePlan(userIDance);
+                if(response){
+                  Toast.show("Bạn đã đăng ký thành công gói cước 6 tháng.",
+                      duration: Toast.lengthLong, gravity: Toast.bottom);
+                  Navigator.popAndPushNamed(context, MySubscriptionScreen.route);
+                }
               }
-              Toast.show("Bạn đã đăng ký thành công gói cước 6 tháng.",
-                  duration: Toast.lengthLong, gravity: Toast.bottom);
-
-              Navigator.popAndPushNamed(context, MySubscriptionScreen.route);
             }
           }
         }
@@ -296,8 +309,6 @@ class _MyAppState extends State<MyApp> {
 class Splash extends StatelessWidget {
   const Splash({Key? key}) : super(key: key);
   static bool? isDark = true;
-  static bool? isUserValidSubscriber = false;
-
   get appModeBox => Hive.box("appModeBox");
 
   @override
@@ -307,8 +318,6 @@ class Splash extends StatelessWidget {
       appModeBox.put('isDark', true);
     }
 
-    // bool lightMode =
-    //     MediaQuery.of(context).platformBrightness == Brightness.light;
     return Scaffold(
       backgroundColor:
           isDark! ? const Color(0xffe1f5fe) : const Color(0xff042a49),
@@ -351,9 +360,6 @@ class AfterSplash extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider<AuthService>(
-          create: (context) => AuthService(),
-        ),
         Provider<GetConfigService>(
           create: (context) => GetConfigService(),
         ),
@@ -365,15 +371,6 @@ class AfterSplash extends StatelessWidget {
             // BlocProvider<LoginBloc>(
             //   create: (context) => LoginBloc(Repository()),
             // ),
-            BlocProvider<PhoneAuthBloc>(
-                create: (context) =>
-                    PhoneAuthBloc(userRepository: UserRepository())),
-            // BlocProvider<RegistrationBloc>(
-            //   create: (context) => RegistrationBloc(Repository()),
-            // ),
-            BlocProvider<FirebaseAuthBloc>(
-              create: (context) => FirebaseAuthBloc(Repository()),
-            ),
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,

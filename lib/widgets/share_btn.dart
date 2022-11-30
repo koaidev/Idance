@@ -1,7 +1,8 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:io';
+
+import 'package:app_review/app_review.dart';
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
-import 'package:package_info/package_info.dart';
 import '../strings.dart';
 
 class ShareApp extends StatefulWidget {
@@ -15,24 +16,32 @@ class ShareApp extends StatefulWidget {
 }
 
 class _ShareAppState extends State<ShareApp> {
-  PackageInfo _packageInfo = PackageInfo(
-    appName: 'AppName',
-    version: 'Unknown',
-    buildNumber: 'Unknown',
-    packageName: '',
-  );
+  String appID = "";
+  String output = "";
 
   @override
   initState() {
     super.initState();
     _initPackageInfo();
+    AppReview.getAppID.then(log);
+    if (Platform.isIOS) {
+      AppReview.requestReview.then((onValue) {
+        print(onValue);
+      });
+    }
   }
 
   Future<void> _initPackageInfo() async {
-    final PackageInfo info = await PackageInfo.fromPlatform();
-    setState(() {
-      _packageInfo = info;
-    });
+
+  }
+
+  void log(String? message) {
+    if (message != null) {
+      setState(() {
+        output = message;
+      });
+      print(message);
+    }
   }
 
   @override
@@ -45,7 +54,7 @@ class _ShareAppState extends State<ShareApp> {
             "\n" +
             "\n" +
             "https://play.google.com/store/apps/details?id=" +
-            _packageInfo.packageName;
+            appID;
         Share.share(shareText);
       },
       child: Icon(Icons.share, color: widget.color),

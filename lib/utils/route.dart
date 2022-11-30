@@ -7,7 +7,6 @@ import '../../screen/all_country_screen.dart';
 import '../../screen/auth/auth_screen.dart';
 import '../../screen/auth/signIn_screen.dart';
 import '../../screen/auth/sign_up_screen.dart';
-import '../../screen/content_country_based_screen.dart';
 import '../../screen/downloads_screen.dart';
 import '../../screen/favourite_screen.dart';
 import '../../screen/genre_screen.dart';
@@ -18,8 +17,6 @@ import '../../screen/movie/movie_reply_screen.dart';
 import '../../screen/movie_by_genere_id.dart';
 import '../../screen/movie_screen.dart';
 import '../../screen/movies_by_star_id.dart';
-import '../../screen/pass_reset_screen.dart';
-import '../../screen/phon_auth_screen.dart';
 import '../../screen/profile/my_profile_screen.dart';
 import '../../screen/settings_screen.dart';
 import '../../screen/subscription/my_subscription_screen.dart';
@@ -64,7 +61,6 @@ class Routes {
       DownloadScreen.route: (_) => DownloadScreen(),
       MyApp.route: (_) => MyApp(),
       RenderFirstScreen.route: (_) => RenderFirstScreen(),
-      ResetPassword.route: (_) => ResetPassword(),
       ContentByStarScreen.route: (_) => ContentByStarScreen(),
     };
   }

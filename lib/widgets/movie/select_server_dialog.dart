@@ -1,12 +1,14 @@
+import 'dart:io' show Platform;
+
 import 'package:flutter/material.dart';
 import 'package:oxoo/constants.dart';
+
 import '../../models/videos.dart';
 import '../../strings.dart';
 import '../../style/theme.dart';
 import '../movie_details_video_player.dart';
 import '../movie_play_for_ios.dart';
 import 'movie_details_youtube_player.dart';
-import 'dart:io' show Platform;
 
 class SelectServerDialog {
   createDialog(context, List<Videos> videos, bool? isDark) {
@@ -78,23 +80,25 @@ class SelectServerDialog {
                                         break;
                                       case "mp4":
                                         {
-                                          if(Platform.isAndroid)
+                                          if (Platform.isAndroid)
                                             Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         MovieDetailsVideoPlayerWidget(
                                                             videoUrl: videos
-                                                                .elementAt(index)
+                                                                .elementAt(
+                                                                    index)
                                                                 .fileUrl)));
-                                          if(Platform.isIOS)
+                                          if (Platform.isIOS)
                                             Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         LandscapePlayer(
                                                             videoUrl: videos
-                                                                .elementAt(index)
+                                                                .elementAt(
+                                                                    index)
                                                                 .fileUrl)));
                                           //statements;
                                         }
@@ -102,23 +106,25 @@ class SelectServerDialog {
                                       default:
                                         {
                                           //statements;
-                                          if(Platform.isAndroid)
+                                          if (Platform.isAndroid)
                                             Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         MovieDetailsVideoPlayerWidget(
                                                             videoUrl: videos
-                                                                .elementAt(index)
+                                                                .elementAt(
+                                                                    index)
                                                                 .fileUrl)));
-                                          if(Platform.isIOS)
+                                          if (Platform.isIOS)
                                             Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         LandscapePlayer(
                                                             videoUrl: videos
-                                                                .elementAt(index)
+                                                                .elementAt(
+                                                                    index)
                                                                 .fileUrl)));
                                         }
                                         break;
@@ -180,23 +186,25 @@ class SelectServerDialog {
 
                                       case "mp4":
                                         {
-                                          if(Platform.isAndroid)
+                                          if (Platform.isAndroid)
                                             Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         MovieDetailsVideoPlayerWidget(
                                                             videoUrl: videos
-                                                                .elementAt(index)
+                                                                .elementAt(
+                                                                    index)
                                                                 .fileUrl)));
-                                          if(Platform.isIOS)
+                                          if (Platform.isIOS)
                                             Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         LandscapePlayer(
                                                             videoUrl: videos
-                                                                .elementAt(index)
+                                                                .elementAt(
+                                                                    index)
                                                                 .fileUrl)));
                                           //statements;
                                         }
@@ -204,23 +212,25 @@ class SelectServerDialog {
                                       default:
                                         {
                                           //statements;
-                                          if(Platform.isAndroid)
+                                          if (Platform.isAndroid)
                                             Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         MovieDetailsVideoPlayerWidget(
                                                             videoUrl: videos
-                                                                .elementAt(index)
+                                                                .elementAt(
+                                                                    index)
                                                                 .fileUrl)));
-                                          if(Platform.isIOS)
+                                          if (Platform.isIOS)
                                             Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         LandscapePlayer(
                                                             videoUrl: videos
-                                                                .elementAt(index)
+                                                                .elementAt(
+                                                                    index)
                                                                 .fileUrl)));
                                         }
                                         break;

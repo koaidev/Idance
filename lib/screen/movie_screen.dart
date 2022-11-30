@@ -112,13 +112,6 @@ class _MoviesScreenState extends State<MoviesScreen> {
       onTap: () async {
         printLog("----------movieScreen: movie item clicked");
         currentMovieId = model.videosId;
-        // if (await (interstitial.isLoaded as FutureOr<bool>)) {
-        //   printLog("---------ad loaded");
-        //   interstitial.show();
-        //   return;
-        // } else {
-        //   Navigator.pushNamed(context, MovieDetailScreen.route, arguments: {"movieID": currentMovieId});
-        // }
         Navigator.pushNamed(context, MovieDetailScreen.route, arguments: {"movieID": currentMovieId});
       },
       child: ClipRRect(

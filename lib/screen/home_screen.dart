@@ -12,8 +12,6 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../models/configuration.dart';
 import '../../models/home_content.dart';
 import '../../widgets/banner_ads.dart';
-import '../models/user_model.dart';
-import '../service/authentication_service.dart';
 import '../service/get_config_service.dart';
 import '../strings.dart';
 import '../style/theme.dart';
@@ -44,56 +42,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final authService = Provider.of<AuthService>(context);
     final configService = Provider.of<GetConfigService>(context);
 
-    AuthUser? authUser = authService.getUser();
-    PaymentConfig? paymentConfig = configService.paymentConfig();
+    // PaymentConfig? paymentConfig = configService.paymentConfig();
     AppConfig? appConfig = configService.appConfig();
 
     return Scaffold(
-      // floatingActionButton: FabCircularMenu(
-      //   children: [
-      //     Spacer(flex: 2),
-      //     GestureDetector(
-      //         onTap: () {
-      //           _launchURL('https://m.me/idanceeee');
-      //         },
-      //         child: Container(
-      //           height: 60,
-      //           width: 60,
-      //           padding: EdgeInsets.all(5),
-      //           decoration: BoxDecoration(
-      //               borderRadius: BorderRadius.all(Radius.circular(15)),
-      //               color: Colors.white),
-      //           child: Image.asset(
-      //             "assets/images/messenger.png",
-      //             fit: BoxFit.fill,
-      //           ),
-      //         )),
-      //     Spacer(flex: 1),
-      //     GestureDetector(
-      //         onTap: () {
-      //           _launchURL("https://zalo.me/g/gxdkue195");
-      //         },
-      //         child: Container(
-      //           height: 60,
-      //           width: 60,
-      //           decoration: BoxDecoration(
-      //               borderRadius: BorderRadius.all(Radius.circular(15)),
-      //               color: Colors.white),
-      //           child: Image.asset(
-      //             "assets/images/zalo_icon.png",
-      //             fit: BoxFit.fill,
-      //           ),
-      //         )),
-      //   ],
-      //   fabSize: 60,
-      //   fabOpenIcon: Icon(Icons.support_agent_rounded),
-      //   fabOpenColor: Colors.red,
-      //   ringColor: Colors.transparent,
-      //   fabColor: CustomTheme.gradient2.colors[1],
-      // ),
       floatingActionButton: ExpandableFab(
         distance: 112.0,
         children: [
@@ -121,8 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
           if (snapshot.hasData) {
             return buildUI(
                 context: context,
-                authUser: authUser,
-                paymentConfig: paymentConfig,
+                // paymentConfig: paymentConfig,
                 appConfig: appConfig,
                 homeContent: snapshot.data);
           } else if (snapshot.hasError) {
@@ -144,8 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget buildUI(
       {BuildContext? context,
-      PaymentConfig? paymentConfig,
-      AuthUser? authUser,
+      // PaymentConfig? paymentConfig,
       AppConfig? appConfig,
       required HomeContent homeContent}) {
     return CustomScrollView(

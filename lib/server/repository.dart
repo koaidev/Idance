@@ -360,7 +360,7 @@ class Repository {
   }
 
   Future<MovieDetailsModel> getMovieDetailsData(
-      {String? movieId, String? userId}) async {
+      {String? movieId}) async {
     dio.options.headers = ConfigApi().getHeaders();
 
     final response = await dio.get(
@@ -422,6 +422,8 @@ class Repository {
         FavouriteListModel favouriteListModel =
             FavouriteListModel.fromJson(response.data);
         return favouriteListModel.favouriteListModel;
+      }else{
+        return null;
       }
     } catch (ex) {
       return null;
@@ -438,6 +440,8 @@ class Repository {
         FavouriteResponseModel favouriteResponseModel =
             FavouriteResponseModel.fromJson(response.data);
         return favouriteResponseModel;
+      }else{
+        return null;
       }
     } catch (ex) {
       return null;

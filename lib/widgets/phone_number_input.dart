@@ -1,8 +1,6 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../bloc/auth/phone_auth/phone_auth_bloc.dart';
-import '../../bloc/auth/phone_auth/phone_auth_event.dart';
 import '../../style/theme.dart';
 import '../../utils/button_widget.dart';
 import '../../utils/edit_text_utils.dart';
@@ -49,8 +47,6 @@ class NumberInput extends StatelessWidget {
                 onTap: () {
                   if (_formKey.currentState!.validate()) {
                     /*print(_selectedCountryCode);*/
-                    BlocProvider.of<PhoneAuthBloc>(context).add(SendOtpEvent(
-                        phoNo: _selectedCountryCode! + _phoneTextController.value.text));
                   }
                 },
                 child: HelpMe().submitButton(screnWidth, AppContent.continueText)),

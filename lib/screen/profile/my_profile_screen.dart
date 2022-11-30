@@ -1,23 +1,26 @@
 import 'dart:async';
 import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../../constants.dart';
 import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:provider/provider.dart';
+import 'package:oxoo/models/user.dart';
+import 'package:oxoo/network/api_firebase.dart';
+
+import '../../app.dart';
+import '../../constants.dart';
 import '../../models/password_set_model.dart';
 import '../../models/user_details_model.dart';
 import '../../server/repository.dart';
-import '../../service/authentication_service.dart';
+import '../../strings.dart';
 import '../../style/theme.dart';
 import '../../utils/button_widget.dart';
 import '../../utils/edit_text_utils.dart';
 import '../../utils/loadingIndicator.dart';
 import '../../utils/profile_text_field.dart';
 import '../../utils/validators.dart';
-import '../../app.dart';
-import '../../strings.dart';
 
 class MyProfileScreen extends StatefulWidget {
   static final String route = '/MyProfileScreen';
@@ -41,10 +44,8 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   TextEditingController accountDeactivateReasonController =
       new TextEditingController();
   TextEditingController deleteController = new TextEditingController();
-  ProfileDetailsModel? profileDetailsModel;
   SubmitResponseModel? _accountDeactivate;
   double? editTextWidth;
-  late AuthService authService;
   bool isupdating = false;
   List<String> users = <String>['Male', 'Female'];
   String? selectedGender = 'Male';
@@ -52,7 +53,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   var appModeBox = Hive.box('appModeBox');
   final picker = ImagePicker();
   File? _image;
-  String? userId;
+  UserIDance? userIDance;
 
   //get Image Function
   Future getImage() async {
@@ -67,51 +68,49 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   @override
   void initState() {
     isDark = appModeBox.get('isDark') ?? false;
-    userId = AuthService().getUser()!.userId;
-    fetchData();
     super.initState();
-  }
-
-  fetchData() async {
-    profileDetailsModel = await Repository().userDetailsData(userID: userId);
-    if (profileDetailsModel != null) {
-      selectedGender = profileDetailsModel!.gender;
-      fullNameController =
-          TextEditingController(text: profileDetailsModel!.name);
-      emailController = TextEditingController(text: profileDetailsModel!.email);
-      phoneController = TextEditingController(text: profileDetailsModel!.phone);
-
-      setState(() {});
-    }
   }
 
   @override
   Widget build(BuildContext context) {
     printLog("_MyProfileScreenState");
-    authService = Provider.of<AuthService>(context);
     editTextWidth = MediaQuery.of(context).size.width;
 
-    return Scaffold(
-      key: _scaffoldKey,
-      appBar: _renderAppBar(),
-      body: Stack(
-        alignment: Alignment.center,
-        children: [
-          Container(
-            color:
-                isDark! ? CustomTheme.primaryColorDark : CustomTheme.whiteColor,
-            child: profileDetailsModel != null
-                ? SingleChildScrollView(
-                    child: _renderProfileWidget(userId),
-                  )
-                : Center(
-                    child: spinkit,
-                  ),
-          ),
-          if (isupdating) spinkit,
-        ],
-      ),
-    );
+    return StreamBuilder<DocumentSnapshot>(
+        stream: ApiFirebase().getUserStream(),
+        builder:
+            (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+          if (snapshot.hasError) {
+            userIDance = UserIDance(uid: ApiFirebase().uid);
+          }
+          if (snapshot.hasData) {
+            userIDance = (snapshot.data?.data() ??
+                UserIDance(uid: ApiFirebase().uid)) as UserIDance?;
+          }
+          // isUserValidSubscriber = userIDance?.currentPlan != "free";
+          return Scaffold(
+            key: _scaffoldKey,
+            appBar: _renderAppBar(),
+            body: Stack(
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  color: isDark!
+                      ? CustomTheme.primaryColorDark
+                      : CustomTheme.whiteColor,
+                  child: ApiFirebase().isLogin()
+                      ? SingleChildScrollView(
+                          child: _renderProfileWidget(ApiFirebase().uid),
+                        )
+                      : Center(
+                          child: spinkit,
+                        ),
+                ),
+                if (isupdating) spinkit,
+              ],
+            ),
+          );
+        });
   }
 
   _renderAppBar() {
@@ -142,7 +141,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                         borderRadius: BorderRadius.all(Radius.circular(75)),
                         child: _image == null
                             ? Image.network(
-                                profileDetailsModel!.imageUrl!,
+                                userIDance?.image ?? "https://play-lh.googleusercontent.com/gbzvBNR9VaSxWKp2oMx2Dvl93cqb04EtQTxJPc1WKky_WMM2vYGI4faZ5MxVoFsk0SFp=w240-h480-rw",
                                 fit: BoxFit.fill,
                               )
                             : Image.file(
@@ -184,7 +183,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
 
                 ProfileTextField().getCustomEditTextField(
                   style: CustomTheme.bodyTextgray2,
-                  hintValue: profileDetailsModel!.name,
+                  hintValue: userIDance?.name,
                   controller: fullNameController,
                   validator: (value) {
                     return validateNotEmpty(value);
@@ -200,7 +199,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                 ProfileTextField().getCustomEditTextField(
                   style: CustomTheme.bodyTextgray2,
                   hintValue:
-                      profileDetailsModel!.email ?? profileDetailsModel!.email,
+                      userIDance?.email ?? "email",
                   controller: emailController,
                   height: 50.0,
                   // validator: (value) {
@@ -215,120 +214,120 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                 ProfileTextField().getCustomEditTextField(
                     controller: phoneController,
                     style: CustomTheme.bodyTextgray2,
-                    hintValue: profileDetailsModel!.phone ??
+                    hintValue: userIDance?.phone ??
                         AppContent.phonewithCountryCode,
                     validator: (value) {
                       return validateNotEmpty(value);
                     }),
                 HelpMe().space(10.0),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Container(
-                    width: 200.0,
-                    height: 30.0,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                        border: Border.all(color: Colors.grey)),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 6.0),
-                      child: new DropdownButton<String>(
-                        value: selectedGender,
-                        isExpanded: true,
-                        underline: Container(
-                          width: 0.0,
-                          height: 0.0,
-                        ),
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            selectedGender = newValue;
-                          });
-                        },
-                        items: users.map((user) {
-                          return new DropdownMenuItem<String>(
-                            value: user,
-                            child: new Text(
-                              user,
-                              style: new TextStyle(color: Colors.grey),
-                            ),
-                          );
-                        }).toList(),
-                      ),
-                    ),
-                  ),
-                ),
+                // Align(
+                //   alignment: Alignment.centerLeft,
+                //   child: Container(
+                //     width: 200.0,
+                //     height: 30.0,
+                //     decoration: BoxDecoration(
+                //         borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                //         border: Border.all(color: Colors.grey)),
+                //     child: Padding(
+                //       padding: const EdgeInsets.symmetric(horizontal: 6.0),
+                //       child: new DropdownButton<String>(
+                //         value: selectedGender,
+                //         isExpanded: true,
+                //         underline: Container(
+                //           width: 0.0,
+                //           height: 0.0,
+                //         ),
+                //         onChanged: (String? newValue) {
+                //           setState(() {
+                //             selectedGender = newValue;
+                //           });
+                //         },
+                //         items: users.map((user) {
+                //           return new DropdownMenuItem<String>(
+                //             value: user,
+                //             child: new Text(
+                //               user,
+                //               style: new TextStyle(color: Colors.grey),
+                //             ),
+                //           );
+                //         }).toList(),
+                //       ),
+                //     ),
+                //   ),
+                // ),
                 SizedBox(height: 20.0),
 
-                if (profileDetailsModel!.passwordAvailable!)
-                  Container(
-                    height: 35.0,
-                    child: TextFormField(
-                      controller: passwordController,
-                      decoration: InputDecoration(
-                        hintText: AppContent.currentPassword,
-                        hintStyle: TextStyle(color: Colors.grey),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.grey),
-                        ),
-                        border: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.grey),
-                        ),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.grey),
-                        ),
-                      ),
-                      style: CustomTheme.bodyTextgray2,
-                      obscureText: true,
-                    ),
-                  ),
-                _space(20),
+                // if (profileDetailsModel!.passwordAvailable!)
+                //   Container(
+                //     height: 35.0,
+                //     child: TextFormField(
+                //       controller: passwordController,
+                //       decoration: InputDecoration(
+                //         hintText: AppContent.currentPassword,
+                //         hintStyle: TextStyle(color: Colors.grey),
+                //         focusedBorder: UnderlineInputBorder(
+                //           borderSide: BorderSide(color: Colors.grey),
+                //         ),
+                //         border: UnderlineInputBorder(
+                //           borderSide: BorderSide(color: Colors.grey),
+                //         ),
+                //         enabledBorder: UnderlineInputBorder(
+                //           borderSide: BorderSide(color: Colors.grey),
+                //         ),
+                //       ),
+                //       style: CustomTheme.bodyTextgray2,
+                //       obscureText: true,
+                //     ),
+                //   ),
+                // _space(20),
 
                 //set password
-                if (!profileDetailsModel!.passwordAvailable!)
-                  InkWell(
-                      onTap: () async {
-                        setPasswordDialog(userId, isDark);
-                      },
-                      child: HelpMe()
-                          .submitButton(editTextWidth, AppContent.setPassword)),
-
-                _space(20),
+                // if (!profileDetailsModel!.passwordAvailable!)
+                //   InkWell(
+                //       onTap: () async {
+                //         setPasswordDialog(userId, isDark);
+                //       },
+                //       child: HelpMe()
+                //           .submitButton(editTextWidth, AppContent.setPassword)),
+                //
+                // _space(20),
                 //save changes button
-                if (profileDetailsModel!.passwordAvailable!)
-                  InkWell(
-                      onTap: () async {
-                        isupdating = true;
-                        setState(() {});
-                        if (_formKey.currentState!.validate()) {
-                          String name = fullNameController.text;
-                          String email = emailController.text.toString();
-                          String? gender = selectedGender;
-                          String password = passwordController.text.toString();
-                          String phone = phoneController.text.toString();
-                          ProfileDetailsModel model = ProfileDetailsModel(
-                            name: name,
-                            email: email,
-                            gender: gender,
-                            phone: phone,
-                            userId: userId,
-                          );
-                          SubmitResponseModel? profileDetailsModel =
-                              await Repository().userUpdateData(
-                                  profileDetailsModel: model,
-                                  password: password,
-                                  image: _image);
-
-                          if (profileDetailsModel != null) {
-                            showShortToast(profileDetailsModel.data!, context);
-                            isupdating = false;
-                            setState(() {
-                              profileDetailsModel = profileDetailsModel;
-                            });
-                          }
-                        }
-                      },
-                      child: HelpMe()
-                          .submitButton(editTextWidth, AppContent.saveChanges)),
-                _space(50),
+                // if (profileDetailsModel!.passwordAvailable!)
+                //   InkWell(
+                //       onTap: () async {
+                //         isupdating = true;
+                //         setState(() {});
+                //         if (_formKey.currentState!.validate()) {
+                //           String name = fullNameController.text;
+                //           String email = emailController.text.toString();
+                //           String? gender = selectedGender;
+                //           String password = passwordController.text.toString();
+                //           String phone = phoneController.text.toString();
+                //           ProfileDetailsModel model = ProfileDetailsModel(
+                //             name: name,
+                //             email: email,
+                //             gender: gender,
+                //             phone: phone,
+                //             userId: userId,
+                //           );
+                //           SubmitResponseModel? profileDetailsModel =
+                //               await Repository().userUpdateData(
+                //                   profileDetailsModel: model,
+                //                   password: password,
+                //                   image: _image);
+                //
+                //           if (profileDetailsModel != null) {
+                //             showShortToast(profileDetailsModel.data!, context);
+                //             isupdating = false;
+                //             setState(() {
+                //               profileDetailsModel = profileDetailsModel;
+                //             });
+                //           }
+                //         }
+                //       },
+                //       child: HelpMe()
+                //           .submitButton(editTextWidth, AppContent.saveChanges)),
+                // _space(50),
                 Text(
                   AppContent.deactivateMessage,
                   textAlign: TextAlign.center,
@@ -433,15 +432,17 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
 
                             if (password == confirmPassword) {
                               // SubmitResponseModel passwordSetModel =
-                                  await (Repository().setUserPassword(
-                                          userID: userId,
-                                          password: password,
-                                          firebaseAuthUid: uid).then((value){
-                                    showShortToast(value!.data!,context);
-                                    setPasswordController.clear();
-                                    confirmPasswordController.clear();
-                                    Navigator.of(context).pop();
-                                  })) ;
+                              await (Repository()
+                                  .setUserPassword(
+                                      userID: userId,
+                                      password: password,
+                                      firebaseAuthUid: uid)
+                                  .then((value) {
+                                showShortToast(value!.data!, context);
+                                setPasswordController.clear();
+                                confirmPasswordController.clear();
+                                Navigator.of(context).pop();
+                              }));
                             } else {
                               showShortToast("password don't match", context);
                             }
@@ -564,9 +565,12 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   //accountDeactivate Function
   accountDeactivate(context) async {
     _accountDeactivate = await Repository().accountDeactivate(
-        userId: userId, reason: accountDeactivateReasonController.value.text, context: context);
+        userId: ApiFirebase().uid,
+        reason: accountDeactivateReasonController.value.text,
+        context: context);
     if (_accountDeactivate != null) {
-      if (authService.getUser() != null) authService.deleteUser();
+      if (ApiFirebase().isLogin()) await ApiFirebase().getUser().delete();
+      await FirebaseAuth.instance.signOut();
       Navigator.of(context).pop();
       Navigator.push(
         context,

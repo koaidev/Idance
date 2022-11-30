@@ -1,46 +1,50 @@
 import 'package:app_review/app_review.dart';
 import 'package:flutter/material.dart';
-import '../../service/authentication_service.dart';
 import 'package:hive/hive.dart';
+
 import '../../screen/terms_polices.dart';
 import '../../strings.dart';
 import '../../style/theme.dart';
-import 'package:package_info/package_info.dart';
 import '../../utils/button_widget.dart';
 import '../constants.dart';
 
 class SettingScreen extends StatefulWidget {
   static final String route = "/SettingScreen";
+
   @override
   _SettingScreenState createState() => _SettingScreenState();
 }
 
 class _SettingScreenState extends State<SettingScreen> {
   String? output = "";
-  PackageInfo _packageInfo = PackageInfo(
-    appName: 'AppName',
-    version: 'Unknown',
-    buildNumber: 'Unknown',
-    packageName: '',
-  );
+  String appId = "";
+  String? buildNumber = "";
+  String? version = "";
 
   static bool? isDark;
   var appModeBox = Hive.box('appModeBox');
-  AuthService authService = AuthService();
   bool _switchValue = true;
 
   @override
   initState() {
     super.initState();
-    _initPackageInfo();
+    AppReview.getAppID.then(log);
+    AppReview.getPackageInfo().then((value) {
+      setState(() {
+        buildNumber = value?.buildNumber;
+        version = value?.version;
+      });
+    });
     isDark = appModeBox.get('isDark') ?? false;
   }
 
-  Future<void> _initPackageInfo() async {
-    final PackageInfo info = await PackageInfo.fromPlatform();
-    setState(() {
-      _packageInfo = info;
-    });
+  void log(String? message) {
+    if (message != null) {
+      setState(() {
+        appId = message;
+      });
+      print(message);
+    }
   }
 
   @override
@@ -161,7 +165,7 @@ class _SettingScreenState extends State<SettingScreen> {
                           ? CustomTheme.bodyText2BoldWhite
                           : CustomTheme.bodyText2Bold),
                   Text(
-                    "${_packageInfo.version}(${_packageInfo.buildNumber})",
+                    "$version($buildNumber)",
                     style: isDark!
                         ? CustomTheme.bodyText3White
                         : CustomTheme.bodyText3,

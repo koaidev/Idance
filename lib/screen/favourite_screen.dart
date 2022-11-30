@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pagewise/flutter_pagewise.dart';
+import 'package:oxoo/network/api_firebase.dart';
 import '../../models/favourite_model.dart';
 import '../../models/user_model.dart';
 import '../../screen/movie/movie_details_screen.dart';
 import '../../server/repository.dart';
-import '../../service/authentication_service.dart';
 import '../../strings.dart';
 import '../../style/theme.dart';
 import '../../utils/loadingIndicator.dart';
@@ -18,7 +18,6 @@ class FavouriteScreen extends StatelessWidget {
   static const int PAGE_SIZE = 100000;
   static const int PAGE_NUMBER = 1;
   var appModeBox = Hive.box('appModeBox');
-  AuthUser? authUser = AuthService().getUser();
   late bool isDark;
 
   @override
@@ -42,7 +41,7 @@ class FavouriteScreen extends StatelessWidget {
   }
 
   Widget buildUI() {
-    return authUser != null
+    return ApiFirebase().isLogin()
         ? Container(
             color: isDark ? CustomTheme.primaryColorDark : CustomTheme.whiteColor,
             child: PagewiseGridView.count(
@@ -57,7 +56,7 @@ class FavouriteScreen extends StatelessWidget {
                 pageFuture: (pageIndex) {
                   printLog(pageIndex);
                   String pageNumber = (pageIndex! * PAGE_NUMBER + 1).toString();
-                  return Repository().favouriteData(authUser!.userId, pageNumber).then((value) => value!);
+                  return Repository().favouriteData(ApiFirebase().uid, pageNumber).then((value) => value!);
                 }),
           )
         : Center(child: Text(AppContent.noItemFound, style: isDark ? CustomTheme.bodyText2White : CustomTheme.bodyText2));

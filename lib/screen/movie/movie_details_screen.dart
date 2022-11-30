@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:isolate';
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -10,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:hive/hive.dart';
 import 'package:oxoo/bloc/movie_details/movie_details_bloc.dart';
+import 'package:oxoo/network/api_firebase.dart';
 import 'package:oxoo/widgets/movie/movie_poster.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -20,20 +22,17 @@ import '../../constants.dart';
 import '../../models/configuration.dart';
 import '../../models/favourite_response_model.dart';
 import '../../models/movie_details_model.dart';
-import '../../models/user_model.dart';
-import '../../models/video_comments/ad_comments_model.dart';
+import '../../models/user.dart';
 import '../../models/video_comments/all_comments_model.dart';
 import '../../screen/auth/auth_screen.dart';
 import '../../screen/subscription/premium_subscription_screen.dart';
 import '../../server/repository.dart';
-import '../../service/authentication_service.dart';
 import '../../service/get_config_service.dart';
 import '../../strings.dart';
 import '../../style/theme.dart';
 import '../../utils/button_widget.dart';
 import '../../utils/loadingIndicator.dart';
 import '../../utils/validators.dart';
-import '../../widgets/movie/select_download_dialog.dart';
 import '../../widgets/movie/select_server_dialog.dart';
 import '../../widgets/share_btn.dart';
 import '../../widgets/tv_series/cast_crew_item_card.dart';
@@ -58,6 +57,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
   late bool _permissionReady;
   TargetPlatform? platform;
   String? _localPath;
+  UserIDance? userIDance;
 
   bool isUserValidSubscriber = false;
 
@@ -65,7 +65,6 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
   void initState() {
     super.initState();
     isDark = appModeBox.get('isDark') ?? false;
-    isUserValidSubscriber = appModeBox.get('isUserValidSubscriber') ?? false;
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     _permissionReady = false;
     _prepare();
@@ -133,71 +132,83 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
   Widget build(BuildContext context) {
     final routes =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
-    final authService = Provider.of<AuthService>(context);
-    AuthUser? authUser = authService.getUser();
 
     final configService = Provider.of<GetConfigService>(context);
     PaymentConfig? paymentConfig = configService.paymentConfig();
     platform = Theme.of(context).platform;
     ToastContext().init(context);
-    return Scaffold(
-      body: Container(
-        color: isDark! ? CustomTheme.primaryColorDark : Colors.white,
-        child: BlocProvider<MovieDetailsBloc>(
-          create: (BuildContext context) =>
-              MovieDetailsBloc(repository: Repository())
-                ..add(GetMovieDetailsEvent(
-                    movieID: routes!['movieID'] ?? widget.movieID,
-                    userID: authUser != null ? authUser.userId : null)),
-          child: BlocBuilder<MovieDetailsBloc, MovieDetailsState>(
-            builder: (context, state) {
-              if (state is MovieDetailsLoadedState) {
-                movieDetailsModel = state.movieDetails;
-                if (movieDetailsModel.isPaid == "1" && authUser == null) {
-                  SchedulerBinding.instance.addPostFrameCallback((_) {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => AuthScreen(
-                                fromPaidScreen: true,
-                              )),
-                    );
-                  });
-                } else {
-                  if (!isUserValidSubscriber &&
-                      movieDetailsModel.isPaid == "1") {
-                    return Scaffold(
-                      backgroundColor:
-                          isDark! ? CustomTheme.black_window : Colors.white,
-                      body: subscriptionInfoDialog(
-                          context: context,
-                          isDark: isDark!,
-                          userId: authUser!.userId.toString()),
-                    );
-                  } else {
-                    isDownloadEnable =
-                        movieDetailsModel.enableDownload.toString() == "1"
-                            ? true
-                            : false;
-                    return buildUI(context, authUser, paymentConfig,
-                        movieDetailsModel.videosId);
-                  }
-                }
-                return spinkit;
-              } else if (state is MovieDetailsErrorState) {
-                printLog("------------movie details erorr: ${state.message}");
-              }
-              return spinkit;
-            },
-          ),
-        ),
-      ),
-    );
+    return StreamBuilder<DocumentSnapshot>(
+        stream: ApiFirebase().getUserStream(),
+        builder:
+            (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+          if (snapshot.hasError) {
+            userIDance = UserIDance(uid: ApiFirebase().uid);
+          }
+          if (snapshot.hasData) {
+            userIDance = (snapshot.data?.data() ??
+                UserIDance(uid: ApiFirebase().uid)) as UserIDance?;
+          }
+          isUserValidSubscriber = userIDance?.currentPlan != "free";
+
+          return Scaffold(
+            body: Container(
+              color: isDark! ? CustomTheme.primaryColorDark : Colors.white,
+              child: BlocProvider<MovieDetailsBloc>(
+                create: (BuildContext context) =>
+                MovieDetailsBloc(repository: Repository())
+                  ..add(GetMovieDetailsEvent(
+                      movieID: routes!['movieID'] ?? widget.movieID,
+                      userID: ApiFirebase().uid)),
+                child: BlocBuilder<MovieDetailsBloc, MovieDetailsState>(
+                  builder: (context, state) {
+                    if (state is MovieDetailsLoadedState) {
+                      movieDetailsModel = state.movieDetails;
+                      if (movieDetailsModel.isPaid == "1" &&
+                          !ApiFirebase().isLogin()) {
+                        SchedulerBinding.instance.addPostFrameCallback((_) {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AuthScreen(
+                                  fromPaidScreen: true,
+                                )),
+                          );
+                        });
+                      } else {
+                        if (!isUserValidSubscriber &&
+                            movieDetailsModel.isPaid == "1") {
+                          return Scaffold(
+                            backgroundColor:
+                            isDark! ? CustomTheme.black_window : Colors.white,
+                            body: subscriptionInfoDialog(
+                                context: context,
+                                isDark: isDark!,
+                                userId: ApiFirebase().uid),
+                          );
+                        } else {
+                          isDownloadEnable =
+                          movieDetailsModel.enableDownload.toString() == "1"
+                              ? true
+                              : false;
+                          return buildUI(
+                              context, paymentConfig, movieDetailsModel.videosId);
+                        }
+                      }
+                      return spinkit;
+                    } else if (state is MovieDetailsErrorState) {
+                      printLog("------------movie details erorr: ${state.message}");
+                    }
+                    return spinkit;
+                  },
+                ),
+              ),
+            ),
+          );});
   }
 
   ///build movie screen UI
-  Widget buildUI(BuildContext context, AuthUser? authUser,
-      PaymentConfig? paymentConfig, String? videoId) {
+  Widget buildUI(
+      BuildContext context, PaymentConfig? paymentConfig, String? videoId) {
     return FutureBuilder(
       future: Repository().getAllComments(videoId),
       builder:
@@ -265,8 +276,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                 )),
                             Row(
                               children: [
-                                if (authUser != null)
-                                  favouriteMovie(authUser.userId, videoId),
+                                if (ApiFirebase().isLogin())
+                                  favouriteMovie(ApiFirebase().uid, videoId),
                                 SizedBox(
                                   width: 8.0,
                                 ),
@@ -835,7 +846,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                           });
                         }) as FutureOr<FavouriteResponseModel>);
                       },
-                      icon: Icon(Icons.favorite_outlined, color: CustomTheme.primaryColorRed))
+                      icon: Icon(Icons.favorite_outlined,
+                          color: CustomTheme.primaryColorRed))
                   : IconButton(
                       onPressed: () async {
                         await (Repository()
@@ -847,7 +859,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                           });
                         }) as FutureOr<FavouriteResponseModel>);
                       },
-                      icon: Icon(Icons.favorite_border, color: CustomTheme.whiteColor));
+                      icon: Icon(Icons.favorite_border,
+                          color: CustomTheme.whiteColor));
             return Container();
         }
       },

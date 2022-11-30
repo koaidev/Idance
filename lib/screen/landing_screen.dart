@@ -1,31 +1,24 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
-import 'package:flutter_inapp_purchase/modules.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
-import 'package:http/http.dart' as http;
 import 'package:onesignal_flutter/onesignal_flutter.dart';
-import 'package:oxoo/models/payment_object.dart';
-import 'package:oxoo/network/api_configuration.dart';
+import 'package:oxoo/network/api_firebase.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../constants.dart';
-import '../../models/user_model.dart';
 import '../../screen/auth/auth_screen.dart';
 import '../../screen/profile/my_profile_screen.dart';
 import '../../screen/search/search_result_screen.dart';
 import '../../screen/settings_screen.dart';
 import '../../screen/subscription/my_subscription_screen.dart';
-import '../../service/authentication_service.dart';
 import '../app.dart';
 import '../config.dart';
-import '../constants.dart';
 import '../models/drawer_model.dart';
 import '../screen/favourite_screen.dart';
 import '../screen/genre_screen.dart';
@@ -55,74 +48,16 @@ class _LandingScreenState extends State<LandingScreen>
   late TabController _controller;
   int _selectedIndex = 0;
   FocusNode? myFocusNode;
-  final _auth = FirebaseAuth.instance;
-  AuthService authService = AuthService();
   static bool isDark = false;
   bool activeSearch = false;
   var appModeBox = Hive.box('appModeBox');
   String? userID;
-  AuthUser? authUser = AuthService().getUser();
-  List<PurchasedItem> _purchases = [];
-  late StreamSubscription? _conectionSubscription;
+  StreamSubscription? _conectionSubscription;
 
   int amount = 0;
   String learnCombo = "";
   int timeCanUse = 0;
   int timeExp = 0;
-
-  checkPaymentUser() async {
-    if (FirebaseAuth.instance.currentUser != null) {
-      final response = await http.get(Uri.parse(ConfigApi().getPaymentStatusUrl(
-          FirebaseAuth.instance.currentUser!.uid.toString())));
-      if (response.statusCode == 200) {
-        // If the server did return a 200 OK response,
-        // then parse the JSON.
-        var paymentObject = PaymentObject.fromJson(jsonDecode(response.body));
-        if (paymentObject.data != null) {
-          Data data = paymentObject.data![paymentObject.data!.length - 1];
-          if (data.userId != null) {
-            int timePaid = int.parse(data.requestId!.substring(2));
-            int amount = int.parse(data.amount!);
-            appModeBox.put("amount", amount);
-            appModeBox.put("timePaid", timePaid);
-
-            if (amount == 50000||amount==45000) {
-              int timeNow = DateTime.now().millisecondsSinceEpoch;
-              int timeUseService = timeNow - timePaid;
-              if (timeUseService > 2678400000) {
-                appModeBox.put("isUserValidSubscriber", false);
-              } else {
-                appModeBox.put("isUserValidSubscriber", true);
-              }
-            }
-            if (amount == 120000||amount==99000) {
-              int timeNow = DateTime.now().millisecondsSinceEpoch;
-              int timeUseService = timeNow - timePaid;
-              if (timeUseService > 8035200000) {
-                appModeBox.put("isUserValidSubscriber", false);
-              } else {
-                appModeBox.put("isUserValidSubscriber", true);
-              }
-            }
-            if (amount == 150000||amount==149000) {
-              int timeNow = DateTime.now().millisecondsSinceEpoch;
-              int timeUseService = timeNow - timePaid;
-              if (timeUseService > 16070400000) {
-                appModeBox.put("isUserValidSubscriber", false);
-              } else {
-                appModeBox.put("isUserValidSubscriber", true);
-              }
-            }
-          }
-        }
-      } else {
-        // If the server did not return a 200 OK response,
-        // then throw an exception.
-        throw Exception('Failed to load album');
-      }
-    }
-  }
-
 
   @override
   void dispose() {
@@ -135,23 +70,16 @@ class _LandingScreenState extends State<LandingScreen>
     super.dispose();
   }
 
-
   @override
   void initState() {
-
+    asyncInitState();
     _conectionSubscription =
         FlutterInappPurchase.connectionUpdated.listen((connected) {
-          print('connected: $connected');
-        });
+      print('connected: $connected');
+    });
 
-    appModeBox.delete("isUserValidSubscriber");
-    amount = appModeBox.get("amount") ?? 0;
-    // _getPurchaseHistory();
     _controller = new TabController(vsync: this, length: 5, initialIndex: 1);
     super.initState();
-
-    checkPaymentUser();
-
     myFocusNode = FocusNode();
     KeyboardVisibilityController().onChange.listen((bool visible) {
       print('Keyboard visibility update. Is visible: $visible');
@@ -161,6 +89,10 @@ class _LandingScreenState extends State<LandingScreen>
 
     SchedulerBinding.instance
         .addPostFrameCallback((_) => configOneSignal(context));
+  }
+
+  void asyncInitState() async {
+    await FlutterInappPurchase.instance.initialize();
   }
 
   void _onItemTapped(int index) {
@@ -197,15 +129,6 @@ class _LandingScreenState extends State<LandingScreen>
       printLog("---------ID and Type: {$id $type}");
 
       switch (type) {
-        // case "tv":
-        //   Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //         builder: (context) => LiveTvDetailsScreen(
-        //               liveTvId: id,
-        //             )),
-        //   );
-        //   break;
         case "movie":
           Navigator.pushNamed(context, MovieDetailScreen.route,
               arguments: {"movieID": id});
@@ -275,7 +198,7 @@ class _LandingScreenState extends State<LandingScreen>
               Container(
                 color: isDark ? Colors.transparent : Colors.white,
                 height: MediaQuery.of(context).size.height,
-                child: authService.getUser() != null
+                child: ApiFirebase().isLogin()
                     ? drawerContent(drawerListItemFirst)
                     : drawerContentWithoutLogin(drawerListItemWithoutLogin),
               )
@@ -360,7 +283,7 @@ class _LandingScreenState extends State<LandingScreen>
           : Text(
               _widgetTitle.elementAt(_selectedIndex),
               style: TextStyle(
-                fontFamily: _selectedIndex==0 ? 'Horizon' : 'Montserrat',
+                fontFamily: _selectedIndex == 0 ? 'Horizon' : 'Montserrat',
               ),
             ),
     );
@@ -503,10 +426,7 @@ class _LandingScreenState extends State<LandingScreen>
                           actions: <Widget>[
                             GestureDetector(
                                 onTap: () async {
-                                  await _auth.signOut();
-                                  if (authService.getUser() != null)
-                                    authService.deleteUser();
-                                  //subscription key will be deleted here
+                                  await FirebaseAuth.instance.signOut();
                                   Navigator.of(dialogContext)
                                       .pushAndRemoveUntil(
                                           MaterialPageRoute(
@@ -653,5 +573,4 @@ class _LandingScreenState extends State<LandingScreen>
           );
         });
   }
-
 }

@@ -39,16 +39,6 @@ PaymentObject copyWith({  int? status,
 
 }
 
-/// id : "29"
-/// order_id : "ID1650502463041"
-/// request_id : "ID1650502463041"
-/// amount : "50000"
-/// order_info : "uvvuvuv - 05868683 - Gói học 1 tháng"
-/// message : "Giao dịch thành công."
-/// user_id : "SjwXCRBYGOO78IfxNGy5MbESUM92"
-/// created_at : null
-/// updated_at : null
-
 class Data {
   Data({
       String? id, 

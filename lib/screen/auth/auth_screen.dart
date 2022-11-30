@@ -3,29 +3,20 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hive/hive.dart';
-import 'package:provider/provider.dart';
-import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:oxoo/network/api_firebase.dart';
 import 'package:toast/toast.dart';
 
-import '../../bloc/auth/firebase_auth/firebase_auth_bloc.dart';
-import '../../bloc/auth/firebase_auth/firebase_auth_event.dart';
-import '../../bloc/auth/firebase_auth/firebase_auth_state.dart';
-import '../../config.dart';
 import '../../constants.dart';
-import '../../models/user_model.dart';
+import '../../models/user.dart';
 import '../../screen/landing_screen.dart';
-import '../../service/authentication_service.dart';
 import '../../strings.dart';
 import '../../style/theme.dart';
 import '../../utils/button_widget.dart';
-import '../phon_auth_screen.dart';
+import '../../utils/validators.dart';
 import 'signIn_screen.dart';
-
-final FirebaseAuth _auth = FirebaseAuth.instance;
 
 class AuthScreen extends StatefulWidget {
   static final String route = '/AuthScreen';
@@ -38,7 +29,6 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
-  late Bloc firebaseAuthBloc;
   bool isLoading = false;
   var appModeBox = Hive.box('appModeBox');
   late bool fromPaidScreen;
@@ -47,7 +37,6 @@ class _AuthScreenState extends State<AuthScreen> {
 
   @override
   void initState() {
-    firebaseAuthBloc = BlocProvider.of<FirebaseAuthBloc>(context);
     fromPaidScreen = widget.fromPaidScreen ?? false;
     isDark = appModeBox.get('isDark') ?? false;
 
@@ -58,8 +47,7 @@ class _AuthScreenState extends State<AuthScreen> {
   Widget build(BuildContext context) {
     printLog("_AuthScreenState");
     ToastContext().init(context);
-    final AuthService authService = Provider.of<AuthService>(context);
-    _isLogged = authService.getUser() != null ? true : false;
+    _isLogged = ApiFirebase().isLogin();
 
     if (_isLogged) {
       return LandingScreen();
@@ -103,27 +91,17 @@ class _AuthScreenState extends State<AuthScreen> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      // if (Config.enablePhoneAuth)
-                      //   phoneAuthWidget(
-                      //     color: CustomTheme.springGreen,
-                      //     title: AppContent.loginWithPhone,
-                      //     imagePath: "ic_button_phone",
-                      //   ),
-                      if (Config.enableFacebookAuth)
-                        socialAuthWidget(
-                            color: CustomTheme.royalBlue,
-                            title: AppContent.loginWithFacebook,
-                            imagePath: "ic_button_facebook",
-                            authService: authService,
-                            function: signInWithFacebook),
-                      if (Config.enableGoogleAuth)
-                        socialAuthWidget(
-                          color: CustomTheme.dodgerBlue,
-                          title: AppContent.loginWithGoogle,
-                          imagePath: "ic_button_google",
-                          authService: authService,
-                          function: signInWithGoogle,
-                        ),
+                      socialAuthWidget(
+                          color: CustomTheme.royalBlue,
+                          title: AppContent.loginWithFacebook,
+                          imagePath: "ic_button_facebook",
+                          function: signInWithFacebook),
+                      socialAuthWidget(
+                        color: CustomTheme.dodgerBlue,
+                        title: AppContent.loginWithGoogle,
+                        imagePath: "ic_button_google",
+                        function: signInWithGoogle,
+                      ),
                       InkWell(
                           onTap: () {
                             Navigator.push(
@@ -140,8 +118,7 @@ class _AuthScreenState extends State<AuthScreen> {
                             color: Colors.white,
                             title: AppContent.loginWithApple,
                             imagePath: "ic_button_apple",
-                            authService: authService,
-                            function: _signInwithApple,
+                            function: signInWithApple,
                             isApple: true),
                       HelpMe().space(90.0),
                     ],
@@ -160,124 +137,104 @@ class _AuthScreenState extends State<AuthScreen> {
       {Color? color,
       String? title,
       String? imagePath,
-      AuthService? authService,
       Function? function,
       bool isApple = false,
       Color? titleColor}) {
-    return BlocListener<FirebaseAuthBloc, FirebaseAuthState>(
-      listener: (context, state) {
-        if (state is FirebaseAuthStateCompleted) {
-          AuthUser? user = state.getUser;
-          if (user == null) {
-            firebaseAuthBloc.add(FirebaseAuthFailed);
-          } else {
-            // print(user.toJson().toString());
-            authService!.updateUser(user);
-            isLoading = false;
-            if (authService.getUser() != null) {
-              Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (context) => LandingScreen()),
-                  (Route<dynamic> route) => false);
+    return InkWell(
+      onTap: () async {
+        setState(() {
+          isLoading = true;
+        });
+        UserCredential fbUser = await function!();
+        if (fbUser.user != null) {
+
+          if (!await ApiFirebase()
+              .checkUserIsExits()) {
+            final user = fbUser.user!;
+            final userIDance = UserIDance(
+                name: user.displayName,
+                phone: user.phoneNumber,
+                uid: user.uid,
+                currentPlan: "free",
+                dateCreate: DateTime.now()
+                    .millisecondsSinceEpoch,
+                email: user.email,
+                fcmToken: user.refreshToken,
+                image: user.photoURL,
+                lastPlanDate: DateTime.now()
+                    .millisecondsSinceEpoch);
+            final response = await ApiFirebase()
+                .register(userIDance);
+            if (response) {
+              Navigator.of(context)
+                  .pushAndRemoveUntil(
+                  MaterialPageRoute(
+                      builder:
+                          (context) =>
+                          LandingScreen()),
+                      (Route<dynamic> route) =>
+                  false);
+            } else {
+              showShortToast(
+                  "Lỗi đã xảy ra. Vui lòng thử cách khác.",
+                  context);
+              setState(() {
+                isLoading = false;
+              });
             }
+          } else {
+            Navigator.of(context)
+                .pushAndRemoveUntil(
+                MaterialPageRoute(
+                    builder:
+                        (context) =>
+                        LandingScreen()),
+                    (Route<dynamic> route) =>
+                false);
           }
-        } else if (state is FirebaseAuthFailedState) {
-          firebaseAuthBloc.add(FirebaseAuthNotStarted());
+        } else {
+          showShortToast("Lỗi đã xảy ra. Vui lòng thử cách khác.", context);
+          setState(() {
+            isLoading = false;
+          });
         }
       },
-      child: BlocBuilder<FirebaseAuthBloc, FirebaseAuthState>(
-        builder: (context, state) {
-          return InkWell(
-            onTap: () async {
-              setState(() {
-                isLoading = true;
-              });
-              User fbUser = await function!();
-              firebaseAuthBloc.add(FirebaseAuthStarted());
-              firebaseAuthBloc.add(FirebaseAuthCompleting(
-                uid: fbUser.uid,
-                email: fbUser.email,
-                phone: fbUser.phoneNumber,
-              ));
-            },
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
-              child: Container(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 10.0, vertical: 10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 10.0,
-                      ),
-                      Image.asset(
-                        'assets/images/$imagePath.png',
-                        width: 20.0,
-                        height: 20.0,
-                      ),
-                      Spacer(flex:1),
-                      Text(title!,
-                          style: isApple
-                              ? CustomTheme.authBtnTitleBlack
-                              : CustomTheme.authBtnTitle),
-                      Spacer(flex:1),
-                      SizedBox(
-                        width: 10.0,
-                      ),
-                    ],
-                  ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
+        child: Container(
+          child: Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 10.0,
                 ),
-                decoration: BoxDecoration(
-                    color: color,
-                    borderRadius: BorderRadius.all(Radius.circular(4.0))),
-              ),
+                Image.asset(
+                  'assets/images/$imagePath.png',
+                  width: 20.0,
+                  height: 20.0,
+                ),
+                Spacer(flex: 1),
+                Text(title!,
+                    style: isApple
+                        ? CustomTheme.authBtnTitleBlack
+                        : CustomTheme.authBtnTitle),
+                Spacer(flex: 1),
+                SizedBox(
+                  width: 10.0,
+                ),
+              ],
             ),
-          );
-        },
+          ),
+          decoration: BoxDecoration(
+              color: color,
+              borderRadius: BorderRadius.all(Radius.circular(4.0))),
+        ),
       ),
     );
   }
-
-  // Widget phoneAuthWidget(
-  //     {Color? color, required String title, String? imagePath}) {
-  //   return InkWell(
-  //     onTap: () {
-  //       Navigator.pushNamed(context, PhoneAuthScreen.route);
-  //     },
-  //     child: Padding(
-  //       padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
-  //       child: Container(
-  //         child: Padding(
-  //           padding:
-  //               const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-  //           child: Row(
-  //             mainAxisAlignment: MainAxisAlignment.center,
-  //             children: [
-  //               Image.asset(
-  //                 'assets/images/$imagePath.png',
-  //                 width: 20.0,
-  //                 height: 20.0,
-  //               ),
-  //               SizedBox(
-  //                 width: 10.0,
-  //               ),
-  //               Text(
-  //                 title,
-  //                 style: CustomTheme.authBtnTitle,
-  //               ),
-  //             ],
-  //           ),
-  //         ),
-  //         decoration: BoxDecoration(
-  //           color: color,
-  //           borderRadius: BorderRadius.all(Radius.circular(4.0)),
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
 
   Widget mailAuthWidget(
       {Color? color, required String title, String? imagePath}) {
@@ -291,19 +248,24 @@ class _AuthScreenState extends State<AuthScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(width: 10,),
+                SizedBox(
+                  width: 10,
+                ),
                 Image.asset(
                   'assets/images/$imagePath.png',
                   width: 20.0,
                   height: 20.0,
                 ),
-                Spacer(flex: 1,),
-
+                Spacer(
+                  flex: 1,
+                ),
                 Text(
                   title,
                   style: CustomTheme.authBtnTitle,
                 ),
-                Spacer(flex: 1,),
+                Spacer(
+                  flex: 1,
+                ),
                 SizedBox(
                   width: 10.0,
                 ),
@@ -319,7 +281,7 @@ class _AuthScreenState extends State<AuthScreen> {
     );
   }
 
-  Future<User?> signInWithGoogle() async {
+  Future<UserCredential> signInWithGoogle() async {
     // Trigger the authentication flow
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
@@ -332,58 +294,12 @@ class _AuthScreenState extends State<AuthScreen> {
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
-    try {
-      final User user = (await _auth.signInWithCredential(credential)).user!;
-      if (user.email != null && user.email != "") {
-        assert(user.email != null);
-      }
-      assert(user.displayName != null);
-      assert(!user.isAnonymous);
 
-      final User currentUser = _auth.currentUser!;
-      assert(user.uid == currentUser.uid);
-
-      // Once signed in, return the UserCredential
-      return user;
-    } catch (e) {
-      setState(() {
-        isLoading = false;
-        Toast.show("Lỗi: $e. \nVui lòng chọn phương thức đăng nhập khác.",
-            duration: Toast.lengthShort, gravity: Toast.bottom);
-      });
-      return null;
-    }
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
-  Future<User> _signInwithApple() async {
-    final appleCredential = await SignInWithApple.getAppleIDCredential(
-      scopes: [
-        AppleIDAuthorizationScopes.email,
-        AppleIDAuthorizationScopes.fullName,
-      ],
-    );
-    print("appleCredential = $appleCredential");
-    final OAuthProvider oAuthProvider = OAuthProvider('apple.com');
-    final credential = oAuthProvider.credential(
-        idToken: appleCredential.identityToken,
-        accessToken: appleCredential.authorizationCode);
-    final User user = (await _auth.signInWithCredential(credential)).user!;
-    print(user.email);
-    if (user.email != null && user.email != "") {
-      assert(user.email != null);
-    }
-    if (user.displayName != null && user.displayName != "") {
-      assert(user.displayName != null);
-    }
-    assert(!user.isAnonymous);
-
-    final User currentUser = _auth.currentUser!;
-    assert(user.uid == currentUser.uid);
-    return user;
-  }
-
-  // ignore: missing_return
-  Future<User?> signInWithFacebook() async {
+  Future<UserCredential> signInWithFacebook() async {
     // Trigger the sign-in flow
     final LoginResult loginResult = await FacebookAuth.instance.login();
 
@@ -392,25 +308,11 @@ class _AuthScreenState extends State<AuthScreen> {
         FacebookAuthProvider.credential(loginResult.accessToken!.token);
 
     // Once signed in, return the UserCredential
-    try {
-      final User user =
-          (await _auth.signInWithCredential(facebookAuthCredential)).user!;
-      if (user.email != null && user.email != "") {
-        assert(user.email != null);
-      }
-      assert(user.displayName != null);
-      assert(!user.isAnonymous);
+    return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+  }
 
-      final User currentUser = _auth.currentUser!;
-      assert(user.uid == currentUser.uid);
-      return user;
-    } catch (e) {
-      setState(() {
-        isLoading = false;
-        Toast.show("Lỗi: $e. \nVui lòng chọn phương thức đăng nhập khác.",
-            duration: Toast.lengthShort, gravity: Toast.bottom);
-      });
-      return null;
-    }
+  Future<UserCredential> signInWithApple() async {
+    final appleProvider = AppleAuthProvider();
+    return FirebaseAuth.instance.signInWithProvider(appleProvider);
   }
 }

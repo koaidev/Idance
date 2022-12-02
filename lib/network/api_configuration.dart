@@ -7,10 +7,6 @@ class ConfigApi {
     return Config.apiServerUrl + "v130";
   }
 
-  String getPaymentStatusUrl(String id) {
-    return "https://apppanel.cnagroup.vn/rest_api/v1/id/$id";
-  }
-
   Map<String, String> getHeaders() {
     /*authorization*/
     String username = 'nguyennam.3695@gmail.com';

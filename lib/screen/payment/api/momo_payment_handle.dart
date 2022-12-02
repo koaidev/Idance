@@ -14,26 +14,25 @@ class MomoPayment {
   static Future<PaymentMomoResponse> createPayment(
       PaymentMomoCreate momoCreate) async {
     final response =
-        await http.post(Uri.parse(ConfigApi().getMomoServerUrlCreate()),
-            headers: <String, String>{
-              'Content-Type': 'application/json; charset=UTF-8',
-            },
-            body: jsonEncode(<String, dynamic>{
-              "partnerCode": momoCreate.partnerCode,
-              "partnerName": momoCreate.partnerName,
-              "storeId": momoCreate.storeId,
-              "requestType": momoCreate.requestType,
-              "ipnUrl": momoCreate.ipnUrl,
-              "redirectUrl": momoCreate.redirectUrl,
-              "orderId": momoCreate.orderId,
-              // "amount": momoCreate.amount,
-              "amount": 1000,
-              "lang": momoCreate.lang,
-              "orderInfo": momoCreate.orderInfo,
-              "requestId": momoCreate.requestId,
-              "extraData": momoCreate.extraData,
-              "signature": momoCreate.signature
-            }));
+    await http.post(Uri.parse(ConfigApi().getMomoServerUrlCreate()),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, dynamic>{
+          "partnerCode": momoCreate.partnerCode,
+          "partnerName": momoCreate.partnerName,
+          "storeId": momoCreate.storeId,
+          "requestType": momoCreate.requestType,
+          "ipnUrl": momoCreate.ipnUrl,
+          "redirectUrl": momoCreate.redirectUrl,
+          "orderId": momoCreate.orderId,
+          "amount": momoCreate.amount,
+          "lang": momoCreate.lang,
+          "orderInfo": momoCreate.orderInfo,
+          "requestId": momoCreate.requestId,
+          "extraData": momoCreate.extraData,
+          "signature": momoCreate.signature
+        }));
 
     if (response.statusCode == 200) {
       // If the server did return a 200 CREATED response,

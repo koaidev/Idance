@@ -135,8 +135,11 @@ class _MySubscriptionScreenState extends State<MySubscriptionScreen> {
                                     Navigator.pushNamed(context,
                                         PremiumSubscriptionScreen.route);
                                   },
-                                  child: HelpMe().submitButton(
-                                      300, AppContent.upgradePurchase)),
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: HelpMe().submitButton(
+                                        300, AppContent.upgradePurchase),
+                                  )),
                           ],
                         ),
                       )),

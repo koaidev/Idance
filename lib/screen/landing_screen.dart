@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:oxoo/network/api_firebase.dart';
+import 'package:toast/toast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../constants.dart';
@@ -20,6 +22,9 @@ import '../../screen/subscription/my_subscription_screen.dart';
 import '../app.dart';
 import '../config.dart';
 import '../models/drawer_model.dart';
+import '../models/payment_object.dart';
+import '../models/user.dart';
+import '../network/api_configuration.dart';
 import '../screen/favourite_screen.dart';
 import '../screen/genre_screen.dart';
 import '../strings.dart';
@@ -32,6 +37,8 @@ import 'movie/movie_details_screen.dart';
 import 'movie_screen.dart';
 import 'tv_series/tv_series_details_screen.dart';
 import 'tv_series_screen.dart';
+import 'package:http/http.dart' as http;
+
 
 class LandingScreen extends StatefulWidget {
   static final String route = "LandingScreen";
@@ -89,6 +96,96 @@ class _LandingScreenState extends State<LandingScreen>
 
     SchedulerBinding.instance
         .addPostFrameCallback((_) => configOneSignal(context));
+    if(FirebaseAuth.instance.currentUser!=null){
+      checkPaymentUser();
+    }
+  }
+
+  checkPaymentUser() async {
+    if (FirebaseAuth.instance.currentUser != null) {
+      final uid = FirebaseAuth.instance.currentUser!.uid;
+      final response = await http.get(Uri.parse("http://apppanel.cnagroup.vn/rest_api/v1/id/$uid"));
+      if (response.statusCode == 200) {
+        print("IPN body: "+ response.body);
+        // If the server did return a 200 OK response,
+        // then parse the JSON.
+        var paymentObject = PaymentObject.fromJson(jsonDecode(response.body));
+        if (paymentObject.data != null) {
+          Data data = paymentObject.data![0];
+          UserIDance currentUser = await ApiFirebase().getUser().get().then((value) => value.data() as UserIDance);
+          if (data.userId != null && currentUser.lastPlanDate!<int.parse(data.requestId!.substring(2))) {
+            int timePaid = int.parse(data.requestId!.substring(2));
+            int amount = int.parse(data.amount!);
+            if (amount == 50000 || amount == 45000) {
+              int timeNow = DateTime.now().millisecondsSinceEpoch;
+              int timeUseService = timeNow - timePaid;
+              if (timeUseService > 2678400000) {
+                final userIDance = {
+                  "currentPlan": "free",
+                };
+                await ApiFirebase().updatePlan(userIDance);
+              } else {
+                final userIDance = {
+                  "currentPlan": "vip1",
+                  "lastPlanDate": timePaid
+                };
+                final response = await ApiFirebase().updatePlan(userIDance);
+                if(response){
+                  Toast.show("Bạn đã đăng ký thành công gói cước 1 tháng.",
+                      duration: Toast.lengthLong, gravity: Toast.bottom);
+                  Navigator.popAndPushNamed(context, MySubscriptionScreen.route);
+                }
+              }
+            }
+            if (amount == 120000 || amount == 99000) {
+              int timeNow = DateTime.now().millisecondsSinceEpoch;
+              int timeUseService = timeNow - timePaid;
+
+              if (timeUseService > 8035200000) {
+                final userIDance = {
+                  "currentPlan": "free",
+                };
+                await ApiFirebase().updatePlan(userIDance);
+              } else {
+                final userIDance = {
+                  "currentPlan": "vip2",
+                  "lastPlanDate": timePaid
+                };
+                final response = await ApiFirebase().updatePlan(userIDance);
+                if(response){
+                  Toast.show("Bạn đã đăng ký thành công gói cước 3 tháng.",
+                      duration: Toast.lengthLong, gravity: Toast.bottom);
+                  Navigator.popAndPushNamed(context, MySubscriptionScreen.route);
+                }
+              }
+            }
+            if (amount == 150000 || amount == 149000) {
+              int timeNow = DateTime.now().millisecondsSinceEpoch;
+              int timeUseService = timeNow - timePaid;
+              if (timeUseService > 16070400000) {
+                final userIDance = {
+                  "currentPlan": "free",
+                };
+                await ApiFirebase().updatePlan(userIDance);
+              } else {
+                final userIDance = {
+                  "currentPlan": "vip3",
+                  "lastPlanDate": timePaid
+                };
+                final response = await ApiFirebase().updatePlan(userIDance);
+                if(response){
+                  Toast.show("Bạn đã đăng ký thành công gói cước 6 tháng.",
+                      duration: Toast.lengthLong, gravity: Toast.bottom);
+                  Navigator.popAndPushNamed(context, MySubscriptionScreen.route);
+                }
+              }
+            }
+          }
+        }
+      } else {
+        print("IPN Error: "+ response.body);
+      }
+    }
   }
 
   void asyncInitState() async {

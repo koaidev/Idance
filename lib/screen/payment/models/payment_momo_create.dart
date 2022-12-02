@@ -20,19 +20,19 @@ class PaymentMomoCreate {
 
   PaymentMomoCreate(
       {required this.partnerCode,
-      required this.partnerName,
-      required this.storeId,
-      required this.requestType,
-      required this.ipnUrl,
-      required this.redirectUrl,
-      required this.orderId,
-      required this.amount,
-      required this.lang,
-      required this.orderInfo,
-      required this.requestId,
-      required this.extraData,
-      required this.autoCapture,
-      required this.signature});
+        required this.partnerName,
+        required this.storeId,
+        required this.requestType,
+        required this.ipnUrl,
+        required this.redirectUrl,
+        required this.orderId,
+        required this.amount,
+        required this.lang,
+        required this.orderInfo,
+        required this.requestId,
+        required this.extraData,
+        required this.autoCapture,
+        required this.signature});
 
   // factory PaymentMomoCreate.fromJson(Map<String, dynamic> json) {
   //   return PaymentMomoCreate(

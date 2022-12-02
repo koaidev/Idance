@@ -19,7 +19,7 @@ class PaymentMomoResponse {
       this.resultCode,
       this.payUrl,
       this.deeplink,
-     );
+      );
 
   static PaymentMomoResponse fromMap(Map<String?, dynamic> map) {
     String partnerCode = map["partnerCode"];

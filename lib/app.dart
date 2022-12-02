@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:app_links/app_links.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,10 +10,6 @@ import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:oxoo/bloc/bloc.dart';
-import 'package:oxoo/models/payment_object.dart';
-import 'package:oxoo/models/user.dart';
-import 'package:oxoo/network/api_configuration.dart';
-import 'package:oxoo/network/api_firebase.dart';
 import 'package:oxoo/screen/subscription/my_subscription_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:toast/toast.dart';
@@ -195,94 +190,7 @@ class _MyAppState extends State<MyApp> {
     _linkSubscription = _appLinks.uriLinkStream.listen((uri) {
       print('onAppLink: $uri');
       openAppLink(uri);
-      checkPaymentUser();
     });
-  }
-
-  checkPaymentUser() async {
-    if (FirebaseAuth.instance.currentUser != null) {
-      final response = await http.get(Uri.parse(ConfigApi().getPaymentStatusUrl(
-          FirebaseAuth.instance.currentUser!.uid.toString())));
-      if (response.statusCode == 200) {
-        // If the server did return a 200 OK response,
-        // then parse the JSON.
-        var paymentObject = PaymentObject.fromJson(jsonDecode(response.body));
-        if (paymentObject.data != null) {
-          Data data = paymentObject.data![0];
-          UserIDance currentUser = await ApiFirebase().getUser().get().then((value) => value.data() as UserIDance);
-          if (data.userId != null && currentUser.lastPlanDate!<int.parse(data.requestId!.substring(2))) {
-            int timePaid = int.parse(data.requestId!.substring(2));
-            int amount = int.parse(data.amount!);
-            if (amount == 50000 || amount == 45000) {
-              int timeNow = DateTime.now().millisecondsSinceEpoch;
-              int timeUseService = timeNow - timePaid;
-              if (timeUseService > 2678400000) {
-                final userIDance = {
-                  "currentPlan": "free",
-                };
-                await ApiFirebase().updatePlan(userIDance);
-              } else {
-                final userIDance = {
-                  "currentPlan": "vip1",
-                  "lastPlanDate": timePaid
-                };
-                final response = await ApiFirebase().updatePlan(userIDance);
-                if(response){
-                  Toast.show("Bạn đã đăng ký thành công gói cước 1 tháng.",
-                      duration: Toast.lengthLong, gravity: Toast.bottom);
-                  Navigator.popAndPushNamed(context, MySubscriptionScreen.route);
-                }
-              }
-            }
-            if (amount == 120000 || amount == 99000) {
-              int timeNow = DateTime.now().millisecondsSinceEpoch;
-              int timeUseService = timeNow - timePaid;
-
-              if (timeUseService > 8035200000) {
-                final userIDance = {
-                  "currentPlan": "free",
-                };
-                await ApiFirebase().updatePlan(userIDance);
-              } else {
-                final userIDance = {
-                  "currentPlan": "vip2",
-                  "lastPlanDate": timePaid
-                };
-                final response = await ApiFirebase().updatePlan(userIDance);
-                if(response){
-                  Toast.show("Bạn đã đăng ký thành công gói cước 3 tháng.",
-                      duration: Toast.lengthLong, gravity: Toast.bottom);
-                  Navigator.popAndPushNamed(context, MySubscriptionScreen.route);
-                }
-              }
-            }
-            if (amount == 150000 || amount == 149000) {
-              int timeNow = DateTime.now().millisecondsSinceEpoch;
-              int timeUseService = timeNow - timePaid;
-              if (timeUseService > 16070400000) {
-                final userIDance = {
-                  "currentPlan": "free",
-                };
-                await ApiFirebase().updatePlan(userIDance);
-              } else {
-                final userIDance = {
-                  "currentPlan": "vip3",
-                  "lastPlanDate": timePaid
-                };
-                final response = await ApiFirebase().updatePlan(userIDance);
-                if(response){
-                  Toast.show("Bạn đã đăng ký thành công gói cước 6 tháng.",
-                      duration: Toast.lengthLong, gravity: Toast.bottom);
-                  Navigator.popAndPushNamed(context, MySubscriptionScreen.route);
-                }
-              }
-            }
-          }
-        }
-      } else {
-        throw Exception('Failed to load album');
-      }
-    }
   }
 
   @override

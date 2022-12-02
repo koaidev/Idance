@@ -125,35 +125,35 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                           ),
                           Expanded(
                               child: Text(
-                            "CNA GROUP",
-                            style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14),
-                          ))
+                                "CNA GROUP",
+                                style: TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14),
+                              ))
                         ],
                       ),
                       SizedBox(height: 5),
                       Row(mainAxisSize: MainAxisSize.min, children: [
                         Expanded(
                             child: Text(
-                          "Liên hệ",
-                          style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              color: Colors.red,
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold),
-                        )),
+                              "Liên hệ",
+                              style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  color: Colors.red,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold),
+                            )),
                         Expanded(
                             child: Text(
-                          "0888.430.620",
-                          style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              color: Colors.black,
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold),
-                        ))
+                              "0888.430.620",
+                              style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold),
+                            ))
                       ]),
                       SizedBox(height: 5),
                       Row(
@@ -161,44 +161,44 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                         children: [
                           Expanded(
                               child: Text(
-                            "Dịch vụ",
-                            style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                color: Colors.red,
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold),
-                          )),
+                                "Dịch vụ",
+                                style: TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    color: Colors.red,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold),
+                              )),
                           Expanded(
                               child: Text(
-                            comboLearn,
-                            style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                color: Colors.black,
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold),
-                          ))
+                                comboLearn,
+                                style: TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold),
+                              ))
                         ],
                       ),
                       SizedBox(height: 5),
                       Row(mainAxisSize: MainAxisSize.min, children: [
                         Expanded(
                             child: Text(
-                          "Số tiền",
-                          style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              color: Colors.red,
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold),
-                        )),
+                              "Số tiền",
+                              style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  color: Colors.red,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold),
+                            )),
                         Expanded(
                             child: Text(
-                          amount,
-                          style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              color: Colors.black,
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold),
-                        ))
+                              amount,
+                              style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold),
+                            ))
                       ]),
                       Divider(
                         color: Colors.grey,
@@ -209,13 +209,13 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                         children: [
                           Expanded(
                               child: Text(
-                            "Thông tin khách hàng",
-                            style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                color: Colors.red,
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold),
-                          )),
+                                "Thông tin khách hàng",
+                                style: TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    color: Colors.red,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold),
+                              )),
                         ],
                       ),
                       SizedBox(height: 10),
@@ -224,26 +224,26 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                         children: [
                           Expanded(
                               child: TextField(
-                            keyboardType: TextInputType.name,
-                            controller: nameController,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    width: 3, color: Colors.blue),
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              labelText: 'Nhập tên của bạn (Không dấu)',
-                            ),
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                  RegExp("[a-z A-Z]"))
-                            ],
-                            style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                color: Colors.red,
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold),
-                          ))
+                                keyboardType: TextInputType.name,
+                                controller: nameController,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        width: 3, color: Colors.blue),
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  labelText: 'Nhập tên của bạn (Không dấu)',
+                                ),
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp("[a-z A-Z]"))
+                                ],
+                                style: TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    color: Colors.red,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold),
+                              ))
                         ],
                       ),
                       SizedBox(height: 10),
@@ -252,22 +252,22 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                         children: [
                           Expanded(
                               child: TextField(
-                            keyboardType: TextInputType.phone,
-                            controller: phoneController,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    width: 3, color: Colors.blue),
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              labelText: 'Nhập SĐT liên hệ của bạn',
-                            ),
-                            style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                color: Colors.red,
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold),
-                          ))
+                                keyboardType: TextInputType.phone,
+                                controller: phoneController,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        width: 3, color: Colors.blue),
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  labelText: 'Nhập SĐT liên hệ của bạn',
+                                ),
+                                style: TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    color: Colors.red,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold),
+                              ))
                         ],
                       ),
                       SizedBox(
@@ -285,7 +285,7 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                           ),
                           onPressed: () async {
                             if (nameController.text.isEmpty |
-                                phoneController.text.isEmpty) {
+                            phoneController.text.isEmpty) {
                               if (nameController.text.isEmpty) {
                                 Toast.show(
                                     "Bạn cần nhập tên để có thể kích hoạt đúng tài khoản.",
@@ -316,17 +316,17 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                                       .millisecondsSinceEpoch
                                       .toString();
                               String ipnUrl =
-                                  "https://apppanel.cnagroup.vn/rest_api/v1/index";
+                                  "http://apppanel.cnagroup.vn/rest_api/v1/index";
                               String orderId = requestId;
                               String orderInfo =
                                   "${nameController.text} - ${phoneController.text} - $comboLearn";
                               String storeId = "MOMOEZEO20220315";
                               Map<String, String> data = {
                                 "user_id":
-                                    FirebaseAuth.instance.currentUser!.uid
+                                FirebaseAuth.instance.currentUser!.uid
                               };
                               String extraData =
-                                  base64.encode(utf8.encode(json.encode(data)));
+                              base64.encode(utf8.encode(json.encode(data)));
                               String accessKey = "y1NdrijpynTsOCHW";
                               String secretKey =
                                   "3FUSB54SlKdbz0R8Z3HHFKF7u8M0EgQU";
@@ -344,7 +344,7 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                                       partnerCode: partnerCode,
                                       partnerName: partnerName,
                                       amount: amountNumber,
-                                      // amount: 10000,
+                                      // amount: 1000,
                                       lang: lang,
                                       requestType: requestType,
                                       redirectUrl: redirectUrl,
@@ -389,7 +389,7 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                             ),
                             onPressed: () async {
                               if (nameController.text.isEmpty |
-                                  phoneController.text.isEmpty) {
+                              phoneController.text.isEmpty) {
                                 if (nameController.text.isEmpty) {
                                   Toast.show(
                                       "Bạn cần nhập tên để có thể kích hoạt đúng tài khoản.",
@@ -426,7 +426,7 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                           onPressed: () async {
                             //todo
                             if (nameController.text.isEmpty |
-                                phoneController.text.isEmpty) {
+                            phoneController.text.isEmpty) {
                               if (nameController.text.isEmpty) {
                                 Toast.show(
                                     "Bạn cần nhập tên để có thể kích hoạt đúng tài khoản.",
@@ -448,12 +448,12 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => PaymentByCardScreen(
-                                            index: index,
-                                            name: nameController.text,
-                                            phoneNumber: phoneController.text,
-                                          ),
+                                        index: index,
+                                        name: nameController.text,
+                                        phoneNumber: phoneController.text,
+                                      ),
                                       settings:
-                                          RouteSettings(arguments: index)));
+                                      RouteSettings(arguments: index)));
                             }
                           },
                         ),

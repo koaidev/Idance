@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:io';
 
 import 'package:flick_video_player/flick_video_player.dart';
@@ -76,24 +75,23 @@ class _PlayerState extends State<MovieDetailsVideoPlayerWidget> {
     return WillPopScope(
         onWillPop: _onWillPop,
         child: Container(
-          // Use the VideoPlayer widget to display the video.
-          child: FlickVideoPlayer(
-            flickManager: flickManager,
-            preferredDeviceOrientationFullscreen: [
-              DeviceOrientation.landscapeLeft,
-              DeviceOrientation.landscapeRight
-            ],
-            preferredDeviceOrientation: [
-              DeviceOrientation.landscapeLeft,
-              DeviceOrientation.landscapeRight
-            ],
-            systemUIOverlay: [],
-            flickVideoWithControls: FlickVideoWithControls(
-              controls: LandscapePlayerControls(),
-              videoFit: boxFit,
-            ),
-          )
-        ));
+            // Use the VideoPlayer widget to display the video.
+            child: FlickVideoPlayer(
+          flickManager: flickManager,
+          preferredDeviceOrientationFullscreen: [
+            DeviceOrientation.landscapeLeft,
+            DeviceOrientation.landscapeRight
+          ],
+          preferredDeviceOrientation: [
+            DeviceOrientation.landscapeLeft,
+            DeviceOrientation.landscapeRight
+          ],
+          systemUIOverlay: [],
+          flickVideoWithControls: FlickVideoWithControls(
+            controls: LandscapePlayerControls(),
+            videoFit: boxFit,
+          ),
+        )));
   }
 }
 

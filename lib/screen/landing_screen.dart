@@ -185,7 +185,29 @@ class _LandingScreenState extends State<LandingScreen>
       } else {
         print("IPN Error: "+ response.body);
       }
+
+      UserIDance currentUser = await ApiFirebase().getUser().get().then((value) => value.data() as UserIDance);
+      if((DateTime.now().millisecondsSinceEpoch - currentUser.lastPlanDate!)>2678400000 && currentUser.currentPlan =="vip1"){
+        final userIDance = {
+          "currentPlan": "free",
+        };
+        await ApiFirebase().updatePlan(userIDance);
+      }
+      if((DateTime.now().millisecondsSinceEpoch - currentUser.lastPlanDate!)>8035200000 && currentUser.currentPlan =="vip2"){
+        final userIDance = {
+          "currentPlan": "free",
+        };
+        await ApiFirebase().updatePlan(userIDance);
+      }
+      if((DateTime.now().millisecondsSinceEpoch - currentUser.lastPlanDate!)>16070400000 && currentUser.currentPlan =="vip3"){
+        final userIDance = {
+          "currentPlan": "free",
+        };
+        await ApiFirebase().updatePlan(userIDance);
+      }
+
     }
+
   }
 
   void asyncInitState() async {

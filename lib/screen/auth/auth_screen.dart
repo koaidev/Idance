@@ -153,7 +153,7 @@ class _AuthScreenState extends State<AuthScreen> {
             final user = fbUser.user!;
             final userIDance = UserIDance(
                 name: user.displayName,
-                phone: user.phoneNumber,
+                phone: user.phoneNumber?.replaceAll("+84", "0"),
                 uid: user.uid,
                 currentPlan: "free",
                 dateCreate: DateTime.now()

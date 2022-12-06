@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +9,10 @@ import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
+import 'package:http/http.dart' as http;
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:oxoo/network/api_firebase.dart';
+import 'package:oxoo/utils/validators.dart';
 import 'package:toast/toast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -24,7 +27,6 @@ import '../config.dart';
 import '../models/drawer_model.dart';
 import '../models/payment_object.dart';
 import '../models/user.dart';
-import '../network/api_configuration.dart';
 import '../screen/favourite_screen.dart';
 import '../screen/genre_screen.dart';
 import '../strings.dart';
@@ -37,8 +39,6 @@ import 'movie/movie_details_screen.dart';
 import 'movie_screen.dart';
 import 'tv_series/tv_series_details_screen.dart';
 import 'tv_series_screen.dart';
-import 'package:http/http.dart' as http;
-
 
 class LandingScreen extends StatefulWidget {
   static final String route = "LandingScreen";
@@ -79,7 +79,9 @@ class _LandingScreenState extends State<LandingScreen>
 
   @override
   void initState() {
-    asyncInitState();
+    if (Platform.isIOS) {
+      asyncInitState();
+    }
     _conectionSubscription =
         FlutterInappPurchase.connectionUpdated.listen((connected) {
       print('connected: $connected');
@@ -96,7 +98,7 @@ class _LandingScreenState extends State<LandingScreen>
 
     SchedulerBinding.instance
         .addPostFrameCallback((_) => configOneSignal(context));
-    if(FirebaseAuth.instance.currentUser!=null){
+    if (FirebaseAuth.instance.currentUser != null) {
       checkPaymentUser();
     }
   }
@@ -104,16 +106,22 @@ class _LandingScreenState extends State<LandingScreen>
   checkPaymentUser() async {
     if (FirebaseAuth.instance.currentUser != null) {
       final uid = FirebaseAuth.instance.currentUser!.uid;
-      final response = await http.get(Uri.parse("http://apppanel.cnagroup.vn/rest_api/v1/id/$uid"));
+      final response = await http
+          .get(Uri.parse("http://apppanel.cnagroup.vn/rest_api/v1/id/$uid"));
       if (response.statusCode == 200) {
-        print("IPN body: "+ response.body);
+        print("IPN body: " + response.body);
         // If the server did return a 200 OK response,
         // then parse the JSON.
         var paymentObject = PaymentObject.fromJson(jsonDecode(response.body));
         if (paymentObject.data != null) {
           Data data = paymentObject.data![0];
-          UserIDance currentUser = await ApiFirebase().getUser().get().then((value) => value.data() as UserIDance);
-          if (data.userId != null && currentUser.lastPlanDate!<int.parse(data.requestId!.substring(2))) {
+          UserIDance currentUser = await ApiFirebase()
+              .getUser()
+              .get()
+              .then((value) => value.data() as UserIDance);
+          if (data.userId != null &&
+              currentUser.lastPlanDate! <
+                  int.parse(data.requestId!.substring(2))) {
             int timePaid = int.parse(data.requestId!.substring(2));
             int amount = int.parse(data.amount!);
             if (amount == 50000 || amount == 45000) {
@@ -130,10 +138,11 @@ class _LandingScreenState extends State<LandingScreen>
                   "lastPlanDate": timePaid
                 };
                 final response = await ApiFirebase().updatePlan(userIDance);
-                if(response){
+                if (response) {
                   Toast.show("Bạn đã đăng ký thành công gói cước 1 tháng.",
                       duration: Toast.lengthLong, gravity: Toast.bottom);
-                  Navigator.popAndPushNamed(context, MySubscriptionScreen.route);
+                  Navigator.popAndPushNamed(
+                      context, MySubscriptionScreen.route);
                 }
               }
             }
@@ -152,10 +161,11 @@ class _LandingScreenState extends State<LandingScreen>
                   "lastPlanDate": timePaid
                 };
                 final response = await ApiFirebase().updatePlan(userIDance);
-                if(response){
+                if (response) {
                   Toast.show("Bạn đã đăng ký thành công gói cước 3 tháng.",
                       duration: Toast.lengthLong, gravity: Toast.bottom);
-                  Navigator.popAndPushNamed(context, MySubscriptionScreen.route);
+                  Navigator.popAndPushNamed(
+                      context, MySubscriptionScreen.route);
                 }
               }
             }
@@ -173,45 +183,131 @@ class _LandingScreenState extends State<LandingScreen>
                   "lastPlanDate": timePaid
                 };
                 final response = await ApiFirebase().updatePlan(userIDance);
-                if(response){
+                if (response) {
                   Toast.show("Bạn đã đăng ký thành công gói cước 6 tháng.",
                       duration: Toast.lengthLong, gravity: Toast.bottom);
-                  Navigator.popAndPushNamed(context, MySubscriptionScreen.route);
+                  Navigator.popAndPushNamed(
+                      context, MySubscriptionScreen.route);
                 }
               }
             }
           }
         }
       } else {
-        print("IPN Error: "+ response.body);
+        print("IPN Error: " + response.body);
       }
 
-      UserIDance currentUser = await ApiFirebase().getUser().get().then((value) => value.data() as UserIDance);
-      if((DateTime.now().millisecondsSinceEpoch - currentUser.lastPlanDate!)>2678400000 && currentUser.currentPlan =="vip1"){
+      UserIDance currentUser = await ApiFirebase()
+          .getUser()
+          .get()
+          .then((value) => value.data() as UserIDance);
+      if ((DateTime.now().millisecondsSinceEpoch - currentUser.lastPlanDate!) >
+              2678400000 &&
+          currentUser.currentPlan == "vip1") {
         final userIDance = {
           "currentPlan": "free",
         };
         await ApiFirebase().updatePlan(userIDance);
       }
-      if((DateTime.now().millisecondsSinceEpoch - currentUser.lastPlanDate!)>8035200000 && currentUser.currentPlan =="vip2"){
+      if ((DateTime.now().millisecondsSinceEpoch - currentUser.lastPlanDate!) >
+              8035200000 &&
+          currentUser.currentPlan == "vip2") {
         final userIDance = {
           "currentPlan": "free",
         };
         await ApiFirebase().updatePlan(userIDance);
       }
-      if((DateTime.now().millisecondsSinceEpoch - currentUser.lastPlanDate!)>16070400000 && currentUser.currentPlan =="vip3"){
+      if ((DateTime.now().millisecondsSinceEpoch - currentUser.lastPlanDate!) >
+              16070400000 &&
+          currentUser.currentPlan == "vip3") {
         final userIDance = {
           "currentPlan": "free",
         };
         await ApiFirebase().updatePlan(userIDance);
       }
-
     }
-
   }
 
   void asyncInitState() async {
     await FlutterInappPurchase.instance.initialize();
+    UserIDance currentUser = await ApiFirebase()
+        .getUser()
+        .get()
+        .then((value) => value.data() as UserIDance);
+    if (currentUser.currentPlan == "free") {
+      showShortToast("Đăng nhập AppleID để kiểm tra trạng thái Tài khoản ngay.", context);
+      final purchases =
+          await FlutterInappPurchase.instance.getPurchaseHistory();
+      final List<PurchasedItem> listIDancePurchases = [];
+      purchases?.forEach((element) {
+        if (element.productId?.contains("com.idance.hocnhayonline") == true) {
+          listIDancePurchases.add(element);
+        }
+      });
+      listIDancePurchases.sort((a, b) => a
+          .originalTransactionDateIOS!.millisecondsSinceEpoch
+          .compareTo(b.originalTransactionDateIOS!.millisecondsSinceEpoch));
+      final element = listIDancePurchases.last;
+      final datePaid =
+          element.originalTransactionDateIOS?.millisecondsSinceEpoch ?? 0;
+
+      if (element.productId == "com.idance.hocnhayonline.goihoc1thang" &&
+          (DateTime.now().millisecondsSinceEpoch - datePaid) <= 2678400000) {
+        final userIDance = {"currentPlan": "vip1", "lastPlanDate": datePaid};
+        final response = await ApiFirebase().updatePlan(userIDance);
+        if (response) {
+          Toast.show("Bạn đã đăng ký thành công gói cước 1 tháng.",
+              duration: Toast.lengthLong, gravity: Toast.bottom);
+          Navigator.popAndPushNamed(context, MySubscriptionScreen.route);
+        }
+      }
+      if (element.productId == "com.idance.hocnhayonline.goihoc3thang" &&
+          (DateTime.now().millisecondsSinceEpoch - datePaid) <= 8035200000) {
+        final userIDance = {"currentPlan": "vip2", "lastPlanDate": datePaid};
+        final response = await ApiFirebase().updatePlan(userIDance);
+        if (response) {
+          Toast.show("Bạn đã đăng ký thành công gói cước 3 tháng.",
+              duration: Toast.lengthLong, gravity: Toast.bottom);
+          Navigator.popAndPushNamed(context, MySubscriptionScreen.route);
+        }
+      }
+
+      if (element.productId == "com.idance.hocnhayonline.goihoc6thang" &&
+          (DateTime.now().millisecondsSinceEpoch - datePaid) <= 16070400000) {
+        final userIDance = {"currentPlan": "vip3", "lastPlanDate": datePaid};
+        final response = await ApiFirebase().updatePlan(userIDance);
+        if (response) {
+          Toast.show("Bạn đã đăng ký thành công gói cước 6 tháng.",
+              duration: Toast.lengthLong, gravity: Toast.bottom);
+          Navigator.popAndPushNamed(context, MySubscriptionScreen.route);
+        }
+      }
+
+      if ((DateTime.now().millisecondsSinceEpoch - currentUser.lastPlanDate!) >
+              2678400000 &&
+          currentUser.currentPlan == "vip1") {
+        final userIDance = {
+          "currentPlan": "free",
+        };
+        await ApiFirebase().updatePlan(userIDance);
+      }
+      if ((DateTime.now().millisecondsSinceEpoch - currentUser.lastPlanDate!) >
+              8035200000 &&
+          currentUser.currentPlan == "vip2") {
+        final userIDance = {
+          "currentPlan": "free",
+        };
+        await ApiFirebase().updatePlan(userIDance);
+      }
+      if ((DateTime.now().millisecondsSinceEpoch - currentUser.lastPlanDate!) >
+              16070400000 &&
+          currentUser.currentPlan == "vip3") {
+        final userIDance = {
+          "currentPlan": "free",
+        };
+        await ApiFirebase().updatePlan(userIDance);
+      }
+    }
   }
 
   void _onItemTapped(int index) {

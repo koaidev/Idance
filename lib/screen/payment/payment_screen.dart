@@ -1,9 +1,13 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:oxoo/screen/landing_screen.dart';
 import 'package:oxoo/screen/payment/choose_payment_screen.dart';
+import 'package:oxoo/utils/validators.dart';
+
+import '../../network/api_firebase.dart';
 
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({Key? key}) : super(key: key);
@@ -19,9 +23,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
     'com.idance.hocnhayonline.goihoc6thang'
   ];
   List<IAPItem> _items = [];
-   IAPItem? item45;
-   IAPItem? item99;
-   IAPItem? item149;
+  IAPItem? item45;
+  IAPItem? item99;
+  IAPItem? item149;
+  late StreamSubscription _purchaseUpdatedSubscription;
+  late StreamSubscription _purchaseErrorSubscription;
 
   Future _getProduct() async {
     List<IAPItem> items =
@@ -49,6 +55,65 @@ class _PaymentScreenState extends State<PaymentScreen> {
   void initState() {
     if (Platform.isIOS) _getProduct();
     super.initState();
+    _purchaseUpdatedSubscription =
+        FlutterInappPurchase.purchaseUpdated.listen((productItem) async {
+      print('purchase-updated: $productItem');
+      if (productItem?.transactionStateIOS == TransactionState.purchased) {
+        if (productItem?.productId == item45?.productId) {
+          final userIDance = {
+            "currentPlan": "vip1",
+            "lastPlanDate":
+                productItem?.originalTransactionDateIOS?.millisecondsSinceEpoch
+          };
+          final response = await ApiFirebase().updatePlan(userIDance);
+          if(response){
+            showShortToast("Bạn đã đăng ký thành công Gói học 1 tháng", context);
+          }else{
+            showShortToast("Lỗi đã xảy ra. Vui lòng liên hệ Admin để xử lý thanh toán.", context);
+          }
+        }
+        if (productItem?.productId == item99?.productId) {
+          final userIDance = {
+            "currentPlan": "vip2",
+            "lastPlanDate":
+            productItem?.originalTransactionDateIOS?.millisecondsSinceEpoch
+          };
+          final response = await ApiFirebase().updatePlan(userIDance);
+          if(response){
+            showShortToast("Bạn đã đăng ký thành công Gói học 3 tháng", context);
+          }else{
+            showShortToast("Lỗi đã xảy ra. Vui lòng liên hệ Admin để xử lý thanh toán.", context);
+          }
+        }
+        if (productItem?.productId == item149?.productId) {
+          final userIDance = {
+            "currentPlan": "vip3",
+            "lastPlanDate":
+            productItem?.originalTransactionDateIOS?.millisecondsSinceEpoch
+          };
+          final response = await ApiFirebase().updatePlan(userIDance);
+          if(response){
+            showShortToast("Bạn đã đăng ký thành công Gói học 6 tháng", context);
+          }else{
+            showShortToast("Lỗi đã xảy ra. Vui lòng liên hệ Admin để xử lý thanh toán.", context);
+          }
+        }
+      }
+    }, onDone: () {
+      _purchaseUpdatedSubscription.cancel();
+    }, onError: (Object error) {
+      showShortToast("Lỗi đã xảy ra. $error.", context);
+    });
+
+    _purchaseErrorSubscription =
+        FlutterInappPurchase.purchaseError.listen((purchaseError) {
+      print('purchase-error: $purchaseError');
+      showShortToast('purchase-error: $purchaseError', context);
+    }, onDone: () {
+      _purchaseErrorSubscription.cancel();
+    }, onError: (Object error) {
+      showShortToast("Lỗi đã xảy ra. $error.", context);
+    });
   }
 
   @override
@@ -91,14 +156,23 @@ class _PaymentScreenState extends State<PaymentScreen> {
               height: 30,
             ),
             if (Platform.isIOS)
-              _buildSubTitle((item45!=null)? item45!.title! : "Không xác định.", "100.000 VNĐ",
-                  (item45!=null)? item45!.localizedPrice! : "0 VNĐ", 1),
+              _buildSubTitle(
+                  (item45 != null) ? item45!.title! : "Không xác định.",
+                  "100.000 VNĐ",
+                  (item45 != null) ? item45!.localizedPrice! : "0 VNĐ",
+                  1),
             if (Platform.isIOS)
-              _buildSubTitle((item99!=null)? item99!.title! : "Không xác định.", "250.000 VNĐ",
-                  (item99!=null)? item99!.localizedPrice! : "0 VNĐ", 2),
+              _buildSubTitle(
+                  (item99 != null) ? item99!.title! : "Không xác định.",
+                  "250.000 VNĐ",
+                  (item99 != null) ? item99!.localizedPrice! : "0 VNĐ",
+                  2),
             if (Platform.isIOS)
-              _buildSubTitle((item149!=null)? item149!.title! : "Không xác định.", "450.000 VNĐ",
-                  (item149!=null)? item149!.localizedPrice! : "0 VNĐ", 3),
+              _buildSubTitle(
+                  (item149 != null) ? item149!.title! : "Không xác định.",
+                  "450.000 VNĐ",
+                  (item149 != null) ? item149!.localizedPrice! : "0 VNĐ",
+                  3),
             if (Platform.isAndroid)
               _buildSubTitle("GÓI HỌC 1 THÁNG", "100.000 VNĐ", "45.000", 1),
             if (Platform.isAndroid)
@@ -185,13 +259,13 @@ class _PaymentScreenState extends State<PaymentScreen> {
     return GestureDetector(
       onTap: () {
         if (Platform.isIOS) {
-          if (index == 1 && item45!=null) {
+          if (index == 1 && item45 != null) {
             FlutterInappPurchase.instance.requestPurchase(item45!.productId!);
           }
-          if (index == 2 && item99!=null) {
+          if (index == 2 && item99 != null) {
             FlutterInappPurchase.instance.requestPurchase(item99!.productId!);
           }
-          if (index == 3 && item149!=null) {
+          if (index == 3 && item149 != null) {
             FlutterInappPurchase.instance.requestPurchase(item149!.productId!);
           }
         }

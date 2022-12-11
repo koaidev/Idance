@@ -46,15 +46,17 @@ class _PlayerState extends State<MovieDetailsVideoPlayerWidget> {
 
   @override
   void initState() {
-    super.initState();
     videoPlayerController = VideoPlayerController.network(widget.videoUrl!);
-    videoPlayerController.initialize().then((value) => setState(() {}));
+    videoPlayerController.initialize().then((value) => setState(() {
+
+    }));
+    super.initState();
     flickManager = FlickManager(
       videoPlayerController: videoPlayerController,
       autoPlay: true,
       autoInitialize: true,
     );
-    boxFit = BoxFit.fitHeight;
+
   }
 
   @override
@@ -89,7 +91,7 @@ class _PlayerState extends State<MovieDetailsVideoPlayerWidget> {
           systemUIOverlay: [],
           flickVideoWithControls: FlickVideoWithControls(
             controls: LandscapePlayerControls(),
-            videoFit: boxFit,
+            videoFit: BoxFit.fitHeight,
           ),
         )));
   }
@@ -219,18 +221,18 @@ class _LandscapePlayerControlsState extends State<LandscapePlayerControls> {
                       SizedBox(
                         width: 10,
                       ),
-                      ReflectToggle(
-                        size: 20,
-                        toggleReflect1: () {
-                          Toast.show(
-                              "Tính năng Gương lật đang được phát triển.",
-                              duration: Toast.lengthShort,
-                              gravity: Toast.center);
-                        },
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
+                      // ReflectToggle(
+                      //   size: 20,
+                      //   toggleReflect1: () {
+                      //     Toast.show(
+                      //         "Tính năng Gương lật đang được phát triển.",
+                      //         duration: Toast.lengthShort,
+                      //         gravity: Toast.center);
+                      //   },
+                      // ),
+                      // SizedBox(
+                      //   width: 10,
+                      // ),
                       FlickSetPlayBack(
                         setPlayBack: () {
                           showModalBottomSheet<void>(

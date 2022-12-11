@@ -108,7 +108,8 @@
 	<false/>
 	<key>io.flutter.embedded_views_preview</key>
     <true/>
-
+    <key>NSExceptionAllowsInsecureHTTPLoadskey</key>
+    <true/>
     <key>NSAllowsArbitraryLoadsInWebContent</key>
     <true/>
 </dict>

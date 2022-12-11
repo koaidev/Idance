@@ -1,16 +1,13 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:app_links/app_links.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:http/http.dart' as http;
+import 'package:kochava_tracker/kochava_tracker.dart';
 import 'package:oxoo/bloc/bloc.dart';
-import 'package:oxoo/screen/subscription/my_subscription_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:toast/toast.dart';
 
@@ -36,39 +33,29 @@ class _MyAppState extends State<MyApp> {
   static final _navigatorKey = GlobalKey<NavigatorState>();
   late AppLinks _appLinks;
   StreamSubscription<Uri>? _linkSubscription;
-
   StreamSubscription? _conectionSubscription;
-
+  String _deviceId = 'N/A';
   int amount = 0;
   String learnCombo = "";
   int timeCanUse = 0;
   int timeExp = 0;
 
-  Future<http.Response> setVipUser(
-    String amount,
-  ) {
-    String timePay = "ID" + DateTime.now().millisecondsSinceEpoch.toString();
-    String userId = FirebaseAuth.instance.currentUser!.uid;
-    Map<String, String> data = {
-      "user_id": FirebaseAuth.instance.currentUser!.uid
-    };
-    String extraData = base64.encode(utf8.encode(json.encode(data)));
-    return http.post(
-        Uri.parse('https://apppanel.cnagroup.vn/rest_api/v1/new_vip_user'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsonEncode(<String, String>{
-          'orderId': timePay,
-          'requestId': timePay,
-          'amount': amount,
-          'extraData': extraData,
-          'message': 'abcde',
-          'orderInfo': 'Pay via apple $amount',
-          'signature': 'Apple not signature'
-        }));
-  }
+  Future<void> startSdk() async {
+    // Start the Kochava SDK.
+    KochavaTracker.instance.registerAndroidAppGuid("koidance-8amcyxp");
+    KochavaTracker.instance.registerIosAppGuid("koidance-cqpt1gi");
+    KochavaTracker.instance.setLogLevel(KochavaTrackerLogLevel.Trace);
+    KochavaTracker.instance.start();
 
+    // Retrieve the Kochava Device ID.
+    String deviceId = await KochavaTracker.instance.getDeviceId();
+
+    if (!mounted) return;
+
+    setState(() {
+      _deviceId = deviceId;
+    });
+  }
   Future<void> initPlatformState() async {
     // prepare
     var result = await FlutterInappPurchase.instance.initialize();
@@ -88,72 +75,20 @@ class _MyAppState extends State<MyApp> {
 
     _conectionSubscription =
         FlutterInappPurchase.connectionUpdated.listen((connected) {
-      print('connected: $connected');
-    });
-
-    FlutterInappPurchase.purchaseUpdated.listen((productItem) async {
-      print('purchase-updated: $productItem');
-
-      ///start calculate time paid
-      String id = productItem!.productId!;
-
-      if (id == "com.idance.hocnhayonline.goihoc1thang") {
-        int timePaid = productItem.transactionDate!.millisecondsSinceEpoch;
-        appModeBox.put("amount", 45000);
-        appModeBox.put("timePaid", timePaid);
-        appModeBox.put("isUserValidSubscriber", true);
-        await setVipUser('45000');
-        Toast.show(
-            "Đăng ký gói học 1 tháng thành công. Nếu bạn không xem được bài học, hãy thoát khởi động lại ứng dụng.");
-
-        Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) => MySubscriptionScreen()),
-            (Route<dynamic> route) => false);
-      }
-
-      if (id == "com.idance.hocnhayonline.goihoc3thang") {
-        int timePaid = productItem.transactionDate!.millisecondsSinceEpoch;
-        appModeBox.put("amount", 99000);
-        appModeBox.put("timePaid", timePaid);
-        appModeBox.put("isUserValidSubscriber", true);
-        await setVipUser('99000');
-        Toast.show(
-            "Đăng ký gói học 3 tháng thành công. Nếu bạn không xem được bài học, hãy thoát khởi động lại ứng dụng.");
-
-        Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) => MySubscriptionScreen()),
-            (Route<dynamic> route) => false);
-      }
-
-      if (id == "com.idance.hocnhayonline.goihoc6thang") {
-        int timePaid = productItem.transactionDate!.millisecondsSinceEpoch;
-        appModeBox.put("amount", 149000);
-        appModeBox.put("timePaid", timePaid);
-        appModeBox.put("isUserValidSubscriber", true);
-        await setVipUser('149000');
-
-        Toast.show(
-            "Đăng ký gói học 6 tháng thành công. Nếu bạn không xem được bài học, hãy thoát khởi động lại ứng dụng.");
-
-        Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) => MySubscriptionScreen()),
-            (Route<dynamic> route) => false);
-      }
-
-      ///end calculate time paid
-    });
+          print('connected: $connected');
+        });
 
     FlutterInappPurchase.purchaseError.listen((purchaseError) {
       print('purchase-error: $purchaseError');
       Toast.show("Lỗi thanh toán: $purchaseError");
     });
   }
-
   @override
   void initState() {
     super.initState();
-    initPlatformState();
     // _getPurchaseHistory();
+    initPlatformState();
+    startSdk();
     isDark = appModeBox.get('isDark');
     if (isDark == null) {
       appModeBox.put('isDark', true);
@@ -164,7 +99,6 @@ class _MyAppState extends State<MyApp> {
   @override
   void dispose() {
     _linkSubscription?.cancel();
-
     if (_conectionSubscription != null) {
       _conectionSubscription!.cancel();
       _conectionSubscription = null;
@@ -217,6 +151,7 @@ class _MyAppState extends State<MyApp> {
 class Splash extends StatelessWidget {
   const Splash({Key? key}) : super(key: key);
   static bool? isDark = true;
+
   get appModeBox => Hive.box("appModeBox");
 
   @override

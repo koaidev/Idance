@@ -88,7 +88,9 @@ dependencies:
   flutter_secure_storage: ^6.1.0
   flutter_pagewise: ^2.0.4
   app_review: ^2.1.2+1
-  
+  kochava_tracker: ^2.1.1
+
+#  smart_auth: ^1.0.6
 
 
 dev_dependencies:

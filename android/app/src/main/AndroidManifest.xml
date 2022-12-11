@@ -11,24 +11,27 @@
     <!-- Permissions options for the `storage` group -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
 
     <queries>
         <package android:name="com.facebook.katana" />
     </queries>
     <application
         android:name="${applicationName}"
-        android:label="IDANCE: Học Nhảy Online"
         android:icon="@mipmap/launcher_icon"
-        android:usesCleartextTraffic="true"
-        >
+        android:label="IDANCE: Học Nhảy Online"
+        android:usesCleartextTraffic="true">
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713" />
-        <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
+        <meta-data
+            android:name="com.facebook.sdk.ClientToken"
+            android:value="@string/facebook_client_token" />
+
         <activity
             android:name=".MainActivity"
-            android:exported="true"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:exported="true"
             android:hardwareAccelerated="true"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"
@@ -39,12 +42,13 @@
             </intent-filter>
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data
-                    android:scheme="http"
                     android:host="apppanel.cnagroup.vn"
-                    />
+                    android:scheme="http" />
             </intent-filter>
         </activity>
         <!-- Don't delete the meta-data below.
@@ -55,8 +59,8 @@
 
         <activity
             android:name="com.facebook.FacebookActivity"
-            android:exported="true"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:exported="true"
             android:label="@string/app_name" />
         <activity
             android:name="com.facebook.CustomTabActivity"

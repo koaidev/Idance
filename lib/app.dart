@@ -42,6 +42,8 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> startSdk() async {
     // Start the Kochava SDK.
+    KochavaTracker.instance.enableIosAtt();
+    KochavaTracker.instance.setIosAttAuthorizationWaitTime(90);
     KochavaTracker.instance.registerAndroidAppGuid("koidance-8amcyxp");
     KochavaTracker.instance.registerIosAppGuid("koidance-cqpt1gi");
     KochavaTracker.instance.setLogLevel(KochavaTrackerLogLevel.Trace);

@@ -132,11 +132,13 @@ class _ExpandableFabState extends State<ExpandableFab>
           opacity: _open ? 0.0 : 1.0,
           curve: const Interval(0.25, 1.0, curve: Curves.easeInOut),
           duration: const Duration(milliseconds: 250),
-          child: FloatingActionButton(
-            backgroundColor: Color(0xfff7b733),
-            onPressed: _toggle,
-            child: const Icon(Icons.support_agent_rounded),
-          ),
+          child:
+            FloatingActionButton.extended(
+              backgroundColor: Color(0xfff7b733),
+              onPressed: _toggle,
+              icon: Icon(Icons.support_agent_rounded),
+              label: Text("Hỗ Trợ", style: TextStyle(fontFamily: "Comfortaa", fontWeight: FontWeight.w700)),
+            ),
         ),
       ),
     );

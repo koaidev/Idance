@@ -123,6 +123,14 @@ flutter:
         - asset: fonts/Horizon.otf
         - asset: fonts/Horizon Italic.otf
           style: italic
+    - family: Comfortaa
+      fonts:
+        - asset: fonts/Comfortaa-Bold.ttf
+          weight: 700
+        - asset: fonts/Comfortaa-Regular.ttf
+        - asset: fonts/Comfortaa-Medium.ttf
+          weight: 500
+
 
   assets:
     - assets/light_splash_screen.gif

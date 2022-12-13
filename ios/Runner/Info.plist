@@ -112,5 +112,7 @@
     <true/>
     <key>NSAllowsArbitraryLoadsInWebContent</key>
     <true/>
+    <key>NSUserTrackingUsageDescription</key>
+    <string>This app require tracking for analytics and ads</string>
 </dict>
 </plist>

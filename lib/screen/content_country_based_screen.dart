@@ -212,6 +212,7 @@ class _ContentCountryBasedScreenState extends State<ContentCountryBasedScreen> {
                 child: Column(
                   children: [
                     GridView.builder(
+                      physics: ScrollPhysics(),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           childAspectRatio: 0.6, crossAxisCount: 3),
                       itemCount: movieList.length,

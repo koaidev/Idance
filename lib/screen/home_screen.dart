@@ -48,29 +48,6 @@ class _HomeScreenState extends State<HomeScreen> {
     AppConfig? appConfig = configService.appConfig();
 
     return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: ExpandableFab(
-        iconData: Icons.support_agent_rounded,
-        name: "Hỗ trợ",
-        distance: 112.0,
-        children: [
-          ActionButton(
-            onPressed: () => _launchURL('https://www.facebook.com/messages/t/idance.vn'),
-            icon: Image.asset(
-              "assets/images/messenger.png",
-              fit: BoxFit.fill,
-            ),
-          ),
-          ActionButton(
-            onPressed: () => _launchURL("https://zalo.me/0888430620"),
-            icon: Image.asset(
-              "assets/images/zalo_icon.png",
-              fit: BoxFit.fill,
-            ),
-          ),
-        ],
-        alignment: Alignment.bottomRight,
-      ),
       backgroundColor:
           isDark! ? CustomTheme.primaryColorDark : Colors.transparent,
       body: FutureBuilder<HomeContent>(
@@ -78,13 +55,35 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
             return Stack(children: [
-
               buildUI(
                   context: context,
                   // paymentConfig: paymentConfig,
                   appConfig: appConfig,
                   homeContent: snapshot.data),
-              Align(alignment: Alignment.bottomLeft, child: ExpandableFab(
+              Align(alignment: Alignment.bottomRight, child: Container(padding: EdgeInsets.only(bottom: 16),child:ExpandableFab(
+                iconData: Icons.support_agent_rounded,
+                name: "Hỗ trợ",
+                distance: 112.0,
+                children: [
+                  ActionButton(
+                    onPressed: () => _launchURL('https://m.me/idance.vn'),
+                    icon: Image.asset(
+                      "assets/images/messenger.png",
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                  ActionButton(
+                    onPressed: () => _launchURL("https://zalo.me/0888430620"),
+                    icon: Image.asset(
+                      "assets/images/zalo_icon.png",
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ],
+                alignment: Alignment.bottomRight,
+              ),)),
+
+              Align(alignment: Alignment.bottomLeft, child: Container(padding: EdgeInsets.only(bottom: 16),child: ExpandableFab(
                 iconData: Icons.groups_outlined,
                 name: "Cộng đồng",
                 alignment: Alignment.bottomLeft,
@@ -105,7 +104,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ],
-              ))
+              ),)),
+
             ],);
           } else if (snapshot.hasError) {
             return Center(

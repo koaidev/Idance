@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 
 @immutable
 class ExpandableFab extends StatefulWidget {
-  const ExpandableFab({
-    Key? key,
-    this.initialOpen,
-    required this.distance,
-    required this.children,
-    required this.alignment,
-    required this.iconData,
-    required this.name
-  }) : super(key: key);
+  const ExpandableFab(
+      {Key? key,
+      this.initialOpen,
+      required this.distance,
+      required this.children,
+      required this.alignment,
+      required this.iconData,
+      required this.name})
+      : super(key: key);
 
   final bool? initialOpen;
   final double distance;
@@ -139,13 +139,14 @@ class _ExpandableFabState extends State<ExpandableFab>
           opacity: _open ? 0.0 : 1.0,
           curve: const Interval(0.25, 1.0, curve: Curves.easeInOut),
           duration: const Duration(milliseconds: 250),
-          child:
-            FloatingActionButton.extended(
-              backgroundColor: Color(0xfff7b733),
-              onPressed: _toggle,
-              icon: Icon(widget.iconData),
-              label: Text(widget.name, style: TextStyle(fontFamily: "Comfortaa", fontWeight: FontWeight.w700)),
-            ),
+          child: FloatingActionButton.extended(
+            backgroundColor: Color(0xfff7b733),
+            onPressed: _toggle,
+            icon: Icon(widget.iconData),
+            label: Text(widget.name,
+                style: TextStyle(
+                    fontFamily: "Comfortaa", fontWeight: FontWeight.w700)),
+          ),
         ),
       ),
     );
@@ -154,14 +155,14 @@ class _ExpandableFabState extends State<ExpandableFab>
 
 @immutable
 class _ExpandingActionButton extends StatelessWidget {
-  const _ExpandingActionButton({
-    Key? key,
-    required this.directionInDegrees,
-    required this.maxDistance,
-    required this.progress,
-    required this.child,
-    required this.alignment
-  }) : super(key: key);
+  const _ExpandingActionButton(
+      {Key? key,
+      required this.directionInDegrees,
+      required this.maxDistance,
+      required this.progress,
+      required this.child,
+      required this.alignment})
+      : super(key: key);
 
   final double directionInDegrees;
   final double maxDistance;
@@ -178,21 +179,23 @@ class _ExpandingActionButton extends StatelessWidget {
           directionInDegrees * (math.pi / 180.0),
           progress.value * maxDistance,
         );
-        return alignment==Alignment.bottomLeft?Positioned(
-          left: 4.0 + offset.dx,
-          bottom: 4.0 + offset.dy,
-          child: Transform.rotate(
-            angle: (1.0 - progress.value) * math.pi / 2,
-            child: child!,
-          ),
-        ):Positioned(
-          right: 4.0 + offset.dx,
-          bottom: 4.0 + offset.dy,
-          child: Transform.rotate(
-            angle: (1.0 - progress.value) * math.pi / 2,
-            child: child!,
-          ),
-        );
+        return alignment == Alignment.bottomLeft
+            ? Positioned(
+                left: 4.0 + offset.dx,
+                bottom: 4.0 + offset.dy,
+                child: Transform.rotate(
+                  angle: (1.0 - progress.value) * math.pi / 2,
+                  child: child!,
+                ),
+              )
+            : Positioned(
+                right: 4.0 + offset.dx,
+                bottom: 4.0 + offset.dy,
+                child: Transform.rotate(
+                  angle: (1.0 - progress.value) * math.pi / 2,
+                  child: child!,
+                ),
+              );
       },
       child: FadeTransition(
         opacity: progress,

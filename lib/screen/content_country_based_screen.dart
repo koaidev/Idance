@@ -3,14 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:oxoo/bloc/country_movie/country_movie_bloc.dart';
 import 'package:oxoo/models/content_by_country_model.dart';
+import 'package:oxoo/screen/tv_series/tv_series_details_screen.dart';
 
 import '../../bloc/search/search_bloc.dart';
 import '../../server/repository.dart';
 import '../../strings.dart';
 import '../../style/theme.dart';
 import '../../utils/loadingIndicator.dart';
-import '../../widgets/home_screen/movie_item.dart';
 import '../models/home_content.dart';
+import 'movie/movie_details_screen.dart';
 
 // ignore: must_be_immutable
 class ContentCountryBasedScreen extends StatefulWidget {
@@ -34,6 +35,7 @@ class _ContentCountryBasedScreenState extends State<ContentCountryBasedScreen> {
   List<Movie> movieList = [];
   List<Movie> mList = [];
   late ContentByCountryModel countryModel;
+  double? cardWidth;
 
   // Future<List<Movie>> getAllMovieByCountryId() async{
   //   return
@@ -41,6 +43,7 @@ class _ContentCountryBasedScreenState extends State<ContentCountryBasedScreen> {
 
   @override
   Widget build(BuildContext context) {
+    cardWidth = MediaQuery.of(context).size.width / 3.1;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: widget.isDark
@@ -208,14 +211,123 @@ class _ContentCountryBasedScreenState extends State<ContentCountryBasedScreen> {
                 margin: EdgeInsets.only(top: 2, bottom: 15),
                 child: Column(
                   children: [
-                    //todo
-                    // showListGenreFilter(context, widget.listGenres!),
-                    HomeScreenMovieList(
-                      latestMovies: movieList,
-                      context: context,
-                      title: AppContent.movieList,
-                      isSearchWidget: true,
-                      isDark: widget.isDark,
+                    GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          childAspectRatio: 0.6, crossAxisCount: 3),
+                      itemCount: movieList.length,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Container(
+                          // width: cardWidth,
+                          height: 115,
+                          margin: EdgeInsets.only(right: 2),
+                          child: InkWell(
+                            onTap: () {
+                              if (movieList[index].isTvseries == "1") {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => TvSerisDetailsScreen(
+                                      seriesID: movieList[index].videosId,
+                                      isPaid: '',
+                                    ),
+                                  ),
+                                );
+                              } else {
+                                Navigator.pushNamed(
+                                    context, MovieDetailScreen.route,
+                                    arguments: {
+                                      "movieID": movieList[index].videosId
+                                    });
+                              }
+                            },
+                            child: ClipRRect(
+                                borderRadius: BorderRadius.circular(5.0),
+                                child: Card(
+                                  color: widget.isDark
+                                      ? CustomTheme.darkGrey
+                                      : Colors.white,
+                                  elevation: 1,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: <Widget>[
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(5.0),
+                                            topRight: Radius.circular(5.0)),
+                                        // child: Image.network(
+                                        //   latestMovies![index].thumbnailUrl!,
+                                        //   fit: BoxFit.fitWidth,
+                                        //   height: 155,
+                                        // ),
+                                        child: FadeInImage.assetNetwork(
+                                            placeholder:
+                                                "assets/images/placeholder.png",
+                                            placeholderScale: 25,
+                                            height: 155,
+                                            fit: BoxFit.fitWidth,
+                                            imageErrorBuilder:
+                                                (context, error, stackTrace) =>
+                                                    Image.asset(
+                                                      "assets/images/placeholder.png",
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                            image:
+                                                movieList[index].thumbnailUrl!),
+                                      ),
+                                      Container(
+                                        margin: EdgeInsets.only(left: 2),
+                                        padding: EdgeInsets.only(
+                                            right: 2, top: 2, bottom: 2),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              movieList[index].title!,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: widget.isDark
+                                                  ? CustomTheme.smallTextWhite
+                                                      .copyWith(fontSize: 13)
+                                                  : CustomTheme.smallText
+                                                      .copyWith(fontSize: 13),
+                                            ),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                    movieList[index]
+                                                        .videoQuality!,
+                                                    textAlign: TextAlign.start,
+                                                    style: widget.isDark
+                                                        ? CustomTheme
+                                                            .smallTextWhite
+                                                        : CustomTheme
+                                                            .smallText),
+                                                Expanded(
+                                                  child: Text(
+                                                      movieList[index].release!,
+                                                      textAlign: TextAlign.end,
+                                                      style: widget.isDark
+                                                          ? CustomTheme
+                                                              .smallTextWhite
+                                                          : CustomTheme
+                                                              .smallText),
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                )),
+                          ),
+                        );
+                      },
                     ),
                   ],
                 )),

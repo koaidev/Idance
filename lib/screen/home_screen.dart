@@ -48,24 +48,28 @@ class _HomeScreenState extends State<HomeScreen> {
     AppConfig? appConfig = configService.appConfig();
 
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: ExpandableFab(
+        iconData: Icons.support_agent_rounded,
+        name: "Hỗ trợ",
         distance: 112.0,
         children: [
           ActionButton(
-            onPressed: () => _launchURL('https://m.me/idanceeee'),
+            onPressed: () => _launchURL('https://www.facebook.com/messages/t/idance.vn'),
             icon: Image.asset(
               "assets/images/messenger.png",
               fit: BoxFit.fill,
             ),
           ),
           ActionButton(
-            onPressed: () => _launchURL("https://zalo.me/g/gxdkue195"),
+            onPressed: () => _launchURL("https://zalo.me/0888430620"),
             icon: Image.asset(
               "assets/images/zalo_icon.png",
               fit: BoxFit.fill,
             ),
           ),
         ],
+        alignment: Alignment.bottomRight,
       ),
       backgroundColor:
           isDark! ? CustomTheme.primaryColorDark : Colors.transparent,
@@ -73,11 +77,36 @@ class _HomeScreenState extends State<HomeScreen> {
         future: _homeContent,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
-            return buildUI(
-                context: context,
-                // paymentConfig: paymentConfig,
-                appConfig: appConfig,
-                homeContent: snapshot.data);
+            return Stack(children: [
+
+              buildUI(
+                  context: context,
+                  // paymentConfig: paymentConfig,
+                  appConfig: appConfig,
+                  homeContent: snapshot.data),
+              Align(alignment: Alignment.bottomLeft, child: ExpandableFab(
+                iconData: Icons.groups_outlined,
+                name: "Cộng đồng",
+                alignment: Alignment.bottomLeft,
+                distance: 112.0,
+                children: [
+                  ActionButton(
+                    onPressed: () => _launchURL('https://www.facebook.com/groups/idance.vn'),
+                    icon: Image.asset(
+                      "assets/images/fb.png",
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                  ActionButton(
+                    onPressed: () => _launchURL("https://zalo.me/g/gxdkue195"),
+                    icon: Image.asset(
+                      "assets/images/zalo_icon.png",
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ],
+              ))
+            ],);
           } else if (snapshot.hasError) {
             return Center(
               child: Text(

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:oxoo/models/home_content.dart';
 import 'package:oxoo/screen/all_country_screen.dart';
+import 'package:oxoo/screen/content_country_based_screen.dart';
 import 'package:oxoo/strings.dart';
 import 'package:oxoo/style/theme.dart';
 
-import '../../screen/content_country_based_screen.dart';
 import '../home_screen_more_widget.dart';
 
 // ignore: must_be_immutable
@@ -39,7 +39,7 @@ class HomeScreenCountryList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(left: 2),
-      height: 130,
+      height: 115,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -65,11 +65,11 @@ class HomeScreenCountryList extends StatelessWidget {
             height: 10,
           ),
           Expanded(
-            child: GridView.count(
-              crossAxisCount: 4,
-              scrollDirection: Axis.vertical,
+            child: ListView.builder(
               shrinkWrap: true,
-              children: List.generate(countryList!.length, (index) {
+              itemCount: countryList!.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (BuildContext context, int index) {
                 return InkWell(
                   onTap: () {
                     Navigator.push(
@@ -117,7 +117,7 @@ class HomeScreenCountryList extends StatelessWidget {
                     ),
                   ),
                 );
-              }),
+              },
             ),
           ),
         ],

@@ -9,11 +9,17 @@ class ExpandableFab extends StatefulWidget {
     this.initialOpen,
     required this.distance,
     required this.children,
+    required this.alignment,
+    required this.iconData,
+    required this.name
   }) : super(key: key);
 
   final bool? initialOpen;
   final double distance;
   final List<Widget> children;
+  final Alignment alignment;
+  final IconData iconData;
+  final String name;
 
   @override
   _ExpandableFabState createState() => _ExpandableFabState();
@@ -62,7 +68,7 @@ class _ExpandableFabState extends State<ExpandableFab>
   Widget build(BuildContext context) {
     return SizedBox.expand(
       child: Stack(
-        alignment: Alignment.bottomRight,
+        alignment: widget.alignment,
         clipBehavior: Clip.none,
         children: [
           _buildTapToCloseFab(),
@@ -82,6 +88,7 @@ class _ExpandableFabState extends State<ExpandableFab>
         i++, angleInDegrees += step) {
       children.add(
         _ExpandingActionButton(
+          alignment: widget.alignment,
           directionInDegrees: angleInDegrees,
           maxDistance: widget.distance,
           progress: _expandAnimation,
@@ -136,8 +143,8 @@ class _ExpandableFabState extends State<ExpandableFab>
             FloatingActionButton.extended(
               backgroundColor: Color(0xfff7b733),
               onPressed: _toggle,
-              icon: Icon(Icons.support_agent_rounded),
-              label: Text("Hỗ Trợ", style: TextStyle(fontFamily: "Comfortaa", fontWeight: FontWeight.w700)),
+              icon: Icon(widget.iconData),
+              label: Text(widget.name, style: TextStyle(fontFamily: "Comfortaa", fontWeight: FontWeight.w700)),
             ),
         ),
       ),
@@ -153,12 +160,14 @@ class _ExpandingActionButton extends StatelessWidget {
     required this.maxDistance,
     required this.progress,
     required this.child,
+    required this.alignment
   }) : super(key: key);
 
   final double directionInDegrees;
   final double maxDistance;
   final Animation<double> progress;
   final Widget child;
+  final Alignment alignment;
 
   @override
   Widget build(BuildContext context) {
@@ -169,7 +178,14 @@ class _ExpandingActionButton extends StatelessWidget {
           directionInDegrees * (math.pi / 180.0),
           progress.value * maxDistance,
         );
-        return Positioned(
+        return alignment==Alignment.bottomLeft?Positioned(
+          left: 4.0 + offset.dx,
+          bottom: 4.0 + offset.dy,
+          child: Transform.rotate(
+            angle: (1.0 - progress.value) * math.pi / 2,
+            child: child!,
+          ),
+        ):Positioned(
           right: 4.0 + offset.dx,
           bottom: 4.0 + offset.dy,
           child: Transform.rotate(

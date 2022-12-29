@@ -119,7 +119,7 @@ class _LandingScreenState extends State<LandingScreen>
                   int.parse(data.requestId!.substring(2))) {
             int timePaid = int.parse(data.requestId!.substring(2));
             int amount = int.parse(data.amount!);
-            if (amount == 50000 || amount == 45000) {
+            if (amount == 50000 || amount == 45000 || amount == 25000||amount==19000) {
               int timeNow = DateTime.now().millisecondsSinceEpoch;
               int timeUseService = timeNow - timePaid;
               if (timeUseService > 2678400000) {
@@ -141,7 +141,7 @@ class _LandingScreenState extends State<LandingScreen>
                 }
               }
             }
-            if (amount == 120000 || amount == 99000) {
+            if (amount == 120000 || amount == 49000) {
               int timeNow = DateTime.now().millisecondsSinceEpoch;
               int timeUseService = timeNow - timePaid;
 
@@ -164,7 +164,7 @@ class _LandingScreenState extends State<LandingScreen>
                 }
               }
             }
-            if (amount == 150000 || amount == 149000) {
+            if (amount == 150000 || amount == 149000 || amount == 99000) {
               int timeNow = DateTime.now().millisecondsSinceEpoch;
               int timeUseService = timeNow - timePaid;
               if (timeUseService > 16070400000) {
@@ -559,7 +559,7 @@ class _LandingScreenState extends State<LandingScreen>
                                       .pushAndRemoveUntil(
                                           MaterialPageRoute(
                                               builder: (dialogContext) =>
-                                                  RenderFirstScreen()),
+                                                  RenderFirstScreen(isUpdate: false,)),
                                           (Route<dynamic> route) => false);
                                 },
                                 child: HelpMe().accountDeactivate(

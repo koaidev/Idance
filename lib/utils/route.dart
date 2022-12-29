@@ -60,7 +60,7 @@ class Routes {
       LandingScreen.route: (_) => LandingScreen(),
       DownloadScreen.route: (_) => DownloadScreen(),
       MyApp.route: (_) => MyApp(),
-      RenderFirstScreen.route: (_) => RenderFirstScreen(),
+      RenderFirstScreen.route: (_) => RenderFirstScreen(isUpdate: false,),
       ContentByStarScreen.route: (_) => ContentByStarScreen(),
     };
   }

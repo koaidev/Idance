@@ -49,18 +49,18 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
     if (index == 1) {
       comboLearn = "Gói học 1 tháng";
       title = "THANH TOÁN GÓI HỌC 1 THÁNG";
-      amount = "45.000";
-      amountNumber = 45000;
+      amount = "19.000";
+      amountNumber = 19000;
     } else if (index == 2) {
       comboLearn = "Gói học 3 tháng";
       title = "THANH TOÁN GÓI HỌC 3 THÁNG";
-      amount = "99.000";
-      amountNumber = 99000;
+      amount = "49.000";
+      amountNumber = 49000;
     } else if (index == 3) {
       comboLearn = "Gói học 6 tháng";
       title = "THANH TOÁN GÓI HỌC 6 THÁNG";
-      amount = "149.000";
-      amountNumber = 149000;
+      amount = "99.000";
+      amountNumber = 99000;
     }
   }
 

@@ -174,11 +174,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   (item149 != null) ? item149!.localizedPrice! : "0 VNĐ",
                   3),
             if (Platform.isAndroid)
-              _buildSubTitle("GÓI HỌC 1 THÁNG", "100.000 VNĐ", "45.000", 1),
+              _buildSubTitle("GÓI HỌC 1 THÁNG", "100.000 VNĐ", "19.000", 1),
             if (Platform.isAndroid)
-              _buildSubTitle("GÓI HỌC 3 THÁNG", "250.000 VNĐ", "99.000", 2),
+              _buildSubTitle("GÓI HỌC 3 THÁNG", "250.000 VNĐ", "49.000", 2),
             if (Platform.isAndroid)
-              _buildSubTitle("GÓI HỌC 6 THÁNG", "450.000 VNĐ", "149.000", 3),
+              _buildSubTitle("GÓI HỌC 6 THÁNG", "450.000 VNĐ", "99.000", 3),
             GestureDetector(
               onTap: () {
                 Navigator.pushNamed(context, LandingScreen.route);

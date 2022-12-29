@@ -36,16 +36,16 @@ class _PaymentByCardScreenState extends State<PaymentByCardScreen> {
   void handleAction(int index) {
     if (index == 1) {
       comboLearn = "goi hoc 1 thang";
-      amount = "45.000";
-      amountNumber = 45000;
+      amount = "19.000";
+      amountNumber = 19000;
     } else if (index == 2) {
       comboLearn = "goi hoc 3 thang";
-      amount = "99.000";
-      amountNumber = 99000;
+      amount = "49.000";
+      amountNumber = 49000;
     } else {
       comboLearn = "goi hoc 6 thang";
-      amount = "149.000";
-      amountNumber = 149000;
+      amount = "99.000";
+      amountNumber = 99000;
     }
     action1 = () {
       Clipboard.setData(ClipboardData(

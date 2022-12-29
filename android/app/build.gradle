@@ -59,8 +59,8 @@ android {
         applicationId "com.idance.hocnhayonline"
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 26
-        versionName '1.2.0'
+        versionCode 30
+        versionName '1.2.1'
     }
 
     signingConfigs {
@@ -108,7 +108,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'com.google.firebase:firebase-core:18.0.0'
     implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
-    implementation 'com.onesignal:OneSignal:4.3.3'
+//    implementation 'com.onesignal:OneSignal:4.3.3'
 
 }
 apply plugin: 'com.google.gms.google-services'

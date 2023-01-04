@@ -21,5 +21,5 @@ class Config {
   static final bool enableAppleAuthForIOS = false;
   //publicKeyBase64 from play store to implement in app purchase
   static final String publicKeyBase64     ="xxxxxxx/xxx+xxx+xxx+xx+xxxx+xxx+xx+xxxxx+xxx/x56/W+xxx+xx+xx/xx";
-  static final int appVersion = 30;
+  static final int appVersion = 31;
 }

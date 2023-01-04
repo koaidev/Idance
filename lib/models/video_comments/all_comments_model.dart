@@ -27,7 +27,7 @@ class AllCommentModel {
 
   AllCommentModel.fromJson(Map<String, dynamic> json) {
     commentsId = json['comments_id'];
-    videosId = json['videos_id'];
+    videosId = json['video_id'];
     userId = json['user_id'];
     userName = json['user_name'];
     userImgUrl = json['user_img_url'];
@@ -37,7 +37,7 @@ class AllCommentModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['comments_id'] = this.commentsId;
-    data['videos_id'] = this.videosId;
+    data['video_id'] = this.videosId;
     data['user_id'] = this.userId;
     data['user_name'] = this.userName;
     data['user_img_url'] = this.userImgUrl;

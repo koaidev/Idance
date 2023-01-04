@@ -4,6 +4,7 @@ import 'dart:isolate';
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -23,6 +24,7 @@ import '../../models/configuration.dart';
 import '../../models/favourite_response_model.dart';
 import '../../models/movie_details_model.dart';
 import '../../models/user.dart';
+import '../../models/video_comments/ad_comments_model.dart';
 import '../../models/video_comments/all_comments_model.dart';
 import '../../screen/auth/auth_screen.dart';
 import '../../screen/subscription/premium_subscription_screen.dart';
@@ -33,6 +35,7 @@ import '../../style/theme.dart';
 import '../../utils/button_widget.dart';
 import '../../utils/loadingIndicator.dart';
 import '../../utils/validators.dart';
+import '../../widgets/movie/movie_details_youtube_player.dart';
 import '../../widgets/movie/select_server_dialog.dart';
 import '../../widgets/share_btn.dart';
 import '../../widgets/tv_series/cast_crew_item_card.dart';
@@ -155,10 +158,10 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
               color: isDark! ? CustomTheme.primaryColorDark : Colors.white,
               child: BlocProvider<MovieDetailsBloc>(
                 create: (BuildContext context) =>
-                MovieDetailsBloc(repository: Repository())
-                  ..add(GetMovieDetailsEvent(
-                      movieID: routes!['movieID'] ?? widget.movieID,
-                      userID: ApiFirebase().uid)),
+                    MovieDetailsBloc(repository: Repository())
+                      ..add(GetMovieDetailsEvent(
+                          movieID: routes!['movieID'] ?? widget.movieID,
+                          userID: ApiFirebase().uid)),
                 child: BlocBuilder<MovieDetailsBloc, MovieDetailsState>(
                   builder: (context, state) {
                     if (state is MovieDetailsLoadedState) {
@@ -170,16 +173,17 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => AuthScreen(
-                                  fromPaidScreen: true,
-                                )),
+                                      fromPaidScreen: true,
+                                    )),
                           );
                         });
                       } else {
                         if (!isUserValidSubscriber &&
                             movieDetailsModel.isPaid == "1") {
                           return Scaffold(
-                            backgroundColor:
-                            isDark! ? CustomTheme.black_window : Colors.white,
+                            backgroundColor: isDark!
+                                ? CustomTheme.black_window
+                                : Colors.white,
                             body: subscriptionInfoDialog(
                                 context: context,
                                 isDark: isDark!,
@@ -187,23 +191,25 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                           );
                         } else {
                           isDownloadEnable =
-                          movieDetailsModel.enableDownload.toString() == "1"
-                              ? true
-                              : false;
-                          return buildUI(
-                              context, paymentConfig, movieDetailsModel.videosId);
+                              movieDetailsModel.enableDownload.toString() == "1"
+                                  ? true
+                                  : false;
+                          return buildUI(context, paymentConfig,
+                              movieDetailsModel.videosId);
                         }
                       }
                       return spinkit;
                     } else if (state is MovieDetailsErrorState) {
-                      printLog("------------movie details erorr: ${state.message}");
+                      printLog(
+                          "------------movie details erorr: ${state.message}");
                     }
                     return spinkit;
                   },
                 ),
               ),
             ),
-          );});
+          );
+        });
   }
 
   ///build movie screen UI
@@ -376,29 +382,30 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
 
                               //todo download button
                               //rent button
-                              // if (isDownloadEnable)
-                              //   Container(
-                              //     width:
-                              //         MediaQuery.of(context).size.width - 170,
-                              //     child: ElevatedButton(
-                              //       onPressed: () async {
-                              //         SelectDownloadDialog().createDialog(
-                              //             context,
-                              //             movieDetailsModel.downloadLinks!,
-                              //             isDark,
-                              //             downloadVideo);
-                              //       },
-                              //       style: ElevatedButton.styleFrom(
-                              //         primary: CustomTheme.whiteColor,
-                              //       ),
-                              //       child: Padding(
-                              //         padding: const EdgeInsets.symmetric(
-                              //             vertical: 14.0, horizontal: 10.0),
-                              //         child: Text(AppContent.download,
-                              //             style: CustomTheme.bodyText3),
-                              //       ),
-                              //     ),
-                              //   ),
+                              if (movieDetailsModel.trailerUrl?.isNotEmpty==true)
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width - 170,
+                                  child: ElevatedButton(
+                                    onPressed: () async {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  MovieDetailsYoutubePlayer(
+                                                      url: movieDetailsModel.trailerUrl)));
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      primary: CustomTheme.whiteColor,
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 14.0, horizontal: 10.0),
+                                      child: Text("Xem thử",
+                                          style: CustomTheme.bodyText3),
+                                    ),
+                                  ),
+                                ),
                             ],
                           ),
                         )
@@ -530,7 +537,6 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       }),
                 ),
               ),
-
             //related movies
             if (movieDetailsModel.relatedMovie!.length > 0)
               SliverToBoxAdapter(
@@ -558,81 +564,87 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
               ),
 
             //todo comment text
-            //comment
-            // if (authUser != null)
-            //   SliverToBoxAdapter(
-            //     child: Padding(
-            //       padding: const EdgeInsets.all(8.0),
-            //       child: Text(
-            //         AppContent.comments,
-            //         style: isDark!
-            //             ? CustomTheme.bodyText2White
-            //             : CustomTheme.bodyText2,
-            //       ),
-            //     ),
-            //   ),
+            // comment
+            if (FirebaseAuth.instance.currentUser != null)
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    AppContent.comments,
+                    style: isDark!
+                        ? CustomTheme.bodyText2White
+                        : CustomTheme.bodyText2,
+                  ),
+                ),
+              ),
             //todo box comment
-            // if (authUser != null)
-            //   SliverToBoxAdapter(
-            //     child: Padding(
-            //       padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            //       child: TextField(
-            //         controller: commentsController,
-            //         style: isDark!
-            //             ? CustomTheme.bodyText2White
-            //             : CustomTheme.bodyText2,
-            //         decoration: InputDecoration(
-            //           hintText: AppContent.yourComments,
-            //           filled: true,
-            //           hintStyle: CustomTheme.bodyTextgray2,
-            //           fillColor:
-            //               isDark! ? Colors.black54 : Colors.grey.shade200,
-            //           focusedBorder: OutlineInputBorder(
-            //             borderSide:
-            //                 BorderSide(color: Colors.grey.shade200, width: 0.0),
-            //           ),
-            //           border: OutlineInputBorder(
-            //             borderSide:
-            //                 BorderSide(color: Colors.grey.shade200, width: 0.0),
-            //           ),
-            //           enabledBorder: OutlineInputBorder(
-            //             borderSide:
-            //                 BorderSide(color: Colors.grey.shade200, width: 0.0),
-            //           ),
-            //         ),
-            //       ),
-            //     ),
-            //   ),
+            if (FirebaseAuth.instance.currentUser != null)
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: TextField(
+                    controller: commentsController,
+                    style: isDark!
+                        ? CustomTheme.bodyText2White
+                        : CustomTheme.bodyText2,
+                    decoration: InputDecoration(
+                      hintText: AppContent.yourComments,
+                      filled: true,
+                      hintStyle: CustomTheme.bodyTextgray2,
+                      fillColor:
+                          isDark! ? Colors.black54 : Colors.grey.shade200,
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Colors.grey.shade200, width: 0.0),
+                      ),
+                      border: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Colors.grey.shade200, width: 0.0),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Colors.grey.shade200, width: 0.0),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             //todo add comment
-            // if (authUser != null)
-            //   SliverToBoxAdapter(
-            //     child: Padding(
-            //       padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            //       child: Align(
-            //         alignment: Alignment.bottomRight,
-            //         child: ElevatedButton(
-            //           style: ElevatedButton.styleFrom(
-            //             primary: isDark!
-            //                 ? CustomTheme.grey_transparent2
-            //                 : Colors.grey.shade300,
-            //           ),
-            //           onPressed: () async {
-            //             String comments = commentsController.text.toString();
-            //             AddCommentsModel? addCommentsModel = await Repository()
-            //                 .addComments(movieDetailsModel.videosId,
-            //                     authUser.userId, comments);
-            //             commentsController.clear();
-            //             if (addCommentsModel != null) {
-            //               showShortToast(addCommentsModel.message!);
-            //               setState(() {});
-            //             }
-            //           },
-            //           child: Text(AppContent.addComments,
-            //               style: TextStyle(color: CustomTheme.primaryColor)),
-            //         ),
-            //       ),
-            //     ),
-            //   ),
+            if (FirebaseAuth.instance.currentUser != null)
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Align(
+                    alignment: Alignment.bottomRight,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: isDark!
+                            ? CustomTheme.grey_transparent2
+                            : Colors.grey.shade300,
+                      ),
+                      onPressed: () async {
+                        String comments = commentsController.text.toString();
+                        AddCommentsModel? addCommentsModel = await Repository()
+                            .addComments(
+                                movieDetailsModel.videosId,
+                                ApiFirebase().uid,
+                                comments,
+                                FirebaseAuth
+                                        .instance.currentUser?.displayName ??
+                                    "IDANCE User");
+                        print("CommentStatus: $addCommentsModel");
+                        commentsController.clear();
+                        if (addCommentsModel != null) {
+                          showShortToast(addCommentsModel.message!, context);
+                          setState(() {});
+                        }
+                      },
+                      child: Text(AppContent.addComments,
+                          style: TextStyle(color: CustomTheme.primaryColor)),
+                    ),
+                  ),
+                ),
+              ),
             if (allCommentModelList.data != null)
               SliverList(
                   delegate: SliverChildListDelegate(List.generate(
@@ -650,8 +662,13 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                 BorderRadius.all(Radius.circular(25.0)),
                             child: Image.network(
                               allCommentModelList.data!.commentsList!
-                                  .elementAt(index)
-                                  .userImgUrl!,
+                                          .elementAt(index)
+                                          .userImgUrl !=
+                                      null
+                                  ? allCommentModelList.data!.commentsList!
+                                      .elementAt(index)
+                                      .userImgUrl!
+                                  : "https://play-lh.googleusercontent.com/gbzvBNR9VaSxWKp2oMx2Dvl93cqb04EtQTxJPc1WKky_WMM2vYGI4faZ5MxVoFsk0SFp=w240-h480-rw",
                               width: 50.0,
                               height: 50.0,
                             ),
@@ -664,8 +681,9 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                               children: [
                                 Text(
                                   allCommentModelList.data!.commentsList!
-                                      .elementAt(index)
-                                      .userName!,
+                                          .elementAt(index)
+                                          .userName ??
+                                      "IDANCE User",
                                   style: isDark!
                                       ? CustomTheme.bodyText2White
                                       : CustomTheme.bodyTextgray2,
@@ -695,7 +713,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                                 .data!.commentsList!
                                                 .elementAt(index)
                                                 .videosId,
-                                            'userId': "1",
+                                            'userId': ApiFirebase().uid,
                                             'isDark': true,
                                           });
                                     },

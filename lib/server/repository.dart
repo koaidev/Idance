@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:oxoo/app.dart';
 
@@ -31,6 +32,7 @@ import '../../models/video_comments/all_comments_model.dart';
 import '../../models/video_comments/all_reply_model.dart';
 import '../../network/api_configuration.dart';
 import '../../utils/validators.dart';
+import '../constants.dart';
 
 class Repository {
   Dio dio = Dio();
@@ -46,7 +48,8 @@ class Repository {
       if (user.status == 'success') {
         return user;
       } else {
-        showShortToast(response.data['data'], MyApp.navigationKey.currentContext!);
+        showShortToast(
+            response.data['data'], MyApp.navigationKey.currentContext!);
         return null;
       }
     } catch (e) {
@@ -69,7 +72,8 @@ class Repository {
       if (user.status == 'success') {
         return user;
       } else {
-        showShortToast(response.data['data'], MyApp.navigationKey.currentContext!);
+        showShortToast(
+            response.data['data'], MyApp.navigationKey.currentContext!);
         return null;
       }
     } catch (e) {
@@ -96,7 +100,8 @@ class Repository {
       if (user.status == 'success') {
         return user;
       } else {
-        showShortToast(response.data['message'], MyApp.navigationKey.currentContext!);
+        showShortToast(
+            response.data['message'], MyApp.navigationKey.currentContext!);
         return null;
       }
     } catch (e) {
@@ -359,13 +364,13 @@ class Repository {
     }
   }
 
-  Future<MovieDetailsModel> getMovieDetailsData(
-      {String? movieId}) async {
+  Future<MovieDetailsModel> getMovieDetailsData({String? movieId}) async {
     dio.options.headers = ConfigApi().getHeaders();
 
     final response = await dio.get(
         "${ConfigApi().getApiUrl()}/single_details?type=movie&id=$movieId");
     if (response.statusCode == 200) {
+      print("MovieDetail: ${response.data}");
       MovieDetailsModel movieDetailsModel =
           MovieDetailsModel.fromJson(response.data);
       return movieDetailsModel;
@@ -422,7 +427,7 @@ class Repository {
         FavouriteListModel favouriteListModel =
             FavouriteListModel.fromJson(response.data);
         return favouriteListModel.favouriteListModel;
-      }else{
+      } else {
         return null;
       }
     } catch (ex) {
@@ -440,7 +445,7 @@ class Repository {
         FavouriteResponseModel favouriteResponseModel =
             FavouriteResponseModel.fromJson(response.data);
         return favouriteResponseModel;
-      }else{
+      } else {
         return null;
       }
     } catch (ex) {
@@ -487,6 +492,7 @@ class Repository {
     try {
       final response =
           await dio.get("${ConfigApi().getApiUrl()}/all_comments?id=$videoId");
+      print("AllComments: ${response.data}");
       if (response.statusCode == 200) {
         AllCommentModelList allCommentModelList =
             AllCommentModelList.fromJson(response.data);
@@ -499,22 +505,33 @@ class Repository {
   }
 
   Future<AddCommentsModel?> addComments(
-      String? videoId, String? userId, String comments) async {
+      String? videoId, String? userId, String comment, String? userName) async {
     dio.options.headers = ConfigApi().getHeaders();
+    printLog(
+        "addComments:----- userID: $userId, videoId: $videoId, comment: $comment");
     try {
-      final response = await dio.get(
-          "${ConfigApi().getApiUrl()}/add_comments?videos_id=$videoId&user_id=$userId&comment=$comments");
+      FormData formData = new FormData.fromMap({
+        "videos_id": videoId,
+        "user_id": userId,
+        "comment": comment,
+        "user_name": userName,
+        "user_img_url": FirebaseAuth.instance.currentUser?.photoURL ??
+            "https://play-lh.googleusercontent.com/gbzvBNR9VaSxWKp2oMx2Dvl93cqb04EtQTxJPc1WKky_WMM2vYGI4faZ5MxVoFsk0SFp=w240-h480-rw"
+      });
+      final response =
+          await dio.post("${ConfigApi().getApiUrl()}/comments", data: formData);
       if (response.statusCode == 200) {
         AddCommentsModel addCommentsModel =
             AddCommentsModel.fromJson(response.data);
         return addCommentsModel;
       }
     } catch (ex) {
-      print(ex);
+      print("add comment error: $ex");
       return null;
     }
   }
 
+  //start add new version
   Future<AllReplyModelList?> getAllReply(String? id) async {
     dio.options.headers = ConfigApi().getHeaders();
     try {
@@ -536,8 +553,18 @@ class Repository {
       String? userId}) async {
     dio.options.headers = ConfigApi().getHeaders();
     try {
-      final response = await dio.get(
-          "${ConfigApi().getApiUrl()}/add_replay?comment=$comment&comments_id=$commentsID&videos_id=$videosID&user_id=1");
+      FormData formData = new FormData.fromMap({
+        "videos_id": videosID,
+        "user_id": userId,
+        "comments_id": commentsID,
+        "comment": comment,
+        "user_name":
+            FirebaseAuth.instance.currentUser?.displayName ?? "IDANCE User",
+        "user_img_url": FirebaseAuth.instance.currentUser?.photoURL ??
+            "https://play-lh.googleusercontent.com/gbzvBNR9VaSxWKp2oMx2Dvl93cqb04EtQTxJPc1WKky_WMM2vYGI4faZ5MxVoFsk0SFp=w240-h480-rw"
+      });
+      final response = await dio.post("${ConfigApi().getApiUrl()}/add_replay",
+          data: formData);
       AddReplyModel addReplyModel = AddReplyModel.fromJson(response.data);
       return addReplyModel;
     } catch (ex) {
@@ -574,6 +601,8 @@ class Repository {
       print(ex.toString());
     }
   }
+
+  //end new version
 
   //End comment to event section
 

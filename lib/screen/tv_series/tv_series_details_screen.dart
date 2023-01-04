@@ -15,6 +15,7 @@ import '../../bloc/tv_seris/tv_seris_bloc.dart';
 import '../../constants.dart';
 import '../../models/configuration.dart';
 import '../../models/tv_series_details_model.dart';
+import '../../models/video_comments/ad_comments_model.dart';
 import '../../models/video_comments/all_comments_model.dart';
 import '../../screen/auth/auth_screen.dart';
 import '../../screen/subscription/premium_subscription_screen.dart';
@@ -24,6 +25,7 @@ import '../../strings.dart';
 import '../../style/theme.dart';
 import '../../utils/button_widget.dart';
 import '../../utils/loadingIndicator.dart';
+import '../../utils/validators.dart';
 import '../../viewmodel/movie_view_model.dart';
 import '../../widgets/movie_play_for_ios.dart';
 import '../../widgets/share_btn.dart';
@@ -553,63 +555,63 @@ class TvSerisDetailsScreen extends StatelessWidget {
                                       );
                                     }),
                               ),
-                            // Padding(
-                            //   padding: const EdgeInsets.all(8.0),
-                            //   child: Text(
-                            //     AppContent.comments,
-                            //     style: isDark!
-                            //         ? CustomTheme.bodyText1BoldWhite
-                            //         : CustomTheme.bodyText1Bold,
-                            //   ),
-                            // ),
-                            // Padding(
-                            //   padding: EdgeInsets.all(8.0),
-                            //   child: TextField(
-                            //     style: isDark!
-                            //         ? CustomTheme.bodyText2White
-                            //         : CustomTheme.bodyText2,
-                            //     controller: editingController,
-                            //     decoration: InputDecoration(
-                            //       hintText: AppContent.yourComments,
-                            //       filled: true,
-                            //       hintStyle: CustomTheme.bodyTextgray2,
-                            //       fillColor:
-                            //           isDark! ? Colors.black54 : Colors.grey.shade200,
-                            //       focusedBorder: OutlineInputBorder(
-                            //         borderSide: BorderSide(
-                            //             color: Colors.grey.shade200, width: 0.0),
-                            //       ),
-                            //       border: OutlineInputBorder(
-                            //         borderSide: BorderSide(
-                            //             color: Colors.grey.shade200, width: 0.0),
-                            //       ),
-                            //       enabledBorder: OutlineInputBorder(
-                            //         borderSide: BorderSide(
-                            //             color: Colors.grey.shade200, width: 0.0),
-                            //       ),
-                            //     ),
-                            //   ),
-                            // ),
-                            // Padding(
-                            //   padding: const EdgeInsets.all(8.0),
-                            //   child: Align(
-                            //     alignment: Alignment.bottomRight,
-                            //     child: ElevatedButton(
-                            //       style: ElevatedButton.styleFrom(
-                            //         primary: isDark!
-                            //             ? CustomTheme.grey_transparent2
-                            //             : Colors.grey.shade300,
-                            //       ),
-                            //       onPressed: () {
-                            //         print("Add Comments Pressed ");
-                            //       },
-                            //       child: Text(
-                            //         AppContent.addComments,
-                            //         style: TextStyle(color: CustomTheme.primaryColor),
-                            //       ),
-                            //     ),
-                            //   ),
-                            // )
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                AppContent.comments,
+                                style: isDark!
+                                    ? CustomTheme.bodyText1BoldWhite
+                                    : CustomTheme.bodyText1Bold,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: TextField(
+                                style: isDark!
+                                    ? CustomTheme.bodyText2White
+                                    : CustomTheme.bodyText2,
+                                controller: editingController,
+                                decoration: InputDecoration(
+                                  hintText: AppContent.yourComments,
+                                  filled: true,
+                                  hintStyle: CustomTheme.bodyTextgray2,
+                                  fillColor:
+                                      isDark! ? Colors.black54 : Colors.grey.shade200,
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.grey.shade200, width: 0.0),
+                                  ),
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.grey.shade200, width: 0.0),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.grey.shade200, width: 0.0),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Align(
+                                alignment: Alignment.bottomRight,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    primary: isDark!
+                                        ? CustomTheme.grey_transparent2
+                                        : Colors.grey.shade300,
+                                  ),
+                                  onPressed: () {
+                                    print("Add Comments Pressed ");
+                                  },
+                                  child: Text(
+                                    AppContent.addComments,
+                                    style: TextStyle(color: CustomTheme.primaryColor),
+                                  ),
+                                ),
+                              ),
+                            )
                           ],
                         ),
                       ),

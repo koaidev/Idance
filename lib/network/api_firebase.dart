@@ -3,9 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_disposable.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:oxoo/models/user.dart';
+import 'package:oxoo/models/video_paid.dart';
 
 class ApiFirebase extends GetxController implements GetxService {
   static const String USERS = "users";
+  static const String VIDEOS_PAID = "videos_paid";
 
   static const String STATUS_SUCCESS = "status_success";
   static const String STATUS_FAIL = "status_fail";
@@ -19,8 +21,16 @@ class ApiFirebase extends GetxController implements GetxService {
 
   DocumentReference getUser() => getUserCollection()
       .withConverter(
-          fromFirestore: (snapshot, options) => UserIDance.fromJson(snapshot.data()),
+          fromFirestore: (snapshot, options) =>
+              UserIDance.fromJson(snapshot.data()),
           toFirestore: (UserIDance user, options) => user.toJson())
+      .doc(uid);
+
+  DocumentReference getVideosPaid() => getVideosPaidCollection()
+      .withConverter(
+          fromFirestore: (snapshot, options) =>
+              VideosPaid.fromJson(snapshot.data()),
+          toFirestore: (VideosPaid videos, options) => videos.toJson())
       .doc(uid);
 
   Future<bool> checkUserIsExits() async {
@@ -30,12 +40,42 @@ class ApiFirebase extends GetxController implements GetxService {
 
   CollectionReference getUserCollection() => db.collection(USERS);
 
+  CollectionReference getVideosPaidCollection() => db.collection(VIDEOS_PAID);
+
+  Stream<DocumentSnapshot> getVideosPaidStream() => getVideosPaidCollection()
+      .withConverter(
+          fromFirestore: (snapshot, options) =>
+              VideosPaid.fromJson(snapshot.data()),
+          toFirestore: (VideosPaid videos, options) => videos.toJson())
+      .doc(uid)
+      .snapshots(includeMetadataChanges: true);
+
   Stream<DocumentSnapshot> getUserStream() => getUserCollection()
       .withConverter(
-          fromFirestore: (snapshot, options) => UserIDance.fromJson(snapshot.data()),
+          fromFirestore: (snapshot, options) =>
+              UserIDance.fromJson(snapshot.data()),
           toFirestore: (UserIDance user, options) => user.toJson())
       .doc(uid)
       .snapshots(includeMetadataChanges: true);
+
+  Future<bool> updateNewVideosPaid(VideoPaid videoPaid, bool isAdd) async {
+    Map<String, Object> map;
+    if (isAdd) {
+      map = {
+        "list_video_paid": FieldValue.arrayUnion([videoPaid])
+      };
+    } else {
+      map = {
+        "list_video_paid": FieldValue.arrayRemove([videoPaid])
+      };
+    }
+    bool response = await getVideosPaid().update(map).then((value) {
+      return true;
+    }).catchError((onError) {
+      return false;
+    });
+    return response;
+  }
 
   Future<bool> register(UserIDance userIDance) async => getUser()
       .set(userIDance)

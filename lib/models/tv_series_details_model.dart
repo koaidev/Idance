@@ -21,6 +21,7 @@ class TvSeriesDetailsModel {
   List<CastAndCrew>? castAndCrew = [];
   List<Season>? season = [];
   List<RelatedTvseries>? relatedTvseries = [];
+  String? trailerUrl;
 
   TvSeriesDetailsModel(
       {this.videosId,
@@ -42,6 +43,7 @@ class TvSeriesDetailsModel {
       this.cast,
       this.castAndCrew,
       this.season,
+      this.trailerUrl,
       this.relatedTvseries});
 
   TvSeriesDetailsModel.fromJson(Map<String, dynamic> json) {
@@ -57,6 +59,7 @@ class TvSeriesDetailsModel {
     enableDownload = json['enable_download'];
     thumbnailUrl = json['thumbnail_url'];
     posterUrl = json['poster_url'];
+    trailerUrl = json['trailler_youtube_source'];
     if (json['genre'] != null) {
       var jsonList = json['genre'] as List;
       jsonList.map((e) => Genre.fromJson(e)).toList().forEach((element) {

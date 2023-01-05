@@ -1,6 +1,7 @@
 import 'dart:io' show Platform;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,19 +28,26 @@ import '../../utils/button_widget.dart';
 import '../../utils/loadingIndicator.dart';
 import '../../utils/validators.dart';
 import '../../viewmodel/movie_view_model.dart';
+import '../../widgets/movie/movie_details_youtube_player.dart';
 import '../../widgets/movie_play_for_ios.dart';
 import '../../widgets/share_btn.dart';
 import '../../widgets/tv_series/cast_crew_item_card.dart';
 import '../../widgets/tv_series/episode_item_card.dart';
 import '../../widgets/tv_series/related_tvseries_card.dart';
+import '../movie/movie_reply_screen.dart';
 
-class TvSerisDetailsScreen extends StatelessWidget {
+class TvSerisDetailsScreen extends StatefulWidget {
   final String? seriesID;
   final String? isPaid;
 
   TvSerisDetailsScreen({Key? key, required this.seriesID, required this.isPaid})
       : super(key: key);
 
+  @override
+  State<StatefulWidget> createState() => _TvSerisDetailsScreenState();
+}
+
+class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
   TvSeriesDetailsModel? tvSeriesDetailsModel;
   TextEditingController editingController = new TextEditingController();
   Season? selectedSeason;
@@ -72,15 +80,17 @@ class TvSerisDetailsScreen extends StatelessWidget {
           }
           isUserValidSubscriber = userIDance?.currentPlan != "free";
           return Scaffold(
-            backgroundColor:
-            isDark! ? CustomTheme.colorAccentDark : CustomTheme.primaryColor,
+            backgroundColor: isDark!
+                ? CustomTheme.colorAccentDark
+                : CustomTheme.primaryColor,
             body: BlocProvider<TvSerisBloc>(
               create: (BuildContext context) => TvSerisBloc(Repository())
-                ..add(GetTvSerisEvent(seriesId: seriesID, userId: ApiFirebase().uid)),
+                ..add(GetTvSerisEvent(
+                    seriesId: widget.seriesID, userId: ApiFirebase().uid)),
               child: BlocBuilder<TvSerisBloc, TvSerisState>(
                 builder: (context, state) {
                   if (state is TvSerisIsLoaded) {
-                    if (isPaid == "1" && !ApiFirebase().isLogin()) {
+                    if (widget.isPaid == "1" && !ApiFirebase().isLogin()) {
                       SchedulerBinding.instance.addPostFrameCallback((_) {
                         Navigator.pushReplacement(
                           context,
@@ -98,7 +108,7 @@ class TvSerisDetailsScreen extends StatelessWidget {
                           tvSeriesDetailsModel!.isPaid == "1") {
                         return Scaffold(
                           backgroundColor:
-                          isDark! ? CustomTheme.black_window : Colors.white,
+                              isDark! ? CustomTheme.black_window : Colors.white,
                           body: subscriptionInfoDialog(
                               context: context,
                               isDark: isDark!,
@@ -135,7 +145,8 @@ class TvSerisDetailsScreen extends StatelessWidget {
                 },
               ),
             ),
-          );});
+          );
+        });
   }
 
   ///build subscriptionInfo Dialog
@@ -176,7 +187,7 @@ class TvSerisDetailsScreen extends StatelessWidget {
                                   fromRadioScreen: false,
                                   fromLiveTvScreen: true,
                                   liveTvID: "1",
-                                  isPaid: isPaid)),
+                                  isPaid: widget.isPaid)),
                         );
                       },
                       child: Text(
@@ -312,14 +323,30 @@ class TvSerisDetailsScreen extends StatelessWidget {
                                                           FontWeight.bold),
                                                 ),
                                                 HelpMe().space(8.0),
-                                                Text(
-                                                  tvSeriesDetailsModel!.slug!,
-                                                  style: TextStyle(
-                                                      fontSize: 14,
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
+                                                if (tvSeriesDetailsModel!.trailerUrl?.isNotEmpty==true)
+                                                  Container(
+                                                    width:
+                                                    MediaQuery.of(context).size.width - 170,
+                                                    child: ElevatedButton(
+                                                      onPressed: () async {
+                                                        Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                                builder: (context) =>
+                                                                    MovieDetailsYoutubePlayer(
+                                                                        url: tvSeriesDetailsModel?.trailerUrl)));
+                                                      },
+                                                      style: ElevatedButton.styleFrom(
+                                                        primary: CustomTheme.whiteColor,
+                                                      ),
+                                                      child: Padding(
+                                                        padding: const EdgeInsets.symmetric(
+                                                            vertical: 14.0, horizontal: 10.0),
+                                                        child: Text("Xem thử",
+                                                            style: CustomTheme.bodyText3),
+                                                      ),
+                                                    ),
+                                                  ),
                                               ],
                                             ),
                                           )
@@ -575,19 +602,23 @@ class TvSerisDetailsScreen extends StatelessWidget {
                                   hintText: AppContent.yourComments,
                                   filled: true,
                                   hintStyle: CustomTheme.bodyTextgray2,
-                                  fillColor:
-                                      isDark! ? Colors.black54 : Colors.grey.shade200,
+                                  fillColor: isDark!
+                                      ? Colors.black54
+                                      : Colors.grey.shade200,
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Colors.grey.shade200, width: 0.0),
+                                        color: Colors.grey.shade200,
+                                        width: 0.0),
                                   ),
                                   border: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Colors.grey.shade200, width: 0.0),
+                                        color: Colors.grey.shade200,
+                                        width: 0.0),
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Colors.grey.shade200, width: 0.0),
+                                        color: Colors.grey.shade200,
+                                        width: 0.0),
                                   ),
                                 ),
                               ),
@@ -603,15 +634,32 @@ class TvSerisDetailsScreen extends StatelessWidget {
                                         : Colors.grey.shade300,
                                   ),
                                   onPressed: () {
-                                    print("Add Comments Pressed ");
+                                    postComment(tvSeriesDetailsModel!);
                                   },
                                   child: Text(
                                     AppContent.addComments,
-                                    style: TextStyle(color: CustomTheme.primaryColor),
+                                    style: TextStyle(
+                                        color: CustomTheme.primaryColor),
                                   ),
                                 ),
                               ),
-                            )
+                            ),
+                            if (allCommentModelList.data != null)
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: ListView.builder(
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.vertical,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemCount: allCommentModelList
+                                            .data?.commentsList?.length ??
+                                        0,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return commentItem(allCommentModelList
+                                          .data!.commentsList![index]);
+                                    }),
+                              ),
                           ],
                         ),
                       ),
@@ -619,6 +667,89 @@ class TvSerisDetailsScreen extends StatelessWidget {
                   )),
         );
       },
+    );
+  }
+
+  void postComment(TvSeriesDetailsModel data) async {
+    String comment = editingController.text.toString();
+    if (comment.isNotEmpty) {
+      AddCommentsModel? model = await Repository().addComments(
+          data.videosId,
+          ApiFirebase().uid,
+          comment,
+          FirebaseAuth.instance.currentUser?.displayName ?? "IDANCE User");
+
+      if (model != null) {
+        editingController.clear();
+        showShortToast(model.message ?? "", context);
+        setState(() {});
+      }
+    }
+  }
+
+  Widget commentItem(AllCommentModel allCommentModelList) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
+      child: Card(
+        color: isDark! ? CustomTheme.colorAccentDark : Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(25.0)),
+                child: Image.network(
+                  allCommentModelList.userImgUrl != null
+                      ? allCommentModelList.userImgUrl!
+                      : "https://play-lh.googleusercontent.com/gbzvBNR9VaSxWKp2oMx2Dvl93cqb04EtQTxJPc1WKky_WMM2vYGI4faZ5MxVoFsk0SFp=w240-h480-rw",
+                  width: 50.0,
+                  height: 50.0,
+                ),
+              ),
+              SizedBox(width: 10.0),
+              Flexible(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      allCommentModelList.userName ?? "IDANCE User",
+                      style: isDark!
+                          ? CustomTheme.bodyText2White
+                          : CustomTheme.bodyTextgray2,
+                    ),
+                    SizedBox(
+                      height: 5.0,
+                    ),
+                    Text(
+                      allCommentModelList.comments!,
+                      style: CustomTheme.smallTextGrey,
+                    ),
+                    SizedBox(
+                      height: 5.0,
+                    ),
+                    InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context, MovieReplyScreen.route,
+                              arguments: {
+                                'commentsID': allCommentModelList.commentsId,
+                                'videosID': allCommentModelList.videosId,
+                                'userId': ApiFirebase().uid,
+                                'isDark': true,
+                              });
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(AppContent.reply,
+                              style: CustomTheme.coloredBodyText3),
+                        ))
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

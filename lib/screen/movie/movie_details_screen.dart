@@ -382,7 +382,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
 
                               //todo download button
                               //rent button
-                              if (movieDetailsModel.trailerUrl?.isNotEmpty==true)
+                              if (movieDetailsModel.trailerUrl?.isNotEmpty ==
+                                  true)
                                 Container(
                                   width:
                                       MediaQuery.of(context).size.width - 170,
@@ -393,7 +394,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                           MaterialPageRoute(
                                               builder: (context) =>
                                                   MovieDetailsYoutubePlayer(
-                                                      url: movieDetailsModel.trailerUrl)));
+                                                      url: movieDetailsModel
+                                                          .trailerUrl)));
                                     },
                                     style: ElevatedButton.styleFrom(
                                       primary: CustomTheme.whiteColor,

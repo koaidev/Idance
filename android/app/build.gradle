@@ -59,7 +59,7 @@ android {
         applicationId "com.idance.hocnhayonline"
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 33
+        versionCode 34
         versionName '2.0.0'
     }
 

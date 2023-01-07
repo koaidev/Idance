@@ -1,6 +1,7 @@
 import 'dart:io' show Platform;
 
 import 'package:flutter/material.dart';
+import 'package:kochava_tracker/kochava_tracker.dart';
 import 'package:oxoo/constants.dart';
 
 import '../../models/videos.dart';
@@ -11,7 +12,7 @@ import '../movie_play_for_ios.dart';
 import 'movie_details_youtube_player.dart';
 
 class SelectServerDialog {
-  createDialog(context, List<Videos> videos, bool? isDark) {
+  createDialog(context,String title ,List<Videos> videos, bool? isDark) {
     print(videos.length);
     showDialog(
         context: context,
@@ -59,6 +60,7 @@ class SelectServerDialog {
                                     const EdgeInsets.symmetric(vertical: 4),
                                 child: InkWell(
                                   onTap: () {
+                                    KochavaTracker.instance.sendEvent("Số lượt xem $title");
                                     //Navigator.of(context).pop();
                                     printLog(
                                         "--------------servertype: ${videos.elementAt(index).fileType}");

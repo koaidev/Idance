@@ -9,6 +9,7 @@ import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
+import 'package:kochava_tracker/kochava_tracker.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:oxoo/network/api_firebase.dart';
 import 'package:toast/toast.dart';
@@ -81,6 +82,7 @@ class _LandingScreenState extends State<LandingScreen>
         FlutterInappPurchase.connectionUpdated.listen((connected) async {
       print('connected: $connected');
     });
+    KochavaTracker.instance.sendEvent("Số lượt mở ứng dụng");
 
     _controller = new TabController(vsync: this, length: 5, initialIndex: 1);
     super.initState();

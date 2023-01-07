@@ -13,6 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
+import 'package:kochava_tracker/kochava_tracker.dart';
 import 'package:oxoo/bloc/movie_details/movie_details_bloc.dart';
 import 'package:oxoo/network/api_firebase.dart';
 import 'package:oxoo/utils/price_converter.dart';
@@ -457,7 +458,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                       primary: CustomTheme.primaryColorRed,
                                     ),
                                     onPressed: () {
-                                      SelectServerDialog().createDialog(context,
+                                      SelectServerDialog().createDialog(context, movieDetailsModel.title,
                                           movieDetailsModel.videos!, isDark);
                                     },
                                     child: Padding(
@@ -517,6 +518,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                       MediaQuery.of(context).size.width - 170,
                                   child: ElevatedButton(
                                     onPressed: () async {
+                                      KochavaTracker.instance.sendEvent("Số lượt xem thử ${movieDetailsModel.title}");
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(

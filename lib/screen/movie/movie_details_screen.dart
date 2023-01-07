@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'dart:isolate';
 import 'dart:ui';
@@ -11,8 +12,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:hive/hive.dart';
+import 'package:http/http.dart' as http;
 import 'package:oxoo/bloc/movie_details/movie_details_bloc.dart';
 import 'package:oxoo/network/api_firebase.dart';
+import 'package:oxoo/utils/price_converter.dart';
 import 'package:oxoo/widgets/movie/movie_poster.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -23,9 +26,11 @@ import '../../constants.dart';
 import '../../models/configuration.dart';
 import '../../models/favourite_response_model.dart';
 import '../../models/movie_details_model.dart';
+import '../../models/payment_object.dart';
 import '../../models/user.dart';
 import '../../models/video_comments/ad_comments_model.dart';
 import '../../models/video_comments/all_comments_model.dart';
+import '../../models/video_paid.dart';
 import '../../screen/auth/auth_screen.dart';
 import '../../screen/subscription/premium_subscription_screen.dart';
 import '../../server/repository.dart';
@@ -39,6 +44,7 @@ import '../../widgets/movie/movie_details_youtube_player.dart';
 import '../../widgets/movie/select_server_dialog.dart';
 import '../../widgets/share_btn.dart';
 import '../../widgets/tv_series/cast_crew_item_card.dart';
+import '../payment/select_method_payment_dialog.dart';
 import 'movie_reply_screen.dart';
 
 class MovieDetailScreen extends StatefulWidget {
@@ -63,6 +69,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
   UserIDance? userIDance;
 
   bool isUserValidSubscriber = false;
+  List<VideoPaid> listVideosPaid = [];
 
   @override
   void initState() {
@@ -131,6 +138,60 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
     return File('$_localPath$videoName');
   }
 
+  checkVideoPaid() async {
+    final response = await http.get(Uri.parse(
+        "http://apppanel.cnagroup.vn/rest_api/v1/id/${ApiFirebase().uid}"));
+    if (response.statusCode == 200) {
+      print("VideoPaids: ${response.body}");
+      var paymentObject = PaymentObject.fromJson(jsonDecode(response.body));
+      if (paymentObject.data?.isNotEmpty == true) {
+        VideosPaid videosPaid = await ApiFirebase()
+            .getVideosPaid()
+            .get()
+            .then((value) => value.data() as VideosPaid);
+        print("VideosPaid: ${videosPaid.listVideoPaid.toString()}");
+        paymentObject.data!.forEach((element) async {
+          if (element.orderInfo?.contains("video") == true &&
+              element.orderInfo?.replaceAll(RegExp('[^0-9]'), '') ==
+                  movieDetailsModel.videosId) {
+            if (!videosPaid.listVideoPaid!.any((video) =>
+                video.videoId.toString() ==
+                element.orderInfo?.replaceAll(RegExp('[^0-9]'), ''))) {
+              bool response2 = await ApiFirebase().updateNewVideosPaid(
+                  new VideoPaid(
+                      videoId: int.parse(movieDetailsModel.videosId),
+                      numberCanWatch: movieDetailsModel.numberCanWatch,
+                      uid: ApiFirebase().uid,
+                      status: true),
+                  true);
+              print("StatusVideo: $response2");
+            } else if (videosPaid.listVideoPaid!.any((video) =>
+                video.videoId.toString() ==
+                    element.orderInfo?.replaceAll(RegExp('[^0-9]'), '') &&
+                video.status == false)) {
+              bool response2 = await ApiFirebase().updateNewVideosPaid(
+                  new VideoPaid(
+                      videoId: int.parse(movieDetailsModel.videosId),
+                      numberCanWatch: movieDetailsModel.numberCanWatch,
+                      uid: ApiFirebase().uid,
+                      status: true),
+                  true);
+              print("ONADD: $response2");
+              bool response3 = await ApiFirebase().updateNewVideosPaid(
+                  new VideoPaid(
+                      videoId: int.parse(movieDetailsModel.videosId),
+                      numberCanWatch: 0,
+                      uid: ApiFirebase().uid,
+                      status: false),
+                  false);
+              print("ONREMOVE: $response3");
+            }
+          }
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final routes =
@@ -153,68 +214,87 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
           }
           isUserValidSubscriber = userIDance?.currentPlan != "free";
 
-          return Scaffold(
-            body: Container(
-              color: isDark! ? CustomTheme.primaryColorDark : Colors.white,
-              child: BlocProvider<MovieDetailsBloc>(
-                create: (BuildContext context) =>
-                    MovieDetailsBloc(repository: Repository())
-                      ..add(GetMovieDetailsEvent(
-                          movieID: routes!['movieID'] ?? widget.movieID,
-                          userID: ApiFirebase().uid)),
-                child: BlocBuilder<MovieDetailsBloc, MovieDetailsState>(
-                  builder: (context, state) {
-                    if (state is MovieDetailsLoadedState) {
-                      movieDetailsModel = state.movieDetails;
-                      if (movieDetailsModel.isPaid == "1" &&
-                          !ApiFirebase().isLogin()) {
-                        SchedulerBinding.instance.addPostFrameCallback((_) {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => AuthScreen(
-                                      fromPaidScreen: true,
-                                    )),
-                          );
-                        });
-                      } else {
-                        if (!isUserValidSubscriber &&
-                            movieDetailsModel.isPaid == "1") {
-                          return Scaffold(
-                            backgroundColor: isDark!
-                                ? CustomTheme.black_window
-                                : Colors.white,
-                            body: subscriptionInfoDialog(
-                                context: context,
-                                isDark: isDark!,
-                                userId: ApiFirebase().uid),
-                          );
-                        } else {
-                          isDownloadEnable =
-                              movieDetailsModel.enableDownload.toString() == "1"
-                                  ? true
-                                  : false;
-                          return buildUI(context, paymentConfig,
-                              movieDetailsModel.videosId);
-                        }
-                      }
-                      return spinkit;
-                    } else if (state is MovieDetailsErrorState) {
-                      printLog(
-                          "------------movie details erorr: ${state.message}");
-                    }
-                    return spinkit;
-                  },
-                ),
-              ),
-            ),
-          );
+          return StreamBuilder<DocumentSnapshot>(
+              stream: ApiFirebase().getVideosPaidStream(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<DocumentSnapshot> snapshot2) {
+                if (snapshot.hasError) {
+                  listVideosPaid = [];
+                }
+                if (snapshot.hasData) {
+                  listVideosPaid =
+                      (snapshot2.data?.data() as VideosPaid?)?.listVideoPaid ??
+                          [];
+                }
+                print(
+                    "VideosPaid: ${(snapshot2.data?.data() as VideosPaid?)?.listVideoPaid}");
+                return Scaffold(
+                  body: Container(
+                    color:
+                        isDark! ? CustomTheme.primaryColorDark : Colors.white,
+                    child: BlocProvider<MovieDetailsBloc>(
+                      create: (BuildContext context) =>
+                          MovieDetailsBloc(repository: Repository())
+                            ..add(GetMovieDetailsEvent(
+                                movieID: routes!['movieID'] ?? widget.movieID,
+                                userID: ApiFirebase().uid)),
+                      child: BlocBuilder<MovieDetailsBloc, MovieDetailsState>(
+                        builder: (context, state) {
+                          if (state is MovieDetailsLoadedState) {
+                            movieDetailsModel = state.movieDetails;
+                            if (movieDetailsModel.isPaid == "1" &&
+                                !ApiFirebase().isLogin()) {
+                              SchedulerBinding.instance
+                                  .addPostFrameCallback((_) {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => AuthScreen(
+                                            fromPaidScreen: true,
+                                          )),
+                                );
+                              });
+                            } else {
+                              // if (!isUserValidSubscriber &&
+                              //     movieDetailsModel.isPaid == "1") {
+                              //   return Scaffold(
+                              //     backgroundColor: isDark!
+                              //         ? CustomTheme.black_window
+                              //         : Colors.white,
+                              //     body: subscriptionInfoDialog(
+                              //         context: context,
+                              //         isDark: isDark!,
+                              //         userId: ApiFirebase().uid),
+                              //   );
+                              // } else {
+                              isDownloadEnable =
+                                  movieDetailsModel.enableDownload.toString() ==
+                                          "1"
+                                      ? true
+                                      : false;
+                              return buildUI(context, paymentConfig,
+                                  movieDetailsModel.videosId);
+                              // }
+                            }
+                            return spinkit;
+                          } else if (state is MovieDetailsErrorState) {
+                            printLog(
+                                "------------movie details erorr: ${state.message}");
+                          }
+                          return spinkit;
+                        },
+                      ),
+                    ),
+                  ),
+                );
+              });
         });
   }
 
   ///build movie screen UI
   Widget buildUI(
       BuildContext context, PaymentConfig? paymentConfig, String? videoId) {
+    checkVideoPaid();
     return FutureBuilder(
       future: Repository().getAllComments(videoId),
       builder:
@@ -361,24 +441,72 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                     }),
                               ),
                               HelpMe().space(8),
-                              Container(
-                                width: MediaQuery.of(context).size.width - 170,
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    primary: CustomTheme.primaryColorRed,
-                                  ),
-                                  onPressed: () {
-                                    SelectServerDialog().createDialog(context,
-                                        movieDetailsModel.videos!, isDark);
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 14.0, horizontal: 10.0),
-                                    child: Text(AppContent.watchNow,
-                                        style: CustomTheme.bodyText3White),
+
+                              ///Học ngay button
+                              if (isUserValidSubscriber ||
+                                  listVideosPaid.any((element) =>
+                                      (element.videoId.toString() ==
+                                              movieDetailsModel.videosId &&
+                                          element.numberCanWatch != 0)) ||
+                                  movieDetailsModel.isPaid == "0")
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width - 170,
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      primary: CustomTheme.primaryColorRed,
+                                    ),
+                                    onPressed: () {
+                                      SelectServerDialog().createDialog(context,
+                                          movieDetailsModel.videos!, isDark);
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 14.0, horizontal: 10.0),
+                                      child: Text(AppContent.watchNow,
+                                          style: CustomTheme.bodyText3White),
+                                    ),
                                   ),
                                 ),
-                              ),
+
+                              ///mua button
+                              if ((movieDetailsModel.isPaid == "1" &&
+                                  !(isUserValidSubscriber ||
+                                      listVideosPaid.any((element) =>
+                                          element.videoId.toString() ==
+                                              movieDetailsModel.videosId &&
+                                          element.numberCanWatch != 0))))
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width - 170,
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      primary: CustomTheme.primaryColorRed,
+                                    ),
+                                    onPressed: () {
+                                      SelectMethodPaymentDialog().createDialog(
+                                          context,
+                                          movieDetailsModel.title +
+                                              " - video${movieDetailsModel.videosId}",
+                                          int.parse(movieDetailsModel.videosId),
+                                          (movieDetailsModel.numberCanWatch ??
+                                              -1),
+                                          (movieDetailsModel.price! > 0
+                                              ? movieDetailsModel.price!
+                                              : 10000),
+                                          isDark);
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 4.0, horizontal: 4.0),
+                                      child: Text(
+                                        "Mua ngay chỉ với ${PriceConverter.convertPrice(movieDetailsModel.price! > 0 ? movieDetailsModel.price! : 10000)}đ\n${movieDetailsModel.numberCanWatch == -1 ? 'Vĩnh viễn' : '${movieDetailsModel.numberCanWatch} lượt xem'}",
+                                        style: CustomTheme.bodyText3White,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ),
+                                ),
 
                               //todo download button
                               //rent button

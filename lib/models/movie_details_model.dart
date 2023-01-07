@@ -1,4 +1,5 @@
 import 'package:oxoo/models/home_content.dart';
+
 import '../../models/tv_series_details_model.dart';
 import '../../models/videos.dart';
 import 'director_model.dart';
@@ -26,6 +27,8 @@ class MovieDetailsModel {
   List<CastAndCrew>? castAndCrew = [];
   List<Movie>? relatedMovie = [];
   String? trailerUrl;
+  int? price;
+  int? numberCanWatch;
 
   MovieDetailsModel(
       {required this.videosId,
@@ -47,6 +50,8 @@ class MovieDetailsModel {
       this.director,
       this.writer,
       this.cast,
+      this.price,
+      this.numberCanWatch,
       this.castAndCrew,
       this.trailerUrl,
       this.relatedMovie});
@@ -61,11 +66,16 @@ class MovieDetailsModel {
     videoQuality = json['video_quality'];
     isTvseries = json['is_tvseries'];
     isPaid = json['is_paid'];
+    price = int.parse(json['price']);
+    numberCanWatch = int.parse(json['number_can_watch']);
     enableDownload = json['enable_download'];
     trailerUrl = json['trailler_youtube_source'];
     if (json['download_links'] != null) {
       var jsonList = json['download_links'] as List;
-      jsonList.map((e) => DownloadLinks.fromJson(e)).toList().forEach((element) {
+      jsonList
+          .map((e) => DownloadLinks.fromJson(e))
+          .toList()
+          .forEach((element) {
         downloadLinks!.add(element);
       });
     } else {
@@ -136,9 +146,12 @@ class MovieDetailsModel {
     data['video_quality'] = this.videoQuality;
     data['is_tvseries'] = this.isTvseries;
     data['is_paid'] = this.isPaid;
+    data['price'] = this.price;
+    data['number_can_watch'] = this.numberCanWatch;
     data['enable_download'] = this.enableDownload;
     if (this.downloadLinks != null) {
-      data['download_links'] = this.downloadLinks!.map((v) => v.toJson()).toList();
+      data['download_links'] =
+          this.downloadLinks!.map((v) => v.toJson()).toList();
     }
     data['thumbnail_url'] = this.thumbnailUrl;
     data['poster_url'] = this.posterUrl;
@@ -164,7 +177,8 @@ class MovieDetailsModel {
       data['cast_and_crew'] = this.castAndCrew!.map((v) => v.toJson()).toList();
     }
     if (this.relatedMovie != null) {
-      data['related_movie'] = this.relatedMovie!.map((v) => v.toJson()).toList();
+      data['related_movie'] =
+          this.relatedMovie!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -248,7 +262,14 @@ class DownloadLinks {
   String? downloadUrl;
   bool inAppDownload = false;
 
-  DownloadLinks({this.downloadLinkId, this.label, this.videosId, this.resolution, this.fileSize, this.downloadUrl, required this.inAppDownload});
+  DownloadLinks(
+      {this.downloadLinkId,
+      this.label,
+      this.videosId,
+      this.resolution,
+      this.fileSize,
+      this.downloadUrl,
+      required this.inAppDownload});
 
   DownloadLinks.fromJson(Map<String, dynamic> json) {
     downloadLinkId = json['download_link_id'];

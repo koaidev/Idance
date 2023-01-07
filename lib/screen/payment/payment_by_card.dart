@@ -2,57 +2,34 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:oxoo/screen/landing_screen.dart';
+import 'package:oxoo/utils/price_converter.dart';
 import 'package:toast/toast.dart';
 
 class PaymentByCardScreen extends StatefulWidget {
-  final int index;
-  final String name;
-  final String phoneNumber;
+  final int amount;
+  final String reason;
 
   const PaymentByCardScreen(
-      {Key? key,
-      required this.index,
-      required this.name,
-      required this.phoneNumber})
+      {Key? key, required this.reason, required this.amount})
       : super(key: key);
 
   @override
-  _PaymentByCardScreenState createState() => _PaymentByCardScreenState(
-      index: index, name: name, phoneNumber: phoneNumber);
+  _PaymentByCardScreenState createState() => _PaymentByCardScreenState();
 }
 
 class _PaymentByCardScreenState extends State<PaymentByCardScreen> {
   Function? action1;
   late String comboLearn;
-  late String amount;
   late int amountNumber;
-  final String phoneNumber;
-  final String name;
-  final int index;
 
-  _PaymentByCardScreenState(
-      {required this.index, required this.name, required this.phoneNumber});
-
-  void handleAction(int index) {
-    if (index == 1) {
-      comboLearn = "goi hoc 1 thang";
-      amount = "19.000";
-      amountNumber = 19000;
-    } else if (index == 2) {
-      comboLearn = "goi hoc 3 thang";
-      amount = "49.000";
-      amountNumber = 49000;
-    } else {
-      comboLearn = "goi hoc 6 thang";
-      amount = "99.000";
-      amountNumber = 99000;
-    }
+  void handleAction() {
+    comboLearn = widget.reason;
+    amountNumber = widget.amount;
     action1 = () {
       Clipboard.setData(ClipboardData(
-          text:
-              "$name - $phoneNumber - $comboLearn - ${FirebaseAuth.instance.currentUser!.uid}"));
+          text: "$comboLearn - ${FirebaseAuth.instance.currentUser!.uid}"));
       Toast.show(
-          "Đã sao chép: $name - $phoneNumber - $comboLearn - ${FirebaseAuth.instance.currentUser!.uid}",
+          "Đã sao chép: $comboLearn - ${FirebaseAuth.instance.currentUser!.uid}",
           duration: Toast.lengthShort,
           backgroundColor: Colors.red,
           textStyle: TextStyle(color: Colors.white, fontSize: 16.0),
@@ -63,7 +40,7 @@ class _PaymentByCardScreenState extends State<PaymentByCardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    handleAction(index);
+    handleAction();
     ToastContext().init(context);
     return Scaffold(
       backgroundColor: Colors.white,
@@ -123,7 +100,7 @@ class _PaymentByCardScreenState extends State<PaymentByCardScreen> {
                   ),
                 ),
                 TextSpan(
-                    text: "\n$amount",
+                    text: "\n${PriceConverter.convertPrice(amountNumber)}",
                     style: const TextStyle(
                         fontFamily: 'Montserrat',
                         fontWeight: FontWeight.bold,
@@ -136,7 +113,7 @@ class _PaymentByCardScreenState extends State<PaymentByCardScreen> {
                     )),
                 TextSpan(
                     text:
-                        "$name - $phoneNumber - $comboLearn - ${FirebaseAuth.instance.currentUser!.uid}\n\n",
+                        "$comboLearn - ${FirebaseAuth.instance.currentUser!.uid}\n\n",
                     style: const TextStyle(
                         fontFamily: 'Montserrat',
                         fontWeight: FontWeight.bold,
@@ -166,8 +143,7 @@ class _PaymentByCardScreenState extends State<PaymentByCardScreen> {
               Expanded(
                   child: _buildActionCopy('Copy số tài khoản', action: () {
                 Clipboard.setData(ClipboardData(text: "1327888888"));
-                Toast.show(
-                    "Đã sao chép: 1327888888",
+                Toast.show("Đã sao chép: 1327888888",
                     duration: Toast.lengthShort,
                     backgroundColor: Colors.red,
                     textStyle: TextStyle(color: Colors.white, fontSize: 16.0),

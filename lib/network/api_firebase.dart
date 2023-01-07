@@ -62,16 +62,17 @@ class ApiFirebase extends GetxController implements GetxService {
     Map<String, Object> map;
     if (isAdd) {
       map = {
-        "list_video_paid": FieldValue.arrayUnion([videoPaid])
+        "list_video_paid": FieldValue.arrayUnion([videoPaid.toJson()])
       };
     } else {
       map = {
-        "list_video_paid": FieldValue.arrayRemove([videoPaid])
+        "list_video_paid": FieldValue.arrayRemove([videoPaid.toJson()])
       };
     }
     bool response = await getVideosPaid().update(map).then((value) {
       return true;
     }).catchError((onError) {
+      print("Error Update: $onError");
       return false;
     });
     return response;
@@ -86,4 +87,17 @@ class ApiFirebase extends GetxController implements GetxService {
       .update(userIDance)
       .then((value) => true)
       .catchError((onError) => false);
+
+  Future<bool> createVideosPaid() async {
+    var videosPaid = await getVideosPaid().get();
+    if (!videosPaid.exists) {
+      bool response = await getVideosPaid()
+          .set(VideosPaid(uid: uid, listVideoPaid: []))
+          .then((value) => true)
+          .catchError((onError) => false);
+      return response;
+    } else {
+      return true;
+    }
+  }
 }

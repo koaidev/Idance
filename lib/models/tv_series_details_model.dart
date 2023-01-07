@@ -22,29 +22,32 @@ class TvSeriesDetailsModel {
   List<Season>? season = [];
   List<RelatedTvseries>? relatedTvseries = [];
   String? trailerUrl;
+  int? price;
+  int? numberCanWatch;
 
-  TvSeriesDetailsModel(
-      {this.videosId,
-      this.title,
-      this.description,
-      this.slug,
-      this.release,
-      this.runtime,
-      this.videoQuality,
-      this.isTvseries,
-      this.isPaid,
-      this.enableDownload,
-      this.thumbnailUrl,
-      this.posterUrl,
-      this.genre,
-      this.country,
-      this.director,
-      this.writer,
-      this.cast,
-      this.castAndCrew,
-      this.season,
-      this.trailerUrl,
-      this.relatedTvseries});
+  TvSeriesDetailsModel({this.videosId,
+    this.title,
+    this.description,
+    this.slug,
+    this.release,
+    this.runtime,
+    this.videoQuality,
+    this.isTvseries,
+    this.isPaid,
+    this.enableDownload,
+    this.thumbnailUrl,
+    this.posterUrl,
+    this.genre,
+    this.country,
+    this.director,
+    this.writer,
+    this.cast,
+    this.price,
+    this.numberCanWatch,
+    this.castAndCrew,
+    this.season,
+    this.trailerUrl,
+    this.relatedTvseries});
 
   TvSeriesDetailsModel.fromJson(Map<String, dynamic> json) {
     videosId = json['videos_id'];
@@ -59,6 +62,8 @@ class TvSeriesDetailsModel {
     enableDownload = json['enable_download'];
     thumbnailUrl = json['thumbnail_url'];
     posterUrl = json['poster_url'];
+    price = int.parse(json['price']);
+    numberCanWatch = int.parse(json['number_can_watch']);
     trailerUrl = json['trailler_youtube_source'];
     if (json['genre'] != null) {
       var jsonList = json['genre'] as List;
@@ -125,6 +130,8 @@ class TvSeriesDetailsModel {
     data['is_tvseries'] = this.isTvseries;
     data['is_paid'] = this.isPaid;
     data['enable_download'] = this.enableDownload;
+    data['price'] = this.price;
+    data['number_can_watch'] = this.numberCanWatch;
     data['thumbnail_url'] = this.thumbnailUrl;
     data['poster_url'] = this.posterUrl;
     if (this.genre != null) {
@@ -313,14 +320,13 @@ class Episodes {
   String? fileUrl;
   List<Null>? subtitle;
 
-  Episodes(
-      {this.episodesId,
-      this.episodesName,
-      this.streamKey,
-      this.fileType,
-      this.imageUrl,
-      this.fileUrl,
-      this.subtitle});
+  Episodes({this.episodesId,
+    this.episodesName,
+    this.streamKey,
+    this.fileType,
+    this.imageUrl,
+    this.fileUrl,
+    this.subtitle});
 
   Episodes.fromJson(Map<String, dynamic> json) {
     episodesId = json['episodes_id'];
@@ -356,18 +362,17 @@ class RelatedTvseries {
   String? thumbnailUrl;
   String? posterUrl;
 
-  RelatedTvseries(
-      {this.videosId,
-      this.genre,
-      this.country,
-      this.title,
-      this.description,
-      this.slug,
-      this.release,
-      this.runtime,
-      this.videoQuality,
-      this.thumbnailUrl,
-      this.posterUrl});
+  RelatedTvseries({this.videosId,
+    this.genre,
+    this.country,
+    this.title,
+    this.description,
+    this.slug,
+    this.release,
+    this.runtime,
+    this.videoQuality,
+    this.thumbnailUrl,
+    this.posterUrl});
 
   RelatedTvseries.fromJson(Map<String, dynamic> json) {
     videosId = json['videos_id'];

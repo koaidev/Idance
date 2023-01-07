@@ -23,21 +23,27 @@ class VideosPaid {
 }
 
 class VideoPaid {
-  String? videoId;
-  String? numberCanWatch;
+  int? videoId;
+  int? numberCanWatch;
+  String? uid;
+  bool? status;
 
-  VideoPaid({this.videoId, this.numberCanWatch});
+  VideoPaid({this.videoId, this.numberCanWatch, this.uid, this.status});
 
   VideoPaid.fromJson(
     Map<String, dynamic>? json,
   ) : this(
-            videoId: json?['video_id'] as String,
-            numberCanWatch: json?['number_can_watch']);
+            videoId: json?['video_id'],
+            numberCanWatch: json?['number_can_watch'],
+            uid: json?['uid'],
+            status: json?['status']);
 
   Map<String, dynamic> toJson() {
     return {
       'video_id': videoId,
       'number_can_watch': numberCanWatch,
+      'uid': uid,
+      'status': status
     };
   }
 }

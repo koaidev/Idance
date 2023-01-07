@@ -95,6 +95,7 @@ class _LandingScreenState extends State<LandingScreen>
         .addPostFrameCallback((_) => configOneSignal(context));
     if (FirebaseAuth.instance.currentUser != null) {
       checkPaymentUser();
+      ApiFirebase().createVideosPaid();
     }
   }
 
@@ -108,18 +109,25 @@ class _LandingScreenState extends State<LandingScreen>
         // If the server did return a 200 OK response,
         // then parse the JSON.
         var paymentObject = PaymentObject.fromJson(jsonDecode(response.body));
-        if (paymentObject.data != null) {
-          Data data = paymentObject.data![0];
+        if (paymentObject.data != null &&
+            paymentObject.data?.isNotEmpty == true) {
+          Data? data = paymentObject.data?[paymentObject.data?.indexWhere(
+                  (element) =>
+                      !(element.orderInfo?.contains("video") == true)) ??
+              0];
           UserIDance currentUser = await ApiFirebase()
               .getUser()
               .get()
               .then((value) => value.data() as UserIDance);
-          if (data.userId != null &&
+          if (data?.userId != null &&
               currentUser.lastPlanDate! <
-                  int.parse(data.requestId!.substring(2))) {
+                  int.parse(data!.requestId!.substring(2))) {
             int timePaid = int.parse(data.requestId!.substring(2));
             int amount = int.parse(data.amount!);
-            if (amount == 50000 || amount == 45000 || amount == 25000||amount==19000) {
+            if (amount == 50000 ||
+                amount == 45000 ||
+                amount == 25000 ||
+                amount == 19000) {
               int timeNow = DateTime.now().millisecondsSinceEpoch;
               int timeUseService = timeNow - timePaid;
               if (timeUseService > 2678400000) {
@@ -559,7 +567,9 @@ class _LandingScreenState extends State<LandingScreen>
                                       .pushAndRemoveUntil(
                                           MaterialPageRoute(
                                               builder: (dialogContext) =>
-                                                  RenderFirstScreen(isUpdate: false,)),
+                                                  RenderFirstScreen(
+                                                    isUpdate: false,
+                                                  )),
                                           (Route<dynamic> route) => false);
                                 },
                                 child: HelpMe().accountDeactivate(

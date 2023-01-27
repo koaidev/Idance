@@ -47,6 +47,7 @@ class UpdateScreen extends StatelessWidget {
                   } else if (GetPlatform.isIOS) {
                     _appUrl =
                         "https://apps.apple.com/us/app/idance-h%E1%BB%8Dc-nh%E1%BA%A3y-online/id1611028904";
+                  // https://apps.apple.com/us/app/idance-h%E1%BB%8Dc-nh%E1%BA%A3y-online/id1611028904
                   }
                   if (await canLaunchUrlString(_appUrl)) {
                     launchUrlString(_appUrl,

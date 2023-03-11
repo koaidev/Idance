@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:flick_video_player/flick_video_player.dart';
@@ -7,6 +8,8 @@ import 'package:oxoo/utils/reflect_toggle.dart';
 import 'package:provider/provider.dart';
 import 'package:toast/toast.dart';
 import 'package:video_player/video_player.dart';
+
+import 'SpeedChip.dart';
 
 bool showFront = true;
 
@@ -28,8 +31,10 @@ Future<void> toggleReflect() async {
 class MovieDetailsVideoPlayerWidget extends StatefulWidget {
   final String? videoUrl;
   final File? localFile;
+  final String? videoMirror;
 
-  const MovieDetailsVideoPlayerWidget({Key? key, this.videoUrl, this.localFile})
+  const MovieDetailsVideoPlayerWidget(
+      {Key? key, this.videoUrl, this.localFile, this.videoMirror})
       : super(key: key);
 
   @override
@@ -44,19 +49,25 @@ class _PlayerState extends State<MovieDetailsVideoPlayerWidget> {
   late dynamic boxFit;
   bool isZoomOut = false;
 
+  void setVideo(bool isMirror){
+    if(isMirror){
+      videoPlayerController = VideoPlayerController.network(widget.videoMirror!);
+      videoPlayerController.initialize().then((value) => setState(() {}));
+    }else{
+      videoPlayerController = VideoPlayerController.network(widget.videoUrl!);
+      videoPlayerController.initialize().then((value) => setState(() {}));
+    }
+  }
+
   @override
   void initState() {
-    videoPlayerController = VideoPlayerController.network(widget.videoUrl!);
-    videoPlayerController.initialize().then((value) => setState(() {
-
-    }));
+   setVideo(false);
     super.initState();
     flickManager = FlickManager(
       videoPlayerController: videoPlayerController,
       autoPlay: true,
       autoInitialize: true,
     );
-
   }
 
   @override
@@ -81,16 +92,16 @@ class _PlayerState extends State<MovieDetailsVideoPlayerWidget> {
             child: FlickVideoPlayer(
           flickManager: flickManager,
           preferredDeviceOrientationFullscreen: [
-            DeviceOrientation.landscapeLeft,
-            DeviceOrientation.landscapeRight
+            DeviceOrientation.portraitUp,
+            DeviceOrientation.portraitDown,
           ],
           preferredDeviceOrientation: [
-            DeviceOrientation.landscapeLeft,
-            DeviceOrientation.landscapeRight
+            DeviceOrientation.portraitUp,
+            DeviceOrientation.portraitDown
           ],
           systemUIOverlay: [],
           flickVideoWithControls: FlickVideoWithControls(
-            controls: LandscapePlayerControls(),
+            controls: LandscapePlayerControls(playerState: this,),
             videoFit: BoxFit.fitHeight,
           ),
         )));
@@ -98,22 +109,45 @@ class _PlayerState extends State<MovieDetailsVideoPlayerWidget> {
 }
 
 class LandscapePlayerControls extends StatefulWidget {
-  const LandscapePlayerControls(
-      {Key? key, this.iconSize = 20, this.fontSize = 12})
-      : super(key: key);
+  LandscapePlayerControls({
+    Key? key,
+    required this.playerState,
+    this.iconSize = 20,
+    this.fontSize = 12,
+  }) : super(key: key);
   final double iconSize;
   final double fontSize;
+  final _PlayerState playerState;
 
   @override
   State<LandscapePlayerControls> createState() =>
-      _LandscapePlayerControlsState();
+      _LandscapePlayerControlsState(playerState: playerState);
 }
 
 class _LandscapePlayerControlsState extends State<LandscapePlayerControls> {
+  double speed = 1.0;
+
+  _LandscapePlayerControlsState({required this.playerState});
+  _PlayerState playerState;
+
   @override
   Widget build(BuildContext contextMain) {
     FlickControlManager controlManager =
         Provider.of<FlickControlManager>(context);
+    double size = 50;
+    Color color = Colors.white;
+    Widget playBack10s = Icon(
+      Icons.fast_rewind_rounded,
+      size: size,
+      color: color,
+    );
+
+    Widget playForward10s = Icon(
+      Icons.fast_forward_rounded,
+      size: size,
+      color: color,
+    );
+
     return Stack(
       children: <Widget>[
         FlickShowControlsAction(
@@ -122,7 +156,115 @@ class _LandscapePlayerControlsState extends State<LandscapePlayerControls> {
               child: FlickVideoBuffer(
                 child: FlickAutoHideChild(
                   showIfVideoNotInitialized: false,
-                  child: LandscapePlayToggle(),
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        // Row(
+                        //   mainAxisSize: MainAxisSize.max,
+                        //   mainAxisAlignment: MainAxisAlignment.center,
+                        //   crossAxisAlignment: CrossAxisAlignment.center,
+                        //   children: [
+                        ReflectToggle(
+                          size: 40,
+                          toggleReflect1: () {
+                            setState(() {
+                              playerState.setVideo(true);
+                            });
+                          },
+                        ),
+                        //   ],
+                        // ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                controlManager
+                                    .seekBackward(Duration(seconds: 10));
+                              },
+                              child: Column(
+                                children: [playBack10s, Text("10s")],
+                              ),
+                            ),
+                            Column(
+                              children: [
+                                LandscapePlayToggle(),
+                                SizedBox(
+                                  height: 5,
+                                )
+                              ],
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                controlManager
+                                    .seekForward(Duration(seconds: 10));
+                              },
+                              child: Column(
+                                children: [playForward10s, Text("10s")],
+                              ),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Container(
+                            height: 30,
+                            alignment: Alignment.center,
+                            child: ChipsFilter(
+                              selected: getCurrentSpeed(speed),
+                              // Select the second filter as default
+                              filters: [
+                                Filter(
+                                    label: "0.5",
+                                    action: () {
+                                      controlManager.setPlaybackSpeed(0.5);
+                                      setState(() {
+                                        speed = 0.5;
+                                      });
+                                    }),
+                                Filter(
+                                    label: "0.75",
+                                    action: () {
+                                      controlManager.setPlaybackSpeed(0.75);
+                                      setState(() {
+                                        speed = 0.75;
+                                      });
+                                    }),
+                                Filter(
+                                    label: "1.0",
+                                    action: () {
+                                      controlManager.setPlaybackSpeed(1.0);
+                                      setState(() {
+                                        speed = 1.0;
+                                      });
+                                    }),
+                                Filter(
+                                    label: "1.25",
+                                    action: () {
+                                      controlManager.setPlaybackSpeed(1.25);
+                                      setState(() {
+                                        speed = 1.25;
+                                      });
+                                    }),
+                                Filter(
+                                    label: "1.5",
+                                    action: () {
+                                      controlManager.setPlaybackSpeed(1.5);
+                                      setState(() {
+                                        speed = 1.5;
+                                      });
+                                    }),
+                              ],
+                            ))
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -218,9 +360,9 @@ class _LandscapePlayerControlsState extends State<LandscapePlayerControls> {
                       FlickSoundToggle(
                         size: 20,
                       ),
-                      SizedBox(
-                        width: 10,
-                      ),
+                      // SizedBox(
+                      //   width: 10,
+                      // ),
                       // ReflectToggle(
                       //   size: 20,
                       //   toggleReflect1: () {
@@ -230,9 +372,9 @@ class _LandscapePlayerControlsState extends State<LandscapePlayerControls> {
                       //         gravity: Toast.center);
                       //   },
                       // ),
-                      // SizedBox(
-                      //   width: 10,
-                      // ),
+                      SizedBox(
+                        width: 10,
+                      ),
                       FlickSetPlayBack(
                         setPlayBack: () {
                           showModalBottomSheet<void>(
@@ -251,11 +393,11 @@ class _LandscapePlayerControlsState extends State<LandscapePlayerControls> {
                                           CrossAxisAlignment.start,
                                       mainAxisSize: MainAxisSize.min,
                                       children: <Widget>[
-                                        _buildItem(context, "0.25", action: () {
-                                          controlManager.setPlaybackSpeed(0.25);
-                                          setState(() {});
-                                          Navigator.pop(context);
-                                        }),
+                                        // _buildItem(context, "0.25", action: () {
+                                        //   controlManager.setPlaybackSpeed(0.25);
+                                        //   setState(() {});
+                                        //   Navigator.pop(context);
+                                        // }),
                                         _buildItem(context, "0.5", action: () {
                                           controlManager.setPlaybackSpeed(0.5);
                                           setState(() {});
@@ -272,12 +414,12 @@ class _LandscapePlayerControlsState extends State<LandscapePlayerControls> {
                                           setState(() {});
                                           Navigator.pop(context);
                                         }),
-                                        _buildItem(context, "1.5", action: () {
+                                        _buildItem(context, "1.25", action: () {
                                           controlManager.setPlaybackSpeed(1.5);
                                           setState(() {});
                                           Navigator.pop(context);
                                         }),
-                                        _buildItem(context, "2.0", action: () {
+                                        _buildItem(context, "1.5", action: () {
                                           controlManager.setPlaybackSpeed(2.0);
                                           setState(() {});
                                           Navigator.pop(context);
@@ -323,6 +465,22 @@ class _LandscapePlayerControlsState extends State<LandscapePlayerControls> {
     );
   }
 
+  int getCurrentSpeed(double speed) {
+    int index = 2;
+    if (speed == 0.5) {
+      index = 0;
+    } else if (speed == 0.75) {
+      index = 1;
+    } else if (speed == 1.0) {
+      index = 2;
+    } else if (speed == 1.25) {
+      index = 3;
+    } else {
+      index = 4;
+    }
+    return index;
+  }
+
   Widget _buildItem(BuildContext context, String title, {Function? action}) {
     return Container(
       width: MediaQuery.of(context).size.width,
@@ -363,12 +521,12 @@ class LandscapePlayToggle extends StatelessWidget {
     Color color = Colors.white;
 
     Widget playWidget = Icon(
-      Icons.play_arrow,
+      Icons.play_circle_outline,
       size: size,
       color: color,
     );
     Widget pauseWidget = Icon(
-      Icons.pause,
+      Icons.pause_circle_outline,
       size: size,
       color: color,
     );

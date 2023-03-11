@@ -44,7 +44,6 @@ import 'package:http/http.dart' as http;
 
 import '../payment/select_method_payment_dialog.dart';
 
-
 class TvSerisDetailsScreen extends StatefulWidget {
   final String? seriesID;
   final String? isPaid;
@@ -69,7 +68,6 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
   UserIDance? userIDance;
   List<VideoPaid> listVideosPaid = [];
 
-
   checkVideoPaid() async {
     final response = await http.get(Uri.parse(
         "http://apppanel.cnagroup.vn/rest_api/v1/id/${ApiFirebase().uid}"));
@@ -87,7 +85,7 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
               element.orderInfo?.replaceAll(RegExp('[^0-9]'), '') ==
                   tvSeriesDetailsModel?.videosId) {
             if (!videosPaid.listVideoPaid!.any((video) =>
-            video.videoId.toString() ==
+                video.videoId.toString() ==
                 element.orderInfo?.replaceAll(RegExp('[^0-9]'), ''))) {
               bool response2 = await ApiFirebase().updateNewVideosPaid(
                   new VideoPaid(
@@ -98,8 +96,8 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                   true);
               print("StatusVideo: $response2");
             } else if (videosPaid.listVideoPaid!.any((video) =>
-            video.videoId.toString() ==
-                element.orderInfo?.replaceAll(RegExp('[^0-9]'), '') &&
+                video.videoId.toString() ==
+                    element.orderInfo?.replaceAll(RegExp('[^0-9]'), '') &&
                 video.status == false)) {
               bool response2 = await ApiFirebase().updateNewVideosPaid(
                   new VideoPaid(
@@ -157,15 +155,13 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                           [];
                 }
                 print(
-                    "VideosPaid: ${(snapshot2.data?.data() as VideosPaid?)
-                        ?.listVideoPaid}");
+                    "VideosPaid: ${(snapshot2.data?.data() as VideosPaid?)?.listVideoPaid}");
                 return Scaffold(
                   backgroundColor: isDark!
                       ? CustomTheme.colorAccentDark
                       : CustomTheme.primaryColor,
                   body: BlocProvider<TvSerisBloc>(
-                    create: (BuildContext context) =>
-                    TvSerisBloc(Repository())
+                    create: (BuildContext context) => TvSerisBloc(Repository())
                       ..add(GetTvSerisEvent(
                           seriesId: widget.seriesID,
                           userId: ApiFirebase().uid)),
@@ -178,10 +174,9 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) =>
-                                      AuthScreen(
-                                        fromPaidScreen: true,
-                                      ),
+                                  builder: (context) => AuthScreen(
+                                    fromPaidScreen: true,
+                                  ),
                                 ),
                               );
                             });
@@ -203,9 +198,8 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
 
                               if (tvSeriesDetailsModel != null) {
                                 if (tvSeriesDetailsModel!.season!.length > 0) {
-                                  selectedSeason =
-                                      tvSeriesDetailsModel!.season!.elementAt(
-                                          0);
+                                  selectedSeason = tvSeriesDetailsModel!.season!
+                                      .elementAt(0);
                                 }
                                 return Stack(
                                   children: [
@@ -245,10 +239,7 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
             color: isDark ? CustomTheme.darkGrey : Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(8.0)),
           ),
-          width: MediaQuery
-              .of(context)
-              .size
-              .width,
+          width: MediaQuery.of(context).size.width,
           height: 260,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0),
@@ -271,12 +262,11 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  PremiumSubscriptionScreen(
-                                      fromRadioScreen: false,
-                                      fromLiveTvScreen: true,
-                                      liveTvID: "1",
-                                      isPaid: widget.isPaid)),
+                              builder: (context) => PremiumSubscriptionScreen(
+                                  fromRadioScreen: false,
+                                  fromLiveTvScreen: true,
+                                  liveTvID: "1",
+                                  isPaid: widget.isPaid)),
                         );
                       },
                       child: Text(
@@ -321,8 +311,7 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
         return ScopedModel<MovieViewModel>(
           model: MovieViewModel(),
           child: ScopedModelDescendant<MovieViewModel>(
-              builder: (context, child, model) =>
-                  Scaffold(
+              builder: (context, child, model) => Scaffold(
                     body: Container(
                       color: isDark!
                           ? CustomTheme.primaryColorDark
@@ -341,8 +330,7 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                                       Stack(
                                         children: [
                                           Container(
-                                            width: MediaQuery
-                                                .of(context)
+                                            width: MediaQuery.of(context)
                                                 .size
                                                 .width,
                                             height: 330.0,
@@ -396,14 +384,14 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                                             height: 280.0,
                                             alignment: Alignment.bottomLeft,
                                             margin:
-                                            new EdgeInsets.only(left: 10),
+                                                new EdgeInsets.only(left: 10),
                                             width: 200.0,
                                             child: Column(
                                               mainAxisSize: MainAxisSize.min,
                                               crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                                  CrossAxisAlignment.start,
                                               mainAxisAlignment:
-                                              MainAxisAlignment.start,
+                                                  MainAxisAlignment.start,
                                               children: [
                                                 Text(
                                                   tvSeriesDetailsModel!.title!,
@@ -411,20 +399,19 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                                                       fontSize: 20,
                                                       color: Colors.white,
                                                       fontWeight:
-                                                      FontWeight.bold),
+                                                          FontWeight.bold),
                                                 ),
                                                 HelpMe().space(8.0),
                                                 if ((tvSeriesDetailsModel
-                                                    ?.isPaid == "1" &&
+                                                            ?.isPaid ==
+                                                        "1" &&
                                                     !(isUserValidSubscriber ||
-                                                        listVideosPaid.any((
-                                                            element) =>
-                                                        element.videoId
-                                                            .toString() ==
-                                                            tvSeriesDetailsModel
-                                                                ?.videosId &&
-                                                            element
-                                                                .numberCanWatch !=
+                                                        listVideosPaid.any((element) =>
+                                                            element.videoId
+                                                                    .toString() ==
+                                                                tvSeriesDetailsModel
+                                                                    ?.videosId &&
+                                                            element.numberCanWatch !=
                                                                 0))))
                                                   Container(
                                                     // width:
@@ -439,71 +426,61 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                                                             .primaryColorRed,
                                                       ),
                                                       onPressed: () {
-                                                        SelectMethodPaymentDialog()
-                                                            .createDialog(
+                                                        SelectMethodPaymentDialog().createDialog(
                                                             context,
-                                                            "${tvSeriesDetailsModel
-                                                                ?.title} - video${
-                                                            tvSeriesDetailsModel
-                                                            ?.videosId
-                                                        }",
+                                                            "${tvSeriesDetailsModel?.title} - video${tvSeriesDetailsModel?.videosId}",
                                                             int.parse(
-                                                                tvSeriesDetailsModel
-                                                                    !.videosId!),
+                                                                tvSeriesDetailsModel!
+                                                                    .videosId!),
                                                             (tvSeriesDetailsModel
-                                                                ?.numberCanWatch ??
+                                                                    ?.numberCanWatch ??
                                                                 -1),
                                                             (tvSeriesDetailsModel!
-                                                                .price! > 0
+                                                                        .price! >
+                                                                    0
                                                                 ? tvSeriesDetailsModel!
-                                                                .price!
+                                                                    .price!
                                                                 : 10000),
                                                             isDark);
                                                       },
                                                       child: Padding(
-                                                        padding: const EdgeInsets
-                                                            .symmetric(
-                                                            vertical: 4.0,
-                                                            horizontal: 4.0),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .symmetric(
+                                                                vertical: 4.0,
+                                                                horizontal:
+                                                                    4.0),
                                                         child: Text(
-                                                          "Mua ngay chỉ với ${PriceConverter
-                                                              .convertPrice(
-                                                              tvSeriesDetailsModel!
-                                                                  .price! > 0
-                                                                  ? tvSeriesDetailsModel!
-                                                                  .price!
-                                                                  : 10000)}đ\n${tvSeriesDetailsModel!
-                                                              .numberCanWatch ==
-                                                              -1
-                                                              ? 'Vĩnh viễn'
-                                                              : '${tvSeriesDetailsModel!
-                                                              .numberCanWatch} lượt xem'}",
+                                                          "Mua ngay chỉ với ${PriceConverter.convertPrice(tvSeriesDetailsModel!.price! > 0 ? tvSeriesDetailsModel!.price! : 10000)}đ\n${tvSeriesDetailsModel!.numberCanWatch == -1 ? 'Vĩnh viễn' : '${tvSeriesDetailsModel!.numberCanWatch} lượt xem'}",
                                                           style: CustomTheme
                                                               .bodyText3White,
-                                                          textAlign: TextAlign
-                                                              .center,
+                                                          textAlign:
+                                                              TextAlign.center,
                                                         ),
                                                       ),
                                                     ),
                                                   ),
                                                 HelpMe().space(8.0),
                                                 if (tvSeriesDetailsModel!
-                                                    .trailerUrl?.isNotEmpty ==
+                                                        .trailerUrl
+                                                        ?.isNotEmpty ==
                                                     true)
                                                   Container(
                                                     width:
-                                                    MediaQuery
-                                                        .of(context)
-                                                        .size
-                                                        .width - 170,
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width -
+                                                            170,
                                                     child: ElevatedButton(
                                                       onPressed: () async {
-                                                        KochavaTracker.instance.sendEvent("Số lượt xem thử ${tvSeriesDetailsModel?.title??'KHÔNG XÁC ĐỊNH'}");
+                                                        // KochavaTracker.instance.sen
+                                                        KochavaTracker.instance
+                                                            .sendEvent(
+                                                                "Số lượt xem thử ${tvSeriesDetailsModel?.title ?? 'KHÔNG XÁC ĐỊNH'}");
                                                         Navigator.push(
                                                             context,
                                                             MaterialPageRoute(
-                                                                builder: (
-                                                                    context) =>
+                                                                builder: (context) =>
                                                                     MovieDetailsYoutubePlayer(
                                                                         url: tvSeriesDetailsModel
                                                                             ?.trailerUrl)));
@@ -514,10 +491,12 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                                                             .whiteColor,
                                                       ),
                                                       child: Padding(
-                                                        padding: const EdgeInsets
-                                                            .symmetric(
-                                                            vertical: 14.0,
-                                                            horizontal: 10.0),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .symmetric(
+                                                                vertical: 14.0,
+                                                                horizontal:
+                                                                    10.0),
                                                         child: Text("Xem thử",
                                                             style: CustomTheme
                                                                 .bodyText3),
@@ -536,7 +515,7 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                                         vertical: 50.0, horizontal: 10.0),
                                     child: Row(
                                       mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         InkWell(
                                             onTap: () {
@@ -559,15 +538,12 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                             if (selectedSeason != null)
                               Container(
                                 margin:
-                                const EdgeInsets.symmetric(horizontal: 8.0),
-                                width: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .width,
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                width: MediaQuery.of(context).size.width,
                                 height: 45.0,
                                 decoration: BoxDecoration(
                                   borderRadius:
-                                  BorderRadius.all(Radius.circular(4.0)),
+                                      BorderRadius.all(Radius.circular(4.0)),
                                   border: Border.all(color: Colors.grey),
                                 ),
                                 child: Center(
@@ -588,7 +564,7 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                                       onChanged: (newValue) {
                                         selectedSeason = newValue;
                                         selectedSeasonName =
-                                        newValue!.seasonsName!;
+                                            newValue!.seasonsName!;
 
                                         model.setCurrentSeason(newValue);
                                         model.setCurrentSeasonName(
@@ -612,7 +588,7 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                             if (selectedSeason != null)
                               Container(
                                 margin:
-                                const EdgeInsets.symmetric(horizontal: 8.0),
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
                                 height: 170.0,
                                 child: ListView.builder(
                                     itemCount: selectedSeason!.episodes!.length,
@@ -627,22 +603,26 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                                           // setState(() {});
                                           if (isUserValidSubscriber ||
                                               listVideosPaid.any((element) =>
-                                              (element.videoId.toString() ==
-                                                  tvSeriesDetailsModel!.videosId &&
-                                                  element.numberCanWatch != 0)) ||
-                                              tvSeriesDetailsModel!.isPaid == "0"){
-                                            KochavaTracker.instance.sendEvent("Số lượt xem ${tvSeriesDetailsModel?.title??'KHÔNG XÁC ĐỊNH'}");
+                                                  (element.videoId.toString() ==
+                                                          tvSeriesDetailsModel!
+                                                              .videosId &&
+                                                      element.numberCanWatch !=
+                                                          0)) ||
+                                              tvSeriesDetailsModel!.isPaid ==
+                                                  "0") {
+                                            KochavaTracker.instance.sendEvent(
+                                                "Số lượt xem ${tvSeriesDetailsModel?.title ?? 'KHÔNG XÁC ĐỊNH'}");
                                             if (Platform.isIOS)
                                               Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
                                                       LandscapePlayer(
-                                                        videoUrl: model
-                                                            .currentSeason
-                                                            ?.episodes![index]
-                                                            .fileUrl,
-                                                      ),
+                                                    videoUrl: model
+                                                        .currentSeason
+                                                        ?.episodes![index]
+                                                        .fileUrl,
+                                                  ),
                                                 ),
                                               );
                                             if (Platform.isAndroid)
@@ -651,15 +631,17 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                                                 MaterialPageRoute(
                                                   builder: (context) =>
                                                       MovieDetailsVideoPlayerWidget(
-                                                        videoUrl: model
-                                                            .currentSeason
-                                                            ?.episodes![index]
-                                                            .fileUrl,
-                                                      ),
+                                                    videoUrl: model
+                                                        .currentSeason
+                                                        ?.episodes![index]
+                                                        .fileUrl,
+                                                  ),
                                                 ),
                                               );
-                                          }else{
-                                            showShortToast("Bạn cần đăng ký hoặc mua để xem video này.", context);
+                                          } else {
+                                            showShortToast(
+                                                "Bạn cần đăng ký hoặc mua để xem video này.",
+                                                context);
                                           }
                                         },
                                         child: Padding(
@@ -698,8 +680,7 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                "${AppContent.releaseOn} ${tvSeriesDetailsModel
-                                    ?.release}",
+                                "${AppContent.releaseOn} ${tvSeriesDetailsModel?.release}",
                                 style: isDark!
                                     ? CustomTheme.bodyText1BoldWhite
                                     : CustomTheme.bodyText1Bold,
@@ -725,11 +706,11 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                             ),
                             Container(
                               margin:
-                              const EdgeInsets.symmetric(horizontal: 4.0),
+                                  const EdgeInsets.symmetric(horizontal: 4.0),
                               height: 120.0,
                               child: ListView.builder(
                                   itemCount:
-                                  tvSeriesDetailsModel!.castAndCrew!.length,
+                                      tvSeriesDetailsModel!.castAndCrew!.length,
                                   scrollDirection: Axis.horizontal,
                                   itemBuilder:
                                       (BuildContext context, int index) {
@@ -754,7 +735,7 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                             if (tvSeriesDetailsModel!.relatedTvseries != null)
                               Container(
                                 margin:
-                                const EdgeInsets.symmetric(horizontal: 8.0),
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
                                 height: 200.0,
                                 child: ListView.builder(
                                     itemCount: tvSeriesDetailsModel!
@@ -843,7 +824,7 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                                     scrollDirection: Axis.vertical,
                                     physics: NeverScrollableScrollPhysics(),
                                     itemCount: allCommentModelList
-                                        .data?.commentsList?.length ??
+                                            .data?.commentsList?.length ??
                                         0,
                                     itemBuilder:
                                         (BuildContext context, int index) {
@@ -868,7 +849,10 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
           data.videosId,
           ApiFirebase().uid,
           comment,
-          FirebaseAuth.instance.currentUser?.displayName ?? "IDANCE User");
+          FirebaseAuth.instance.currentUser?.displayName ??
+              FirebaseAuth.instance.currentUser?.email
+                  ?.replaceAll("@gmail.com", "") ??
+              "IDANCE User");
 
       if (model != null) {
         editingController.clear();

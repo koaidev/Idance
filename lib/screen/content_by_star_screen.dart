@@ -13,7 +13,9 @@ class ContentByStarScreen extends StatefulWidget {
   static final String route = '/ContentByStarScreen';
   final String? starId;
   final String? starName;
-  const ContentByStarScreen({Key? key, this.starId, this.starName}) : super(key: key);
+
+  const ContentByStarScreen({Key? key, this.starId, this.starName})
+      : super(key: key);
 
   @override
   _ContentByStarScreenState createState() => _ContentByStarScreenState();
@@ -33,7 +35,8 @@ class _ContentByStarScreenState extends State<ContentByStarScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final routes = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final routes =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
 
     return Scaffold(
       appBar: _buildAppBar(true, routes["starName"]),
@@ -55,7 +58,9 @@ class _ContentByStarScreenState extends State<ContentByStarScreen> {
         loadingBuilder: (context) => Center(child: spinkit),
         pageFuture: (pageIndex) {
           String pageNumber = (pageIndex! * PAGE_NUMBER + 1).toString();
-          return Repository().getMovieByStarID(pageNumber, id).then((value) => value!);
+          return Repository()
+              .getMovieByStarID(pageNumber, id)
+              .then((value) => value!);
         },
       ),
     );
@@ -64,19 +69,24 @@ class _ContentByStarScreenState extends State<ContentByStarScreen> {
   _buildAppBar(isPresentAppBar, title) {
     if (isPresentAppBar)
       return AppBar(
-        backgroundColor: isDark ? CustomTheme.primaryColorDark : CustomTheme.primaryColor,
+        backgroundColor:
+            isDark ? CustomTheme.primaryColorDark : CustomTheme.primaryColor,
         title: Text(title),
       );
   }
 
   Widget _noItemFounnd(context) {
-    return Center(child: Text(AppContent.noItemFound, style: isDark ? CustomTheme.bodyText2White : CustomTheme.bodyText2));
+    return Center(
+        child: Text(AppContent.noItemFound,
+            style:
+                isDark ? CustomTheme.bodyText2White : CustomTheme.bodyText2));
   }
 
   Widget _itemBuilder(context, MovieModel model, _) {
     return Container(
       child: InkWell(
-        onTap: () => Navigator.pushNamed(context, MovieDetailScreen.route, arguments: {"movieID": model.videosId}),
+        onTap: () => Navigator.pushNamed(context, MovieDetailScreen.route,
+            arguments: {"movieID": model.videosId}),
         child: ClipRRect(
             borderRadius: BorderRadius.circular(5.0),
             child: Card(
@@ -86,7 +96,9 @@ class _ContentByStarScreenState extends State<ContentByStarScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   ClipRRect(
-                    borderRadius: BorderRadius.only(topLeft: Radius.circular(5.0), topRight: Radius.circular(5.0)),
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(5.0),
+                        topRight: Radius.circular(5.0)),
                     child: Image.network(
                       model.thumbnailUrl!,
                       fit: BoxFit.fill,
@@ -103,14 +115,24 @@ class _ContentByStarScreenState extends State<ContentByStarScreen> {
                         Text(
                           model.title!,
                           overflow: TextOverflow.ellipsis,
-                          style: isDark ? CustomTheme.smallTextWhite.copyWith(fontSize: 13) : CustomTheme.smallText.copyWith(fontSize: 13),
+                          style: isDark
+                              ? CustomTheme.smallTextWhite
+                                  .copyWith(fontSize: 13)
+                              : CustomTheme.smallText.copyWith(fontSize: 13),
                         ),
                         Row(
                           children: [
-                            Text(model.videoQuality!, textAlign: TextAlign.start, style: isDark ? CustomTheme.smallTextWhite : CustomTheme.smallText),
+                            Text(model.videoQuality!,
+                                textAlign: TextAlign.start,
+                                style: isDark
+                                    ? CustomTheme.smallTextWhite
+                                    : CustomTheme.smallText),
                             Expanded(
-                              child:
-                                  Text(model.release!, textAlign: TextAlign.end, style: isDark ? CustomTheme.smallTextWhite : CustomTheme.smallText),
+                              child: Text(model.release!,
+                                  textAlign: TextAlign.end,
+                                  style: isDark
+                                      ? CustomTheme.smallTextWhite
+                                      : CustomTheme.smallText),
                             ),
                           ],
                         )

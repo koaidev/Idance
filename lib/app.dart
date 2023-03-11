@@ -57,6 +57,8 @@ class _MyAppState extends State<MyApp> {
 
     // Retrieve the Kochava Device ID.
     String deviceId = await KochavaTracker.instance.getDeviceId();
+    KochavaTracker.instance.sendEventWithString("Mở app", "Mở app");
+    KochavaTracker.instance.buildEventWithEventName("Mở appV2").send();
 
     if (!mounted) return;
 

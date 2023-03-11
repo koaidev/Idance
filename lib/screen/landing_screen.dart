@@ -538,15 +538,15 @@ class _LandingScreenState extends State<LandingScreen>
                   Navigator.pushNamed(context, FavouriteScreen.route,
                       arguments: true);
                   break;
+                // case 7:
+                //   Navigator.pop(context);
+                //   Navigator.pushNamed(context, MySubscriptionScreen.route);
+                //   break;
                 case 7:
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, MySubscriptionScreen.route);
-                  break;
-                case 8:
                   Navigator.pop(context);
                   Navigator.pushNamed(context, SettingScreen.route);
                   break;
-                case 9:
+                case 8:
                   // Navigator.pop(context);
                   showDialog(
                       context: context,
@@ -560,7 +560,7 @@ class _LandingScreenState extends State<LandingScreen>
                               isDark ? CustomTheme.darkGrey : Colors.white,
                           shape: RoundedRectangleBorder(
                               borderRadius: new BorderRadius.circular(15)),
-                          actionsPadding: EdgeInsets.only(right: 15.0),
+                          actionsPadding: EdgeInsets.all(15.0),
                           actions: <Widget>[
                             GestureDetector(
                                 onTap: () async {

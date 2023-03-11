@@ -12,7 +12,7 @@ import '../movie_play_for_ios.dart';
 import 'movie_details_youtube_player.dart';
 
 class SelectServerDialog {
-  createDialog(context,String title ,List<Videos> videos, bool? isDark) {
+  createDialog(context, String title, List<Videos> videos, bool? isDark) {
     print(videos.length);
     showDialog(
         context: context,
@@ -60,7 +60,8 @@ class SelectServerDialog {
                                     const EdgeInsets.symmetric(vertical: 4),
                                 child: InkWell(
                                   onTap: () {
-                                    KochavaTracker.instance.sendEvent("Số lượt xem $title");
+                                    KochavaTracker.instance
+                                        .sendEvent("Số lượt xem $title");
                                     //Navigator.of(context).pop();
                                     printLog(
                                         "--------------servertype: ${videos.elementAt(index).fileType}");
@@ -88,10 +89,18 @@ class SelectServerDialog {
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         MovieDetailsVideoPlayerWidget(
-                                                            videoUrl: videos
-                                                                .elementAt(
-                                                                    index)
-                                                                .fileUrl)));
+                                                          videoUrl: videos
+                                                              .elementAt(index)
+                                                              .fileUrl,
+                                                          videoMirror: index ==
+                                                                  0
+                                                              ? videos
+                                                                  .elementAt(1)
+                                                                  .fileUrl
+                                                              : videos
+                                                                  .elementAt(0)
+                                                                  .fileUrl,
+                                                        )));
                                           if (Platform.isIOS)
                                             Navigator.push(
                                                 context,
@@ -114,10 +123,18 @@ class SelectServerDialog {
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         MovieDetailsVideoPlayerWidget(
-                                                            videoUrl: videos
-                                                                .elementAt(
-                                                                    index)
-                                                                .fileUrl)));
+                                                          videoUrl: videos
+                                                              .elementAt(index)
+                                                              .fileUrl,
+                                                          videoMirror: index ==
+                                                                  0
+                                                              ? videos
+                                                                  .elementAt(1)
+                                                                  .fileUrl
+                                                              : videos
+                                                                  .elementAt(0)
+                                                                  .fileUrl,
+                                                        )));
                                           if (Platform.isIOS)
                                             Navigator.push(
                                                 context,
@@ -194,10 +211,18 @@ class SelectServerDialog {
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         MovieDetailsVideoPlayerWidget(
-                                                            videoUrl: videos
-                                                                .elementAt(
-                                                                    index)
-                                                                .fileUrl)));
+                                                          videoUrl: videos
+                                                              .elementAt(index)
+                                                              .fileUrl,
+                                                          videoMirror: index ==
+                                                                  0
+                                                              ? videos
+                                                                  .elementAt(1)
+                                                                  .fileUrl
+                                                              : videos
+                                                                  .elementAt(0)
+                                                                  .fileUrl,
+                                                        )));
                                           if (Platform.isIOS)
                                             Navigator.push(
                                                 context,
@@ -220,10 +245,18 @@ class SelectServerDialog {
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         MovieDetailsVideoPlayerWidget(
-                                                            videoUrl: videos
-                                                                .elementAt(
-                                                                    index)
-                                                                .fileUrl)));
+                                                          videoUrl: videos
+                                                              .elementAt(index)
+                                                              .fileUrl,
+                                                          videoMirror: index ==
+                                                                  0
+                                                              ? videos
+                                                                  .elementAt(1)
+                                                                  .fileUrl
+                                                              : videos
+                                                                  .elementAt(0)
+                                                                  .fileUrl,
+                                                        )));
                                           if (Platform.isIOS)
                                             Navigator.push(
                                                 context,

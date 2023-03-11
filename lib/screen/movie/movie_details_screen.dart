@@ -762,7 +762,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                 ApiFirebase().uid,
                                 comments,
                                 FirebaseAuth
-                                        .instance.currentUser?.displayName ??
+                                        .instance.currentUser?.displayName ?? FirebaseAuth
+                                    .instance.currentUser?.email?.replaceAll("@gmail.com", "")??
                                     "IDANCE User");
                         print("CommentStatus: $addCommentsModel");
                         commentsController.clear();

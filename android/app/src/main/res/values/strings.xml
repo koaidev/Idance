@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name">IDance</string>
 
-    <string name="facebook_app_id">373793947472190</string>
-    <string name="fb_login_protocol_scheme">fb373793947472190</string>
-    <string name="facebook_client_token">c6e4e69702020a7fe71c6faa196d7f81</string>
+    <string name="facebook_app_id">5973343579368269</string>
+    <string name="fb_login_protocol_scheme">fb5973343579368269</string>
+    <string name="facebook_client_token">c65cb04cb3b1ab3d9f01297ff64819f7</string>
 
 </resources>

@@ -12,6 +12,7 @@ import 'package:http/http.dart' as http;
 import 'package:kochava_tracker/kochava_tracker.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:oxoo/network/api_firebase.dart';
+import 'package:oxoo/screen/boughtMovie/BoughtScreen.dart';
 import 'package:toast/toast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -514,39 +515,38 @@ class _LandingScreenState extends State<LandingScreen>
                   Navigator.pushNamed(context, TvSeriesScreen.route,
                       arguments: true);
                   break;
-                // case 3:
-                //   Navigator.pop(context);
-                //   Navigator.pushNamed(context, LiveTvScreen.route, arguments: true);
-                //   break;
                 case 3:
                   Navigator.pop(context);
-                  Navigator.pushNamed(context, GenreScreen.route,
-                      arguments: true);
-
+                  Navigator.pushNamed(context, BoughtScreen.route, arguments: true);
                   break;
                 case 4:
                   Navigator.pop(context);
-                  Navigator.pushNamed(context, AllCountryScreen.route,
+                  Navigator.pushNamed(context, GenreScreen.route,
                       arguments: true);
                   break;
                 case 5:
                   Navigator.pop(context);
-                  Navigator.pushNamed(context, MyProfileScreen.route);
+                  Navigator.pushNamed(context, AllCountryScreen.route,
+                      arguments: true);
                   break;
                 case 6:
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, MyProfileScreen.route);
+                  break;
+                case 7:
                   Navigator.pop(context);
                   Navigator.pushNamed(context, FavouriteScreen.route,
                       arguments: true);
                   break;
-                // case 7:
-                //   Navigator.pop(context);
-                //   Navigator.pushNamed(context, MySubscriptionScreen.route);
-                //   break;
-                case 7:
+                case 8:
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, MySubscriptionScreen.route);
+                  break;
+                case 9:
                   Navigator.pop(context);
                   Navigator.pushNamed(context, SettingScreen.route);
                   break;
-                case 8:
+                case 10:
                   // Navigator.pop(context);
                   showDialog(
                       context: context,

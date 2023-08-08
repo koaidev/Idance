@@ -4,7 +4,6 @@ import 'dart:io' show Platform;
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:oxoo/screen/payment/api/momo_payment_handle.dart';
 import 'package:oxoo/screen/payment/models/payment_momo_create.dart';
 import 'package:oxoo/screen/payment/payment_by_card.dart';
@@ -42,17 +41,17 @@ class ChoosePaymentScreenState extends State<StatefulWidget> {
     super.initState();
     initPlatformState();
     if (index == 1) {
-      comboLearn = "Gói học 1 tháng";
+      comboLearn = "GOI HOC 1 THANG";
       title = "THANH TOÁN GÓI HỌC 1 THÁNG";
       amount = "19.000";
       amountNumber = 19000;
     } else if (index == 2) {
-      comboLearn = "Gói học 3 tháng";
+      comboLearn = "GOI HOC 3 THANG";
       title = "THANH TOÁN GÓI HỌC 3 THÁNG";
       amount = "49.000";
       amountNumber = 49000;
     } else if (index == 3) {
-      comboLearn = "Gói học 6 tháng";
+      comboLearn = "GOI HOC 6 THANG";
       title = "THANH TOÁN GÓI HỌC 6 THÁNG";
       amount = "99.000";
       amountNumber = 99000;

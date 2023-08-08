@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:oxoo/screen/boughtMovie/BoughtScreen.dart';
 import 'package:oxoo/screen/content_by_star_screen.dart';
 import 'package:oxoo/screen/home_screen.dart';
 
@@ -55,6 +56,7 @@ class Routes {
       // PhoneAuthScreen.route: (_) => PhoneAuthScreen(
       //       userRepository: userRepository,
       //     ),
+      BoughtScreen.route: (_) => BoughtScreen(),
       HomeScreen.route: (_) => HomeScreen(),
       LiveTvChannelsCard.route: (_) => LiveTvChannelsCard(),
       LandingScreen.route: (_) => LandingScreen(),

@@ -8,6 +8,7 @@ import 'package:oxoo/screen/payment/payment_by_card.dart';
 
 import '../../models/video_paid.dart';
 import '../../style/theme.dart';
+import '../subscription/my_subscription_screen.dart';
 import 'api/momo_payment_handle.dart';
 import 'models/payment_momo_create.dart';
 
@@ -137,7 +138,7 @@ class SelectMethodPaymentDialog {
                                   MaterialPageRoute(
                                       builder: (context) => PaymentByCardScreen(
                                             amount: amount,
-                                            reason: reason,
+                                            reason: reason + "ID video: $videoId",
                                           )));
                             },
                             child: Container(
@@ -149,6 +150,33 @@ class SelectMethodPaymentDialog {
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
                                     "Thanh toán bằng chuyển khoản",
+                                    style: isDark
+                                        ? CustomTheme.smallTextWhite
+                                        : CustomTheme.smallTextGrey,
+                                  ),
+                                )),
+                          ),
+                        ),
+                        SizedBox(height: 16,),
+                        Text("Hoặc", style: TextStyle(color: Colors.white)),
+                        SizedBox(height: 16,),
+                        Padding(
+                          padding: const EdgeInsets.all(4),
+                          child: InkWell(
+                            onTap: () {
+                              //Navigator.of(context).pop();
+                              Navigator.pop(context);
+                              Navigator.pushNamed(context, MySubscriptionScreen.route);
+                            },
+                            child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                color: isDark
+                                    ? CustomTheme.black_window
+                                    : Colors.grey.shade300,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    "Nâng cấp tài khoản vip",
                                     style: isDark
                                         ? CustomTheme.smallTextWhite
                                         : CustomTheme.smallTextGrey,

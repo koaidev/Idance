@@ -91,6 +91,8 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                   new VideoPaid(
                       videoId: int.parse(tvSeriesDetailsModel?.videosId ?? "0"),
                       numberCanWatch: tvSeriesDetailsModel?.numberCanWatch ?? 0,
+                      name: tvSeriesDetailsModel?.title,
+                      thumb: tvSeriesDetailsModel?.thumbnailUrl,
                       uid: ApiFirebase().uid,
                       status: true),
                   true);
@@ -104,6 +106,8 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                       videoId: int.parse(tvSeriesDetailsModel?.videosId ?? "0"),
                       numberCanWatch: tvSeriesDetailsModel?.numberCanWatch,
                       uid: ApiFirebase().uid,
+                      name: tvSeriesDetailsModel?.title,
+                      thumb: tvSeriesDetailsModel?.thumbnailUrl,
                       status: true),
                   true);
               print("ONADD: $response2");
@@ -112,6 +116,8 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                       videoId: int.parse(tvSeriesDetailsModel?.videosId ?? "0"),
                       numberCanWatch: 0,
                       uid: ApiFirebase().uid,
+                      name: tvSeriesDetailsModel?.title,
+                      thumb: tvSeriesDetailsModel?.thumbnailUrl,
                       status: false),
                   false);
               print("ONREMOVE: $response3");
@@ -428,7 +434,7 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                                                       onPressed: () {
                                                         SelectMethodPaymentDialog().createDialog(
                                                             context,
-                                                            "${tvSeriesDetailsModel?.title} - video${tvSeriesDetailsModel?.videosId}",
+                                                            "video series: ${tvSeriesDetailsModel?.videosId}",
                                                             int.parse(
                                                                 tvSeriesDetailsModel!
                                                                     .videosId!),

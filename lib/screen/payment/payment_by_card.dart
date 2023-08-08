@@ -93,7 +93,7 @@ class _PaymentByCardScreenState extends State<PaymentByCardScreen> {
               text: TextSpan(children: [
                 TextSpan(
                   text:
-                      "Để thanh toán gói học này, bạn hãy chuyển khoản chính xác học phí và nội dung bên dưới:\n\nHọc phí:",
+                      "Để thanh toán gói học này, bạn hãy chuyển khoản chính xác học phí với nội dung bên dưới:\n\nHọc phí:",
                   style: TextStyle(
                     fontFamily: 'Montserrat',
                     color: Colors.white,
@@ -139,7 +139,7 @@ class _PaymentByCardScreenState extends State<PaymentByCardScreen> {
           Row(
             children: [
               Expanded(
-                  child: _buildActionCopy('Copy cú pháp', action: action1)),
+                  child: _buildActionCopy('Copy nội dung', action: action1)),
               Expanded(
                   child: _buildActionCopy('Copy số tài khoản', action: () {
                 Clipboard.setData(ClipboardData(text: "1327888888"));

@@ -9,7 +9,7 @@ class AppContent {
   static final String profile = "Thông tin cá nhân";
   static final String favorite = "Yêu thích";
   static final String signOut = "Đăng xuất";
-  static final String library = "Thư viện";
+  static final String library = "Bài học đã mua";
   static final String darkMode = "Giao diện tối";
   static final String purchases = "Gói học";
   static final String internetIssue = "Sự cố mạng";

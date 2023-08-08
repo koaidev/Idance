@@ -79,7 +79,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     _permissionReady = false;
     _prepare();
-    FlutterDownloader.registerCallback(downloadCallback);
+    // FlutterDownloader.registerCallback(downloadCallback);
   }
 
   static void downloadCallback(
@@ -111,16 +111,16 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
     return directory.path;
   }
 
-  Future<dynamic> downloadVideo(String videoUrl, String fileName) async {
-    if (_permissionReady) {
-      await FlutterDownloader.enqueue(
-          url: videoUrl,
-          savedDir: _localPath!,
-          fileName: fileName,
-          showNotification: true,
-          openFileFromNotification: true);
-    }
-  }
+  // Future<dynamic> downloadVideo(String videoUrl, String fileName) async {
+  //   if (_permissionReady) {
+  //     await FlutterDownloader.enqueue(
+  //         url: videoUrl,
+  //         savedDir: _localPath!,
+  //         fileName: fileName,
+  //         showNotification: true,
+  //         openFileFromNotification: true);
+  //   }
+  // }
 
   ///Getting  Audio File Directory
   Future<List> getTotalDownloadedFile() async {
@@ -163,6 +163,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       videoId: int.parse(movieDetailsModel.videosId),
                       numberCanWatch: movieDetailsModel.numberCanWatch,
                       uid: ApiFirebase().uid,
+                      name: movieDetailsModel.title,
+                      thumb: movieDetailsModel.thumbnailUrl,
                       status: true),
                   true);
               print("StatusVideo: $response2");
@@ -174,6 +176,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   new VideoPaid(
                       videoId: int.parse(movieDetailsModel.videosId),
                       numberCanWatch: movieDetailsModel.numberCanWatch,
+                      name: movieDetailsModel.title,
+                      thumb: movieDetailsModel.thumbnailUrl,
                       uid: ApiFirebase().uid,
                       status: true),
                   true);
@@ -182,6 +186,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   new VideoPaid(
                       videoId: int.parse(movieDetailsModel.videosId),
                       numberCanWatch: 0,
+                      name: movieDetailsModel.title,
+                      thumb: movieDetailsModel.thumbnailUrl,
                       uid: ApiFirebase().uid,
                       status: false),
                   false);
@@ -256,18 +262,6 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                 );
                               });
                             } else {
-                              // if (!isUserValidSubscriber &&
-                              //     movieDetailsModel.isPaid == "1") {
-                              //   return Scaffold(
-                              //     backgroundColor: isDark!
-                              //         ? CustomTheme.black_window
-                              //         : Colors.white,
-                              //     body: subscriptionInfoDialog(
-                              //         context: context,
-                              //         isDark: isDark!,
-                              //         userId: ApiFirebase().uid),
-                              //   );
-                              // } else {
                               isDownloadEnable =
                                   movieDetailsModel.enableDownload.toString() ==
                                           "1"
@@ -458,8 +452,11 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                       primary: CustomTheme.primaryColorRed,
                                     ),
                                     onPressed: () {
-                                      SelectServerDialog().createDialog(context, movieDetailsModel.title,
-                                          movieDetailsModel.videos!, isDark);
+                                      SelectServerDialog().createDialog(
+                                          context,
+                                          movieDetailsModel.title,
+                                          movieDetailsModel.videos!,
+                                          isDark);
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
@@ -487,8 +484,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                     onPressed: () {
                                       SelectMethodPaymentDialog().createDialog(
                                           context,
-                                          movieDetailsModel.title +
-                                              " - video${movieDetailsModel.videosId}",
+
+                                              "video don: ${movieDetailsModel.videosId}",
                                           int.parse(movieDetailsModel.videosId),
                                           (movieDetailsModel.numberCanWatch ??
                                               -1),
@@ -518,7 +515,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                       MediaQuery.of(context).size.width - 170,
                                   child: ElevatedButton(
                                     onPressed: () async {
-                                      KochavaTracker.instance.sendEvent("Số lượt xem thử ${movieDetailsModel.title}");
+                                      KochavaTracker.instance.sendEvent(
+                                          "Số lượt xem thử ${movieDetailsModel.title}");
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
@@ -762,8 +760,9 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                 ApiFirebase().uid,
                                 comments,
                                 FirebaseAuth
-                                        .instance.currentUser?.displayName ?? FirebaseAuth
-                                    .instance.currentUser?.email?.replaceAll("@gmail.com", "")??
+                                        .instance.currentUser?.displayName ??
+                                    FirebaseAuth.instance.currentUser?.email
+                                        ?.replaceAll("@gmail.com", "") ??
                                     "IDANCE User");
                         print("CommentStatus: $addCommentsModel");
                         commentsController.clear();

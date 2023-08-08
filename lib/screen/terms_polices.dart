@@ -19,8 +19,8 @@ class TermsPolices extends StatelessWidget {
         title: Text(AppContent.termsPolicy),
         backgroundColor:isDark? CustomTheme.colorAccentDark:CustomTheme.primaryColor,
       ),
-      body: WebView(
-      initialUrl: _url,
+      body: WebViewWidget(
+        controller: WebViewController()..setJavaScriptMode(JavaScriptMode.unrestricted)..loadRequest(Uri.parse(_url)),
     ),
     );
   }

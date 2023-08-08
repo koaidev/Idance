@@ -58,6 +58,7 @@ class ApiFirebase extends GetxController implements GetxService {
       .doc(uid)
       .snapshots(includeMetadataChanges: true);
 
+
   Future<bool> updateNewVideosPaid(VideoPaid videoPaid, bool isAdd) async {
     Map<String, Object> map;
     if (isAdd) {

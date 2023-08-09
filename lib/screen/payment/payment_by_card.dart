@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:oxoo/screen/landing_screen.dart';
 import 'package:oxoo/utils/price_converter.dart';
 import 'package:toast/toast.dart';
 
@@ -92,39 +91,47 @@ class _PaymentByCardScreenState extends State<PaymentByCardScreen> {
               textAlign: TextAlign.center,
               text: TextSpan(children: [
                 TextSpan(
-                  text:
-                      "Để thanh toán gói học này, bạn hãy chuyển khoản chính xác học phí với nội dung bên dưới:\n\nHọc phí:",
+                    text: "\n${PriceConverter.convertPrice(amountNumber)} VNĐ",
+                    style: const TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: Colors.white)),
+                TextSpan(
+                  text: "\n\nĐể thanh toán gói học này, bạn hãy ",
                   style: TextStyle(
                     fontFamily: 'Montserrat',
                     color: Colors.white,
                   ),
                 ),
                 TextSpan(
-                    text: "\n${PriceConverter.convertPrice(amountNumber)}",
-                    style: const TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white)),
-                TextSpan(
-                    text: "\n\n Nội dung:\n",
-                    style: TextStyle(
-                      color: Colors.white,
+                  text: "copy nội dung chuyển khoản",
+                  style: TextStyle(
                       fontFamily: 'Montserrat',
-                    )),
-                TextSpan(
-                    text:
-                        "$comboLearn - ${FirebaseAuth.instance.currentUser!.uid}\n\n",
-                    style: const TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white)),
-                TextSpan(
-                    text:
-                        "\n\n-----------------------------\nTên ngân hàng: ACB\n\n Tên tài khoản: CNA Group\n\n Số tài khoản: 1327.888888\n\n-----------------------------\n\nHotline: 0888.430.620",
-                    style: TextStyle(
                       color: Colors.white,
+                      decoration: TextDecoration.underline),
+                ),
+                TextSpan(
+                  text: " và chuyển khoản vào ",
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    color: Colors.white,
+                  ),
+                ),
+                TextSpan(
+                  text: "số tài khoản",
+                  style: TextStyle(
                       fontFamily: 'Montserrat',
-                    ))
+                      color: Colors.white,
+                      decoration: TextDecoration.underline),
+                ),
+                TextSpan(
+                  text: " bên dưới\n",
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    color: Colors.white,
+                  ),
+                ),
               ])),
           SizedBox(
             height: 15,
@@ -139,40 +146,87 @@ class _PaymentByCardScreenState extends State<PaymentByCardScreen> {
           Row(
             children: [
               Expanded(
-                  child: _buildActionCopy('Copy nội dung', action: action1)),
+                  child: Column(
+                children: [
+                  RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(children: [
+                        TextSpan(
+                            text: "\nNỘI DUNG\nCHUYỂN KHOẢN\n\n",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Montserrat',
+                            )),
+                        TextSpan(
+                            text:
+                                "$comboLearn - ${FirebaseAuth.instance.currentUser!.uid}\n\n",
+                            style: const TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white)),
+                      ])),
+                  _buildActionCopy('COPY NỘI DUNG CHUYỂN KHOẢN',
+                      action: action1)
+                ],
+              )),
+              SizedBox(
+                width: 20,
+              ),
               Expanded(
-                  child: _buildActionCopy('Copy số tài khoản', action: () {
-                Clipboard.setData(ClipboardData(text: "1327888888"));
-                Toast.show("Đã sao chép: 1327888888",
-                    duration: Toast.lengthShort,
-                    backgroundColor: Colors.red,
-                    textStyle: TextStyle(color: Colors.white, fontSize: 16.0),
-                    gravity: Toast.bottom);
-              })),
+                  child: Column(
+                children: [
+                  RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(children: [
+                        TextSpan(
+                            text: "\nSỐ TÀI KHOẢN\n\n\n",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Montserrat',
+                            )),
+                        TextSpan(
+                            text: "Ngân hàng ACB\nCNA Group\n 1327.888888\n\n",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold))
+                      ])),
+                  _buildActionCopy('COPY SỐ\nTÀI KHOẢN', action: () {
+                    Clipboard.setData(ClipboardData(text: "1327888888"));
+                    Toast.show("Đã sao chép: 1327888888",
+                        duration: Toast.lengthShort,
+                        backgroundColor: Colors.red,
+                        textStyle:
+                            TextStyle(color: Colors.white, fontSize: 16.0),
+                        gravity: Toast.bottom);
+                  })
+                ],
+              )),
             ],
           ),
           SizedBox(
-            height: 20,
+            height: 32,
+          ),
+          Divider(
+            height: 1,
+            color: Colors.white,
+          ),
+          SizedBox(
+            height: 32,
           ),
           Container(
-            child: ElevatedButton(
-                style: ElevatedButton.styleFrom(primary: Colors.red),
-                onPressed: () {
-                  Navigator.pushNamed(context, LandingScreen.route);
-                },
-                child: Row(
-                  children: [
-                    Expanded(child: Icon(Icons.home_rounded)),
-                    Expanded(
-                        child: Text(
-                      "HOME",
-                      style: TextStyle(
-                        fontFamily: 'Montserrat',
-                      ),
-                    ))
-                  ],
-                )),
-            width: 200,
+            width: 160,
+            decoration: BoxDecoration(
+                color: Colors.redAccent,
+                borderRadius: BorderRadius.all(Radius.circular(16))),
+            child: Padding(padding: EdgeInsets.all(6),child: Text(
+              "HOTLINE:\n0888.430.620",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white,
+                fontFamily: 'Montserrat',
+              ),
+            ),)
           )
         ],
       ),
@@ -184,23 +238,23 @@ class _PaymentByCardScreenState extends State<PaymentByCardScreen> {
       onTap: () {
         action?.call();
       },
-      child: Row(
-        children: [
-          Icon(
-            Icons.copy_sharp,
-            color: Colors.white,
-          ),
-          SizedBox(
-            width: 3,
-          ),
-          Text(
+      child: Container(
+        width: 160,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(6)),
+            color: Colors.red),
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(0, 6, 0, 6),
+          child: Text(
             title,
             style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'Montserrat',
-            ),
-          )
-        ],
+                color: Colors.white,
+                fontFamily: 'Montserrat',
+                decorationColor: Colors.white,
+                decoration: TextDecoration.underline),
+            textAlign: TextAlign.center,
+          ),
+        ),
       ),
     );
   }

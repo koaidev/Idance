@@ -59,6 +59,14 @@
           }
         },
         {
+          "client_id": "3297000991-9bvi3tstopvog24300v65um794nse2nv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.idance.hocnhayonline",
+            "certificate_hash": "710232625fb83f8d1642eaa9cf46059e1b8e9b92"
+          }
+        },
+        {
           "client_id": "3297000991-df0hn2asgbii32t0avmvi29spet03euj.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

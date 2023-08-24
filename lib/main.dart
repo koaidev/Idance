@@ -1,7 +1,7 @@
 import 'package:admob_flutter/admob_flutter.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_downloader/flutter_downloader.dart';
+// import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:hive/hive.dart';
 import 'package:oxoo/firebase_options.dart';
 import 'package:path_provider/path_provider.dart';
@@ -16,7 +16,7 @@ import 'service/locator.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await FlutterDownloader.initialize();
+  // await FlutterDownloader.initialize();
   Admob.initialize(testDeviceIds: ["17A3B83DAC6AB3357062439AAD33FEA3"]);
   final document = await getApplicationDocumentsDirectory();
   Hive.init(document.path);

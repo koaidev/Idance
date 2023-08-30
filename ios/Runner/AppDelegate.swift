@@ -1,7 +1,6 @@
 
 import UIKit
 import Flutter
-import flutter_downloader
 import FBSDKCoreKit
 import FBSDKLoginKit
 
@@ -11,8 +10,8 @@ import FBSDKLoginKit
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
-    GeneratedPluginRegistrant.register(with: self)
-    FlutterDownloaderPlugin.setPluginRegistrantCallback(registerPlugins)
+      GeneratedPluginRegistrant.register(with: self)
+//    FlutterDownloaderPlugin.setPluginRegistrantCallback(registerPlugins)
     ApplicationDelegate.shared.application(
                 application,
                 didFinishLaunchingWithOptions: launchOptions
@@ -33,8 +32,8 @@ func application(
           )
           return true
       }
-private func registerPlugins(registry: FlutterPluginRegistry) {
-          if (!registry.hasPlugin("FlutterDownloaderPlugin")) {
-             FlutterDownloaderPlugin.register(with: registry.registrar(forPlugin: "FlutterDownloaderPlugin")!)
-          }
-      }
+//private func registerPlugins(registry: FlutterPluginRegistry) {
+//          if (!registry.hasPlugin("FlutterDownloaderPlugin")) {
+//             FlutterDownloaderPlugin.register(with: registry.registrar(forPlugin: "FlutterDownloaderPlugin")!)
+//          }
+//      }

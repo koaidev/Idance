@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_downloader/flutter_downloader.dart';
+// import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:kochava_tracker/kochava_tracker.dart';
@@ -85,12 +85,12 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
     // FlutterDownloader.registerCallback(downloadCallback);
   }
 
-  static void downloadCallback(
-      String id, DownloadTaskStatus status, int progress) {
-    final SendPort send =
-        IsolateNameServer.lookupPortByName('downloader_send_port')!;
-    send.send([id, status, progress]);
-  }
+  // static void downloadCallback(
+  //     String id, DownloadTaskStatus status, int progress) {
+  //   final SendPort send =
+  //       IsolateNameServer.lookupPortByName('downloader_send_port')!;
+  //   send.send([id, status, progress]);
+  // }
 
   _prepare() async {
     _localPath = (await _findLocalPath()) + Platform.pathSeparator + 'Download';

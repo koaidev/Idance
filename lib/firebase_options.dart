@@ -59,12 +59,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyD-SyhcHkNaHUocv0EZbBu0jiHRp9Obfmc',
-    appId: '1:3297000991:ios:c3bc17d482677195c01f2a',
+    appId: '1:3297000991:ios:d95f9cb65637dc8dc01f2a',
     messagingSenderId: '3297000991',
     projectId: 'idance2022-4d6d8',
     storageBucket: 'idance2022-4d6d8.appspot.com',
     androidClientId: '3297000991-0rjueillbkgnp5dpmh6ttmppmf3vmh8m.apps.googleusercontent.com',
-    iosClientId: '3297000991-1g6p4mmekrtenah6n3q5vmqde5a0jvj0.apps.googleusercontent.com',
-    iosBundleId: 'com.idance.hocnhayonline',
+    iosClientId: '3297000991-imajikjavk4338igpcuivhb90hh9bl14.apps.googleusercontent.com',
+    iosBundleId: 'com.idance.hocnhayonline2023',
   );
 }

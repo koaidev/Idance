@@ -43,6 +43,7 @@ import '../../utils/loadingIndicator.dart';
 import '../../utils/validators.dart';
 import '../../widgets/movie/movie_details_youtube_player.dart';
 import '../../widgets/movie/select_server_dialog.dart';
+import '../../widgets/movie_details_video_player.dart';
 import '../../widgets/share_btn.dart';
 import '../../widgets/tv_series/cast_crew_item_card.dart';
 import '../payment/select_method_payment_dialog.dart';
@@ -68,6 +69,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
   TargetPlatform? platform;
   String? _localPath;
   UserIDance? userIDance;
+  bool isIos = false;
 
   bool isUserValidSubscriber = false;
   List<VideoPaid> listVideosPaid = [];
@@ -75,6 +77,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
   @override
   void initState() {
     super.initState();
+    isIos = Platform.isIOS;
     isDark = appModeBox.get('isDark') ?? false;
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     _permissionReady = false;
@@ -443,13 +446,13 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                       (element.videoId.toString() ==
                                               movieDetailsModel.videosId &&
                                           element.numberCanWatch != 0)) ||
-                                  movieDetailsModel.isPaid == "0")
+                                  movieDetailsModel.isPaid == "0" || isIos)
                                 Container(
                                   width:
                                       MediaQuery.of(context).size.width - 170,
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
-                                      primary: CustomTheme.primaryColorRed,
+                                      backgroundColor: CustomTheme.primaryColorRed,
                                     ),
                                     onPressed: () {
                                       SelectServerDialog().createDialog(
@@ -468,7 +471,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                 ),
 
                               ///mua button
-                              if ((movieDetailsModel.isPaid == "1" &&
+                              if (!isIos && (movieDetailsModel.isPaid == "1" &&
                                   !(isUserValidSubscriber ||
                                       listVideosPaid.any((element) =>
                                           element.videoId.toString() ==
@@ -479,7 +482,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                       MediaQuery.of(context).size.width - 170,
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
-                                      primary: CustomTheme.primaryColorRed,
+                                      backgroundColor: CustomTheme.primaryColorRed,
                                     ),
                                     onPressed: () {
                                       SelectMethodPaymentDialog().createDialog(
@@ -506,7 +509,6 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                   ),
                                 ),
 
-                              //todo download button
                               //rent button
                               if (movieDetailsModel.trailerUrl?.isNotEmpty ==
                                   true)
@@ -517,16 +519,24 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                     onPressed: () async {
                                       KochavaTracker.instance.sendEvent(
                                           "Số lượt xem thử ${movieDetailsModel.title}");
+                                      // Navigator.push(
+                                      //     context,
+                                      //     MaterialPageRoute(
+                                      //         builder: (context) =>
+                                      //             MovieDetailsYoutubePlayer(
+                                      //                 url: movieDetailsModel
+                                      //                     .trailerUrl)));
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  MovieDetailsYoutubePlayer(
-                                                      url: movieDetailsModel
-                                                          .trailerUrl)));
+                                                  MovieDetailsVideoPlayerWidget(
+                                                    videoUrl: movieDetailsModel.trailerUrl,
+                                                    videoMirror: movieDetailsModel.trailerUrl,
+                                                  )));
                                     },
                                     style: ElevatedButton.styleFrom(
-                                      primary: CustomTheme.whiteColor,
+                                      backgroundColor: CustomTheme.whiteColor,
                                     ),
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
@@ -748,7 +758,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                     alignment: Alignment.bottomRight,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: isDark!
+                        backgroundColor: isDark!
                             ? CustomTheme.grey_transparent2
                             : Colors.grey.shade300,
                       ),
@@ -899,7 +909,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: CustomTheme.primaryColor,
+                        backgroundColor: CustomTheme.primaryColor,
                       ),
                       onPressed: () async {
                         Navigator.push(
@@ -919,7 +929,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: CustomTheme.primaryColor,
+                        backgroundColor: CustomTheme.primaryColor,
                       ),
                       onPressed: () {
                         Navigator.of(context).pop();

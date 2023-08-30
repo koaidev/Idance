@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
+import 'package:http/http.dart' as http;
 import 'package:kochava_tracker/kochava_tracker.dart';
 import 'package:oxoo/models/user.dart';
 import 'package:oxoo/network/api_firebase.dart';
@@ -16,7 +17,6 @@ import 'package:scoped_model/scoped_model.dart';
 
 import '../../bloc/tv_seris/tv_seris_bloc.dart';
 import '../../constants.dart';
-import '../../models/configuration.dart';
 import '../../models/payment_object.dart';
 import '../../models/tv_series_details_model.dart';
 import '../../models/video_comments/ad_comments_model.dart';
@@ -40,8 +40,6 @@ import '../../widgets/tv_series/cast_crew_item_card.dart';
 import '../../widgets/tv_series/episode_item_card.dart';
 import '../../widgets/tv_series/related_tvseries_card.dart';
 import '../movie/movie_reply_screen.dart';
-import 'package:http/http.dart' as http;
-
 import '../payment/select_method_payment_dialog.dart';
 
 class TvSerisDetailsScreen extends StatefulWidget {
@@ -67,6 +65,7 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
   bool isUserValidSubscriber = false;
   UserIDance? userIDance;
   List<VideoPaid> listVideosPaid = [];
+  bool isIos = false;
 
   checkVideoPaid() async {
     final response = await http.get(Uri.parse(
@@ -131,10 +130,9 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     printLog("_TvSerisDetailsScreenState");
-
+    isIos = Platform.isIOS;
     isDark = appModeBox.get('isDark') ?? false;
     final configService = Provider.of<GetConfigService>(context);
-    PaymentConfig? paymentConfig = configService.paymentConfig();
 
     return StreamBuilder<DocumentSnapshot>(
         stream: ApiFirebase().getUserStream(),
@@ -187,18 +185,6 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                               );
                             });
                           } else {
-                            // tvSeriesDetailsModel = state.tvSeriesDetailsModel;
-                            // if (!isUserValidSubscriber &&
-                            //     tvSeriesDetailsModel!.isPaid == "1") {
-                            //   return Scaffold(
-                            //     backgroundColor:
-                            //         isDark! ? CustomTheme.black_window : Colors.white,
-                            //     body: subscriptionInfoDialog(
-                            //         context: context,
-                            //         isDark: isDark!,
-                            //         userId: ApiFirebase().uid),
-                            //   );
-                            // } else {
                             if (state.tvSeriesDetailsModel != null) {
                               tvSeriesDetailsModel = state.tvSeriesDetailsModel;
 
@@ -262,7 +248,7 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                   children: [
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: CustomTheme.primaryColor,
+                        backgroundColor: CustomTheme.primaryColor,
                       ),
                       onPressed: () async {
                         Navigator.push(
@@ -285,7 +271,7 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: CustomTheme.primaryColor,
+                        backgroundColor: CustomTheme.primaryColor,
                       ),
                       onPressed: () {
                         Navigator.of(context).pop();
@@ -311,7 +297,7 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
           (context, AsyncSnapshot<AllCommentModelList?> allCommentModelList) {
         // ignore: unnecessary_null_comparison
         if (allCommentModelList.connectionState == ConnectionState.none &&
-            allCommentModelList.hasData == null) {
+            allCommentModelList.hasData) {
           return Container();
         }
         return ScopedModel<MovieViewModel>(
@@ -420,16 +406,12 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                                                             element.numberCanWatch !=
                                                                 0))))
                                                   Container(
-                                                    // width:
-                                                    // MediaQuery
-                                                    //     .of(context)
-                                                    //     .size
-                                                    //     .width - 170,
                                                     child: ElevatedButton(
                                                       style: ElevatedButton
                                                           .styleFrom(
-                                                        primary: CustomTheme
-                                                            .primaryColorRed,
+                                                        backgroundColor:
+                                                            CustomTheme
+                                                                .primaryColorRed,
                                                       ),
                                                       onPressed: () {
                                                         SelectMethodPaymentDialog().createDialog(
@@ -483,18 +465,27 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                                                         KochavaTracker.instance
                                                             .sendEvent(
                                                                 "Số lượt xem thử ${tvSeriesDetailsModel?.title ?? 'KHÔNG XÁC ĐỊNH'}");
+                                                        // Navigator.push(
+                                                        //     context,
+                                                        //     MaterialPageRoute(
+                                                        //         builder: (context) =>
+                                                        //             MovieDetailsYoutubePlayer(
+                                                        //                 url: tvSeriesDetailsModel
+                                                        //                     ?.trailerUrl)));
                                                         Navigator.push(
                                                             context,
                                                             MaterialPageRoute(
                                                                 builder: (context) =>
-                                                                    MovieDetailsYoutubePlayer(
-                                                                        url: tvSeriesDetailsModel
-                                                                            ?.trailerUrl)));
+                                                                    MovieDetailsVideoPlayerWidget(
+                                                                      videoUrl: tvSeriesDetailsModel?.trailerUrl,
+                                                                      videoMirror: tvSeriesDetailsModel?.trailerUrl
+                                                                    )));
                                                       },
                                                       style: ElevatedButton
                                                           .styleFrom(
-                                                        primary: CustomTheme
-                                                            .whiteColor,
+                                                        backgroundColor:
+                                                            CustomTheme
+                                                                .whiteColor,
                                                       ),
                                                       child: Padding(
                                                         padding:
@@ -807,7 +798,7 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                                 alignment: Alignment.bottomRight,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    primary: isDark!
+                                    backgroundColor: isDark!
                                         ? CustomTheme.grey_transparent2
                                         : Colors.grey.shade300,
                                   ),

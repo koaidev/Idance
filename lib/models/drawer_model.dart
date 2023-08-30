@@ -68,7 +68,7 @@ List<DrawerModel> drawerListItemFirst = [
   DrawerModel(
       id: 12,
       navItemName: AppContent.darkMode,
-      navItemIcon: "ic_         brightness_3_black_24dp.svg",
+      navItemIcon: "ic_brightness_3_black_24dp.svg",
       isSelected: false),
   // DrawerModel(
   //     id: 12,

@@ -394,7 +394,7 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                                                           FontWeight.bold),
                                                 ),
                                                 HelpMe().space(8.0),
-                                                if ((tvSeriesDetailsModel
+                                                if (!isIos &&(tvSeriesDetailsModel
                                                             ?.isPaid ==
                                                         "1" &&
                                                     !(isUserValidSubscriber ||
@@ -598,7 +598,7 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                                           print("tapped_on_episodeItem_card");
                                           // isSeriesPlaying = true;
                                           // setState(() {});
-                                          if (isUserValidSubscriber ||
+                                          if (isIos || (isUserValidSubscriber ||
                                               listVideosPaid.any((element) =>
                                                   (element.videoId.toString() ==
                                                           tvSeriesDetailsModel!
@@ -606,7 +606,7 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                                                       element.numberCanWatch !=
                                                           0)) ||
                                               tvSeriesDetailsModel!.isPaid ==
-                                                  "0") {
+                                                  "0")) {
                                             KochavaTracker.instance.sendEvent(
                                                 "Số lượt xem ${tvSeriesDetailsModel?.title ?? 'KHÔNG XÁC ĐỊNH'}");
                                             if (Platform.isIOS)

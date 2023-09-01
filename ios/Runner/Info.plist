@@ -30,10 +30,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.idance.hocnhayonline</string>
+			<string>com.idance.hocnhayonlineance2023</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb373793947472190</string>
+				<string>fb5973343579368269</string>
 				<string>com.googleusercontent.apps.3297000991-r65651oamugqb77ib90icd3t09tku789</string>
 			</array>
 		</dict>
@@ -41,11 +41,11 @@
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>FacebookAppID</key>
-	<string>373793947472190</string>
+	<string>5973343579368269</string>
 	<key>FacebookClientToken</key>
-	<string>c6e4e69702020a7fe71c6faa196d7f81</string>
+	<string>c65cb04cb3b1ab3d9f01297ff64819f7</string>
 	<key>FacebookDisplayName</key>
-	<string>IDANCE</string>
+	<string>IDance: Học Nhảy Online</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-3940256099942544~1458002511</string>
 	<key>LSApplicationCategoryType</key>
@@ -53,6 +53,8 @@
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>momo</string>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

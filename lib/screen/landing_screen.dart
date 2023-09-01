@@ -338,7 +338,7 @@ class _LandingScreenState extends State<LandingScreen>
                 color: isDark ? Colors.transparent : Colors.white,
                 height: MediaQuery.of(context).size.height,
                 child: ApiFirebase().isLogin()
-                    ? drawerContent(drawerListItemFirst)
+                    ? drawerContent(drawerListItemFirstIOS)
                     : drawerContentWithoutLogin(drawerListItemWithoutLogin),
               )
             ],
@@ -440,22 +440,22 @@ class _LandingScreenState extends State<LandingScreen>
   }
 
   //drawerContent
-  Widget drawerContent(drawerListItem) {
+  Widget drawerContent(List<DrawerModel> drawerListItem) {
     return ListView.builder(
         physics: const NeverScrollableScrollPhysics(),
         itemCount: drawerListItem.length,
         itemBuilder: (BuildContext context, int index) {
-          if (index == 11)
+          if ((drawerListItem[index].id??0)-1 == 11)
             return ListTile(
               leading: SvgPicture.asset(
                 'assets/drawer_icon/${drawerListItem.elementAt(index).navItemIcon}',
                 color: CustomTheme.grey_60,
               ),
               title: Container(
-                  color: drawerListItem.elementAt(index).isSelected
+                  color: drawerListItem.elementAt(index).isSelected??false
                       ? Colors.red
                       : Colors.transparent,
-                  child: Text(drawerListItem.elementAt(11).navItemName,
+                  child: Text(drawerListItem.elementAt(11).navItemName??"",
                       style: TextStyle(color: CustomTheme.grey_60))),
               trailing: Switch(
                 value: isDark,
@@ -472,7 +472,7 @@ class _LandingScreenState extends State<LandingScreen>
             );
           return InkWell(
             child: ListTile(
-              tileColor: drawerListItem.elementAt(index).isSelected
+              tileColor: drawerListItem.elementAt(index).isSelected??false
                   ? isDark
                       ? Colors.grey.shade900
                       : Colors.grey.shade200
@@ -482,10 +482,10 @@ class _LandingScreenState extends State<LandingScreen>
                 color: CustomTheme.grey_60,
               ),
               title: Text(
-                drawerListItem.elementAt(index).navItemName,
+                drawerListItem.elementAt(index).navItemName??"",
                 style: TextStyle(
                     fontFamily: 'Montserrat',
-                    color: drawerListItem.elementAt(index).isSelected
+                    color: drawerListItem.elementAt(index).isSelected??false
                         ? Colors.red
                         : CustomTheme.grey_60),
               ),
@@ -499,7 +499,7 @@ class _LandingScreenState extends State<LandingScreen>
                 drawerListItem[index].isSelected = true;
                 savedIndex = index;
               });
-              switch (index) {
+              switch ((drawerListItem[index].id??0)-1) {
                 case 0:
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(builder: (context) => LandingScreen()),

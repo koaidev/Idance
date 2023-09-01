@@ -445,17 +445,17 @@ class _LandingScreenState extends State<LandingScreen>
         physics: const NeverScrollableScrollPhysics(),
         itemCount: drawerListItem.length,
         itemBuilder: (BuildContext context, int index) {
-          if ((drawerListItem[index].id??0)-1 == 11)
+          if (((drawerListItem[index].id!)-1) == 11)
             return ListTile(
               leading: SvgPicture.asset(
                 'assets/drawer_icon/${drawerListItem.elementAt(index).navItemIcon}',
                 color: CustomTheme.grey_60,
               ),
               title: Container(
-                  color: drawerListItem.elementAt(index).isSelected??false
+                  color: drawerListItem.elementAt(index).isSelected!
                       ? Colors.red
                       : Colors.transparent,
-                  child: Text(drawerListItem.elementAt(11).navItemName??"",
+                  child: Text(drawerListItem.elementAt(index).navItemName!,
                       style: TextStyle(color: CustomTheme.grey_60))),
               trailing: Switch(
                 value: isDark,

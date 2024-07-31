@@ -1,4 +1,3 @@
-import 'package:app_review/app_review.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:oxoo/screen/terms_polices.dart';
@@ -28,13 +27,6 @@ class _SettingScreenState extends State<SettingScreen> {
   @override
   initState() {
     super.initState();
-    AppReview.getAppID.then(log);
-    AppReview.getPackageInfo().then((value) {
-      setState(() {
-        buildNumber = value?.buildNumber;
-        version = value?.version;
-      });
-    });
     isDark = appModeBox.get('isDark') ?? false;
   }
 

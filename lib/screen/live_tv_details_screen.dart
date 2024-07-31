@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:admob_flutter/admob_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -38,7 +37,6 @@ class LiveTvDetailsScreen extends StatefulWidget {
 class _LiveTvDetailsScreenState extends State<LiveTvDetailsScreen> {
   LiveTvDetailsModel? liveTvDetailsModel;
   String? currentliveTvID;
-  late AdmobInterstitial admobInterstitial;
   AdsConfig? adsConfig;
   static late bool isDark;
   var appModeBox = Hive.box('appModeBox');
@@ -48,34 +46,34 @@ class _LiveTvDetailsScreenState extends State<LiveTvDetailsScreen> {
   @override
   void initState() {
     isDark = appModeBox.get('isDark') ?? false;
-    adsConfig = GetConfigService().adsConfig();
-    admobInterstitial = AdmobInterstitial(
-        adUnitId: adsConfig!.admobInterstitialAdsId,
-        listener: (AdmobAdEvent event, Map<String, dynamic>? args) {
-          if (event == AdmobAdEvent.closed) admobInterstitial.load();
-          handleAdMobEvent(event, args, 'Interstitial');
-        });
-    admobInterstitial.load();
+    // adsConfig = GetConfigService().adsConfig();
+    // admobInterstitial = AdmobInterstitial(
+    //     adUnitId: adsConfig!.admobInterstitialAdsId,
+    //     listener: (AdmobAdEvent event, Map<String, dynamic>? args) {
+    //       if (event == AdmobAdEvent.closed) admobInterstitial.load();
+    //       handleAdMobEvent(event, args, 'Interstitial');
+    //     });
+    // admobInterstitial.load();
     super.initState();
   }
 
   //AdmobAdEvent will be handled here
-  void handleAdMobEvent(
-      AdmobAdEvent event, Map<String, dynamic>? args, String adType) {
-    switch (event) {
-      case AdmobAdEvent.closed:
-        Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    LiveTvDetailsScreen(liveTvId: currentliveTvID)));
-        break;
-      case AdmobAdEvent.failedToLoad:
-        print('Admob $adType failed to load. :(');
-        break;
-      default:
-    }
-  }
+  // void handleAdMobEvent(
+  //     AdmobAdEvent event, Map<String, dynamic>? args, String adType) {
+  //   switch (event) {
+  //     case AdmobAdEvent.closed:
+  //       Navigator.pushReplacement(
+  //           context,
+  //           MaterialPageRoute(
+  //               builder: (context) =>
+  //                   LiveTvDetailsScreen(liveTvId: currentliveTvID)));
+  //       break;
+  //     case AdmobAdEvent.failedToLoad:
+  //       print('Admob $adType failed to load. :(');
+  //       break;
+  //     default:
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -223,10 +221,10 @@ class _LiveTvDetailsScreenState extends State<LiveTvDetailsScreen> {
                                               ),
                                             ],
                                           ),
-                                          ShareApp(
-                                            title: liveTvDetailsModel!
-                                                .currentProgramTitle,
-                                          )
+                                          // ShareApp(
+                                          //   title: liveTvDetailsModel!
+                                          //       .currentProgramTitle,
+                                          // )
                                         ],
                                       ),
                                     ),
@@ -313,11 +311,11 @@ class _LiveTvDetailsScreenState extends State<LiveTvDetailsScreen> {
                                                         .allTvChannel!
                                                         .elementAt(index)
                                                         .liveTvId;
-                                                if (await (admobInterstitial
-                                                        .isLoaded
-                                                    as FutureOr<bool>)) {
-                                                  admobInterstitial.show();
-                                                }
+                                                // if (await (admobInterstitial
+                                                //         .isLoaded
+                                                //     as FutureOr<bool>)) {
+                                                //   admobInterstitial.show();
+                                                // }
                                               },
                                               child: LiveTvChannelsCard(
                                                 allTvChannel:

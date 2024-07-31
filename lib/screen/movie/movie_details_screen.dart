@@ -10,11 +10,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 // import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:kochava_tracker/kochava_tracker.dart';
 import 'package:oxoo/bloc/movie_details/movie_details_bloc.dart';
+import 'package:oxoo/models/video_paid.dart';
 import 'package:oxoo/network/api_firebase.dart';
 import 'package:oxoo/utils/price_converter.dart';
 import 'package:oxoo/widgets/movie/movie_poster.dart';
@@ -168,7 +170,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       uid: ApiFirebase().uid,
                       name: movieDetailsModel.title,
                       thumb: movieDetailsModel.thumbnailUrl,
-                      status: true),
+                      status: true) as VideoPaid,
                   true);
               print("StatusVideo: $response2");
             } else if (videosPaid.listVideoPaid!.any((video) =>
@@ -182,7 +184,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       name: movieDetailsModel.title,
                       thumb: movieDetailsModel.thumbnailUrl,
                       uid: ApiFirebase().uid,
-                      status: true),
+                      status: true) as VideoPaid,
                   true);
               print("ONADD: $response2");
               bool response3 = await ApiFirebase().updateNewVideosPaid(
@@ -192,7 +194,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       name: movieDetailsModel.title,
                       thumb: movieDetailsModel.thumbnailUrl,
                       uid: ApiFirebase().uid,
-                      status: false),
+                      status: false) as VideoPaid,
                   false);
               print("ONREMOVE: $response3");
             }
@@ -223,7 +225,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                 UserIDance(uid: ApiFirebase().uid)) as UserIDance?;
           }
           isUserValidSubscriber = userIDance?.currentPlan != "free";
-
+          Repository repo = Repository();
           return StreamBuilder<DocumentSnapshot>(
               stream: ApiFirebase().getVideosPaidStream(),
               builder: (BuildContext context,
@@ -365,9 +367,6 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                 SizedBox(
                                   width: 8.0,
                                 ),
-                                ShareApp(
-                                    title: movieDetailsModel.title,
-                                    color: Colors.white),
                               ],
                             ),
                           ],
@@ -446,13 +445,15 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                       (element.videoId.toString() ==
                                               movieDetailsModel.videosId &&
                                           element.numberCanWatch != 0)) ||
-                                  movieDetailsModel.isPaid == "0" || isIos)
+                                  movieDetailsModel.isPaid == "0" ||
+                                  isIos)
                                 Container(
                                   width:
                                       MediaQuery.of(context).size.width - 170,
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
-                                      backgroundColor: CustomTheme.primaryColorRed,
+                                      backgroundColor:
+                                          CustomTheme.primaryColorRed,
                                     ),
                                     onPressed: () {
                                       SelectServerDialog().createDialog(
@@ -471,24 +472,25 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                 ),
 
                               ///mua button
-                              if (!isIos && (movieDetailsModel.isPaid == "1" &&
-                                  !(isUserValidSubscriber ||
-                                      listVideosPaid.any((element) =>
-                                          element.videoId.toString() ==
-                                              movieDetailsModel.videosId &&
-                                          element.numberCanWatch != 0))))
+                              if (!isIos &&
+                                  (movieDetailsModel.isPaid == "1" &&
+                                      !(isUserValidSubscriber ||
+                                          listVideosPaid.any((element) =>
+                                              element.videoId.toString() ==
+                                                  movieDetailsModel.videosId &&
+                                              element.numberCanWatch != 0))))
                                 Container(
                                   width:
                                       MediaQuery.of(context).size.width - 170,
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
-                                      backgroundColor: CustomTheme.primaryColorRed,
+                                      backgroundColor:
+                                          CustomTheme.primaryColorRed,
                                     ),
                                     onPressed: () {
                                       SelectMethodPaymentDialog().createDialog(
                                           context,
-
-                                              "video don: ${movieDetailsModel.videosId}",
+                                          "video don: ${movieDetailsModel.videosId}",
                                           int.parse(movieDetailsModel.videosId),
                                           (movieDetailsModel.numberCanWatch ??
                                               -1),
@@ -531,8 +533,11 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                           MaterialPageRoute(
                                               builder: (context) =>
                                                   MovieDetailsVideoPlayerWidget(
-                                                    videoUrl: movieDetailsModel.trailerUrl,
-                                                    videoMirror: movieDetailsModel.trailerUrl,
+                                                    videoUrl: movieDetailsModel
+                                                        .trailerUrl,
+                                                    videoMirror:
+                                                        movieDetailsModel
+                                                            .trailerUrl,
                                                   )));
                                     },
                                     style: ElevatedButton.styleFrom(

@@ -10,18 +10,17 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:kochava_tracker/kochava_tracker.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
+import 'package:oxoo/constants.dart';
 import 'package:oxoo/network/api_firebase.dart';
+import 'package:oxoo/screen/auth/auth_screen.dart';
 import 'package:oxoo/screen/boughtMovie/BoughtScreen.dart';
+import 'package:oxoo/screen/profile/my_profile_screen.dart';
+import 'package:oxoo/screen/search/search_result_screen.dart';
+import 'package:oxoo/screen/settings_screen.dart';
+import 'package:oxoo/screen/subscription/my_subscription_screen.dart';
 import 'package:toast/toast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../constants.dart';
-import '../../screen/auth/auth_screen.dart';
-import '../../screen/profile/my_profile_screen.dart';
-import '../../screen/search/search_result_screen.dart';
-import '../../screen/settings_screen.dart';
-import '../../screen/subscription/my_subscription_screen.dart';
 import '../app.dart';
 import '../config.dart';
 import '../models/drawer_model.dart';
@@ -261,35 +260,35 @@ class _LandingScreenState extends State<LandingScreen>
   }
 
   Future<void> configOneSignal(BuildContext context) async {
-    await OneSignal.shared.setAppId(Config.oneSignalID);
-    OneSignal.shared.setNotificationOpenedHandler((notification) {
-      String? id = notification.notification.additionalData!["id"];
-      String? type = notification.notification.additionalData!["vtype"];
-      printLog("---------ID and Type: {$id $type}");
-
-      switch (type) {
-        case "movie":
-          Navigator.pushNamed(context, MovieDetailScreen.route,
-              arguments: {"movieID": id});
-          break;
-        case "tvseries":
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => TvSerisDetailsScreen(
-                      seriesID: id,
-                      isPaid: '',
-                    )),
-          );
-          break;
-        case "webview":
-          _launchURL(id!);
-          break;
-        default:
-          print("type_is_not_movie_event_radio_tv !");
-          break;
-      }
-    });
+    // await OneSignal.shared.setAppId(Config.oneSignalID);
+    // OneSignal.shared.setNotificationOpenedHandler((notification) {
+    //   String? id = notification.notification.additionalData!["id"];
+    //   String? type = notification.notification.additionalData!["vtype"];
+    //   printLog("---------ID and Type: {$id $type}");
+    //
+    //   switch (type) {
+    //     case "movie":
+    //       Navigator.pushNamed(context, MovieDetailScreen.route,
+    //           arguments: {"movieID": id});
+    //       break;
+    //     case "tvseries":
+    //       Navigator.push(
+    //         context,
+    //         MaterialPageRoute(
+    //             builder: (context) => TvSerisDetailsScreen(
+    //                   seriesID: id,
+    //                   isPaid: '',
+    //                 )),
+    //       );
+    //       break;
+    //     case "webview":
+    //       _launchURL(id!);
+    //       break;
+    //     default:
+    //       print("type_is_not_movie_event_radio_tv !");
+    //       break;
+    //   }
+    // });
   }
 
   _launchURL(String url) async {
@@ -445,7 +444,7 @@ class _LandingScreenState extends State<LandingScreen>
         physics: const NeverScrollableScrollPhysics(),
         itemCount: drawerListItem.length,
         itemBuilder: (BuildContext context, int index) {
-          if (((drawerListItem[index].id!)-1) == 11)
+          if (((drawerListItem[index].id!) - 1) == 11)
             return ListTile(
               leading: SvgPicture.asset(
                 'assets/drawer_icon/${drawerListItem.elementAt(index).navItemIcon}',
@@ -472,7 +471,7 @@ class _LandingScreenState extends State<LandingScreen>
             );
           return InkWell(
             child: ListTile(
-              tileColor: drawerListItem.elementAt(index).isSelected??false
+              tileColor: drawerListItem.elementAt(index).isSelected ?? false
                   ? isDark
                       ? Colors.grey.shade900
                       : Colors.grey.shade200
@@ -482,10 +481,10 @@ class _LandingScreenState extends State<LandingScreen>
                 color: CustomTheme.grey_60,
               ),
               title: Text(
-                drawerListItem.elementAt(index).navItemName??"",
+                drawerListItem.elementAt(index).navItemName ?? "",
                 style: TextStyle(
                     fontFamily: 'Montserrat',
-                    color: drawerListItem.elementAt(index).isSelected??false
+                    color: drawerListItem.elementAt(index).isSelected ?? false
                         ? Colors.red
                         : CustomTheme.grey_60),
               ),
@@ -499,7 +498,7 @@ class _LandingScreenState extends State<LandingScreen>
                 drawerListItem[index].isSelected = true;
                 savedIndex = index;
               });
-              switch ((drawerListItem[index].id??0)-1) {
+              switch ((drawerListItem[index].id ?? 0) - 1) {
                 case 0:
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(builder: (context) => LandingScreen()),
@@ -517,7 +516,8 @@ class _LandingScreenState extends State<LandingScreen>
                   break;
                 case 3:
                   Navigator.pop(context);
-                  Navigator.pushNamed(context, BoughtScreen.route, arguments: true);
+                  Navigator.pushNamed(context, BoughtScreen.route,
+                      arguments: true);
                   break;
                 case 4:
                   Navigator.pop(context);

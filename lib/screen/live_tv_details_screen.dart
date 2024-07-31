@@ -6,19 +6,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
+import 'package:oxoo/bloc/live_tv/live_tv_details_bloc.dart';
+import 'package:oxoo/models/configuration.dart';
+import 'package:oxoo/models/live_tv_details_model.dart';
 import 'package:oxoo/network/api_firebase.dart';
+import 'package:oxoo/screen/subscription/premium_subscription_screen.dart';
+import 'package:oxoo/server/repository.dart';
+import 'package:oxoo/service/get_config_service.dart';
+import 'package:oxoo/style/theme.dart';
+import 'package:oxoo/utils/button_widget.dart';
+import 'package:oxoo/widgets/live_mp4_video_player.dart';
+import 'package:oxoo/widgets/live_tv/live_tv_channels_card.dart';
+import 'package:oxoo/widgets/share_btn.dart';
 
-import '../../bloc/live_tv/live_tv_details_bloc.dart';
-import '../../models/configuration.dart';
-import '../../models/live_tv_details_model.dart';
-import '../../screen/subscription/premium_subscription_screen.dart';
-import '../../server/repository.dart';
-import '../../service/get_config_service.dart';
-import '../../style/theme.dart';
-import '../../utils/button_widget.dart';
-import '../../widgets/live_mp4_video_player.dart';
-import '../../widgets/live_tv/live_tv_channels_card.dart';
-import '../../widgets/share_btn.dart';
 import '../constants.dart';
 import '../models/user.dart';
 import '../strings.dart';
@@ -373,7 +373,7 @@ class _LiveTvDetailsScreenState extends State<LiveTvDetailsScreen> {
                   children: [
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: CustomTheme.primaryColor,
+                        backgroundColor: CustomTheme.primaryColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
                         ),
@@ -399,7 +399,7 @@ class _LiveTvDetailsScreenState extends State<LiveTvDetailsScreen> {
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: CustomTheme.primaryColor,
+                        backgroundColor: CustomTheme.primaryColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
                         ),

@@ -58,7 +58,6 @@ class ApiFirebase extends GetxController implements GetxService {
       .doc(uid)
       .snapshots(includeMetadataChanges: true);
 
-
   Future<bool> updateNewVideosPaid(VideoPaid videoPaid, bool isAdd) async {
     Map<String, Object> map;
     if (isAdd) {
@@ -100,5 +99,17 @@ class ApiFirebase extends GetxController implements GetxService {
     } else {
       return true;
     }
+  }
+
+  Future<bool> updateNumberUser() async {
+    var map = {
+      "totalUser": FieldValue.increment(1),
+      "userFromSeptember": FieldValue.increment(1)
+    };
+    var numberUser = await FirebaseFirestore.instance
+        .collection("app_infor")
+        .doc("information")
+        .update(map).then((value) => true, );
+    return numberUser;
   }
 }

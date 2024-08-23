@@ -8,7 +8,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
-import 'package:kochava_tracker/kochava_tracker.dart';
+// import 'package:kochava_tracker/kochava_tracker.dart';
 import 'package:oxoo/models/user.dart';
 import 'package:oxoo/network/api_firebase.dart';
 import 'package:oxoo/widgets/movie_details_video_player.dart';
@@ -462,9 +462,9 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                                                     child: ElevatedButton(
                                                       onPressed: () async {
                                                         // KochavaTracker.instance.sen
-                                                        KochavaTracker.instance
-                                                            .sendEvent(
-                                                                "Số lượt xem thử ${tvSeriesDetailsModel?.title ?? 'KHÔNG XÁC ĐỊNH'}");
+                                                        // KochavaTracker.instance
+                                                        //     .sendEvent(
+                                                        //         "Số lượt xem thử ${tvSeriesDetailsModel?.title ?? 'KHÔNG XÁC ĐỊNH'}");
                                                         // Navigator.push(
                                                         //     context,
                                                         //     MaterialPageRoute(
@@ -607,8 +607,8 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                                                           0)) ||
                                               tvSeriesDetailsModel!.isPaid ==
                                                   "0")) {
-                                            KochavaTracker.instance.sendEvent(
-                                                "Số lượt xem ${tvSeriesDetailsModel?.title ?? 'KHÔNG XÁC ĐỊNH'}");
+                                            // KochavaTracker.instance.sendEvent(
+                                            //     "Số lượt xem ${tvSeriesDetailsModel?.title ?? 'KHÔNG XÁC ĐỊNH'}");
                                             if (Platform.isIOS)
                                               Navigator.push(
                                                 context,

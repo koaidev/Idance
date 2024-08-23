@@ -1,7 +1,7 @@
 import 'dart:io' show Platform;
 
 import 'package:flutter/material.dart';
-import 'package:kochava_tracker/kochava_tracker.dart';
+// import 'package:kochava_tracker/kochava_tracker.dart';
 import 'package:oxoo/constants.dart';
 
 import '../../models/videos.dart';
@@ -60,8 +60,8 @@ class SelectServerDialog {
                                     const EdgeInsets.symmetric(vertical: 4),
                                 child: InkWell(
                                   onTap: () {
-                                    KochavaTracker.instance
-                                        .sendEvent("Số lượt xem $title");
+                                    // KochavaTracker.instance
+                                    //     .sendEvent("Số lượt xem $title");
                                     //Navigator.of(context).pop();
                                     printLog(
                                         "--------------servertype: ${videos.elementAt(index).fileType}");

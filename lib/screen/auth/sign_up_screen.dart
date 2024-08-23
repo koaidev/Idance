@@ -205,6 +205,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                                               .then((value) async {
                                             final user = value?.user;
                                             if (user != null) {
+                                              await ApiFirebase().updateNumberUser();
                                               final userIDance = UserIDance(
                                                   name: user.displayName,
                                                   phone: user.phoneNumber,

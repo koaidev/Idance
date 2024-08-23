@@ -166,6 +166,7 @@ class _AuthScreenState extends State<AuthScreen> {
             final response = await ApiFirebase()
                 .register(userIDance);
             if (response) {
+              await ApiFirebase().updateNumberUser();
               Navigator.of(context)
                   .pushAndRemoveUntil(
                   MaterialPageRoute(

@@ -8,7 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:kochava_tracker/kochava_tracker.dart';
+// import 'package:kochava_tracker/kochava_tracker.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:oxoo/bloc/bloc.dart';
 import 'package:oxoo/update/update_screen.dart';
@@ -48,17 +48,17 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> startSdk() async {
     // Start the Kochava SDK.
-    KochavaTracker.instance.enableIosAtt();
-    KochavaTracker.instance.setIosAttAuthorizationWaitTime(90);
-    KochavaTracker.instance.registerAndroidAppGuid("koidance-8amcyxp");
-    KochavaTracker.instance.registerIosAppGuid("koidance-cqpt1gi");
-    KochavaTracker.instance.setLogLevel(KochavaTrackerLogLevel.Trace);
-    KochavaTracker.instance.start();
-
-    // Retrieve the Kochava Device ID.
-    String deviceId = await KochavaTracker.instance.getDeviceId();
-    KochavaTracker.instance.sendEventWithString("Mở app", "Mở app");
-    KochavaTracker.instance.buildEventWithEventName("Mở appV2").send();
+    // KochavaTracker.instance.enableIosAtt();
+    // KochavaTracker.instance.setIosAttAuthorizationWaitTime(90);
+    // KochavaTracker.instance.registerAndroidAppGuid("koidance-8amcyxp");
+    // KochavaTracker.instance.registerIosAppGuid("koidance-cqpt1gi");
+    // KochavaTracker.instance.setLogLevel(KochavaTrackerLogLevel.Trace);
+    // KochavaTracker.instance.start();
+    //
+    // // Retrieve the Kochava Device ID.
+    // String deviceId = await KochavaTracker.instance.getDeviceId();
+    // KochavaTracker.instance.sendEventWithString("Mở app", "Mở app");
+    // KochavaTracker.instance.buildEventWithEventName("Mở appV2").send();
 
     if (!mounted) return;
 

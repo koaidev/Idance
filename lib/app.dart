@@ -9,7 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 // import 'package:kochava_tracker/kochava_tracker.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
+// import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:oxoo/bloc/bloc.dart';
 import 'package:oxoo/update/update_screen.dart';
 import 'package:provider/provider.dart';
@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
   late AppLinks _appLinks;
   StreamSubscription<Uri>? _linkSubscription;
   StreamSubscription? _conectionSubscription;
-  String _deviceId = 'N/A';
+  // String _deviceId = 'N/A';
   int amount = 0;
   String learnCombo = "";
   int timeCanUse = 0;
@@ -60,11 +60,7 @@ class _MyAppState extends State<MyApp> {
     // KochavaTracker.instance.sendEventWithString("Mở app", "Mở app");
     // KochavaTracker.instance.buildEventWithEventName("Mở appV2").send();
 
-    if (!mounted) return;
-
-    setState(() {
-      _deviceId = deviceId;
-    });
+    // if (!mounted) return;
   }
 
   Future<void> initPlatformState() async {

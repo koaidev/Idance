@@ -10,7 +10,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 // import 'package:kochava_tracker/kochava_tracker.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
+// import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:oxoo/network/api_firebase.dart';
 import 'package:oxoo/screen/auth/auth_screen.dart';
 import 'package:oxoo/screen/boughtMovie/BoughtScreen.dart';
@@ -249,7 +249,7 @@ class _LandingScreenState extends State<LandingScreen>
   ];
 
   void _handleSubmitted(String value) {
-    printLog("trying_to_submit$value");
+    // printLog("trying_to_submit$value");
     if (value.length > 0) {
       Navigator.push(
           context,
@@ -301,7 +301,7 @@ class _LandingScreenState extends State<LandingScreen>
 
   @override
   Widget build(BuildContext context) {
-    printLog("_LandingScreenState");
+    // printLog("_LandingScreenState");
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -490,7 +490,7 @@ class _LandingScreenState extends State<LandingScreen>
               ),
             ),
             onTap: () {
-              printLog("index$index");
+              // printLog("index$index");
               setState(() {
                 if (savedIndex != -1) {
                   drawerListItem.elementAt(savedIndex).isSelected = false;
@@ -651,7 +651,7 @@ class _LandingScreenState extends State<LandingScreen>
               ),
             ),
             onTap: () {
-              printLog("index $index");
+              // printLog("index $index");
               setState(() {
                 if (savedIndex != -1) {
                   drawerListItem.elementAt(savedIndex).isSelected = false;

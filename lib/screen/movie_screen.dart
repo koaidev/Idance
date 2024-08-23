@@ -1,16 +1,14 @@
-import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pagewise/flutter_pagewise.dart';
 import 'package:hive/hive.dart';
-import '../../models/configuration.dart';
-import '../../models/movie_model.dart';
-import '../../screen/movie/movie_details_screen.dart';
-import '../../server/repository.dart';
-import '../../service/get_config_service.dart';
-import '../../strings.dart';
-import '../../style/theme.dart';
-import '../../utils/loadingIndicator.dart';
-import '../../widgets/banner_ads.dart';
+import 'package:oxoo/models/movie_model.dart';
+import 'package:oxoo/screen/movie/movie_details_screen.dart';
+import 'package:oxoo/server/repository.dart';
+import 'package:oxoo/strings.dart';
+import 'package:oxoo/style/theme.dart';
+import 'package:oxoo/utils/loadingIndicator.dart';
+import 'package:oxoo/widgets/banner_ads.dart';
+
 import '../constants.dart';
 
 class MoviesScreen extends StatefulWidget {
@@ -24,43 +22,37 @@ class _MoviesScreenState extends State<MoviesScreen> {
   static const int PAGE_NUMBER = 1;
   static bool? isDark;
   var appModeBox = Hive.box('appModeBox');
-  late AdmobInterstitial interstitial;
+  // late AdmobInterstitial interstitial;
   String? currentMovieId;
-  AdsConfig? adsConfig;
+  // AdsConfig? adsConfig;
 
   @override
   void initState() {
     super.initState();
     isDark = appModeBox.get('isDark') ?? false;
-    adsConfig = GetConfigService().adsConfig();
-    interstitial = AdmobInterstitial(
-      adUnitId: adsConfig!.admobInterstitialAdsId,
-      listener: (AdmobAdEvent event, Map<String, dynamic>? args) {
-        if (event == AdmobAdEvent.closed) interstitial.load();
-        handleAdMobEvent(event, args, 'Interstitial');
-      },
-    );
-    interstitial.load();
+    // adsConfig = GetConfigService().adsConfig();
+    // interstitial = AdmobInterstitial(
+    //   adUnitId: adsConfig!.admobInterstitialAdsId,
+    //   listener: (AdmobAdEvent event, Map<String, dynamic>? args) {
+    //     if (event == AdmobAdEvent.closed) interstitial.load();
+    //     handleAdMobEvent(event, args, 'Interstitial');
+    //   },
+    // );
+    // interstitial.load();
   }
 
   //AdmobAdEvent will be handled here
-  void handleAdMobEvent(AdmobAdEvent event, Map<String, dynamic>? args, String adType) {
-    switch (event) {
-      case AdmobAdEvent.closed:
-        Navigator.pushNamed(context, MovieDetailScreen.route, arguments: {"movieID": currentMovieId});
-        break;
-      case AdmobAdEvent.failedToLoad:
-        print('Admob $adType failed to load. :(');
-        break;
-      default:
-    }
-  }
-
-  @override
-  void dispose() {
-    interstitial.dispose();
-    super.dispose();
-  }
+  // void handleAdMobEvent(AdmobAdEvent event, Map<String, dynamic>? args, String adType) {
+  //   switch (event) {
+  //     case AdmobAdEvent.closed:
+  //       Navigator.pushNamed(context, MovieDetailScreen.route, arguments: {"movieID": currentMovieId});
+  //       break;
+  //     case AdmobAdEvent.failedToLoad:
+  //       print('Admob $adType failed to load. :(');
+  //       break;
+  //     default:
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {

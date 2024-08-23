@@ -1,11 +1,10 @@
-import 'package:app_review/app_review.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:oxoo/screen/terms_polices.dart';
+import 'package:oxoo/strings.dart';
+import 'package:oxoo/style/theme.dart';
+import 'package:oxoo/utils/button_widget.dart';
 
-import '../../screen/terms_polices.dart';
-import '../../strings.dart';
-import '../../style/theme.dart';
-import '../../utils/button_widget.dart';
 import '../constants.dart';
 
 class SettingScreen extends StatefulWidget {
@@ -28,13 +27,6 @@ class _SettingScreenState extends State<SettingScreen> {
   @override
   initState() {
     super.initState();
-    AppReview.getAppID.then(log);
-    AppReview.getPackageInfo().then((value) {
-      setState(() {
-        buildNumber = value?.buildNumber;
-        version = value?.version;
-      });
-    });
     isDark = appModeBox.get('isDark') ?? false;
   }
 
@@ -188,24 +180,24 @@ class _SettingScreenState extends State<SettingScreen> {
               ),
             ),
             _divider(isDark),
-            InkWell(
-              onTap: () {
-                AppReview.storeListing.then((onValue) {
-                  setState(() {
-                    output = onValue;
-                  });
-                  print(onValue);
-                });
-              },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    vertical: 10.0, horizontal: 10.0),
-                child: Text(AppContent.shareThisApp,
-                    style: isDark!
-                        ? CustomTheme.bodyText2BoldWhite
-                        : CustomTheme.bodyText2Bold),
-              ),
-            ),
+            // InkWell(
+            //   onTap: () {
+            //     AppReview.storeListing.then((onValue) {
+            //       setState(() {
+            //         output = onValue;
+            //       });
+            //       print(onValue);
+            //     });
+            //   },
+            //   child: Padding(
+            //     padding: const EdgeInsets.symmetric(
+            //         vertical: 10.0, horizontal: 10.0),
+            //     child: Text(AppContent.shareThisApp,
+            //         style: isDark!
+            //             ? CustomTheme.bodyText2BoldWhite
+            //             : CustomTheme.bodyText2Bold),
+            //   ),
+            // ),
             _divider(isDark),
           ],
         ),

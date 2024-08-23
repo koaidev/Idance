@@ -134,7 +134,7 @@ class _MovieReplyScreenState extends State<MovieReplyScreen> {
                 width: 90.0,
                 child:
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: Colors.grey.shade300),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.grey.shade300),
                   onPressed: () async {
                     String comments = replyController.text.toString();
                     AddReplyModel? addReplyModel = await Repository().addReplyModel(

@@ -522,10 +522,6 @@ class _TvSerisDetailsScreenState extends State<TvSerisDetailsScreen> {
                                               Icons.arrow_back_ios,
                                               color: Colors.white,
                                             )),
-                                        ShareApp(
-                                          title: tvSeriesDetailsModel!.title,
-                                          color: Colors.white,
-                                        )
                                       ],
                                     ),
                                   )

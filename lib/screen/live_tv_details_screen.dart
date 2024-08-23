@@ -1,24 +1,23 @@
 import 'dart:async';
 
-import 'package:admob_flutter/admob_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
+import 'package:oxoo/bloc/live_tv/live_tv_details_bloc.dart';
+import 'package:oxoo/models/configuration.dart';
+import 'package:oxoo/models/live_tv_details_model.dart';
 import 'package:oxoo/network/api_firebase.dart';
+import 'package:oxoo/screen/subscription/premium_subscription_screen.dart';
+import 'package:oxoo/server/repository.dart';
+import 'package:oxoo/service/get_config_service.dart';
+import 'package:oxoo/style/theme.dart';
+import 'package:oxoo/utils/button_widget.dart';
+import 'package:oxoo/widgets/live_mp4_video_player.dart';
+import 'package:oxoo/widgets/live_tv/live_tv_channels_card.dart';
+import 'package:oxoo/widgets/share_btn.dart';
 
-import '../../bloc/live_tv/live_tv_details_bloc.dart';
-import '../../models/configuration.dart';
-import '../../models/live_tv_details_model.dart';
-import '../../screen/subscription/premium_subscription_screen.dart';
-import '../../server/repository.dart';
-import '../../service/get_config_service.dart';
-import '../../style/theme.dart';
-import '../../utils/button_widget.dart';
-import '../../widgets/live_mp4_video_player.dart';
-import '../../widgets/live_tv/live_tv_channels_card.dart';
-import '../../widgets/share_btn.dart';
 import '../constants.dart';
 import '../models/user.dart';
 import '../strings.dart';
@@ -38,7 +37,6 @@ class LiveTvDetailsScreen extends StatefulWidget {
 class _LiveTvDetailsScreenState extends State<LiveTvDetailsScreen> {
   LiveTvDetailsModel? liveTvDetailsModel;
   String? currentliveTvID;
-  late AdmobInterstitial admobInterstitial;
   AdsConfig? adsConfig;
   static late bool isDark;
   var appModeBox = Hive.box('appModeBox');
@@ -48,34 +46,34 @@ class _LiveTvDetailsScreenState extends State<LiveTvDetailsScreen> {
   @override
   void initState() {
     isDark = appModeBox.get('isDark') ?? false;
-    adsConfig = GetConfigService().adsConfig();
-    admobInterstitial = AdmobInterstitial(
-        adUnitId: adsConfig!.admobInterstitialAdsId,
-        listener: (AdmobAdEvent event, Map<String, dynamic>? args) {
-          if (event == AdmobAdEvent.closed) admobInterstitial.load();
-          handleAdMobEvent(event, args, 'Interstitial');
-        });
-    admobInterstitial.load();
+    // adsConfig = GetConfigService().adsConfig();
+    // admobInterstitial = AdmobInterstitial(
+    //     adUnitId: adsConfig!.admobInterstitialAdsId,
+    //     listener: (AdmobAdEvent event, Map<String, dynamic>? args) {
+    //       if (event == AdmobAdEvent.closed) admobInterstitial.load();
+    //       handleAdMobEvent(event, args, 'Interstitial');
+    //     });
+    // admobInterstitial.load();
     super.initState();
   }
 
   //AdmobAdEvent will be handled here
-  void handleAdMobEvent(
-      AdmobAdEvent event, Map<String, dynamic>? args, String adType) {
-    switch (event) {
-      case AdmobAdEvent.closed:
-        Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    LiveTvDetailsScreen(liveTvId: currentliveTvID)));
-        break;
-      case AdmobAdEvent.failedToLoad:
-        print('Admob $adType failed to load. :(');
-        break;
-      default:
-    }
-  }
+  // void handleAdMobEvent(
+  //     AdmobAdEvent event, Map<String, dynamic>? args, String adType) {
+  //   switch (event) {
+  //     case AdmobAdEvent.closed:
+  //       Navigator.pushReplacement(
+  //           context,
+  //           MaterialPageRoute(
+  //               builder: (context) =>
+  //                   LiveTvDetailsScreen(liveTvId: currentliveTvID)));
+  //       break;
+  //     case AdmobAdEvent.failedToLoad:
+  //       print('Admob $adType failed to load. :(');
+  //       break;
+  //     default:
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -223,10 +221,10 @@ class _LiveTvDetailsScreenState extends State<LiveTvDetailsScreen> {
                                               ),
                                             ],
                                           ),
-                                          ShareApp(
-                                            title: liveTvDetailsModel!
-                                                .currentProgramTitle,
-                                          )
+                                          // ShareApp(
+                                          //   title: liveTvDetailsModel!
+                                          //       .currentProgramTitle,
+                                          // )
                                         ],
                                       ),
                                     ),
@@ -313,11 +311,11 @@ class _LiveTvDetailsScreenState extends State<LiveTvDetailsScreen> {
                                                         .allTvChannel!
                                                         .elementAt(index)
                                                         .liveTvId;
-                                                if (await (admobInterstitial
-                                                        .isLoaded
-                                                    as FutureOr<bool>)) {
-                                                  admobInterstitial.show();
-                                                }
+                                                // if (await (admobInterstitial
+                                                //         .isLoaded
+                                                //     as FutureOr<bool>)) {
+                                                //   admobInterstitial.show();
+                                                // }
                                               },
                                               child: LiveTvChannelsCard(
                                                 allTvChannel:
@@ -373,7 +371,7 @@ class _LiveTvDetailsScreenState extends State<LiveTvDetailsScreen> {
                   children: [
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: CustomTheme.primaryColor,
+                        backgroundColor: CustomTheme.primaryColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
                         ),
@@ -399,7 +397,7 @@ class _LiveTvDetailsScreenState extends State<LiveTvDetailsScreen> {
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: CustomTheme.primaryColor,
+                        backgroundColor: CustomTheme.primaryColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
                         ),

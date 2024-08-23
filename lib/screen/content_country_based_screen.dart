@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:oxoo/bloc/country_movie/country_movie_bloc.dart';
+import 'package:oxoo/bloc/search/search_bloc.dart';
 import 'package:oxoo/models/content_by_country_model.dart';
 import 'package:oxoo/screen/tv_series/tv_series_details_screen.dart';
+import 'package:oxoo/server/repository.dart';
+import 'package:oxoo/strings.dart';
+import 'package:oxoo/style/theme.dart';
+import 'package:oxoo/utils/loadingIndicator.dart';
 
-import '../../bloc/search/search_bloc.dart';
-import '../../server/repository.dart';
-import '../../strings.dart';
-import '../../style/theme.dart';
-import '../../utils/loadingIndicator.dart';
 import '../models/home_content.dart';
 import 'movie/movie_details_screen.dart';
 

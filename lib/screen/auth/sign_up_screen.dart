@@ -186,7 +186,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                                   ),
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
-                                      primary: CustomTheme.primaryColor,
+                                      backgroundColor: CustomTheme.primaryColor,
                                       shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(20.0),
